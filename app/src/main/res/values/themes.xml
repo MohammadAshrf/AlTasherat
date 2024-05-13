@@ -44,7 +44,7 @@
     </style>
 
     <style name="TextView.Error" parent="TextView">
-        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textColor">@color/Error</item>
     </style>
 
     // ------------------------------------------- EditText----------------------------------------
