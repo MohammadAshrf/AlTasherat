@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="wight">#FFFFFFFF</color>
+    <color name="Primary">#4426F5</color>
+    <color name="Secondary">#65BCF9</color>
+    <color name="Accent">#8EE7AD</color>
+    <color name="text">#0E0063</color>
+    <color name="bgInput">#F1F4FB</color>
+    <color name="textInputIcon">#b2aecc</color>
+    <color name="Error">#CE6679</color>
+
+    <color name="surface">#F1F4FB</color>
+    <color name="background">#b2aecc</color>
+    <color name="Bg">#010533</color>
+    <color name="BgCard">#1C204C</color>
+    <color name="Bg_bt">#282D6E</color>
+    <color name="icon">#B2AECC</color>
+
+
 </resources>
