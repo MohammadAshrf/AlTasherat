@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AlTasherat</string>
+    <string name="unsupported_type">Unsupported type…</string>
 </resources>
