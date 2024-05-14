@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.common.domain.repository.usecase
+package com.solutionplus.altasherat.common.domain.usecase
 
 import com.solutionplus.altasherat.common.data.mapper.ExceptionMapper
 import com.solutionplus.altasherat.common.data.model.Resource
@@ -25,24 +25,10 @@ object BaseUseCase {
                     call()
                 }
                 onResult.invoke(Resource.Success(result))
-            } catch (e: LeonException.Network) {
-                val failureResource = when (e) {
-                    is LeonException.Network.Retrial -> Resource.Error<T>(e)
-                    is LeonException.Network.Unhandled -> Resource.Error(e)
-                }
-                onResult.invoke(failureResource)
+
             } catch (e: Exception) {
-                when (e) {
-                    is HttpException -> {
-                        val mappedException = ExceptionMapper().map(e)
-                        onResult.invoke(Resource.Error(mappedException))
-                    }
-                    is LeonException -> onResult.invoke(Resource.Error(e))
-                    else -> {
-                        val unknownException = LeonException.Unknown(message = "Unknown error: $e")
-                        onResult.invoke(Resource.Error(unknownException))
-                    }
-                }
+                val mappedException = ExceptionMapper().map(e)
+                onResult.invoke(Resource.Error(mappedException))
             }
         }
     }

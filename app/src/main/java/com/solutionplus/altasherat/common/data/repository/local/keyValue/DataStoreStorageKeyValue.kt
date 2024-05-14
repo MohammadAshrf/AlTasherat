@@ -13,13 +13,13 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.common.data.models.exception.SolutionXException
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
 class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "fileName")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "altasherat")
 
     override suspend fun <Model> saveEntry(key: IStorageKeyEnum, data: Model) {
         context.dataStore.edit {
@@ -29,7 +29,7 @@ class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue 
                 is Boolean -> it[booleanPreferencesKey(key.keyValue)] = data
                 is Float -> it[floatPreferencesKey(key.keyValue)] = data
                 is Long -> it[longPreferencesKey(key.keyValue)] = data
-                else -> throw SolutionXException.Local.IOOperation(R.string.unsupported_type)
+                else -> throw LeonException.Local.IOOperation(R.string.unsupported_type)
             }
         }
     }
@@ -52,7 +52,7 @@ class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue 
             is Long -> (context.dataStore.data.map { it[longPreferencesKey(key.keyValue)] }
                 .firstOrNull() ?: defaultValue) as Model
 
-            else -> throw SolutionXException.Local.IOOperation(R.string.unsupported_type)
+            else -> throw LeonException.Local.IOOperation(R.string.unsupported_type)
         }
     }
 }

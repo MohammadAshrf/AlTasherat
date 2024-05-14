@@ -12,6 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 
+/*
 @Module
 @InstallIn(SingletonComponent::class)
 object WorkManagerModule {
@@ -25,4 +26,4 @@ object WorkManagerModule {
 
         return WorkManager.getInstance(context)
     }
-}
+}*/

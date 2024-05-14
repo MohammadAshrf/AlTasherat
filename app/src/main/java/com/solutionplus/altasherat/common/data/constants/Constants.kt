@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.common.presentation.util
+package com.solutionplus.altasherat.common.data.constants
 
 
 object Constants {

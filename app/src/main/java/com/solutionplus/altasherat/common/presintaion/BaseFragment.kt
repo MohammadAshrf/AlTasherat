@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 
 import androidx.viewbinding.ViewBinding
 import com.example.solutionx.common.presentaion.bindView
-import com.solutionplus.altasherat.common.data.models.exception.SolutionXException
 
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
