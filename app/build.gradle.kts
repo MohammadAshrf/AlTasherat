@@ -120,4 +120,8 @@ dependencies {
     implementation(libs.google.hilt.android)
     kapt(libs.google.hilt.android.compiler)
 
+    //workManager
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+
 }
