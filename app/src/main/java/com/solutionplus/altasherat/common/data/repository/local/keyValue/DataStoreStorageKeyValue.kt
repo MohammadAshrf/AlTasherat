@@ -12,9 +12,10 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.models.exception.SolutionXException
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import okio.IOException
 
 class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue {
 
@@ -28,7 +29,7 @@ class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue 
                 is Boolean -> it[booleanPreferencesKey(key.keyValue)] = data
                 is Float -> it[floatPreferencesKey(key.keyValue)] = data
                 is Long -> it[longPreferencesKey(key.keyValue)] = data
-                else -> {}
+                else -> throw SolutionXException.Local.IOOperation(R.string.unsupported_type)
             }
         }
     }
@@ -50,7 +51,8 @@ class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue 
 
             is Long -> (context.dataStore.data.map { it[longPreferencesKey(key.keyValue)] }
                 .firstOrNull() ?: defaultValue) as Model
-                else-> throw  IOException()
+
+            else -> throw SolutionXException.Local.IOOperation(R.string.unsupported_type)
         }
     }
 }
