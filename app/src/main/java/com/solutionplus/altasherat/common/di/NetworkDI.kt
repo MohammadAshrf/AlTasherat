@@ -1,7 +1,7 @@
 package com.solutionplus.altasherat.common.di
 
+import com.intuit.sdp.BuildConfig
 import com.solutionplus.altasherat.common.data.repository.remote.ServiceApi
-import com.solutionplus.altasherat.BuildConfig
 import com.solutionplus.altasherat.common.presentation.util.Constants
 import dagger.Module
 import dagger.Provides
