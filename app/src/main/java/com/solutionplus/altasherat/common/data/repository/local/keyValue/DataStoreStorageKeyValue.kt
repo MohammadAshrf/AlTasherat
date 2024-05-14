@@ -55,4 +55,23 @@ class DataStoreStorageKeyValue(private val context: Context) : IStorageKeyValue 
             else -> throw LeonException.Local.IOOperation(R.string.unsupported_type)
         }
     }
+
+    override suspend fun <Model> removeEntry(key: IStorageKeyEnum) {
+        context.dataStore.edit {
+            it.remove(stringPreferencesKey(key.keyValue))
+        }
+    }
+
+    override suspend fun <Model> updateEntry(key: IStorageKeyEnum, data: Model) {
+        context.dataStore.edit {
+            when (data) {
+                is String -> it[stringPreferencesKey(key.keyValue)] = data
+                is Int -> it[intPreferencesKey(key.keyValue)] = data
+                is Boolean -> it[booleanPreferencesKey(key.keyValue)] = data
+                is Float -> it[floatPreferencesKey(key.keyValue)] = data
+                is Long -> it[longPreferencesKey(key.keyValue)] = data
+                else -> throw LeonException.Local.IOOperation(R.string.unsupported_type)
+            }
+        }
+    }
 }
