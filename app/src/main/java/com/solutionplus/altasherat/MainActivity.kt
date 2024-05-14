@@ -29,6 +29,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onActivityReady(savedInstanceState: Bundle?) {
         logger.info("onActivityReady")
+
+    // test
     }
 
     override fun viewInit() {
