@@ -45,8 +45,13 @@ android {
         }
     }
     compileOptions {
+<<<<<<< HEAD
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+=======
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+>>>>>>> cfb1dac1eda7749c5779221ceab1a6dc04d7939a
     }
 
     androidComponents {
@@ -68,7 +73,11 @@ android {
         viewBinding = true
     }
     kotlinOptions {
+<<<<<<< HEAD
         jvmTarget = "1.8"
+=======
+        jvmTarget = "17"
+>>>>>>> cfb1dac1eda7749c5779221ceab1a6dc04d7939a
     }
 }
 
@@ -120,4 +129,11 @@ dependencies {
     implementation(libs.google.hilt.android)
     kapt(libs.google.hilt.android.compiler)
 
+<<<<<<< HEAD
+=======
+    //workManager
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+
+>>>>>>> cfb1dac1eda7749c5779221ceab1a6dc04d7939a
 }
