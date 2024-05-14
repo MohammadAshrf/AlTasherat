@@ -14,33 +14,33 @@ import retrofit2.http.Url
 
 internal interface ServiceApi {
 
-    @GET
+    @GET("{pathUrl}")
     @JvmSuppressWildcards
     suspend fun get(
-        @Url url: String,
+        @Path("pathUrl") pathUrl: String,
         @HeaderMap headers: Map<String, Any>,
         @QueryMap queryParams: Map<String, Any>
     ): ResponseBody
 
-    @POST
+    @POST("{pathUrl}")
     @JvmSuppressWildcards
     suspend fun post(
-        @Url url: String, @HeaderMap headers: Map<String, Any>,
+        @Path("pathUrl") pathUrl: String, @HeaderMap headers: Map<String, Any>,
         @QueryMap queryParams: Map<String, Any>, @Body requestBody: Any
     ): ResponseBody
 
-    @DELETE
+    @DELETE("{pathUrl}")
     @JvmSuppressWildcards
     suspend fun delete(
-        @Url url: String,
+        @Path("pathUrl") pathUrl: String,
         @HeaderMap headers: Map<String, Any>,
         @QueryMap queryParams: Map<String, Any>
     ): ResponseBody
 
-    @PUT
+    @PUT("{pathUrl}")
     @JvmSuppressWildcards
     suspend fun put(
-        @Url url: String,
+        @Path("pathUrl") pathUrl: String,
         @HeaderMap headers: Map<String, Any>,
         @QueryMap queryParams: Map<String, Any>,
         @Body requestBody: Any
