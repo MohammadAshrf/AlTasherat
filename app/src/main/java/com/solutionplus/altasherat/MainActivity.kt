@@ -24,7 +24,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             insets
         }
 
-
     }
 
     override fun onActivityReady(savedInstanceState: Bundle?) {

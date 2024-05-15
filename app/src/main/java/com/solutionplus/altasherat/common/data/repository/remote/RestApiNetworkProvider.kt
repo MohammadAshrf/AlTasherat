@@ -15,7 +15,7 @@ internal class RestApiNetworkProvider  @Inject constructor(private val serviceAp
         requestBody: RequestBody
     ): ResponseBody {
         val response  = serviceApi.post(
-            url = pathUrl, headers = headers ?: hashMapOf(),
+            pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
 
@@ -30,7 +30,7 @@ internal class RestApiNetworkProvider  @Inject constructor(private val serviceAp
         requestBody: RequestBody?
     ): ResponseBody {
         val response = serviceApi.delete(
-            url = pathUrl,
+            pathUrl = pathUrl,
             headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf()
         )
@@ -47,7 +47,7 @@ internal class RestApiNetworkProvider  @Inject constructor(private val serviceAp
         requestBody: RequestBody?
     ): ResponseBody {
         val response = serviceApi.put(
-            url = pathUrl,
+            pathUrl = pathUrl,
             headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(),
             requestBody = requestBody ?: Unit
@@ -64,7 +64,7 @@ internal class RestApiNetworkProvider  @Inject constructor(private val serviceAp
         queryParams: Map<String, Any>?
     ): ResponseBody {
         val response = serviceApi.get(
-            url = pathUrl,
+            pathUrl = pathUrl,
             headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf()
         )

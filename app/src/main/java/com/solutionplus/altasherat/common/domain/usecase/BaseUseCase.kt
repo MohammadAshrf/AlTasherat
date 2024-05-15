@@ -12,7 +12,7 @@ import retrofit2.HttpException
 /** crossinline keyword is used in function types to
  *  specify that a lambda passed as a parameter to the function
  *  cannot have non-local returns.**/
-object BaseUseCase {
+abstract class BaseUseCase {
     suspend inline fun <T> execute(
         scope: CoroutineScope,
         crossinline call: suspend () -> T,
@@ -27,7 +27,7 @@ object BaseUseCase {
                 onResult.invoke(Resource.Success(result))
 
             } catch (e: Exception) {
-                val mappedException = ExceptionMapper().map(e)
+                val mappedException = ExceptionMapper.map(e)
                 onResult.invoke(Resource.Error(mappedException))
             }
         }
