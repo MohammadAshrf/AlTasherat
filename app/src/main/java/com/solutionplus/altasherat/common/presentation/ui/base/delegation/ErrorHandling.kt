@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.common.presentation
+package com.solutionplus.altasherat.common.presentation.ui.base.delegation
 
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 

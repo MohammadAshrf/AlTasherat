@@ -1,7 +1,5 @@
 package com.solutionplus.altasherat.android.helpers.logging
 
-import am.leon.solutionx.android.helpers.logging.LoggerFactory
-
 class Logger(private val clazz: Class<*>) {
     /**
      * Is the logger instance enabled for the DEBUG level?

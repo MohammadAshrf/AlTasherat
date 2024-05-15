@@ -1,7 +1,7 @@
 package com.solutionplus.altasherat.common.data.mapper
 
-import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -11,8 +11,7 @@ object ExceptionMapper {
     fun map(exception: Throwable): LeonException {
         return when (exception) {
             is HttpException -> {
-                val code = exception.code()
-                when (code) {
+                when (val code = exception.code()) {
                     401 -> LeonException.Client.Unauthorized
                     422 -> LeonException.Client.ResponseValidation(emptyMap(), exception.message())
                     in 400..499 -> LeonException.Client.Unhandled(code, exception.message())
@@ -46,6 +45,7 @@ object ExceptionMapper {
                         )
                 }
             }
+
             else -> LeonException.Unknown("An unknown error occurred: ${exception.message}")
         }
     }

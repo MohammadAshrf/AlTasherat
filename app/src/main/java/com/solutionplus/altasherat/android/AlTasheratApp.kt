@@ -2,16 +2,15 @@ package com.solutionplus.altasherat.android
 
 import android.app.Application
 import android.util.Log
-import com.intuit.sdp.BuildConfig
-import androidx.work.Configuration
 import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
+import com.intuit.sdp.BuildConfig
 import com.solutionplus.altasherat.android.helpers.logging.LoggerProvider
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
-
 @HiltAndroidApp
-class BaseApp : Application(), Configuration.Provider {
+class AlTasheratApp : Application(), Configuration.Provider {
 
 
     @Inject
