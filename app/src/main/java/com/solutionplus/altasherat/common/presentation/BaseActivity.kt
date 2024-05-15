@@ -3,8 +3,12 @@ package com.solutionplus.altasherat.common.presentation
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
+import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 
 abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() ,ErrorHandling {
@@ -17,7 +21,10 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() ,ErrorH
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         _binding = bindingClass.bindView(this)
+
+
 
         setContentView(binding.root)
 

@@ -14,7 +14,6 @@ import javax.inject.Inject
 class BaseApp : Application(), Configuration.Provider {
 
 
-    // test
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
 
