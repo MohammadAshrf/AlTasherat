@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.solutionplus.altasherat.common.presintaion.BaseActivity
+import com.solutionplus.altasherat.common.presentation.BaseActivity
 import com.solutionplus.altasherat.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,8 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onActivityReady(savedInstanceState: Bundle?) {
         logger.info("onActivityReady")
-
-    // test
     }
 
     override fun viewInit() {

@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.common.presintaion
+package com.solutionplus.altasherat.common.presentation
 
 import android.app.Activity
 import android.view.LayoutInflater
