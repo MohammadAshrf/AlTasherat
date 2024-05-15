@@ -1,5 +1,4 @@
-package com.solutionplus.altasherat.common.presentation
-
+package com.solutionplus.altasherat.common.presentation.ui.base.activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,40 +7,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
-import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.android.extentions.bindView
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
+import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorHandling
 
-abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() ,ErrorHandling {
-    protected abstract val bindingClass: Class<Binding>
+abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorHandling {
 
-
-    private var _binding: Binding? = null
-    protected val binding: Binding get() = _binding!!
-
+    private lateinit var _binding: Binding
+    protected val binding: Binding
+        get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        _binding = bindingClass.bindView(this)
+        _binding = bindView()
 
-
-
-        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         viewInit()
-
-
         onActivityReady(savedInstanceState)
 
     }
 
-    abstract fun onActivityReady(savedInstanceState: Bundle?)
-
-
     abstract fun viewInit()
-     override fun handleHttpExceptions(exception: LeonException) {
-        when(exception){
-            is LeonException.Client.Unauthorized ->{
+    abstract fun onActivityReady(savedInstanceState: Bundle?)
+    override fun handleHttpExceptions(exception: LeonException) {
+        when (exception) {
+            is LeonException.Client.Unauthorized -> {
                 //navigate to Home
             }
 
@@ -58,11 +54,8 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() ,ErrorH
         }
     }
 
-
     private fun showToasts(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
-
 }
 
