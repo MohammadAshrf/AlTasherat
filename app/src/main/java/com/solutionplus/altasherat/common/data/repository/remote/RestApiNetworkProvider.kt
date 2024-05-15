@@ -68,7 +68,7 @@ internal class RestApiNetworkProvider  @Inject constructor(private val serviceAp
             headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf()
         )
-            return Gson().fromJson(response.string(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel)
     }
 
 

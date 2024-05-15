@@ -2,11 +2,12 @@ package com.solutionplus.altasherat.common.presintaion
 
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.example.solutionx.common.presentaion.bindView
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 
-abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() ,ErrorHandling {
     protected abstract val bindingClass: Class<Binding>
 
 
@@ -29,8 +30,31 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity() {
 
     abstract fun onActivityReady(savedInstanceState: Bundle?)
 
-    abstract fun viewInit()
 
+    abstract fun viewInit()
+     override fun handleHttpExceptions(exception: LeonException) {
+        when(exception){
+            is LeonException.Client.Unauthorized ->{
+                //navigate to Home
+            }
+
+            is LeonException.Local.IOOperation -> TODO()
+            is LeonException.Network.Retrial -> TODO()
+
+            is LeonException.Client.ResponseValidation -> TODO()
+            is LeonException.Local.RequestValidation -> TODO()
+
+            is LeonException.Network.Unhandled -> showToasts("Unhandled Network Error")
+            is LeonException.Client.Unhandled -> showToasts("Unhandled Client Error")
+            is LeonException.Server.InternalServerError -> showToasts("Internal Server Error")
+            is LeonException.Unknown -> showToasts("Unknown Error")
+        }
+    }
+
+
+    private fun showToasts(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 
 
 }
