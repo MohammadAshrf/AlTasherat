@@ -62,6 +62,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideGsonConverterFactory(): GsonConverterFactory {
+        return GsonConverterFactory.create()
+    }
+
+    @Provides
+    @Singleton
     fun provideHttpLoggingInterceptor() =
         HttpLoggingInterceptor { message ->
             if (BuildConfig.DEBUG) logger.warning(message)
