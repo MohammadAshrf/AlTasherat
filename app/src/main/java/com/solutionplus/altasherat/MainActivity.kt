@@ -15,6 +15,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onActivityReady(savedInstanceState: Bundle?) {
         logger.debug("onActivityReady")
+
         //set up the host fragment and the nav controller
         val navHostFragment =
             supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
