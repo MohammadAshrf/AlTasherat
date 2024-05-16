@@ -9,4 +9,5 @@
     <string name="password_reset">استعادة كلمة المرور</string>
     <string name="enter_phone_number">ادخل رقم جوالك لاستعادة كلمة المرور</string>
     <string name="enter_phone_text">ادخل رقم الجوال للمتابعة</string>
+    <string name="enter_otp_text">ادخل الكود المرسل لجوالك للمتابعة</string>
 </resources>
