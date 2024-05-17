@@ -18,5 +18,14 @@
         android:id="@+id/otpFragment"
         android:name="com.solutionplus.altasherat.features.resetPassword.presentation.OtpFragment"
         android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp" />
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_otpFragment_to_enterNewPasswordFragment"
+            app:destination="@id/enterNewPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterNewPasswordFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.EnterNewPasswordFragment"
+        android:label="fragment_enter_new_password"
+        tools:layout="@layout/fragment_enter_new_password" />
 </navigation>

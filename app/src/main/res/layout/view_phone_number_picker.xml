@@ -13,7 +13,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="0dp"
         android:layout_alignParentEnd="true"
-        android:drawableStart="@drawable/drawable_with_margin"
+        android:drawableStart="@drawable/ic_phone_with_margin"
         android:drawablePadding="20dp"
         android:ems="10"
         android:gravity="center"

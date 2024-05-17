@@ -10,4 +10,6 @@
     <string name="enter_phone_number">ادخل رقم جوالك لاستعادة كلمة المرور</string>
     <string name="enter_phone_text">ادخل رقم الجوال للمتابعة</string>
     <string name="enter_otp_text">ادخل الكود المرسل لجوالك للمتابعة</string>
+    <string name="enter_password_text">ادخل كلمة المرور</string>
+    <string name="enter_password_again_text">اعادة ادخال كلمة المرور مره اخرى</string>
 </resources>
