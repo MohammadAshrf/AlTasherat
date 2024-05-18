@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.solutionplus.altasherat.android.extentions.bindView
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorHandling
@@ -38,13 +39,15 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
     override fun handleHttpExceptions(exception: LeonException) {
         when (exception) {
             is LeonException.Client.Unauthorized -> {
-                //navigate to Home
+                //todo navigate to Home
             }
 
             is LeonException.Local.IOOperation -> TODO()
             is LeonException.Network.Retrial -> TODO()
 
-            is LeonException.Client.ResponseValidation -> TODO()
+            is LeonException.Client.ResponseValidation -> {
+                showSnackbar(exception.message ?: "Unknown validation error")
+            }
             is LeonException.Local.RequestValidation -> TODO()
 
             is LeonException.Network.Unhandled -> showToasts("Unhandled Network Error")
@@ -56,6 +59,9 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
 
     private fun showToasts(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }
 
