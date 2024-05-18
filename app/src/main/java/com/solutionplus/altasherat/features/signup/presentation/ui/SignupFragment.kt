@@ -73,7 +73,7 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_last_name), true)
                 false
             }
-            binding.etEmail.text?.trim()?.length !in 1..15 || !Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text.toString()).matches() -> {
+            binding.etEmail.text?.trim()?.length !in 1..25 || !Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text.toString()).matches() -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_email), true)
                 false
             }
