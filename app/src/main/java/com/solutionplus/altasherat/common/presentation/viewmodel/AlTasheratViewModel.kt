@@ -48,17 +48,15 @@ abstract class AlTasheratViewModel<Action : ViewAction, Event : ViewEvent, State
         println("Current state: ${viewState.value}")
     }
 
-    abstract fun clearState()
-
     private val actionSharedFlow: SharedFlow<Action>
         get() = _actionMutableFlow
 
-    abstract fun onActionTrigger(action: ViewAction?)
+    abstract fun invokeAction(action: ViewAction?)
 
     init {
         viewModelScope.launch {
             actionSharedFlow.collect {
-                onActionTrigger(it)
+                invokeAction(it)
             }
         }
     }
@@ -68,4 +66,6 @@ abstract class AlTasheratViewModel<Action : ViewAction, Event : ViewEvent, State
         super.onCleared()
         eventChannel.close()
     }
+
+    abstract fun clearState()
 }

@@ -4,11 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
-        android:allowBackup="true"
         android:name=".android.AlTasheratApp"
-
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -18,10 +16,13 @@
         android:theme="@style/Theme.AlTasherat"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.activites.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.activites.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            >
+            tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

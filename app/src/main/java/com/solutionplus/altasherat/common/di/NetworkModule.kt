@@ -1,6 +1,6 @@
 package com.solutionplus.altasherat.common.di
 
-import com.intuit.sdp.BuildConfig
+import com.solutionplus.altasherat.BuildConfig
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.constants.Constants
 import com.solutionplus.altasherat.common.data.repository.remote.AlTasheratApiServices
