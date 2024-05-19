@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AlTasherat" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/Bg_bt</item> <!-- Dark Blue Background -->
-        <item name="colorOnPrimary">@color/wight</item> <!-- White Text -->
+        <item name="colorOnPrimary">@color/white</item> <!-- White Text -->
         <item name="colorSecondary">@color/Accent</item> <!-- Teal Elements -->
         <item name="colorOnSecondary">@color/black</item>
         <item name="colorSurface">@color/BgCard</item> <!-- Dark Blue Card Background -->

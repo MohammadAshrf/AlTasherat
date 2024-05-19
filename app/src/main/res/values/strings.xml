@@ -3,4 +3,6 @@
     <string name="unsupported_type">Unsupported type…</string>
     <string name="network_unavailable">Please check your internet connection and try again.</string>
     <string name="timeout_error">The operation timed out. Please try again later.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -68,12 +68,8 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         }
     }
 
-    protected fun showLoading() {
-        loadingView.loadingView.visibility = View.VISIBLE
-    }
-
-    protected fun hideLoading() {
-        loadingView.loadingView.visibility = View.GONE
+    protected fun isLoading(isLoading: Boolean) {
+        loadingView.root.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     abstract fun onFragmentReady(savedInstanceState: Bundle?)
