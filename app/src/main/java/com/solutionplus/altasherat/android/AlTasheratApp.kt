@@ -4,7 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
-import com.intuit.sdp.BuildConfig
+import com.solutionplus.altasherat.BuildConfig
+
 import com.solutionplus.altasherat.android.helpers.logging.LoggerProvider
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

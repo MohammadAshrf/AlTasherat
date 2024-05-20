@@ -17,26 +17,26 @@ interface AlTasheratApiServices {
     suspend fun post(
         @Path("path") pathUrl: String, @QueryMap queryParams: Map<String, Any>,
         @HeaderMap headers: Map<String, Any>, @Body requestBody: Any,
-    ): Response<ResponseBody>
+    ): ResponseBody
 
     @GET("{path}")
     @JvmSuppressWildcards
     suspend fun get(
         @Path("path") pathUrl: String, @QueryMap queryParams: Map<String, Any>,
         @HeaderMap headers: Map<String, Any>,
-    ): Response<ResponseBody>
+    ): ResponseBody
 
     @PUT("{path}")
     @JvmSuppressWildcards
     suspend fun put(
         @Path("path") pathUrl: String, @QueryMap queryParams: Map<String, Any>,
         @HeaderMap headers: Map<String, Any>, @Body requestBody: Any,
-    ): Response<ResponseBody>
+    ): ResponseBody
 
     @DELETE("{path}")
     @JvmSuppressWildcards
     suspend fun delete(
         @Path("path") pathUrl: String, @QueryMap queryParams: Map<String, Any>,
         @HeaderMap headers: Map<String, Any>, @Body requestBody: Any,
-    ): Response<ResponseBody>
+    ): ResponseBody
 }

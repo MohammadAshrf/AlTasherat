@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.common.data.repository.remote
 
 import com.google.gson.Gson
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
 import java.lang.reflect.Type
 
@@ -13,7 +14,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }
 
     override suspend fun <ResponseBody, RequestBody> delete(
@@ -27,7 +28,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }
 
     override suspend fun <ResponseBody, RequestBody> put(
@@ -41,7 +42,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }
 
     override suspend fun <ResponseBody> get(
@@ -54,7 +55,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf()
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }
 
 }

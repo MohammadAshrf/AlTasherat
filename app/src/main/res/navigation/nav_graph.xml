@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileMenuFragment"
-        android:name="com.solutionplus.altasherat.features.profilemenu.Presentation.fragment.ProfileMenuFragment"
+        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.ProfileMenuFragment"
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
         <action
