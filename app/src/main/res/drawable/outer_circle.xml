@@ -10,7 +10,7 @@
         </shape>
     </item>
     <!-- Inner Space (margin) -->
-    <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
+    <item android:left="1.5dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
         <shape android:shape="oval">
             <solid android:color="#FFFFFF" />
             <size

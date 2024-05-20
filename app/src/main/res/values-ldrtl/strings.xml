@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="terms">الشروط والاحكام</string>
+    <string name="policy">الشروط والاحكام</string>
+    <string name="language">اللغة</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="login">تسجيل الدخول</string>
+</resources>

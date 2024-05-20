@@ -5,4 +5,11 @@
     <string name="timeout_error">The operation timed out. Please try again later.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_password">تعديل كلمة المرور</string>
+    <string name="about_us">من نحن</string>
+    <string name="terms">الشروط والاحكام</string>
+    <string name="policy">الشروط والاحكام</string>
+    <string name="language">اللغة</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="login">تسجيل الدخول</string>
 </resources>

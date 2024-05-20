@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/profileMenuFragment"
-        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.ProfileMenuFragment"
+        android:name="com.solutionplus.altasherat.features.profilemenu.Presentation.fragment.ProfileMenuFragment"
         android:label="fragment_profile_menu"
-        tools:layout="@layout/fragment_profile_menu" />
+        tools:layout="@layout/fragment_profile_menu" >
+        <action
+            android:id="@+id/action_profileMenuFragment_to_fakeFragment"
+            app:destination="@id/fakeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fakeFragment"
+        android:name="com.solutionplus.altasherat.fakeFragment"
+        android:label="fragment_fake"
+        tools:layout="@layout/fragment_fake" />
 </navigation>
