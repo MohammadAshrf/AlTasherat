@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="button_background_radius">60</dimen>
-    <dimen name="_32sdp">38dp</dimen>
+    <dimen name="_32sdp">32dp</dimen>
 </resources>

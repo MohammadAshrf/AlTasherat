@@ -56,22 +56,28 @@
 
     <TextView
         android:id="@+id/email_tv"
+        style="@style/Font.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        style="@style/Font.Medium"
         android:layout_marginTop="19dp"
-        tools:text=" test@!gmail.com"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:text=" test@!gmail.com" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        style="@style/Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="641dp" />
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_background"
+        android:drawableTint="#FFFFFF"
+        android:text="@string/skip_txt"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

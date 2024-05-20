@@ -1,9 +1,14 @@
 package com.solutionplus.altasherat.features.profileMenu.Presentation.fragment
 
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.core.view.marginTop
@@ -13,10 +18,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentProfileMenuBinding
+import com.solutionplus.altasherat.databinding.ViewCostomSnackbarBinding
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowAdapter
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuViewModel
@@ -35,7 +42,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-
+        showCustomSnackbar(binding.root)
     }
 
 
@@ -136,5 +143,37 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
         binding.rvRow.layoutManager = LinearLayoutManager(requireContext())
         binding.rvRow.adapter = adapter
+    }
+
+    fun showCustomSnackbar(view: View) {
+
+        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_INDEFINITE)
+
+        val inflater = LayoutInflater.from(view.context)
+        val customSnackbarBinding = ViewCostomSnackbarBinding.inflate(inflater)
+
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+        val params = snackbarLayout.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snackbarLayout.layoutParams = params
+
+        snackbarLayout.background = ColorDrawable(Color.TRANSPARENT)
+
+        snackbarLayout.addView(customSnackbarBinding.root, 0)
+
+        // Set the text and click listeners for the views in your custom layout
+        //customSnackbarBinding.snackbarText.text = "Your custom text"
+        customSnackbarBinding.snackbarAction.setOnClickListener {
+            findNavController().navigate(R.id.emailVerifiedFragment)
+            snackbar.dismiss()
+        }
+        customSnackbarBinding.snackbarClose.setOnClickListener {
+            // Dismiss the Snackbar when the close button is clicked
+            snackbar.dismiss()
+        }
+
+        // Show the Snackbar
+        snackbar.show()
     }
 }

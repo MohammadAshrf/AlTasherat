@@ -15,4 +15,5 @@
     <string name="conferm_email_txt">تأكيد البريد الالكتروني</string>
     <string name="we_send_msg_txt">أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى</string>
     <string name="check_email_txt">تحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة</string>
+    <string name="skip_txt">تخطي</string>
 </resources>

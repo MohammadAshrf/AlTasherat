@@ -7,15 +7,14 @@ import com.solutionplus.altasherat.databinding.FragmentEmailVerifiedBinding
 
 class EmailVerifiedFragment : BaseFragment<FragmentEmailVerifiedBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun subscribeToObservables() {
-        TODO("Not yet implemented")
+
     }
 
     override fun viewInit() {
-        TODO("Not yet implemented")
     }
 
 }
