@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentProfileMenuBinding
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowAdapter
@@ -87,7 +88,11 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
         binding.tvVersion.text = "v $version"
     }
 
-    private fun loadImageFromUrl(url: String, imageView: ImageView) {
+    private fun loadImageFromUrl(url: String?, imageView: ImageView) {
+        if (url.isNullOrEmpty() || (!url.startsWith("http://") && !url.startsWith("https://"))) {
+            return
+        }
+
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val url = URL(url)
@@ -96,7 +101,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
                     imageView.setImageBitmap(bmp)
                 }
             } catch (e: Exception) {
-                // Handle the exception here
+                // Handle exception here
             }
         }
     }

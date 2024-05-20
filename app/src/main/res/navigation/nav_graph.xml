@@ -19,4 +19,9 @@
         android:name="com.solutionplus.altasherat.fakeFragment"
         android:label="fragment_fake"
         tools:layout="@layout/fragment_fake" />
+    <fragment
+        android:id="@+id/emailVerifiedFragment"
+        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
+        android:label="fragment_email_verified"
+        tools:layout="@layout/fragment_email_verified" />
 </navigation>

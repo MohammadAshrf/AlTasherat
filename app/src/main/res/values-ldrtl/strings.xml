@@ -6,4 +6,5 @@
     <string name="language">اللغة</string>
     <string name="sign_out">تسجيل الخروج</string>
     <string name="login">تسجيل الدخول</string>
+    <string name="conferm_email_txt">تأكيد البريد الالكتروني</string>
 </resources>

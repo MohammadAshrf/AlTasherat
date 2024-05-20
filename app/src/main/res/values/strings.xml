@@ -12,4 +12,7 @@
     <string name="language">اللغة</string>
     <string name="sign_out">تسجيل الخروج</string>
     <string name="login">تسجيل الدخول</string>
+    <string name="conferm_email_txt">تأكيد البريد الالكتروني</string>
+    <string name="we_send_msg_txt">أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى</string>
+    <string name="check_email_txt">تحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة</string>
 </resources>
