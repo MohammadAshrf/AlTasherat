@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_visa_platform"
+        android:icon="@drawable/group3x"
+        android:title="Visa platform" />
+    <item
+        android:id="@+id/navigation_visa_applications"
+        android:icon="@drawable/iconvp3"
+        android:title="Visa applications" />
+
+    <item
+        android:id="@+id/navigation_profile_Personaly"
+        android:icon="@drawable/profile3x"
+        android:title="Profile personly" />
+
+</menu>

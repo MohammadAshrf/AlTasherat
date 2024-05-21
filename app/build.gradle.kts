@@ -125,4 +125,29 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.hilt.work)
 
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    //Mockito
+    androidTestImplementation("org.mockito:mockito-core:3.11.2")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    androidTestImplementation("io.mockk:mockk:1.12.0")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test:runner:1.4.0")
+
+    testImplementation("org.mockito:mockito-core:3.11.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("io.mockk:mockk:1.12.0") // MockK
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation ("com.google.truth:truth:1.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("androidx.test.ext:junit:1.1.3")
+    testImplementation ("androidx.test:runner:1.4.0")
+    implementation ("com.google.android.material:material:1.2.0")
+
+
+
 }

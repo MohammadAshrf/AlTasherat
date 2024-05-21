@@ -17,5 +17,8 @@
     <color name="Bg_bt">#282D6E</color>
     <color name="icon">#B2AECC</color>
 
+    <color name="backgroundEditText">#f1f4fb</color>
+
+
 
 </resources>

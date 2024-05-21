@@ -8,5 +8,5 @@
         android:centerColor="@color/Secondary"
         android:startColor="@color/Accent"
         android:type="linear"/>
-    <corners android:radius="@dimen/button_background_radius"/>
+    <corners android:radius="60dp"/>
 </shape>
