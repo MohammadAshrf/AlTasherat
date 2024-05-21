@@ -54,6 +54,8 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/et_password"
         style="@style/EditText"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
@@ -69,6 +71,7 @@
         android:text="نسيت كلمه المرور؟"
         android:textSize="14sp"
         android:textColor="@color/text"
+        android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout2"

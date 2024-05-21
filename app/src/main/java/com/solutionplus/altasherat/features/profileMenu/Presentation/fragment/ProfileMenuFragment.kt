@@ -126,7 +126,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
     private fun setupRecyclerView() {
         val items = if (!isUserLoggedIn) {
             listOf(
-                RowItem(R.drawable.ic_login, getString(R.string.login), R.id.loginFragment),
+                RowItem(R.drawable.ic_login, getString(R.string.login), R.id.homeActivity),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
                 RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
                 RowItem(R.drawable.ic_terms, getString(R.string.edit_password), R.id.fakeFragment),

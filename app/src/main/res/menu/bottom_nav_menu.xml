@@ -4,15 +4,15 @@
     <item
         android:id="@+id/navigation_visa_platform"
         android:icon="@drawable/group3x"
-        android:title="Visa platform" />
+        android:title="@string/visa_platform" />
     <item
         android:id="@+id/navigation_visa_applications"
         android:icon="@drawable/iconvp3"
-        android:title="Visa applications" />
+        android:title="@string/visa_applications" />
 
     <item
         android:id="@+id/profileMenuFragment"
         android:icon="@drawable/profile3x"
-        android:title="Profile personly" />
+        android:title="@string/profile_personly" />
 
 </menu>

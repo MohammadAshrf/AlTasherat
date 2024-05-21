@@ -40,8 +40,9 @@
             android:id="@+id/action_profileMenuFragment_to_emailVerifiedFragment"
             app:destination="@id/emailVerifiedFragment" />
         <action
-            android:id="@+id/action_profileMenuFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_profileMenuFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+
     </fragment>
     <fragment
         android:id="@+id/fakeFragment"
