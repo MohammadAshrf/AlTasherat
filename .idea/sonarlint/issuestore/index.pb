@@ -16,3 +16,7 @@ bapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/activ
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 ë
 aapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/frgment/BaseFragment.kt,2\b\2bd6a7f3f94eb0c7f439e066d55a924d01cec011
+è
+_app/src/main/java/com/solutionplus/altasherat/features/signup/presentation/ui/SignupFragment.kt,a\f\af7d73844a9881e0e88770b43d79c9c9bb5189e8
+ê
+`app/src/main/java/com/solutionplus/altasherat/features/signup/presentation/ui/SignupViewModel.kt,0\4\04c94683bde6ec4395fdf411730f7bed65f2aec3
