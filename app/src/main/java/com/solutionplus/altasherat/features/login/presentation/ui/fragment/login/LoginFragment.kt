@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.signup.presentation.ui.adapter.CountryAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.ForgetPasswordActivity
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
@@ -24,8 +26,13 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListener {
 
     private val viewModel: LoginViewModel by viewModels()
+    private val adapter: CountryAdapter by lazy {
+        CountryAdapter(requireContext(), emptyList())
+    }
 
-    override fun onFragmentReady(savedInstanceState: Bundle?) {}
+    override fun onFragmentReady(savedInstanceState: Bundle?) {
+        subscribeToObservables()
+    }
 
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -40,8 +47,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                         handleEvent(event)
                     }
                 }
+                launch {
+                    viewModel.countries.collect { countries ->
+                        setupCountrySpinner(countries)
+                    }
+                }
             }
         }
+    }
+
+    private fun setupCountrySpinner(countries: List<Country>) {
+        adapter.updateCountries(countries)
+        binding.etCountruCode.adapter = adapter
     }
 
     override fun viewInit() {
@@ -84,8 +101,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         if (validateLoginDetails()) {
             val phoneNumber = binding.etPhoneClient.text.toString()
             val password = binding.etPassword.text.toString()
+            val countryCode =(binding.etCountruCode.selectedItem as Country).code
             viewModel.onActionTrigger(
-                LoginContract.LoginActions.LoginWithPhone(phoneNumber, "0020", password)
+                LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
         }
     }

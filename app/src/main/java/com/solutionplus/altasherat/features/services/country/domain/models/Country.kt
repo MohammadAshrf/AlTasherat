@@ -8,9 +8,7 @@ class Country(
 	val id: Int,
 	val name: String,
 	val code: String,
-	val visible: Boolean,
 	val flag: String,
-	val nationality: String,
 	val currency: String,
     val phoneCode: String
 ) : Parcelable

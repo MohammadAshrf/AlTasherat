@@ -1,6 +1,11 @@
 package com.solutionplus.altasherat.features.services.country.domain.repository.local
 
-internal interface ICountriesLocalDS {
-    suspend fun saveCountry(countryName: String)
-//    suspend fun getSavedCountries(): String?
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+
+interface ICountriesLocalDS {
+    suspend fun getCountriesFromLocal(): List<CountryEntity>
+    suspend fun saveCountriesToLocal(countries: List<Country>)
+    suspend fun isOnBoardingShown(): Boolean
+    suspend fun setOnBoardingShown(shown: Boolean)
 }

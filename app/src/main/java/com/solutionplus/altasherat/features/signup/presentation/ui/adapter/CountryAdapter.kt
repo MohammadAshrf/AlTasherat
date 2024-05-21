@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
-class CountryAdapter(context: Context, countries: List<Country>) :
+class CountryAdapter(context: Context, private var countries: List<Country>) :
     ArrayAdapter<Country>(context, 0, countries) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -36,11 +36,14 @@ class CountryAdapter(context: Context, countries: List<Country>) :
         country?.let {
             countryNameTextView.text = it.name
             flagImageView.text = it.flag
-//            Glide.with(context)
-//                .load(it.flag)
-//                .into(flagImageView)
         }
-
         return view
+    }
+
+    fun updateCountries(newCountries: List<Country>) {
+        countries = newCountries
+        clear()
+        addAll(newCountries)
+        notifyDataSetChanged()
     }
 }

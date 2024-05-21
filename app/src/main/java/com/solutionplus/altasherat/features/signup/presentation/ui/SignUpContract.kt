@@ -10,11 +10,19 @@ import com.solutionplus.altasherat.features.signup.domain.model.User
 interface SignUpContract {
 
     sealed class SignupActions : ViewAction {
-        data class Signup(val firstName: String, val lastName: String, val email: String, val phoneNumber: String, val countryCode: String, val password: String) : SignupActions()
+        data class Signup(
+            val firstName: String,
+            val lastName: String,
+            val email: String,
+            val phoneNumber: String,
+            val countryCode: String,
+            val password: String
+        ) : SignupActions()
+        data object FetchCountries : SignupActions()
     }
 
     sealed class SignupEvent : ViewEvent {
-        data class CountriesIndex(val countries: List<Country>) : SignupEvent()
+        //        data class CountriesIndex(val countries: List<Country>) : SignupEvent()
         data class SignupSuccess(val user: User) : SignupEvent()
         data class SignupError(val message: String) : SignupEvent()
     }
