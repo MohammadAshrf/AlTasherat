@@ -29,9 +29,7 @@ import kotlinx.coroutines.launch
 class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListener {
 
     private val viewModel: SignupViewModel by viewModels()
-    private val adapter: CountryAdapter by lazy {
-        CountryAdapter(requireContext(), emptyList())
-    }
+
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         subscribeToObservables()
     }
@@ -52,7 +50,7 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
                     }
                 }
                 launch {
-                    viewModel.countries.collect { countries ->
+                    viewModel.countries.collect{ countries ->
                         setupCountrySpinner(countries)
                     }
                 }
@@ -87,7 +85,7 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
         }
     }
     private fun setupCountrySpinner(countries: List<Country>) {
-        adapter.updateCountries(countries)
+        val adapter = CountryAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
     }
     override fun onSignupAction() {

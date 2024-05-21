@@ -57,7 +57,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     }
 
     private fun setupCountrySpinner(countries: List<Country>) {
-        adapter.updateCountries(countries)
+        val adapter = CountryAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
     }
 
