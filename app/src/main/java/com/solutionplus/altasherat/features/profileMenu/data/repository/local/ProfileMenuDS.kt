@@ -12,20 +12,23 @@ import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEn
 import com.solutionplus.altasherat.features.profileMenu.domain.repository.local.IProfileMenuDS
 
 
-
-internal class ProfileMenuDS (private val storageKV: IKeyValueStorageProvider, private val encryptionProvider: IEncryptionProvider):
-    IProfileMenuDS
-{
+internal class ProfileMenuDS(
+    private val storageKV: IKeyValueStorageProvider,
+    private val encryptionProvider: IEncryptionProvider
+) :
+    IProfileMenuDS {
 
     override suspend fun getUser(): UserEntity {
         val userJson = storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java)
         logger.info("userInfo before decryption --> $userJson ")
-        val decodedBytes: ByteArray? =
+        val decodedBytes: ByteArray =
             Base64.decode(userJson, Base64.DEFAULT)
 
-        val decryptedBytes = decodedBytes?.let { encryptionProvider.decryptData(it)?.decodeToString() }
+        val decryptedBytes =
+            decodedBytes.let { encryptionProvider.decryptData(it).decodeToString() }
 
-        val result = decryptedBytes?.let { Gson().fromJson(it, UserEntity::class.java) }?: UserEntity()
+        val result =
+            decryptedBytes.let { Gson().fromJson(it, UserEntity::class.java) }
 
         logger.warning("userInfo after decryption --> $result ")
 
@@ -33,12 +36,7 @@ internal class ProfileMenuDS (private val storageKV: IKeyValueStorageProvider, p
     }
 
 
-    private fun logUserInfoAfterDecryption( userJson: String,result: UserEntity){
-        logger.warning("userInfo encryption --> $userJson ")
-        logger.warning("userInfo after decryption --> $result ")
-    }
-
-    companion object{
+    companion object {
         val logger = getClassLogger()
     }
 }

@@ -27,7 +27,9 @@ import com.solutionplus.altasherat.databinding.ViewCostomSnackbarBinding
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowAdapter
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuViewModel
+import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract.ProfileMenuState
+import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,43 +44,49 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
+        //todo make logic to show snackbar if loged in user not verified
         showCustomSnackbar(binding.root)
+
+        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.CheckUserLogin)
+
     }
 
 
     override fun subscribeToObservables() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.collect { state ->
-                handleState(state)
-                setupRecyclerView(state)
+        collectFlowWithLifecycle(viewModel.viewState) {
+
+        }
+
+        collectFlowWithLifecycle(viewModel.singleEvent) {
+            when (it) {
+                is ProfileMenuContract.ProfileMenuEvent.NavigateToSignup -> {
+                    //findNavController().navigate(R.id.signupFragment)
+
+                }
+
+                is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
+                    setupRecyclerView()
+                    handleState(it.user)
+                }
             }
+
         }
     }
 
-    private fun handleState(state: ProfileMenuState) {
-        isLoading(state.isLoading)
+    private fun handleState(user: User) {
 
-        if (state.isUserLoggedIn) {
-            binding.nameTextView.text = state.fullName
+
+        binding.nameTextView.text = user.fullName
+        binding.profilePictureMenu.profilePictureView.visibility = View.VISIBLE
+        binding.nameTextView.visibility = View.VISIBLE
+        binding.btnEditProfile.visibility = View.VISIBLE
+        binding.view.visibility = View.VISIBLE
+
+
+
+        if (user.imageUrl != null) {
             binding.profilePictureMenu.profilePictureView.visibility = View.VISIBLE
-            binding.nameTextView.visibility = View.VISIBLE
-            binding.btnEditProfile.visibility = View.VISIBLE
-            binding.view.visibility = View.VISIBLE
-
-        } else {
-            binding.profilePictureMenu.profilePictureView.visibility = View.GONE
-            binding.nameTextView.visibility = View.GONE
-            binding.btnEditProfile.visibility = View.GONE
-            binding.view.visibility = View.GONE
-// Set the top margin of the RecyclerView
-            val params = binding.rvRow.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = resources.getDimensionPixelSize(R.dimen._32sdp)
-            binding.rvRow.layoutParams = params
-        }
-
-        if (state.doesProfilePictureExist && state.imageUrl != null) {
-            binding.profilePictureMenu.profilePictureView.visibility = View.VISIBLE
-            loadImageFromUrl(state.imageUrl, binding.profilePictureMenu.profilePicture)
+            loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
         } else {
             // Hide profile picture
         }
@@ -113,8 +121,8 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
         }
     }
 
-    private fun setupRecyclerView(state: ProfileMenuState) {
-        val items = if (!state.isUserLoggedIn) {
+    private fun setupRecyclerView() {
+        val items = if (!viewModel.isUserLoggedIn) {
             listOf(
                 RowItem(R.drawable.ic_login, getString(R.string.login), R.id.fakeFragment),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),

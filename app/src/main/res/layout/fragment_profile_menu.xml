@@ -9,6 +9,7 @@
 
     <include
         android:id="@+id/profile_picture_menu"
+        android:visibility="gone"
         android:layout_marginTop="42dp"
         layout="@layout/view_profile_picture"
         android:layout_width="match_parent"
@@ -25,6 +26,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
+        android:visibility="gone"
+
         android:id="@+id/name_text_view"
         style="@style/Font.Heavy"
         android:layout_width="wrap_content"
@@ -38,6 +41,8 @@
         tools:text="ناديــن محمد السيد  " />
 
     <Button
+        android:visibility="gone"
+
         android:id="@+id/btn_edit_profile"
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
@@ -57,6 +62,8 @@
 
     <!-- Horizontal gray line -->
     <View
+        android:visibility="gone"
+
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -77,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.110000014"
         tools:itemCount="6"
         tools:listitem="@layout/item_menu" />
 

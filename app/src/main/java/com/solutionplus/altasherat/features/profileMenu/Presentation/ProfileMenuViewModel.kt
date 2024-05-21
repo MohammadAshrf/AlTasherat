@@ -20,20 +20,18 @@ import javax.inject.Inject
 class ProfileMenuViewModel @Inject constructor(
     private val checkUserLoginUC: CheckUserLoginUC
 ) : AlTasheratViewModel<ProfileMenuAction, ProfileMenuEvent, ProfileMenuState>(ProfileMenuState.initial()) {
-
+     var isUserLoggedIn = false
     override fun clearState() {
         setState(ProfileMenuState.initial())
     }
 
-    init {
-        checkUserLogin()
-    }
 
     override fun onActionTrigger(action: ViewAction?) {
         when (action) {
             is ProfileMenuAction.SignOut -> handleSignOut()
             is ProfileMenuAction.GoBack -> handleGoBack()
             is ProfileMenuAction.ChangeProfile -> handleChangeProfile()
+            is ProfileMenuAction.CheckUserLogin -> checkUserLogin()
         }
     }
 
@@ -52,20 +50,8 @@ class ProfileMenuViewModel @Inject constructor(
     private fun checkUserLogin() {
         viewModelScope.launch {
             val user = checkUserLoginUC.execute(null)
-            val newState = if (user != null) {
-                oldViewState.copy(
-                    isUserLoggedIn = true,
-                    doesProfilePictureExist = user.imageUrl != null,
-                    imageUrl = user.imageUrl,
-                    fullName = user.fullName
-                    )
-            } else {
-                oldViewState.copy(
-                    isUserLoggedIn = false,
-                    doesProfilePictureExist = false
-                )
-            }
-            setState(newState)
+            isUserLoggedIn = user.phone.isNotEmpty() && user.email.isNotEmpty()
+            sendEvent(ProfileMenuEvent.IsUserLoggedIn(user))
         }
     }
 

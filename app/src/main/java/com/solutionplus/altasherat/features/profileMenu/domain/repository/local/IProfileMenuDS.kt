@@ -4,5 +4,5 @@ import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEn
 
 internal interface IProfileMenuDS {
 
-    suspend fun getUser(): UserEntity?
+    suspend fun getUser(): UserEntity
 }

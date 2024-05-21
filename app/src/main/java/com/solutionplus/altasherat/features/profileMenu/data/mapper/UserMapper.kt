@@ -8,7 +8,7 @@ internal object UserMapper : Mapper<Unit,User, UserEntity>() {
 
     override fun domainToEntity(model: User): UserEntity {
         return UserEntity(
-            id = model.id ?: 0,
+            id = model.id,
             userName = model.userName.orEmpty(),
             firsName = model.firstName.orEmpty(),
             middleName = model.middleName.orEmpty(),
@@ -18,6 +18,21 @@ internal object UserMapper : Mapper<Unit,User, UserEntity>() {
             imageUrl = model.imageUrl.orEmpty(),
             fullName = model.fullName.orEmpty(),
             email = model.email.orEmpty(),
+        )
+    }
+    override fun entityToDomain(model: UserEntity): User {
+        return User(
+            id = model.id,
+            userName = model.userName,
+            firstName = model.firsName,
+            middleName = model.middleName,
+            lastName = model.lastName,
+            phone = model.phone,
+            birthDate = model.birthDate,
+            imageUrl = model.imageUrl,
+            fullName = model.fullName,
+            email = model.email,
+            password = ""
         )
     }
 
