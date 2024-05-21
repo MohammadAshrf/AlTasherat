@@ -78,3 +78,5 @@ iapp/src/main/java/com/solutionplus/altasherat/features/profileMenu/data/reposit
 lapp/src/main/java/com/solutionplus/altasherat/features/login/presentation/ui/fragment/login/LoginContract.kt,2\1\2153e97ea5a52d65f3f46be7992b94b370c349a8
 …
 Uapp/src/main/java/com/solutionplus/altasherat/common/domain/interactor/BaseUseCase.kt,8\3\83815f4adb6e474b94da345c5799daaa0135eae3
+˜
+happ/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/dashboard/VisaPlatformFragment.kt,7\1\710a180f599b9731d132e76dd6c7490dec275793

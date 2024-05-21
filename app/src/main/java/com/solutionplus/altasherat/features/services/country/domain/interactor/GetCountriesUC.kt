@@ -20,15 +20,7 @@ class GetCountriesUC(private val repository: ICountriesRepository) :
         }
     }
 
-    fun emitCountries(): Flow<Resource<List<Country>>> = flow {
-        emit(Resource.Loading(true))
-        try {
-            val countries = execute(Unit)
-            emit(Resource.Success(countries))
-        } catch (e: Exception) { } finally {
-            emit(Resource.Loading(false))
-        }
-    }
+    fun emitCountries(): Flow<Resource<List<Country>>> = invoke()
 
     companion object{
         val logger = getClassLogger()

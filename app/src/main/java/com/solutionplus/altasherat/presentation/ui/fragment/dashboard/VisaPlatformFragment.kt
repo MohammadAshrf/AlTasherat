@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 class VisaPlatformFragment : Fragment() {
 
     private lateinit var binding: FragmentVisaPlatformBinding
-    private val viewModel: LoginViewModel by viewModels()
     val controller: NavController by lazy { findNavController() }
 
     override fun onCreateView(
@@ -49,15 +48,8 @@ class VisaPlatformFragment : Fragment() {
 
     private fun handleButtonClick() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isUserLoggedIn.collect { isLoggedIn ->
-                if (isLoggedIn) {
-                    findNavController().navigate(R.id.action_navigation_visa_platform_to_navigation_visa_applications)
 //                    navigateToNextFragment()
-                } else {
-                    // User is not logged in, show the bottom sheet dialog for login/signup
                     showBottomSheetDialog()
-                }
-            }
         }
     }
 

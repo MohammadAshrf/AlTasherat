@@ -24,12 +24,12 @@ class LoginViewModel @Inject constructor(
     initialState = LoginContract.LoginState.initial()
 ) {
 
-    private val _isUserLoggedIn = MutableStateFlow(false)
-    val isUserLoggedIn: StateFlow<Boolean> = _isUserLoggedIn.asStateFlow()
-
     private val _countries = MutableStateFlow<List<Country>>(emptyList())
     val countries: StateFlow<List<Country>> get() = _countries
 
+    init {
+        fetchCountries()
+    }
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
@@ -67,14 +67,12 @@ class LoginViewModel @Inject constructor(
                     is Resource.Success -> sendEvent(LoginContract.LoginEvents.LoginSuccess(resource.model))
 
                 }
-                _isUserLoggedIn.value = false
             }
         }
     }
 
     override fun clearState() {
         setState(LoginContract.LoginState.initial())
-        _isUserLoggedIn.value = false
     }
 
 }
