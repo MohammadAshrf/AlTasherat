@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/viewPagerFragment">
+    app:startDestination="@id/changePasswordFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
 
+        <action
+            android:id="@+id/action_loginFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
 
     <fragment
@@ -20,7 +23,14 @@
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
+        <action
+            android:id="@+id/action_signupFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/resetPasswordByPhoneFragment"
         android:name="com.solutionplus.altasherat.features.resetPassword.presentation.ResetPasswordByPhoneFragment"
@@ -38,5 +48,26 @@
         <action
             android:id="@+id/action_viewPagerFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
+
 </navigation>

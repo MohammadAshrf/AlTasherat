@@ -14,11 +14,14 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             userName = model.username.orEmpty(),
             fullName = "${model.firstname.orEmpty()} ${model.lastname.orEmpty()}",
             email = model.email.orEmpty(),
+            password = "",
             lastName = model.lastname.orEmpty(),
             firstName = model.firstname.orEmpty(),
             middleName = model.middlename.orEmpty(),
             birthDate = model.birthdate.orEmpty(),
-            phone = model.phone?.countryCode.orEmpty() + "-" + model.phone?.number.orEmpty()
+            phone = model.phone?.countryCode.orEmpty() + "-" + model.phone?.number.orEmpty(),
+            imageUrl = ""
+
         )
     }
 

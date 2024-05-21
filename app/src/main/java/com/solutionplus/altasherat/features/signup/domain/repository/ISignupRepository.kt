@@ -1,6 +1,5 @@
 package com.solutionplus.altasherat.features.signup.domain.repository
 
-import com.solutionplus.altasherat.features.countries.country.Country
 import com.solutionplus.altasherat.features.signup.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.model.Signup

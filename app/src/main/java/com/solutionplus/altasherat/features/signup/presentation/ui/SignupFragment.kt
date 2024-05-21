@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.signup.presentation.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
@@ -13,10 +14,13 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentSignupBinding
-import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginState
+import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
 import com.solutionplus.altasherat.features.signup.presentation.ui.adapter.CountryAdapter
+import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnSignupActionListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -32,21 +36,45 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewState.collect { state ->
-                    renderState(state)
+                launch {
+                    viewModel.viewState.collect { state ->
+                        renderState(state)
+                    }
+                }
+                launch {
+                    viewModel.singleEvent.collect { event ->
+                        handleEvent(event)
+                    }
                 }
             }
         }
     }
 
-    private fun renderState(state: SignUpState){
-        when (state) {
-            is SignUpState.Error -> { }
-            is SignUpState.Loading -> { }
-            is SignUpState.Success -> { Toast.makeText(requireContext(), "You signed up successfully", Toast.LENGTH_SHORT).show()}
+    private fun renderState(state: SignUpContract.SignUpState){
+        CoroutineScope(Dispatchers.Main).launch {
+            if (state.isLoading)
+            {
+                showLoading(resources.getString(R.string.please_wait))
+            }else{
+                hideLoading()
+            }
+            state.exception?.let {
+                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
+    private fun handleEvent(event: SignUpContract.SignupEvent) {
+        when (event) {
+            is SignUpContract.SignupEvent.SignupSuccess -> {
+                val intent = Intent(requireActivity(), HomeActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(requireContext(), "You signed up successfully", Toast.LENGTH_SHORT).show()
+            }
+            is SignUpContract.SignupEvent.SignupError -> {
+                Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     override fun onSignupAction() {
         if (validateLoginDetails()) {
             val firstName = binding.etFirstname.text.toString()
@@ -55,8 +83,8 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
             val phoneNumber = binding.etPhoneClient.text.toString()
             val countryCode = binding.etCountruCode
             val password = binding.etPassword.text.toString()
-            viewModel.handleIntent(
-                SignUpIntent.SignUp(
+            viewModel.onActionTrigger(
+                SignUpContract.SignupActions.Signup(
                     firstName, lastName, email, phoneNumber, "0020", password
                 )
             )

@@ -44,7 +44,7 @@ class LoginLocalDSTest{
     }
 
     @Test
-    fun testSaveUser() = runBlocking {
+    fun `when saving user given valid user expect user saved in storage`() = runBlocking {
         val user = UserEntity(id = 1, userName = "testUser", firsName = "Test", lastName = "User")
         val userJson = Gson().toJson(user)
         val bytesUser = userJson.toByteArray()
@@ -59,7 +59,7 @@ class LoginLocalDSTest{
     }
 
     @Test
-    fun testSaveAccessToken() = runBlocking {
+    fun `when saving access token given valid token expect token saved in storage`() = runBlocking {
         val token = "testToken"
         val bytes = token.toByteArray()
         val encryptedToken = "encryptedToken"
@@ -73,7 +73,7 @@ class LoginLocalDSTest{
     }
 
     @Test
-    fun testGetUser() = runBlocking {
+    fun `when getting user expect user returned from storage`() = runBlocking {
         val user = UserEntity(id = 1, userName = "testUser", firsName = "Test", lastName = "User")
         val userJson = Gson().toJson(user)
         val encryptedUserData = Base64.getEncoder().encodeToString(userJson.toByteArray())
@@ -93,7 +93,7 @@ class LoginLocalDSTest{
 
     // Test case 2: Save login with empty response then do nothing
     @Test
-    fun testSaveUserWithEmptyResponse() = runBlocking {
+    fun `when saving user given empty user expect storage not called`() = runBlocking {
         // Given
         val user = UserEntity() // Empty user
 
@@ -108,7 +108,7 @@ class LoginLocalDSTest{
 
     // Test case 4: Get access token with no access token stored then return exception
     @Test
-    fun testGetAccessTokenWithNoTokenStored()  {
+    fun `when getting access token given no token stored expect exception thrown`()  {
          runBlocking {
              // Given
              val encryptedToken = ""
@@ -133,7 +133,7 @@ class LoginLocalDSTest{
 
     // Test case 5: Get access token when IV is empty then return exception
     @Test
-    fun testGetAccessTokenWithEmptyIV(){
+    fun `when getting access token given empty IV expect exception thrown`(){
         runBlocking {
             // Given
             val encryptedToken = "encryptedAccessToken"
@@ -161,7 +161,7 @@ class LoginLocalDSTest{
 
     // Test case 6: Get access token when stored data cannot be decrypted then return empty string
     @Test
-    fun testGetUserWithInvalidData() = runBlocking {
+    fun `when getting user given invalid data expect empty user entity returned`() = runBlocking {
         // Given
         val encryptedUserData = "invalidEncryptedUserData"
 

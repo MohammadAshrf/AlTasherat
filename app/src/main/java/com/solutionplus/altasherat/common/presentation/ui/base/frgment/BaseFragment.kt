@@ -56,12 +56,6 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindView()
-
-        loadingView = ViewLoadingBinding.inflate(
-            inflater,
-            binding.root as ViewGroup,
-            true
-        ) // Inflate loading view
         return binding.root
     }
 

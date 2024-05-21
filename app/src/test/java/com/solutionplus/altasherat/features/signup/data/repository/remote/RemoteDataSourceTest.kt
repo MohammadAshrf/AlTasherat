@@ -32,7 +32,7 @@ class RemoteDataSourceTest {
     }
 
     @Test
-    fun loginWithPhoneReturnsExpectedResult() = runTest {
+    fun `when Signup given valid request expect expected result`() = runTest {
         val signupRequest = SignupRequest(phone = Phone("0020","1066791541"), password = "123456789", countryCode = "0020", countryId = 1, email = "mahmoud@gmail", firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
         val expectedResponse = SignupDto("hi","testToken", null)
 
@@ -45,7 +45,7 @@ class RemoteDataSourceTest {
 
 
     @Test
-    fun loginWithPhoneReturnsNullWhenProviderReturnsNull() = runTest {
+    fun `when signup with phone given request and provider returns null expect null result`() = runTest {
         val signupRequest = SignupRequest(phone = Phone("0020","1066791541"), password = "123456789", countryCode = "0020", countryId = 1, email = "mahmoud@gmail", firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
         val expectedResponse = null
 

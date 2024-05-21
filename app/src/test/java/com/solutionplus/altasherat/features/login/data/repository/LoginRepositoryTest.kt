@@ -41,7 +41,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun testLoginWithPhone() {
+    fun `when login with phone given valid request expect successful login response`() {
         runBlocking {
             val phoneNumber = Phone("0020", "100100100")
             val loginRequest = LoginRequest(phone = phoneNumber, password = "123456789")
@@ -69,7 +69,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun testSaveUser() {
+    fun `when saving user given valid user expect user saved`() {
         runBlocking {
             val user = User()
             val userEntity = UserMapper.domainToEntity(user)
@@ -84,7 +84,7 @@ class LoginRepositoryTest {
 
 
     @Test
-    fun `test saving user with different data`() = runBlocking {
+    fun `when saving user given different data expect user saved with correct data`() = runBlocking {
         val user = User(id = 1, userName = "user1", email = "user1@example.com", phone = "123456789")
         val userEntity = UserMapper.domainToEntity(user)
         val localDs = mockk<ILoginLocalDS>()
@@ -101,7 +101,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun `test saving user is null`() = runBlocking {
+    fun `when saving user given null fields expect user saved`() = runBlocking {
         val user = User(id = null, userName = null, email = null, phone = null)
         val userEntity = UserMapper.domainToEntity(user)
         val localDs = mockk<ILoginLocalDS>()
@@ -118,10 +118,10 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun `test saving user with invalid data`() {
+    fun `when saving user given invalid data expect exception thrown`() {
         runBlocking {
             // Arrange
-            val user = User(id = 1) // Missing required fields like username, email, etc.
+            val user = User(id = 1)
             val localDataSource = mockk<ILoginLocalDS>()
             val repository: ILoginRepository = LoginRepository(mockk(), localDataSource)
 
@@ -133,7 +133,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun testSaveAccessToken() = runBlocking{
+    fun `when saving access token given valid token expect token saved`() = runBlocking{
         val token = "sampleToken"
 
         // Call the method to be tested
@@ -144,7 +144,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun testGetUser() = runBlocking{
+    fun `when getting user expect correct user entity returned`() = runBlocking{
         val userEntity = UserEntity()
 
         // Mock local data source behavior

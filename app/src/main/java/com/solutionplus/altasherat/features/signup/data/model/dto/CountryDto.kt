@@ -2,7 +2,6 @@ package com.solutionplus.altasherat.features.signup.data.model.dto
 
 
 import com.google.gson.annotations.SerializedName
-import com.solutionplus.altasherat.features.countries.country.Country
 
 data class CountryDto(
     @SerializedName("code")

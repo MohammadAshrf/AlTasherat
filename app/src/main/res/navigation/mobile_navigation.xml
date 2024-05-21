@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_visa_platform">
+
+    <fragment
+        android:id="@+id/navigation_visa_applications"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.home.VisaApplicationsFragment"
+        android:label="visa applications"
+        tools:layout="@layout/fragment_visa_applications" />
+
+    <fragment
+        android:id="@+id/navigation_visa_platform"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.dashboard.VisaPlatformFragment"
+        android:label="visa platform"
+        tools:layout="@layout/fragment_visa_platform" >
+
+        <action
+            android:id="@+id/action_navigation_visa_platform_to_navigation_visa_applications"
+            app:destination="@id/navigation_visa_applications" />
+        <action
+            android:id="@+id/action_navigation_visa_platform_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile_Personaly"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.notifications.ProfilePersonlyFragment"
+        android:label="profile Personaly"
+        tools:layout="@layout/fragment_profile_personly" />
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.solutionplus.altasherat.presentation.ui.activity.main.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>

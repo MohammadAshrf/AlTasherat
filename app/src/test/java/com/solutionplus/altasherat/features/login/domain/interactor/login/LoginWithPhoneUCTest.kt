@@ -50,7 +50,7 @@ class LoginWithPhoneUCTest {
     }
 
     @Test
-    fun `test successful login with phone, country code , and password `() = runTest {
+    fun `when login is successful_given phone country code and password_expect user details are returned`() = runTest {
         val phone = Phone(countryCode = "0020", number = "100100100")
         val loginRequest = LoginRequest(phone = phone, password = "123456789")
 

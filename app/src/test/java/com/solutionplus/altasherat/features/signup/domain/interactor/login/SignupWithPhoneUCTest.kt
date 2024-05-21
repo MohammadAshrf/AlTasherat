@@ -43,7 +43,8 @@ import kotlinx.coroutines.test.runBlockingTest
     }
 
     @Test
-    fun `test successful signup with phone, country code, and password`() = runTest {
+    fun ` when signup is successful expect user details are returned`() = runTest {
+
         val phone = Phone(countryCode = "0020", number = "100100100")
         val signupRequest = SignupRequest(phone = phone, password = "123456789", countryCode = "0020", countryId = 1, email = "mahmoud@gmail", firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
 

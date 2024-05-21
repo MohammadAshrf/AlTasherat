@@ -19,26 +19,27 @@ internal class SignupLocalDS (private val storageKV: IKeyValueStorageProvider, p
     override suspend fun saveUser(user: UserEntity) {
         val userJson = Gson().toJson(user)
         val bytesUser = userJson.toByteArray()
-        val encryptUserData = Base64.getEncoder()
-            .encodeToString(encryptionProvider.encryptData(bytes = bytesUser))
-        logUserInfoAfterEncryption(userJson, encryptUserData)
-        storageKV.saveEntry(StorageKeyEnum.USER, Gson().toJson(encryptUserData), String::class.java)
+        val encryptedUserData = encryptionProvider.encryptData(bytesUser)
+        val encryptUserDataBase64 = Base64.getEncoder().encodeToString(encryptedUserData)
+        logUserInfoAfterEncryption(userJson, encryptUserDataBase64)
+        storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java)
     }
 
     override suspend fun saveAccessToken(token: String) {
         val bytes = token.toByteArray()
-        val encryptData = Base64.getEncoder()
-            .encodeToString(encryptionProvider.encryptData(bytes = bytes))
-        logAccessTokenAfterEncryption(token, encryptData)
-        storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptData, String::class.java)
+        val encryptedData = encryptionProvider.encryptData(bytes)
+        val encryptedDataBase64 = Base64.getEncoder().encodeToString(encryptedData)
+        logAccessTokenAfterEncryption(token, encryptedDataBase64)
+        storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptedDataBase64, String::class.java)
     }
 
     override suspend fun getUser(): UserEntity {
-        val userJson = storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java)
-        val decryptedBytes =
-            encryptionProvider.decryptData(Base64.getDecoder().decode(userJson))?.decodeToString()
-        val result = Gson().fromJson(decryptedBytes, UserEntity::class.java)
-        logUserInfoAfterDecryption(userJson!!,result)
+        val userJsonBase64 = storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java)
+        val encryptedBytes = Base64.getDecoder().decode(userJsonBase64)
+        val decryptedBytes = encryptionProvider.decryptData(encryptedBytes)
+        val decryptedString = decryptedBytes?.decodeToString()
+        val result = Gson().fromJson(decryptedString, UserEntity::class.java)
+        logUserInfoAfterDecryption(userJsonBase64!!, result)
         return result
     }
 

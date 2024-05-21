@@ -79,6 +79,7 @@ dependencies {
     implementation(libs.androidx.junit.ktx)
     implementation(libs.androidx.runner)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     // Unit Test
     testImplementation(libs.junit)
@@ -149,5 +150,8 @@ dependencies {
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("androidx.test.ext:junit:1.1.3")
     testImplementation ("androidx.test:runner:1.4.0")
+    implementation ("com.google.android.material:material:1.2.0")
+
+
 
 }

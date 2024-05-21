@@ -2,7 +2,6 @@ package com.solutionplus.altasherat.features.signup.data.repository.remote
 
 import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
-import com.solutionplus.altasherat.features.countries.country.Country
 import com.solutionplus.altasherat.features.signup.data.model.dto.SignupDto
 import com.solutionplus.altasherat.features.signup.data.model.dto.CountryDto
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
-import com.solutionplus.altasherat.common.presentation.ui.base.viewmodel.BaseViewModel
-import com.solutionplus.altasherat.features.countries.country.Country
+import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
+import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.signup.data.model.request.Phone
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
@@ -17,18 +17,16 @@ import javax.inject.Inject
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
-) : BaseViewModel<SignUpState, SignUpIntent>() {
-    override val initialState: SignUpState = SignUpState.Loading
-
-    override fun handleIntent(intent: SignUpIntent) {
-        when (intent) {
-            is SignUpIntent.SignUp -> signUp(
-                intent.firstName,
-                intent.lastName,
-                intent.email,
-                intent.phoneNumber,
-                intent.countryCode,
-                intent.password
+) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(initialState = SignUpContract.SignUpState.initial()) {
+    override fun onActionTrigger(action: ViewAction?) {
+        when (action) {
+            is SignUpContract.SignupActions.Signup -> signUp(
+                action.firstName,
+                action.lastName,
+                action.email,
+                action.phoneNumber,
+                action.countryCode,
+                action.password
             )
         }
     }
@@ -56,20 +54,24 @@ class SignupViewModel @Inject constructor(
                 countryId = 1,
                 countryCode = countryCode
             )
+
+            setState(oldViewState.copy(isLoading = true))
+
             signupUC.invoke(viewModelScope, signupRequest) { resource ->
                 when (resource) {
-                    is Resource.Loading -> _viewState.update { SignUpState.Loading }
+                    is Resource.Failure -> setState(oldViewState.copy(isLoading = false, exception = resource.exception))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> {
-                        _viewState.update { SignUpState.Success(resource.model) }
-                    }
-
-                    is Resource.Failure -> _viewState.update {
-                        SignUpState.Error(
-                            resource.exception.message ?: "error in signup"
-                        )
+                        setState(oldViewState.copy(isLoading = false, exception = null))
+                        sendEvent(SignUpContract.SignupEvent.SignupSuccess(resource.model))
                     }
                 }
             }
         }
     }
+
+    override fun clearState() {
+        setState(SignUpContract.SignUpState.initial())
+    }
+
 }
