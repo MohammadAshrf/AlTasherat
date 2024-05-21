@@ -80,7 +80,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
             binding.nameTextView.visibility = View.VISIBLE
             binding.btnEditProfile.visibility = View.VISIBLE
             binding.view.visibility = View.VISIBLE
-
+            binding.btnLogOut.visibility = View.VISIBLE
             if (user.imageUrl != null) {
                 loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
             } else {
@@ -105,6 +105,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
     }
 
     private fun loadImageFromUrl(url: String?, imageView: ImageView) {
+        //todo change it with glide
         if (url.isNullOrEmpty() || (!url.startsWith("http://") && !url.startsWith("https://"))) {
             return
         }
@@ -125,7 +126,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
     private fun setupRecyclerView() {
         val items = if (!isUserLoggedIn) {
             listOf(
-                RowItem(R.drawable.ic_login, getString(R.string.login), R.id.fakeFragment),
+                RowItem(R.drawable.ic_login, getString(R.string.login), R.id.loginFragment),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
                 RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
                 RowItem(R.drawable.ic_terms, getString(R.string.edit_password), R.id.fakeFragment),
@@ -137,7 +138,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
                 RowItem(
                     R.drawable.ic_edt_password,
                     getString(R.string.edit_password),
-                    R.id.fakeFragment
+                    R.id.changePasswordFragment
                 ),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
                 RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),

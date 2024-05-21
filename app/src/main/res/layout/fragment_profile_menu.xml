@@ -120,8 +120,9 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_log_out"
         style="@style/Button"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginBottom="16dp"

@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     private val viewModel: LoginViewModel by viewModels()
 
-    override fun onFragmentReady(savedInstanceState: Bundle?) { }
+    override fun onFragmentReady(savedInstanceState: Bundle?) {}
 
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -42,18 +42,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             }
         }
     }
-    override fun viewInit() { }
+
+    override fun viewInit() {
+        binding.tvForgotPassword.setOnClickListener {
+            //findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
+    }
 
     private fun renderState(state: LoginContract.LoginState) {
         CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading)
-            {
+            if (state.isLoading) {
                 showLoading(resources.getString(R.string.please_wait))
-            }else{
-               hideLoading()
+            } else {
+                hideLoading()
             }
             state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -61,10 +66,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     private fun handleEvent(event: LoginContract.LoginEvents) {
         when (event) {
             is LoginContract.LoginEvents.LoginSuccess -> {
-                val intent = Intent(requireActivity(),HomeActivity::class.java)
+                val intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(requireContext(), "You logged in successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You logged in successfully", Toast.LENGTH_SHORT)
+                    .show()
             }
+
             is LoginContract.LoginEvents.LoginError -> {
                 Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
             }
@@ -87,11 +94,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
                 false
             }
+
             binding.etPassword.text?.trim()?.length !in 8..50 -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
                 false
             }
-            else -> { true }
+
+            else -> {
+                true
+            }
         }
     }
 }
