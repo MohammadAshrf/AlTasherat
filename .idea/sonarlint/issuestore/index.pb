@@ -28,3 +28,5 @@ eapp/src/main/java/com/solutionplus/altasherat/features/services/country/data/ma
 eapp/src/main/java/com/solutionplus/altasherat/features/services/country/data/models/dto/CountryDto.kt,1\8\18fff7c4269b28910129e9b374f53c7070173ff6
 ž
 napp/src/main/java/com/solutionplus/altasherat/features/services/country/data/repository/CountriesRepository.kt,d\4\d451584d0a9e9dce8dc51e0b9e6e69b6f59f95ad
+‹
+[app/src/main/java/com/solutionplus/altasherat/presentation/ui/activity/main/MainActivity.kt,b\d\bd99de68866d77a24ef22d255f7e654450366f5d
