@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 class CountryAdapter(context: Context, countries: List<Country>) :
     ArrayAdapter<Country>(context, 0, countries) {
@@ -31,13 +31,14 @@ class CountryAdapter(context: Context, countries: List<Country>) :
         )
 
         val countryNameTextView: TextView = view.findViewById(R.id.countryNameTextView)
-        val flagImageView: ImageView = view.findViewById(R.id.flagImageView)
+        val flagImageView: TextView = view.findViewById(R.id.flagImageView)
 
         country?.let {
             countryNameTextView.text = it.name
-            Glide.with(context)
-                .load(it.flag)
-                .into(flagImageView)
+            flagImageView.text = it.flag
+//            Glide.with(context)
+//                .load(it.flag)
+//                .into(flagImageView)
         }
 
         return view

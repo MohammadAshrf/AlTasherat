@@ -4,6 +4,7 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.domain.model.User
 
 interface SignUpContract {
@@ -13,6 +14,7 @@ interface SignUpContract {
     }
 
     sealed class SignupEvent : ViewEvent {
+        data class CountriesIndex(val countries: List<Country>) : SignupEvent()
         data class SignupSuccess(val user: User) : SignupEvent()
         data class SignupError(val message: String) : SignupEvent()
     }

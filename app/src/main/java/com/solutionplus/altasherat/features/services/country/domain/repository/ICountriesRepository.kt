@@ -1,6 +1,6 @@
-package com.solutionplus.altasherat.feature.services.country.domain.repository
+package com.solutionplus.altasherat.features.services.country.domain.repository
 
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 interface ICountriesRepository {
     suspend fun getCountries(): List<Country>

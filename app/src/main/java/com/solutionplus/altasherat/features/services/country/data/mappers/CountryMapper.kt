@@ -1,9 +1,9 @@
-package com.solutionplus.altasherat.feature.services.country.data.mappers
+package com.solutionplus.altasherat.features.services.country.data.mappers
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
-import com.solutionplus.altasherat.feature.services.country.data.models.dto.CountryDto
-import com.solutionplus.altasherat.feature.services.country.data.models.entity.CountryEntity
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
     override fun dtoToDomain(model: CountryDto): Country {
