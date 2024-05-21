@@ -26,6 +26,7 @@ junitKtx = "1.1.5"
 runner = "1.5.2"
 firebaseFirestoreKtx = "25.0.0"
 lifecycleViewmodelKtx = "2.7.0"
+activityVersion = "1.9.0"
 
 
 [libraries]
@@ -61,6 +62,7 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activityVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

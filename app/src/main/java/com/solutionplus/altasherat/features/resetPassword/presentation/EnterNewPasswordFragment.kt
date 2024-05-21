@@ -9,15 +9,14 @@ import com.solutionplus.altasherat.databinding.FragmentEnterNewPasswordBinding
 
 class EnterNewPasswordFragment : BaseFragment<FragmentEnterNewPasswordBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
     }
 
     override fun subscribeToObservables() {
-        TODO("Not yet implemented")
+
     }
 
     override fun viewInit() {
-        TODO("Not yet implemented")
+
     }
 
 }

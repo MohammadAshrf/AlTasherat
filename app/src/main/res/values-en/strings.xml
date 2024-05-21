@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AlTasherat</string>
+    <string name="unsupported_type">Unsupported type…</string>
+    <string name="network_unavailable">Please check yout Internet</string>
+    <string name="send">send</string>
+    <string name="password_reset">reset password</string>
+    <string name="enter_phone_number">for recover enter your number</string>
+    <string name="enter_phone_text">enter your phone</string>
+    <string name="err_msg_enter_countrycode">Please Enter Country Code</string>
+    <string name="err_msg_enter_valid_first_name">First name must be between 3 and 15 characters.</string>
+    <string name="err_msg_enter_valid_last_name">Last name must be between 3 and 15 characters.</string>
+    <string name="err_msg_enter_valid_email">Please enter a valid email address with maximum 15 characters.</string>
+    <string name="err_msg_enter_valid_phone">Phone number must be numeric and between 9 and 15 characters.</string>
+    <string name="err_msg_enter_valid_password">Password must be between 8 and 50 characters.</string>
+    <string name="please_wait">Please Wait…</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="edit_password">change password</string>
+    <string name="about_us">about us</string>
+    <string name="terms">Terms and Conditions</string>
+    <string name="policy">privacy policy</string>
+    <string name="language">language</string>
+    <string name="sign_out">sign out</string>
+    <string name="login">" sign in"</string>
+    <string name="conferm_email_txt">"verify your e-mail "</string>
+    <string name="we_send_msg_txt">"We sent a confirmation email to "</string>
+    <string name="check_email_txt">"Check your email and click the confirmation link to continue "</string>
+    <string name="skip_txt">Skip</string>
+    <string name="enter_otp_text">"Enter the code sent to your mobile phone to continue "</string>
+    <string name="enter_password_text">"Enter the password "</string>
+    <string name="enter_password_again_text">"Re-enter the password again "</string>
+    <string name="enter_password">"      Enter the new password"</string>
+    <string name="enter_old_password">"      Enter the old password"</string>
+    <string name="repete_new_password">"      ReEnter the new password"</string>
+    <string name="save">Save</string>
+    <string name="old_password_txt">old password</string>
+    <string name="new_password_text">new password</string>
+    <string name="repete_new_password_text">repeat new password</string>
+    <string name="change_password">change password</string>
+    <string name="visa_platform">Visa platform</string>
+    <string name="visa_applications">Visa applications</string>
+    <string name="profile_personly">Profile personly</string>
+</resources>

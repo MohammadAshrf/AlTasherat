@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentResetPasswordByPhoneBinding
 
@@ -18,7 +20,9 @@ class ResetPasswordByPhoneFragment : BaseFragment<FragmentResetPasswordByPhoneBi
     }
 
     override fun viewInit() {
-
+        binding.btnSendPhone?.setOnClickListener {
+            findNavController().navigate(R.id.action_resetPasswordByPhoneFragment_to_otpFragment)
+        }
     }
 
 }

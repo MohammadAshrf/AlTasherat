@@ -1,29 +1,29 @@
 <resources>
     <string name="app_name">AlTasherat</string>
     <string name="unsupported_type">Unsupported type…</string>
-    <string name="network_unavailable">Please check your internet connection and try again.</string>
-    <string name="timeout_error">The operation timed out. Please try again later.</string>
+    <string name="network_unavailable">الرجاء التأكد من الانترنت</string>
+    <string name="timeout_error" translatable="false">The operation timed out. Please try again later.</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="send">إرسال</string>
     <string name="password_reset">استعادة كلمة المرور</string>
     <string name="enter_phone_number">ادخل رقم جوالك لاستعادة كلمة المرور</string>
     <string name="enter_phone_text">ادخل رقم الجوال للمتابعة</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
 
 
-    <string name="err_msg_enter_countrycode">Please Enter Country Code</string>
-    <string name="err_msg_enter_valid_first_name">First name must be between 3 and 15 characters.</string>
-    <string name="err_msg_enter_valid_last_name">Last name must be between 3 and 15 characters.</string>
-    <string name="err_msg_enter_valid_email">Please enter a valid email address with maximum 15 characters.</string>
-    <string name="err_msg_enter_valid_phone">Phone number must be numeric and between 9 and 15 characters.</string>
-    <string name="err_msg_enter_valid_password">Password must be between 8 and 50 characters.</string>
+    <string name="err_msg_enter_countrycode">الرجاء ادخال كود الدولة</string>
+    <string name="err_msg_enter_valid_first_name">الإسم الاول يجب ان لا يقل عن 3 حروف ولا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_last_name">الإسم الأخير يجب ان لا يقل عن 3 حروف ولا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_email">الإيميل  يجب ان لا  يزيد عن 15</string>
+    <string name="err_msg_enter_valid_phone">رقم الهاتف يجب ان لا يقل عن 3 ارقام ولا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_password">كلمة المرور يجب ان لا تقل عن 9 حروف ولا يزيد عن 50</string>
 
-    <string name="please_wait">Please Wait…</string>
+    <string name="please_wait">الرجاء الإنتظار</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications" translatable="false">الإشعارات</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="edit_password">تعديل كلمة المرور</string>
     <string name="about_us">من نحن</string>
@@ -39,4 +39,15 @@
     <string name="enter_otp_text">ادخل الكود المرسل لجوالك للمتابعة</string>
     <string name="enter_password_text">ادخل كلمة المرور</string>
     <string name="enter_password_again_text">اعادة ادخال كلمة المرور مره اخرى</string>
+    <string name="enter_password">     ادخل كلمه المرور الجديده   </string>
+    <string name="enter_old_password">"ادخل كلمه المرور القديمه     "</string>
+    <string name="repete_new_password">"اعد كتابه كلمه المرور     "</string>
+    <string name="save">حفظ</string>
+    <string name="old_password_txt">كلمة المرور القديمة</string>
+    <string name="new_password_text">كلمة المرور الحديدة</string>
+    <string name="repete_new_password_text">إعادة كلمة المرور الجديدة</string>
+    <string name="change_password">تغيير كلمة المرور</string>
+    <string name="visa_platform">منصة التأشيرات</string>
+    <string name="visa_applications">طلبات التأشيرات</string>
+    <string name="profile_personly">الملف الشخصي</string>
 </resources>

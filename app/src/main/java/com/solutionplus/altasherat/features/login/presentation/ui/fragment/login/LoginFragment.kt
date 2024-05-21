@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
+import com.solutionplus.altasherat.presentation.ui.activity.main.ForgetPasswordActivity
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +46,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun viewInit() {
         binding.tvForgotPassword.setOnClickListener {
-            //findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+            val intent = Intent(requireActivity(), ForgetPasswordActivity::class.java)
+            startActivity(intent)
         }
     }
 
