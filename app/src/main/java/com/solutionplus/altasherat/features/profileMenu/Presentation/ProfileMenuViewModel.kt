@@ -20,7 +20,6 @@ import javax.inject.Inject
 class ProfileMenuViewModel @Inject constructor(
     private val checkUserLoginUC: CheckUserLoginUC
 ) : AlTasheratViewModel<ProfileMenuAction, ProfileMenuEvent, ProfileMenuState>(ProfileMenuState.initial()) {
-     var isUserLoggedIn = false
     override fun clearState() {
         setState(ProfileMenuState.initial())
     }
@@ -50,7 +49,8 @@ class ProfileMenuViewModel @Inject constructor(
     private fun checkUserLogin() {
         viewModelScope.launch {
             val user = checkUserLoginUC.execute(null)
-            isUserLoggedIn = user.phone.isNotEmpty() && user.email.isNotEmpty()
+            val isUserLoggedIn = user.id != -1
+            setState(oldViewState.copy(isUserLoggedIn = isUserLoggedIn))
             sendEvent(ProfileMenuEvent.IsUserLoggedIn(user))
         }
     }

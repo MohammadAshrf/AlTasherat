@@ -24,13 +24,14 @@ interface ProfileMenuContract {
         val isLoading: Boolean,
         val exception: LeonException?,
         val action: ViewAction?,
-
+        val isUserLoggedIn: Boolean = false,
         ) : ViewState {
         companion object {
             fun initial() = ProfileMenuState(
                 isLoading = false,
                 exception = null,
                 action = null,
+                isUserLoggedIn = false,
                 )
         }
     }

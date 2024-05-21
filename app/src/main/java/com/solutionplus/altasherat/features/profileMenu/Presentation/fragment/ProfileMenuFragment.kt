@@ -42,18 +42,18 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
     private val viewModel: ProfileMenuViewModel by viewModels<ProfileMenuViewModel>()
 
+    private var isUserLoggedIn = false
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        //todo make logic to show snackbar if loged in user not verified
-        showCustomSnackbar(binding.root)
-
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.CheckUserLogin)
-
     }
 
 
     override fun subscribeToObservables() {
-        collectFlowWithLifecycle(viewModel.viewState) {
+        collectFlowWithLifecycle(viewModel.viewState) { state ->
+            if (state.isUserLoggedIn) {
+                isUserLoggedIn = true
+            }
 
         }
 
@@ -74,21 +74,22 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
     }
 
     private fun handleState(user: User) {
-
-
-        binding.nameTextView.text = user.fullName
-        binding.profilePictureMenu.profilePictureView.visibility = View.VISIBLE
-        binding.nameTextView.visibility = View.VISIBLE
-        binding.btnEditProfile.visibility = View.VISIBLE
-        binding.view.visibility = View.VISIBLE
-
-
-
-        if (user.imageUrl != null) {
+        if (user.id != -1) {
+            binding.nameTextView.text = user.fullName
             binding.profilePictureMenu.profilePictureView.visibility = View.VISIBLE
-            loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
-        } else {
-            // Hide profile picture
+            binding.nameTextView.visibility = View.VISIBLE
+            binding.btnEditProfile.visibility = View.VISIBLE
+            binding.view.visibility = View.VISIBLE
+
+            if (user.imageUrl != null) {
+                loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
+            } else {
+                // Hide profile picture
+            }
+            if (!user.emailVerified) {
+                showCustomSnackbar(binding.root)
+            }
+
         }
     }
 
@@ -122,7 +123,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
     }
 
     private fun setupRecyclerView() {
-        val items = if (!viewModel.isUserLoggedIn) {
+        val items = if (!isUserLoggedIn) {
             listOf(
                 RowItem(R.drawable.ic_login, getString(R.string.login), R.id.fakeFragment),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
@@ -164,6 +165,9 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
         val params = snackbarLayout.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.TOP
+        params.topMargin =
+            resources.getDimensionPixelSize(R.dimen.your_margin_top) // Replace 'your_margin_top' with your actual top margin value
+
         snackbarLayout.layoutParams = params
 
         snackbarLayout.background = ColorDrawable(Color.TRANSPARENT)

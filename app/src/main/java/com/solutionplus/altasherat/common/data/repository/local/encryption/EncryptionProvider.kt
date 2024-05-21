@@ -47,6 +47,9 @@ class EncryptionProvider: IEncryptionProvider {
     }
 
     override fun decryptData(bytes: ByteArray): ByteArray {
+        if (bytes.isEmpty() || bytes.size < 16) {
+            return byteArrayOf()
+        }
         val initialVector = bytes.copyOfRange(0, cipher.blockSize)
         val data = bytes.copyOfRange(cipher.blockSize, bytes.size)
         cipher.init(Cipher.DECRYPT_MODE, getKey(), IvParameterSpec(initialVector))
