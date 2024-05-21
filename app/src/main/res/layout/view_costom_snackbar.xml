@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:background="@drawable/snackbar_background"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/snackbar_text"
+        style="@style/Font.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="البريد الإلكتروني غير مؤكد"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/snackbar_action"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:background="@drawable/confirm_button_background"
+        android:backgroundTint="@null"
+        android:text="تأكيد"
+        android:textColor="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/snackbar_close"
+        android:layout_width="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="40dp"
+        android:background="@drawable/close_button_background"
+        android:src="@drawable/ic_close"
+        android:textColor="@android:color/white" />
+</LinearLayout>

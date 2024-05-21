@@ -17,7 +17,7 @@ interface AlTasheratApiServices {
     suspend fun post(
         @Path("path") pathUrl: String, @QueryMap queryParams: Map<String, Any>,
         @HeaderMap headers: Map<String, Any>, @Body requestBody: Any,
-    ):  ResponseBody
+    ): ResponseBody
 
     @GET("{path}")
     @JvmSuppressWildcards

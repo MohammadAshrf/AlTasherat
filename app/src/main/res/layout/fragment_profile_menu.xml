@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".features.profileMenu.Presentation.fragment.ProfileMenuFragment">
+
+    <include
+        android:id="@+id/profile_picture_menu"
+        android:visibility="gone"
+        android:layout_marginTop="42dp"
+        layout="@layout/view_profile_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:visibility="gone"
+
+        android:id="@+id/name_text_view"
+        style="@style/Font.Heavy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textColor="@color/text"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_menu"
+        tools:text="ناديــن محمد السيد  " />
+
+    <Button
+        android:visibility="gone"
+
+        android:id="@+id/btn_edit_profile"
+        style="@style/Button"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/background_gradient"
+        android:drawableTint="#FFFFFF"
+        android:fontFamily="@font/app_font_heavy"
+        android:text="تعــديل الملف الشخصي"
+        android:textAppearance="@style/Font.Heavy"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/name_text_view"
+        app:layout_constraintStart_toStartOf="@+id/name_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+
+
+    <!-- Horizontal gray line -->
+    <View
+        android:visibility="gone"
+
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="24dp"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_edit_profile" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.110000014"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_menu" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/Font.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="26dp"
+        android:text="النسخة الحالية: "
+        android:textColor="@color/text"
+
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        style="@style/Font.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v 1.0"
+        android:textColor="@color/text"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button_background"
+        android:drawableEnd="@drawable/ic_sign_out"
+        android:text="@string/sign_out"
+        android:textColor="#FF1C1F"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

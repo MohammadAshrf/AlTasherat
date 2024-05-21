@@ -7,5 +7,5 @@
         android:startColor="@color/Accent"
         />
     <corners
-        android:radius="@dimen/button_background_radius" />
+        android:radius="60dp" />
 </shape>
