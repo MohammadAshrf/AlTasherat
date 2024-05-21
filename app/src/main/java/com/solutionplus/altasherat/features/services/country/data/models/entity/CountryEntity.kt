@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.feature.services.country.data.models.entity
+package com.solutionplus.altasherat.features.services.country.data.models.entity
 
 internal data class CountryEntity(
 val id: Int,

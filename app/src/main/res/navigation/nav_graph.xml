@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/changePasswordFragment">
+    app:startDestination="@id/viewPagerFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment"

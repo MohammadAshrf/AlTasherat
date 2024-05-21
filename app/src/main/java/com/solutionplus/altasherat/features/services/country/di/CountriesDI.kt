@@ -1,14 +1,14 @@
-package com.solutionplus.altasherat.feature.services.country.di
+package com.solutionplus.altasherat.features.services.country.di
 
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
-import com.solutionplus.altasherat.feature.services.country.data.repository.CountriesRepository
-import com.solutionplus.altasherat.feature.services.country.data.repository.local.CountriesLocalDS
-import com.solutionplus.altasherat.feature.services.country.data.repository.remote.CountriesRemoteDS
-import com.solutionplus.altasherat.feature.services.country.domain.interactor.GetCountriesUC
-import com.solutionplus.altasherat.feature.services.country.domain.repository.ICountriesRepository
-import com.solutionplus.altasherat.feature.services.country.domain.repository.local.ICountriesLocalDS
-import com.solutionplus.altasherat.feature.services.country.domain.repository.remote.ICountriesRemoteDS
+import com.solutionplus.altasherat.features.services.country.data.repository.CountriesRepository
+import com.solutionplus.altasherat.features.services.country.data.repository.local.CountriesLocalDS
+import com.solutionplus.altasherat.features.services.country.data.repository.remote.CountriesRemoteDS
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
+import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
+import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
+import com.solutionplus.altasherat.features.services.country.domain.repository.remote.ICountriesRemoteDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

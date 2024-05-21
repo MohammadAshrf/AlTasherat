@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
 import com.solutionplus.altasherat.features.signup.data.model.request.Phone
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
+    private val getCountriesUC: GetCountriesUC
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(initialState = SignUpContract.SignUpState.initial()) {
     override fun onActionTrigger(action: ViewAction?) {
         when (action) {
@@ -28,6 +30,22 @@ class SignupViewModel @Inject constructor(
                 action.countryCode,
                 action.password
             )
+        }
+    }
+
+    init {
+        fetchCountries()
+    }
+
+    private fun fetchCountries() {
+        viewModelScope.launch {
+            getCountriesUC.emitCountries().collect { resource ->
+                when (resource) {
+                    is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                    is Resource.Success -> sendEvent(SignUpContract.SignupEvent.CountriesIndex(resource.model))
+                }
+            }
         }
     }
 
@@ -67,6 +85,13 @@ class SignupViewModel @Inject constructor(
                     }
                 }
             }
+//            getCountriesUC.emitCountries().collect {
+//                when (it) {
+//                    is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
+//                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+//                    is Resource.Success -> sendEvent(SignUpContract.SignupEvent.CountriesIndex(it.model))
+//                }
+//            }
         }
     }
 

@@ -85,7 +85,6 @@
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:background="@drawable/shape_spinner_background"
-        android:entries="@android:array/postalAddressTypes"
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toStartOf="@+id/et_Phone_Client"
         app:layout_constraintStart_toStartOf="@+id/et_lastName"

@@ -1,9 +1,9 @@
-package com.solutionplus.altasherat.feature.services.country.domain.interactor
+package com.solutionplus.altasherat.features.services.country.domain.interactor
 
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
-import com.solutionplus.altasherat.feature.services.country.domain.repository.ICountriesRepository
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetCountriesUC(private val repository: ICountriesRepository) :

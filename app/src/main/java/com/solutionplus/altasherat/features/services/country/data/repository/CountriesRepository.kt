@@ -1,11 +1,11 @@
-package com.solutionplus.altasherat.feature.services.country.data.repository
+package com.solutionplus.altasherat.features.services.country.data.repository
 
 import com.google.gson.Gson
-import com.solutionplus.altasherat.feature.services.country.data.mappers.CountryMapper
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
-import com.solutionplus.altasherat.feature.services.country.domain.repository.ICountriesRepository
-import com.solutionplus.altasherat.feature.services.country.domain.repository.local.ICountriesLocalDS
-import com.solutionplus.altasherat.feature.services.country.domain.repository.remote.ICountriesRemoteDS
+import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
+import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
+import com.solutionplus.altasherat.features.services.country.domain.repository.remote.ICountriesRemoteDS
 
 internal class CountriesRepository(
     private val localDS: ICountriesLocalDS, private val remoteDS: ICountriesRemoteDS

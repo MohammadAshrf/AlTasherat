@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.feature.services.country.data.models.dto
+package com.solutionplus.altasherat.features.services.country.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,6 @@
-package com.solutionplus.altasherat.feature.services.country.domain.repository.remote
+package com.solutionplus.altasherat.features.services.country.domain.repository.remote
 
-import com.solutionplus.altasherat.feature.services.country.data.models.dto.CountryDto
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
 
 internal interface ICountriesRemoteDS {
     suspend fun getCounties(): List<CountryDto>
