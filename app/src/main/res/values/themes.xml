@@ -46,7 +46,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">start|center</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/text</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textAppearance">@style/Font</item>
@@ -85,14 +85,14 @@
 
     // ------------------------------------------- Button ------------------------------------------
 
-    <style name="Button" parent="Widget.AppCompat.Button">
+    <style name="Button" parent="Widget.Material3.Button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
         <item name="android:text">@string/app_name</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textAppearance">@style/Font.Medium</item>
+        <item name="android:textAppearance">@style/Font.Heavy</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>

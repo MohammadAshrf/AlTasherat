@@ -13,7 +13,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel)
     }
 
     override suspend fun <ResponseBody, RequestBody> delete(
@@ -27,7 +27,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel)
     }
 
     override suspend fun <ResponseBody, RequestBody> put(
@@ -41,7 +41,7 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel)
     }
 
     override suspend fun <ResponseBody> get(
@@ -54,7 +54,6 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf()
         )
-        return Gson().fromJson(response.message(), responseWrappedModel)
+        return Gson().fromJson(response.string(), responseWrappedModel)
     }
-
 }

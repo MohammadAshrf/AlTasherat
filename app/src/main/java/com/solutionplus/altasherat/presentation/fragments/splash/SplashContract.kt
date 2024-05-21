@@ -13,8 +13,9 @@ interface SplashContract {
     }
 
     sealed class SplashEvent : ViewEvent {
-        data class CountriesIndex(val countries: List<Country>) : SplashEvent()
+//        data class CountriesIndex(val countries: List<Country>) : SplashEvent()
         data object NavigateToOnBoarding : SplashEvent()
+        data object NavigateToHome : SplashEvent()
     }
 
     data class SplashState(

@@ -29,7 +29,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     private fun handleEvents() {
         collectFlowWithLifecycle(splashVM.singleEvent) {
-            navigateToOnboarding()
+            when (it) {
+                is SplashContract.SplashEvent.NavigateToOnBoarding -> navigateToOnboarding()
+                is SplashContract.SplashEvent.NavigateToHome -> startHomeActivity()
+            }
         }
     }
 

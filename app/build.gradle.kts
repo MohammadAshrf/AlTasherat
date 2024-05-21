@@ -122,8 +122,11 @@ dependencies {
     implementation(libs.google.hilt.android)
     kapt(libs.google.hilt.android.compiler)
 
-    //workManager
+    // Work Manager
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.hilt.work)
+
+    // Dots Indicator
+    implementation(libs.dotsindicator)
 
 }

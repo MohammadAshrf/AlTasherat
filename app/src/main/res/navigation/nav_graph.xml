@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/onBoardingFragment"
-        android:name="com.solutionplus.altasherat.presentation.fragments.onboarding.OnBoardingFirstFragment"
+        android:name="com.solutionplus.altasherat.presentation.fragments.onboarding.OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding">
         <action
             android:id="@+id/action_onBoardingFragment_to_homeActivity"

@@ -1,8 +1,6 @@
 package com.solutionplus.altasherat.presentation.fragments.splash
 
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
-import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
@@ -24,10 +22,13 @@ class SplashViewModel @Inject constructor(private val getCountriesUC: GetCountri
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(SplashEvent.CountriesIndex(it.model))
+                    is Resource.Success -> sendEvent(
+                        if (it.model)
+                            SplashEvent.NavigateToHome else
+                            SplashEvent.NavigateToOnBoarding
+                    )
                 }
             }
-            sendEvent(SplashEvent.NavigateToOnBoarding)
         }
     }
 
