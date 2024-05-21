@@ -25,7 +25,7 @@ class GetCountriesUC(private val repository: ICountriesRepository) :
         try {
             val countries = execute(Unit)
             emit(Resource.Success(countries))
-        } finally {
+        } catch (e: Exception) { } finally {
             emit(Resource.Loading(false))
         }
     }

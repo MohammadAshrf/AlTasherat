@@ -76,3 +76,5 @@ Kapp/src/main/java/com/solutionplus/altasherat/common/data/model/Resource.kt,1\
 iapp/src/main/java/com/solutionplus/altasherat/features/profileMenu/data/repository/local/ProfileMenuDS.kt,9\7\97394ae5c05d8afab8ee048d1c6efd80e33834ef
 œ
 lapp/src/main/java/com/solutionplus/altasherat/features/login/presentation/ui/fragment/login/LoginContract.kt,2\1\2153e97ea5a52d65f3f46be7992b94b370c349a8
+…
+Uapp/src/main/java/com/solutionplus/altasherat/common/domain/interactor/BaseUseCase.kt,8\3\83815f4adb6e474b94da345c5799daaa0135eae3
