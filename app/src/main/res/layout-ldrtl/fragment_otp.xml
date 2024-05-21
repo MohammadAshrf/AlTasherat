@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/enter_phone_number"
+                android:text="@string/enter_otp_text"
                 android:textColor="@color/text"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
@@ -71,15 +71,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <include
-                android:id="@+id/phoneNumberPicker"
-                layout="@layout/view_phone_number_picker"
+                android:id="@+id/view_otp"
+                layout="@layout/view_otp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    android:layout_marginTop="-40dp"
+                android:layout_marginTop="-40dp"
                 />
 
 
@@ -120,7 +120,7 @@
         android:layout_height="150dp"
         android:src="@drawable/image_plane"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

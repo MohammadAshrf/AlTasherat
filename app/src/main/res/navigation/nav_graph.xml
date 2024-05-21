@@ -71,4 +71,27 @@
     </fragment>
 
 
+    <fragment
+        android:id="@+id/resetPasswordByPhoneFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.ResetPasswordByPhoneFragment"
+        android:label="fragment_reset_password_by_phone"
+        tools:layout="@layout/fragment_reset_password_by_phone" >
+        <action
+            android:id="@+id/action_resetPasswordByPhoneFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.OtpFragment"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_otpFragment_to_enterNewPasswordFragment"
+            app:destination="@id/enterNewPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterNewPasswordFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.EnterNewPasswordFragment"
+        android:label="fragment_enter_new_password"
+        tools:layout="@layout/fragment_enter_new_password" />
 </navigation>
