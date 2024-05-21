@@ -27,20 +27,12 @@ class ProfileMenuViewModel @Inject constructor(
 
     override fun onActionTrigger(action: ViewAction?) {
         when (action) {
-            is ProfileMenuAction.SignOut -> handleSignOut()
-            is ProfileMenuAction.GoBack -> handleGoBack()
             is ProfileMenuAction.ChangeProfile -> handleChangeProfile()
             is ProfileMenuAction.CheckUserLogin -> checkUserLogin()
         }
     }
 
-    private fun handleSignOut() {
-        // Handle sign out
-    }
 
-    private fun handleGoBack() {
-        // Handle go back
-    }
 
     private fun handleChangeProfile() {
         // Handle change profile

@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.profileMenu.Presentation.fragment
 
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -60,7 +61,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
                 is ProfileMenuContract.ProfileMenuEvent.NavigateToSignup -> {
-                    //findNavController().navigate(R.id.signupFragment)
+                    findNavController().navigate(R.id.signupFragment)
 
                 }
 
@@ -68,6 +69,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
                     setupRecyclerView()
                     handleState(it.user)
                 }
+
             }
 
         }
@@ -81,22 +83,27 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
             binding.btnEditProfile.visibility = View.VISIBLE
             binding.view.visibility = View.VISIBLE
             binding.btnLogOut.visibility = View.VISIBLE
-            if (user.imageUrl != null) {
-                loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
-            } else {
-                // Hide profile picture
-            }
+
             if (!user.emailVerified) {
                 showCustomSnackbar(binding.root)
             }
 
         }
+        if (user.imageUrl != "") {
+            loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
+        } else {
+            // Hide profile picture
+        }
     }
 
     override fun viewInit() {
         getAppVersion()
+        binding.backButton.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getAppVersion() {
         val packageInfo =
             requireContext().packageManager!!.getPackageInfo(requireContext().packageName, 0)
@@ -125,6 +132,10 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
     private fun setupRecyclerView() {
         val items = if (!isUserLoggedIn) {
+            // Add margin to the top of the RecyclerView if the user is not logged in
+            val params = binding.rvRow.layoutParams as ViewGroup.MarginLayoutParams
+            params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top_profile_menu)
+            binding.rvRow.layoutParams = params
             listOf(
                 RowItem(R.drawable.ic_login, getString(R.string.login), R.id.homeActivity),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
@@ -134,6 +145,11 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
                 RowItem(R.drawable.ic_language, getString(R.string.language), R.id.fakeFragment),
             )
         } else {
+            // Remove the top margin if the user is logged in
+            val params = binding.rvRow.layoutParams as ViewGroup.MarginLayoutParams
+            params.topMargin = 0
+            binding.rvRow.layoutParams = params
+
             listOf(
                 RowItem(
                     R.drawable.ic_edt_password,

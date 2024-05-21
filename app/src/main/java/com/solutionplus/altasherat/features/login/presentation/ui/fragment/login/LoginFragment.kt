@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
-import com.solutionplus.altasherat.presentation.ui.activity.main.ForgetPasswordActivity
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,8 +45,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun viewInit() {
         binding.tvForgotPassword.setOnClickListener {
-            val intent = Intent(requireActivity(), ForgetPasswordActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_viewPagerFragment_to_resetPasswordByPhoneFragment)
+
         }
     }
 
@@ -92,6 +91,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     private fun validateLoginDetails(): Boolean {
         return when {
+
             binding.etPhoneClient.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.etPhoneClient.text.toString()) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
                 false
