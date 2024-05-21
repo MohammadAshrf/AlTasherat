@@ -31,7 +31,7 @@ internal class ProfileMenuDS(
         }
 
         val decodedBytes: ByteArray = Base64.decode(userJson, Base64.DEFAULT)
-        val decryptedBytes = decodedBytes.let { encryptionProvider.decryptData(it).decodeToString() }
+        val decryptedBytes = decodedBytes.let { encryptionProvider.decryptData(it)?.decodeToString() }
 
         val result = decryptedBytes.let { Gson().fromJson(it, UserEntity::class.java) }
         logger.warning("userInfo after decryption --> $result ")

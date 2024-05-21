@@ -11,30 +11,22 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
+import com.solutionplus.altasherat.common.presentation.ui.base.activity.BaseActivity
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorHandling
 import com.solutionplus.altasherat.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
-    private lateinit var binding: ActivityHomeBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun viewInit() {
         val host =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         setupWithNavController(binding.navView, host.navController)
     }
-//    fun hideBottomNavigationView() {
-//        binding.navView.hide()
-//    }
-//
-//    fun showBottomNavigationView() {
-//        binding.navView.show()
-//    }
-//
+
+    override fun onActivityReady(savedInstanceState: Bundle?) {
+        
+    }
+
 }

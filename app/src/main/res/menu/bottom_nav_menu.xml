@@ -11,7 +11,7 @@
         android:title="Visa applications" />
 
     <item
-        android:id="@+id/navigation_profile_Personaly"
+        android:id="@+id/profileMenuFragment"
         android:icon="@drawable/profile3x"
         android:title="Profile personly" />
 
