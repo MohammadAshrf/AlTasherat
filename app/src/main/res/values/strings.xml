@@ -39,9 +39,9 @@
     <string name="enter_otp_text">ادخل الكود المرسل لجوالك للمتابعة</string>
     <string name="enter_password_text">ادخل كلمة المرور</string>
     <string name="enter_password_again_text">اعادة ادخال كلمة المرور مره اخرى</string>
-    <string name="enter_password">     ادخل كلمه المرور الجديده   </string>
-    <string name="enter_old_password">"ادخل كلمه المرور القديمه     "</string>
-    <string name="repete_new_password">"اعد كتابه كلمه المرور     "</string>
+    <string name="enter_password">  &#160;&#160;&#160;ادخل كلمه المرور الجديده </string>
+    <string name="enter_old_password">&#160;&#160;&#160;ادخل كلمه المرور القديمه</string>
+    <string name="repete_new_password">&#160;&#160;&#160;اعد كتابه كلمه المرور</string>
     <string name="save">حفظ</string>
     <string name="old_password_txt">كلمة المرور القديمة</string>
     <string name="new_password_text">كلمة المرور الحديدة</string>
@@ -50,4 +50,12 @@
     <string name="visa_platform">منصة التأشيرات</string>
     <string name="visa_applications">طلبات التأشيرات</string>
     <string name="profile_personly">الملف الشخصي</string>
+    <string name="Phone">&#160;&#160;&#160;الجوال</string>
+    <string name="name">&#160;&#160;&#160;الاسم</string>
+    <string name="firstname">&#160;&#160;&#160;الاسم الاول</string>
+    <string name="LastName">&#160;&#160;&#160;الاسم الاخير</string>
+    <string name="email">&#160;&#160;&#160;ادخل البريد الالكتروني</string>
+    <string name="WritePassword">&#160;&#160;&#160;ادخل كلمه المرور</string>
+    <string name="Password"> كلمه المرور</string>
+    <string name="Email">البريد الالكتروني</string>
 </resources>

@@ -17,8 +17,7 @@
         android:background="@drawable/phone_background"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="@dimen/_10sdp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/et_CountruCode"
@@ -30,8 +29,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toStartOf="@+id/et_Phone_Client"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_Phone_Client"
-        android:layout_marginStart="@dimen/_10sdp" />
+        app:layout_constraintTop_toTopOf="@+id/et_Phone_Client" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
@@ -48,35 +46,33 @@
         app:layout_constraintEnd_toEndOf="@+id/et_Phone_Client"
         app:layout_constraintStart_toStartOf="@+id/et_CountruCode"
         app:layout_constraintTop_toBottomOf="@+id/et_CountruCode"
-        app:startIconDrawable="@drawable/ic_lock"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/icon"
-        >
+        app:startIconDrawable="@drawable/ic_lock">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_password"
-        style="@style/EditText"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_button_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:hint="    ادخل كلمه المرور"
-        android:inputType="textPassword"
-        />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_button_background"
+            android:hint="    ادخل كلمه المرور"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_forgot_password"
         style="@style/TextView"
-        android:text="نسيت كلمه المرور؟"
-        android:textSize="14sp"
-        android:textColor="@color/text"
         android:layout_marginStart="8dp"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/_10sdp"
+        android:text="نسيت كلمه المرور؟"
+        android:textColor="@color/text"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
@@ -88,8 +84,8 @@
         android:text="الجوال"
         android:textColor="@color/text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/et_CountruCode"
-        app:layout_constraintStart_toStartOf="@+id/et_CountruCode" />
+        app:layout_constraintBottom_toTopOf="@+id/et_Phone_Client"
+        app:layout_constraintEnd_toEndOf="@+id/et_Phone_Client" />
 
     <TextView
         android:id="@+id/textView3"
@@ -100,7 +96,7 @@
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

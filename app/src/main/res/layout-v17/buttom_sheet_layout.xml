@@ -44,7 +44,7 @@
         android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
-        android:drawableLeft="@drawable/small_image_login"
+        android:drawableStart="@drawable/small_image_login"
         android:layout_marginTop="@dimen/_13sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:drawableTint="#FFFFFF"
@@ -54,7 +54,6 @@
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
-        tools:ignore="RtlHardcoded"
-        android:drawableStart="@drawable/small_image_login" />
+        tools:ignore="RtlHardcoded" />
 
 </LinearLayout>

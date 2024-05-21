@@ -78,7 +78,7 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
             is SignUpContract.SignupEvent.CountriesIndex -> {
                 val adapter = CountryAdapter(requireContext(), event.countries)
                 binding.etCountruCode.adapter = adapter
-                setupCountrySpinner(event.countries)
+//                setupCountrySpinner(event.countries)
             }
         }
     }
