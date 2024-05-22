@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.presentation.activites.home
+package com.solutionplus.altasherat.presentation.ui.activites.home
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

@@ -29,8 +29,5 @@ class CountriesRepository(
         return localDS.isOnBoardingShown()
     }
 
-    override suspend fun setOnBoardingShown(shown: Boolean) {
-        localDS.setOnBoardingShown(shown)
-    }
 
 }

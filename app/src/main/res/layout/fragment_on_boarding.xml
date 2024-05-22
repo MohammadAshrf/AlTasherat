@@ -5,8 +5,9 @@
     android:id="@+id/on_boarding_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/onboarding_background"
-    tools:context=".presentation.fragments.onboarding.OnBoardingFragment">
+    android:background="@drawable/main_background"
+    tools:context=".feature.onboarding.OnBoardingFragment">
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -18,6 +19,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/ic_right_rounded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_20sdp"
+        android:src="@drawable/ic_right_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/TextView.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:text="السابق"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/ic_right_rounded"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
     <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
         android:id="@+id/dots_indicator"
@@ -36,5 +60,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:progressMode="true"
         app:selectedDotColor="@color/Accent" />
+
+
+    <Button
+        android:id="@+id/next_button"
+        style="@style/Button"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_left_rounded"
+        android:drawableTint="#FFFFFF"
+        android:text="@string/next"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@id/dots_indicator"
+        app:layout_constraintStart_toStartOf="@id/dots_indicator"
+        app:layout_constraintTop_toBottomOf="@id/dots_indicator"
+        tools:ignore="RtlHardcoded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

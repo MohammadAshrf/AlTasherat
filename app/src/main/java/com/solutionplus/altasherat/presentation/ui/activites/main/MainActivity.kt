@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.presentation.activites.main
+package com.solutionplus.altasherat.presentation.ui.activites.main
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController

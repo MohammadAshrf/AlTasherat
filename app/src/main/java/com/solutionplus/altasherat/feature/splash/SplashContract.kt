@@ -1,15 +1,14 @@
-package com.solutionplus.altasherat.presentation.fragments.splash
+package com.solutionplus.altasherat.feature.splash
 
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
 
 interface SplashContract {
 
     sealed class SplashAction : ViewAction {
-        data object FetchCountries : SplashAction()
+        data object IsOnBoardingShown : SplashAction()
     }
 
     sealed class SplashEvent : ViewEvent {

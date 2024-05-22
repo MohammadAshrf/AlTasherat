@@ -51,12 +51,12 @@ abstract class AlTasheratViewModel<Action : ViewAction, Event : ViewEvent, State
     private val actionSharedFlow: SharedFlow<Action>
         get() = _actionMutableFlow
 
-    abstract fun invokeAction(action: ViewAction?)
+    abstract fun onActionTrigger(action: ViewAction?)
 
     init {
         viewModelScope.launch {
             actionSharedFlow.collect {
-                invokeAction(it)
+                onActionTrigger(it)
             }
         }
     }

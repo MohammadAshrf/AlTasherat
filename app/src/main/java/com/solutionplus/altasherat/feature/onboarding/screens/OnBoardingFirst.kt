@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.presentation.fragments.onboarding.screens
+package com.solutionplus.altasherat.feature.onboarding.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,9 +12,12 @@ class OnBoardingFirst : BaseFragment<FragmentOnBoardingFirstBinding>() {
     }
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
-        binding.nextButton.setOnClickListener {
-                viewPager?.currentItem = 1
-        }
+
+        binding.cardView.helloOnboarding.text = getString(R.string.hello_onboarding)
+        binding.cardView.onboardingDescription.text = getString(R.string.first_onboarding)
+//        binding.cardView.nextButton.setOnClickListener {
+//                viewPager?.currentItem = 1
+//        }
     }
 
     override fun subscribeToObservables() {

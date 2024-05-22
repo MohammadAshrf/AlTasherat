@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.presentation.fragments.splash
+package com.solutionplus.altasherat.feature.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentSplashBinding
-import com.solutionplus.altasherat.presentation.activites.home.HomeActivity
+import com.solutionplus.altasherat.presentation.ui.activites.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        splashVM.invokeAction(SplashContract.SplashAction.FetchCountries)
+        splashVM.onActionTrigger(SplashContract.SplashAction.IsOnBoardingShown)
     }
 
     override fun subscribeToObservables() {
@@ -50,6 +50,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                     HomeActivity::class.java
                 )
             ).also { requireActivity().finish() }
-        }, 1000)
+        }, 1500)
     }
 }
