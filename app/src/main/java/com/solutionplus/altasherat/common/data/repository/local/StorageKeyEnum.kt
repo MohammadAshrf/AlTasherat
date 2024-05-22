@@ -5,7 +5,6 @@ import com.solutionplus.altasherat.common.domain.repository.local.IStorageKeyEnu
 enum class StorageKeyEnum(override val keyValue: String) : IStorageKeyEnum {
     ACCESS_TOKEN("accessToken"),
     USER("user"),
-    COUNTRY_NAME("country_name"),
+    ON_BOARDING_SHOWN("onBoardingShown"),
     COUNTRIES("countries")
-
 }
