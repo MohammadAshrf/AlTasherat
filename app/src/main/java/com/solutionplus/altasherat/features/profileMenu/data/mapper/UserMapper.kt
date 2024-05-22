@@ -4,7 +4,7 @@ import com.solutionplus.altasherat.common.data.mapper.Mapper
 import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 
-internal object UserMapper : Mapper<Unit,User, UserEntity>() {
+internal object UserMapper : Mapper<Unit, User, UserEntity>() {
 
     override fun domainToEntity(model: User): UserEntity {
         return UserEntity(
@@ -21,6 +21,7 @@ internal object UserMapper : Mapper<Unit,User, UserEntity>() {
             emailVerified = false
         )
     }
+
     override fun entityToDomain(model: UserEntity): User {
         return User(
             id = model.id,

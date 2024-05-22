@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.profileMenu.Presentation.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,26 +12,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.activity.viewModels
-import androidx.core.view.marginTop
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.common.data.model.exception.LeonException
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentProfileMenuBinding
 import com.solutionplus.altasherat.databinding.ViewCostomSnackbarBinding
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowAdapter
-import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuViewModel
+import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
+import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
-import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract.ProfileMenuState
 import com.solutionplus.altasherat.features.profileMenu.domain.model.User
+import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
+import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
+import com.solutionplus.altasherat.presentation.ui.activity.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +40,7 @@ import java.net.URL
 
 
 @AndroidEntryPoint
-class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
+class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowItemClickListener {
 
     private val viewModel: ProfileMenuViewModel by viewModels<ProfileMenuViewModel>()
 
@@ -48,34 +49,29 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.CheckUserLogin)
     }
-
+    override fun viewInit() {
+        getAppVersion()
+    }
 
     override fun subscribeToObservables() {
         collectFlowWithLifecycle(viewModel.viewState) { state ->
             if (state.isUserLoggedIn) {
                 isUserLoggedIn = true
             }
-
         }
 
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
-                is ProfileMenuContract.ProfileMenuEvent.NavigateToSignup -> {
-                    findNavController().navigate(R.id.action_profileMenuFragment_to_viewPagerFragment2)
-
-                }
-
                 is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
                     setupRecyclerView()
                     handleState(it.user)
                 }
-
             }
-
         }
     }
 
     private fun handleState(user: User) {
+
         if (user.id != -1) {
             binding.nameTextView.text = user.fullName
             binding.profilePictureMenu.profilePictureView.visibility = View.VISIBLE
@@ -85,23 +81,18 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
             binding.btnLogOut.visibility = View.VISIBLE
 
             if (!user.emailVerified) {
-                showCustomSnackbar(binding.root)
+                showCustomSnackbar()
             }
 
         }
         if (user.imageUrl != "") {
-            loadImageFromUrl(user.imageUrl, binding.profilePictureMenu.profilePicture)
-        } else {
-            // Hide profile picture
+            Glide.with(this)
+                .load(user.imageUrl)
+                .into(binding.profilePictureMenu.profilePicture)
         }
     }
 
-    override fun viewInit() {
-        getAppVersion()
-        binding.backButton.setOnClickListener{
-            findNavController().popBackStack()
-        }
-    }
+
 
     @SuppressLint("SetTextI18n")
     private fun getAppVersion() {
@@ -111,33 +102,15 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
         binding.tvVersion.text = "v $version"
     }
 
-    private fun loadImageFromUrl(url: String?, imageView: ImageView) {
-        //todo change it with glide
-        if (url.isNullOrEmpty() || (!url.startsWith("http://") && !url.startsWith("https://"))) {
-            return
-        }
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val url = URL(url)
-                val bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                withContext(Dispatchers.Main) {
-                    imageView.setImageBitmap(bmp)
-                }
-            } catch (e: Exception) {
-                // Handle exception here
-            }
-        }
-    }
 
     private fun setupRecyclerView() {
         val items = if (!isUserLoggedIn) {
-            // Add margin to the top of the RecyclerView if the user is not logged in
-            val params = binding.rvRow.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top_profile_menu)
-            binding.rvRow.layoutParams = params
             listOf(
-                RowItem(R.drawable.ic_login, getString(R.string.login), R.id.homeActivity),
+                RowItem(
+                    R.drawable.ic_login,
+                    getString(R.string.login),
+                    destinationActivity = AuthenticationActivity::class.java
+                ),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
                 RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
                 RowItem(R.drawable.ic_terms, getString(R.string.edit_password), R.id.fakeFragment),
@@ -145,16 +118,11 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
                 RowItem(R.drawable.ic_language, getString(R.string.language), R.id.fakeFragment),
             )
         } else {
-            // Remove the top margin if the user is logged in
-            val params = binding.rvRow.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = 0
-            binding.rvRow.layoutParams = params
-
             listOf(
                 RowItem(
                     R.drawable.ic_edt_password,
                     getString(R.string.edit_password),
-                    R.id.changePasswordFragment
+                    R.id.action_profileMenuFragment_to_changePasswordFragment2
                 ),
                 RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
                 RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
@@ -164,45 +132,32 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
             )
         }
 
-        val navController = findNavController()
-        val adapter = RowAdapter(items, navController)
+        val adapter = RowAdapter(items, this)
 
         binding.rvRow.layoutManager = LinearLayoutManager(requireContext())
         binding.rvRow.adapter = adapter
     }
 
-    fun showCustomSnackbar(view: View) {
+    fun showCustomSnackbar() {
+        binding.messageVerefication.VerificationMessage.visibility = View.VISIBLE
 
-        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG)
-
-        val inflater = LayoutInflater.from(view.context)
-        val customSnackbarBinding = ViewCostomSnackbarBinding.inflate(inflater)
-
-        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-        val params = snackbarLayout.layoutParams as FrameLayout.LayoutParams
-        params.gravity = Gravity.TOP
-        params.topMargin =
-            resources.getDimensionPixelSize(R.dimen.your_margin_top) // Replace 'your_margin_top' with your actual top margin value
-
-        snackbarLayout.layoutParams = params
-
-        snackbarLayout.background = ColorDrawable(Color.TRANSPARENT)
-
-        snackbarLayout.addView(customSnackbarBinding.root, 0)
-
-        // Set the text and click listeners for the views in your custom layout
-        //customSnackbarBinding.snackbarText.text = "Your custom text"
-        customSnackbarBinding.snackbarAction.setOnClickListener {
+        binding.messageVerefication.snackbarAction.setOnClickListener {
             findNavController().navigate(R.id.emailVerifiedFragment)
-            snackbar.dismiss()
+            binding.messageVerefication.VerificationMessage.visibility = View.GONE
         }
-        customSnackbarBinding.snackbarClose.setOnClickListener {
-            // Dismiss the Snackbar when the close button is clicked
-            snackbar.dismiss()
+        binding.messageVerefication.snackbarClose.setOnClickListener {
+            binding.messageVerefication.VerificationMessage.visibility = View.GONE
         }
-
-        // Show the Snackbar
-        snackbar.show()
     }
+
+    override fun onRowItemClick(destinationFragmentId: Int?, destinationActivity: Class<*>?) {
+        destinationFragmentId?.let {
+            findNavController().navigate(it)
+        }
+        destinationActivity?.let {
+            val intent = Intent(context, it)
+            startActivity(intent)
+        }
+    }
+
 }
