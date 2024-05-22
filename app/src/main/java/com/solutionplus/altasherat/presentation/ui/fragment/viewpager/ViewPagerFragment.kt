@@ -52,7 +52,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
             }
         }
         binding.skip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_homeActivity)
+            //findNavController().navigate(R.id.action_viewPagerFragment_to_homeActivity)
         }
     }
 

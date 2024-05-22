@@ -56,7 +56,7 @@ class VisaPlatformFragment : Fragment() {
     }
 
     private fun navigateToNextFragment() {
-        findNavController().navigate(R.id.action_navigation_visa_platform_to_viewPagerFragment2)
+        //findNavController().navigate(R.id.action_navigation_visa_platform_to_viewPagerFragment2)
     }
 
     private fun showBottomSheetDialog() {
