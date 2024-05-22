@@ -3,6 +3,7 @@ package com.solutionplus.altasherat.presentation.ui.fragment.dashboard
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -15,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.databinding.FragmentVisaPlatformBinding
@@ -26,6 +28,7 @@ class VisaPlatformFragment : Fragment() {
 
     private lateinit var binding: FragmentVisaPlatformBinding
     val controller: NavController by lazy { findNavController() }
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,26 +51,32 @@ class VisaPlatformFragment : Fragment() {
 
     private fun handleButtonClick() {
         viewLifecycleOwner.lifecycleScope.launch {
-//                    navigateToNextFragment()
-                    showBottomSheetDialog()
+            showBottomSheetDialog()
         }
     }
 
     private fun navigateToNextFragment() {
-           val direction =   findNavController().navigate(R.id.action_navigation_visa_platform_to_mainActivity)
-//        controller.navigate(direction)
+        findNavController().navigate(R.id.action_navigation_visa_platform_to_mainActivity)
     }
 
     private fun showBottomSheetDialog() {
-        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate(R.layout.buttom_sheet_layout, null)
         val btnClose = view.findViewById<Button>(R.id.btnLoginAndSignup)
         btnClose.setOnClickListener {
             navigateToNextFragment()
             bottomSheetDialog.dismiss()
         }
-        bottomSheetDialog.setCancelable(false)
+        bottomSheetDialog.setCancelable(true)
         bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetDialog.show()
+
+        bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                bottomSheetDialog.dismiss()
+            }
+            false
+        }
     }
 }

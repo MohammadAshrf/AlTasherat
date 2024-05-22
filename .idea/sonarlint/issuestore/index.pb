@@ -80,3 +80,5 @@ lapp/src/main/java/com/solutionplus/altasherat/features/login/presentation/ui/fr
 Uapp/src/main/java/com/solutionplus/altasherat/common/domain/interactor/BaseUseCase.kt,8\3\83815f4adb6e474b94da345c5799daaa0135eae3
 ˜
 happ/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/dashboard/VisaPlatformFragment.kt,7\1\710a180f599b9731d132e76dd6c7490dec275793
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
