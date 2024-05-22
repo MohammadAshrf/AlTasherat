@@ -19,7 +19,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>() {
     }
 
     override fun viewInit() {
-        binding.btnSendOtp?.setOnClickListener {
+        binding.btnSendOtp.setOnClickListener {
             findNavController().navigate(R.id.action_otpFragment_to_enterNewPasswordFragment)
 
         }

@@ -20,7 +20,7 @@ class ResetPasswordByPhoneFragment : BaseFragment<FragmentResetPasswordByPhoneBi
     }
 
     override fun viewInit() {
-        binding.btnSendPhone?.setOnClickListener {
+        binding.btnSendPhone.setOnClickListener {
             findNavController().navigate(R.id.action_resetPasswordByPhoneFragment_to_otpFragment)
         }
     }

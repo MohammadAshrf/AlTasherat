@@ -14,7 +14,6 @@ import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragm
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.presentation.ui.adapter.CountryAdapter
-import com.solutionplus.altasherat.presentation.ui.activity.main.ForgetPasswordActivity
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
 import dagger.hilt.android.AndroidEntryPoint
