@@ -55,7 +55,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_button_background"
             android:hint="    ادخل كلمه المرور"
@@ -72,7 +71,7 @@
         android:textColor="@color/text"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
     <TextView
@@ -83,19 +82,25 @@
         android:text="الجوال"
         android:textColor="@color/text"
         android:textStyle="bold"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         app:layout_constraintBottom_toTopOf="@+id/et_CountruCode"
-        app:layout_constraintEnd_toEndOf="@+id/et_CountruCode" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         style="@style/Font.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:text="كلمه المرور"
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_Phone_Client" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
