@@ -121,7 +121,15 @@
             android:id="@+id/action_onBoardingFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/visaPlatformFragment"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.dashboard.VisaPlatformFragment"
+        android:label="fragment_visa_platform"
+        tools:layout="@layout/fragment_visa_platform" >
+        <action
+            android:id="@+id/action_visaPlatformFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
 
 
 </navigation>

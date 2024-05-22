@@ -16,6 +16,7 @@ interface SignUpContract {
             val email: String,
             val phoneNumber: String,
             val countryCode: String,
+            val countryId:Int,
             val password: String
         ) : SignupActions()
         data object FetchCountries : SignupActions()

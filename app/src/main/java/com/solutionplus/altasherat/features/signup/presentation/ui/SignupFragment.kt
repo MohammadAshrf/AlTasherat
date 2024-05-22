@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentSignupBinding
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
@@ -26,7 +27,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListener {
+class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionListener {
 
     private val viewModel: SignupViewModel by viewModels()
 
@@ -34,7 +35,7 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
         subscribeToObservables()
     }
 
-    override fun viewInit() { }
+    override fun viewInit() {}
 
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -50,7 +51,7 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
                     }
                 }
                 launch {
-                    viewModel.countries.collect{ countries ->
+                    viewModel.countries.collect { countries ->
                         setupCountrySpinner(countries)
                     }
                 }
@@ -58,47 +59,53 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
         }
     }
 
-    private fun renderState(state: SignUpContract.SignUpState){
+    private fun renderState(state: SignUpContract.SignUpState) {
         CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading)
-            {
+            if (state.isLoading) {
                 showLoading(resources.getString(R.string.please_wait))
-            }else{
+            } else {
                 hideLoading()
             }
             state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
+
     private fun handleEvent(event: SignUpContract.SignupEvent) {
         when (event) {
             is SignUpContract.SignupEvent.SignupSuccess -> {
                 val intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(requireContext(), "You signed up successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You signed up successfully", Toast.LENGTH_SHORT)
+                    .show()
             }
+
             is SignUpContract.SignupEvent.SignupError -> {
                 Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
             }
 
         }
     }
+
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
     }
+
     override fun onSignupAction() {
         if (validateLoginDetails()) {
             val firstName = binding.etFirstname.text.toString()
             val lastName = binding.etLastName.text.toString()
             val email = binding.etEmail.text.toString()
             val phoneNumber = binding.etPhoneClient.text.toString()
-            val countryCode =(binding.etCountruCode.selectedItem as Country).code
+            val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
+            val countryId = (binding.etCountruCode.selectedItem as Country).id
             val password = binding.etPassword.text.toString()
             viewModel.onActionTrigger(
                 SignUpContract.SignupActions.Signup(
-                    firstName, lastName, email, phoneNumber, countryCode, password
+                    firstName, lastName, email, phoneNumber, countryCode, countryId, password
                 )
             )
         }
@@ -107,28 +114,42 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
     private fun validateLoginDetails(): Boolean {
         return when {
             binding.etFirstname.text?.trim()?.length !in 3..15 -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_first_name), true)
+                showErrorSnackBar(
+                    resources.getString(R.string.err_msg_enter_valid_first_name),
+                    true
+                )
                 false
             }
+
             binding.etLastName.text?.trim()?.length !in 3..15 -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_last_name), true)
                 false
             }
-            binding.etEmail.text?.trim()?.length !in 1..25 || !Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text.toString()).matches() -> {
+
+            binding.etEmail.text?.trim()?.length !in 1..25 || !Patterns.EMAIL_ADDRESS.matcher(
+                binding.etEmail.text.toString()
+            ).matches() -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_email), true)
                 false
             }
+
             binding.etPhoneClient.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.etPhoneClient.text.toString()) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
                 false
             }
+
             binding.etPassword.text?.trim()?.length !in 8..50 -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
                 false
             }
+
             else -> {
                 true
             }
         }
+    }
+
+    companion object {
+        val logger = getClassLogger()
     }
 }

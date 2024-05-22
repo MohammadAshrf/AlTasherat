@@ -61,7 +61,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
                 is ProfileMenuContract.ProfileMenuEvent.NavigateToSignup -> {
-                    findNavController().navigate(R.id.signupFragment)
+                    findNavController().navigate(R.id.action_profileMenuFragment_to_viewPagerFragment2)
 
                 }
 
@@ -173,7 +173,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>() {
 
     fun showCustomSnackbar(view: View) {
 
-        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_INDEFINITE)
+        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG)
 
         val inflater = LayoutInflater.from(view.context)
         val customSnackbarBinding = ViewCostomSnackbarBinding.inflate(inflater)

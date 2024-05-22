@@ -14,8 +14,8 @@
         android:text="@string/name"
         android:textColor="@color/text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/et_firstname"
-        app:layout_constraintEnd_toEndOf="@+id/et_firstname" />
+        app:layout_constraintBottom_toTopOf="@+id/et_lastName"
+        app:layout_constraintStart_toStartOf="@+id/et_lastName" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/et_firstname"
@@ -68,8 +68,9 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/et_Phone_Client"
         style="@style/EditText"
-        android:layout_width="240dp"
+        android:layout_width="200dp"
         android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/phone_background"
         android:inputType="phone"
@@ -83,6 +84,7 @@
         android:background="@drawable/shape_spinner_background"
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toEndOf="@+id/et_firstname"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/et_Phone_Client"
         app:layout_constraintTop_toTopOf="@+id/et_Phone_Client" />
 
@@ -91,7 +93,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="26dp"
         app:boxBackgroundColor="@color/wight"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
@@ -128,7 +130,7 @@
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/et_email"
-        app:layout_constraintEnd_toEndOf="@+id/et_email" />
+        app:layout_constraintStart_toStartOf="@+id/et_email" />
 
     <TextView
         android:id="@+id/textView2"
@@ -138,8 +140,8 @@
         android:text="@string/Phone"
         android:textColor="@color/text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/et_CountruCode"
-        app:layout_constraintEnd_toEndOf="@+id/et_CountruCode" />
+        app:layout_constraintBottom_toTopOf="@+id/et_Phone_Client"
+        app:layout_constraintStart_toStartOf="@+id/et_Phone_Client" />
 
     <TextView
         android:id="@+id/textView3"
@@ -150,6 +152,6 @@
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2" />
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

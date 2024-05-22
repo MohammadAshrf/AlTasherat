@@ -38,6 +38,7 @@ class SignupViewModel @Inject constructor(
                 action.email,
                 action.phoneNumber,
                 action.countryCode,
+                action.countryId,
                 action.password
             )
             is SignUpContract.SignupActions.FetchCountries -> fetchCountries()
@@ -63,6 +64,7 @@ class SignupViewModel @Inject constructor(
         email: String,
         phoneNumber: String,
         countryCode: String,
+        countryId: Int,
         password: String
     ) {
         viewModelScope.launch {
@@ -77,7 +79,7 @@ class SignupViewModel @Inject constructor(
                 phone = phone,
                 password = password,
                 passwordConfirmation = password,
-                countryId = 1,
+                countryId = countryId,
                 countryCode = countryCode
             )
 

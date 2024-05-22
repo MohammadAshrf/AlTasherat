@@ -100,7 +100,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         if (validateLoginDetails()) {
             val phoneNumber = binding.etPhoneClient.text.toString()
             val password = binding.etPassword.text.toString()
-            val countryCode =(binding.etCountruCode.selectedItem as Country).code
+            val countryCode =(binding.etCountruCode.selectedItem as Country).phoneCode
+
             viewModel.onActionTrigger(
                 LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
