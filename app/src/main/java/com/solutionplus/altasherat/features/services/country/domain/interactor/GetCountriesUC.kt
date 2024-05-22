@@ -1,28 +1,17 @@
 package com.solutionplus.altasherat.features.services.country.domain.interactor
 
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class GetCountriesUC(private val repository: ICountriesRepository) :
-    BaseUseCase<List<Country>, Unit>() {
-    override suspend fun execute(params: Unit?): List<Country> {
-        return if (repository.isOnBoardingShown()) {
-            repository.getCountriesFromLocal()
-        } else {
-            val remoteCountries = repository.getCountriesFromRemote()
-            repository.saveCountries(remoteCountries)
-            remoteCountries
-        }
+    BaseUseCase<Unit, Unit>() {
+    override suspend fun execute(params: Unit?) {
+//        val countries = repository.getCountriesFromRemote()
+//        repository.saveCountries(countries)
+        repository.getCountriesFromLocal()
     }
 
-    fun emitCountries(): Flow<Resource<List<Country>>> = invoke()
-
-    companion object{
-        val logger = getClassLogger()
-    }
+    fun emitCountries(): Flow<Resource<Unit>> = invoke()
 }

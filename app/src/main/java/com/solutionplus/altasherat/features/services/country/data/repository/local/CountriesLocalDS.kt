@@ -23,16 +23,13 @@ internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStora
 
     override suspend fun isOnBoardingShown(): Boolean {
 
-        val key= localStorageProvider.hasKey(StorageKeyEnum.ON_BOARDING_SHOWN, Boolean::class.java)
+        val key = localStorageProvider.hasKey(StorageKeyEnum.COUNTRY_NAME, String::class.java)
         logger.info(key.toString())
         return key
 
     }
-    override suspend fun setOnBoardingShown(shown : Boolean) {
-         localStorageProvider.saveEntry(StorageKeyEnum.ON_BOARDING_SHOWN, shown, Boolean::class.java)
-        logger.info("key saved")
-    }
-    companion object{
+
+    companion object {
         val logger = getClassLogger()
     }
 }

@@ -7,6 +7,4 @@ interface ICountriesRepository {
     suspend fun getCountriesFromLocal(): List<Country>
     suspend fun saveCountries(countries: List<Country>)
     suspend fun isOnBoardingShown(): Boolean
-    suspend fun setOnBoardingShown(shown: Boolean)
-
 }

@@ -48,8 +48,6 @@ abstract class AlTasheratViewModel<Action : ViewAction, Event : ViewEvent, State
         println("Current state: ${viewState.value}")
     }
 
-    abstract fun clearState()
-
     private val actionSharedFlow: SharedFlow<Action>
         get() = _actionMutableFlow
 
@@ -68,4 +66,6 @@ abstract class AlTasheratViewModel<Action : ViewAction, Event : ViewEvent, State
         super.onCleared()
         eventChannel.close()
     }
+
+    abstract fun clearState()
 }

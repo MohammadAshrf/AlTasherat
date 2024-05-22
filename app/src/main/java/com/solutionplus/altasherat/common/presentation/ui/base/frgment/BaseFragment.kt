@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -56,6 +57,12 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindView()
+
+        loadingView = ViewLoadingBinding.inflate(
+            inflater,
+            binding.root as ViewGroup,
+            true
+        ) // Inflate loading view
         return binding.root
     }
 
@@ -90,11 +97,14 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         mProgressDialog?.dismiss()
     }
 
+    protected fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+    abstract fun viewInit()
+
     abstract fun onFragmentReady(savedInstanceState: Bundle?)
 
     abstract fun subscribeToObservables()
-
-    abstract fun viewInit()
 
     protected fun isInternetAvailable(): Boolean {
         return isInternetAvailable(requireContext())

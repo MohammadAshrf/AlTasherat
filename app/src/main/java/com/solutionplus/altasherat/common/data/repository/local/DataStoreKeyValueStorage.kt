@@ -33,7 +33,7 @@ class DataStoreKeyValueStorage(private val context: Context) : IKeyValueStorageP
         key: IStorageKeyEnum,
         defaultValue: Model,
         type: Type
-    ): Model? {
+    ): Model {
         val preferencesKey = getPreferenceKey<Model>(key, type)
         val preferences = context.dataStore.data.first()
         return preferences[preferencesKey] ?: defaultValue
@@ -58,6 +58,7 @@ class DataStoreKeyValueStorage(private val context: Context) : IKeyValueStorageP
         val preferences = context.dataStore.data.first()
         return preferences.contains(preferencesKey)
     }
+
 
     private fun <Model> getPreferenceKey(key: IStorageKeyEnum, type: Type): Preferences.Key<Model> {
         return when (type) {

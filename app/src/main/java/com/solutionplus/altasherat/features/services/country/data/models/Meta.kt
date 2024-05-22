@@ -1,7 +1,6 @@
 package com.solutionplus.altasherat.features.services.country.data.models
 
 import com.google.gson.annotations.SerializedName
-import com.solutionplus.altasherat.features.services.country.data.models.LinksItem
 
 data class Meta(
 

@@ -7,5 +7,4 @@ interface ICountriesLocalDS {
     suspend fun getCountriesFromLocal(): List<CountryEntity>
     suspend fun saveCountriesToLocal(countries: List<Country>)
     suspend fun isOnBoardingShown(): Boolean
-    suspend fun setOnBoardingShown(shown: Boolean)
 }

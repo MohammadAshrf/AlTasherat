@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.data.model.request.Phone
@@ -21,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
-    private val getCountriesUC: GetCountriesUC
+    private val getCountriesUC: GetCountriesFromLocalUC
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(initialState = SignUpContract.SignUpState.initial()) {
     private val _countries = MutableStateFlow<List<Country>>(emptyList())
     val countries: StateFlow<List<Country>> get() = _countries
@@ -46,7 +47,7 @@ class SignupViewModel @Inject constructor(
 
     private fun fetchCountries() {
         viewModelScope.launch {
-            getCountriesUC.emitCountries().collect { resource ->
+            getCountriesUC.emitCountriesFromLocal().collect { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))

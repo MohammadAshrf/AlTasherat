@@ -6,7 +6,7 @@ import com.solutionplus.altasherat.features.signup.domain.model.User
 import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepository
 import javax.inject.Inject
 
-class SignupUC @Inject constructor(
+class SignupUC(
     private val repository: ISignupRepository,
 ) : BaseUseCase<User, SignupRequest>() {
 
