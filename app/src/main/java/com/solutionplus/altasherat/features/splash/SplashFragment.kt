@@ -39,7 +39,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     private fun navigateToOnboarding() {
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.action_splashFragment_to_onBoardingFirstFragment)
-        }, 1500)
+        }, 1200)
     }
 
     private fun startHomeActivity() {
@@ -50,6 +50,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                     HomeActivity::class.java
                 )
             ).also { requireActivity().finish() }
-        }, 1500)
+        }, 1200)
     }
 }
