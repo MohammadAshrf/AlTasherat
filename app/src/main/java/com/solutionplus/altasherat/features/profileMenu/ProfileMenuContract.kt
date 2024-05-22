@@ -14,7 +14,6 @@ interface ProfileMenuContract {
     }
 
     sealed class ProfileMenuEvent : ViewEvent {
-        object NavigateToSignup : ProfileMenuEvent()
         data class IsUserLoggedIn(val user: User) : ProfileMenuEvent()
     }
 
