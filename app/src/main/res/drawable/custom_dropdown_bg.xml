@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/ic_dropdown"
-        android:gravity="start|center_vertical"
+        android:gravity="end|center_vertical"
         android:left="8dp"
         android:right="8dp" />
     <item android:drawable="@drawable/dropdown_bg" />

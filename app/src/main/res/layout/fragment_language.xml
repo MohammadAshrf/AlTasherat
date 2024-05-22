@@ -45,9 +45,9 @@
                 android:layout_width="@dimen/_3sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4sdp"
                 android:background="@color/Primary"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -55,12 +55,12 @@
                 style="@style/TextView.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:text="@string/choose_language"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_language"
-                app:layout_constraintEnd_toEndOf="@id/rectangle_language"
+                app:layout_constraintStart_toStartOf="@id/rectangle_language"
                 app:layout_constraintTop_toTopOf="@id/rectangle_language" />
 
             <RadioGroup
@@ -82,34 +82,34 @@
                     android:id="@+id/arabic_radioBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_8sdp"
                     android:background="@drawable/item_default_single_radio_selection"
                     android:button="@null"
                     android:checked="true"
-                    android:drawableEnd="@drawable/arabic"
+                    android:drawableStart="@drawable/arabic"
                     android:drawablePadding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_12sdp"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_4sdp"
                     android:text="@string/arabic"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="viewStart"
                     android:textAppearance="@style/TextView.Medium" />
 
                 <RadioButton
                     android:id="@+id/english_radioBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_8sdp"
                     android:background="@drawable/item_single_radio_selection"
                     android:button="@null"
                     android:checked="true"
-                    android:drawableEnd="@drawable/english"
+                    android:drawableStart="@drawable/english"
                     android:drawablePadding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_12sdp"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_4sdp"
                     android:text="@string/english"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="viewStart"
                     android:textAppearance="@style/TextView.Medium" />
             </RadioGroup>
 
@@ -129,9 +129,9 @@
                 android:layout_width="@dimen/_3sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4sdp"
                 android:background="@color/Primary"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line" />
 
             <TextView
@@ -139,12 +139,12 @@
                 style="@style/TextView.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:text="@string/choose_state"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_state"
-                app:layout_constraintEnd_toEndOf="@id/rectangle_state"
+                app:layout_constraintStart_toStartOf="@id/rectangle_state"
                 app:layout_constraintTop_toTopOf="@id/rectangle_state" />
 
             <Spinner
@@ -180,7 +180,7 @@
         android:paddingBottom="@dimen/_55sdp"
         android:src="@drawable/location_logo"
         app:layout_constraintBottom_toTopOf="@id/language_cardView"
-        app:layout_constraintStart_toStartOf="@id/language_cardView"
+        app:layout_constraintEnd_toEndOf="@id/language_cardView"
         app:layout_constraintTop_toTopOf="@id/language_cardView" />
 
     <Button

@@ -69,4 +69,5 @@
     <string name="choose_state">من فضلك اختر الدولة</string>
     <string name="lang_continue">الإستمرار</string>
     <string name="change_language">بإمكانك تغيير بلدك ولغتك في اي وقت من القائمة</string>
+    <string name="back">السابق</string>
 </resources>
