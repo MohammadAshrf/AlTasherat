@@ -6,10 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.data.model.request.Phone
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +21,14 @@ import javax.inject.Inject
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
+    private val getCountriesUC: GetCountriesUC
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(initialState = SignUpContract.SignUpState.initial()) {
+    private val _countries = MutableStateFlow<List<Country>>(emptyList())
+    val countries: StateFlow<List<Country>> get() = _countries
+
+    init {
+        fetchCountries()
+    }
     override fun onActionTrigger(action: ViewAction?) {
         when (action) {
             is SignUpContract.SignupActions.Signup -> signUp(
@@ -28,6 +39,20 @@ class SignupViewModel @Inject constructor(
                 action.countryCode,
                 action.password
             )
+            is SignUpContract.SignupActions.FetchCountries -> fetchCountries()
+        }
+    }
+
+
+    private fun fetchCountries() {
+        viewModelScope.launch {
+            getCountriesUC.emitCountries().collect { resource ->
+                when (resource) {
+                    is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                    is Resource.Success -> _countries.value = resource.model
+                }
+            }
         }
     }
 

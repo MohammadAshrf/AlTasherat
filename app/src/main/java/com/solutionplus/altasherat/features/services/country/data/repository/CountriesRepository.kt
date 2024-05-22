@@ -1,23 +1,36 @@
-package com.solutionplus.altasherat.feature.services.country.data.repository
+package com.solutionplus.altasherat.features.services.country.data.repository
 
-import com.google.gson.Gson
-import com.solutionplus.altasherat.feature.services.country.data.mappers.CountryMapper
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
-import com.solutionplus.altasherat.feature.services.country.domain.repository.ICountriesRepository
-import com.solutionplus.altasherat.feature.services.country.domain.repository.local.ICountriesLocalDS
-import com.solutionplus.altasherat.feature.services.country.domain.repository.remote.ICountriesRemoteDS
+import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
+import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
+import com.solutionplus.altasherat.features.services.country.domain.repository.remote.ICountriesRemoteDS
 
-internal class CountriesRepository(
+class CountriesRepository(
     private val localDS: ICountriesLocalDS, private val remoteDS: ICountriesRemoteDS
 ) : ICountriesRepository {
-    override suspend fun getCountries(): List<Country> {
-        val result = remoteDS.getCounties()
-        return CountryMapper.dtoToDomain(result)
+    override suspend fun getCountriesFromRemote(): List<Country> {
+        val result = remoteDS.getCountiesFromRemote().data
+        return result?.map {
+            CountryMapper.dtoToDomain(it ?: CountryDto())
+        } ?: emptyList()
+    }
+
+    override suspend fun getCountriesFromLocal(): List<Country> {
+        return CountryMapper.entityToDomain(localDS.getCountriesFromLocal())
     }
 
     override suspend fun saveCountries(countries: List<Country>) {
-        val countriesEntity = CountryMapper.domainToEntity(countries)
-        val result = Gson().toJson(countriesEntity)
-        localDS.saveCountry(result)
+        localDS.saveCountriesToLocal(countries)
     }
+
+    override suspend fun isOnBoardingShown(): Boolean {
+        return localDS.isOnBoardingShown()
+    }
+
+    override suspend fun setOnBoardingShown(shown: Boolean) {
+        localDS.setOnBoardingShown(shown)
+    }
+
 }

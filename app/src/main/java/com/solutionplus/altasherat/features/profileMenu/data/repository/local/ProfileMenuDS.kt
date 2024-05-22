@@ -10,6 +10,7 @@ import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEn
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.profileMenu.domain.repository.local.IProfileMenuDS
+import com.solutionplus.altasherat.features.services.country.data.repository.local.CountriesLocalDS
 
 
 internal class ProfileMenuDS(
@@ -19,7 +20,7 @@ internal class ProfileMenuDS(
     IProfileMenuDS {
 
     override suspend fun getUser(): UserEntity {
-        if (!storageKV.hasKey<String>(StorageKeyEnum.USER, String::class.java)) {
+        if (!storageKV.hasKey(StorageKeyEnum.USER, String::class.java)) {
             return UserEntity(-1,"","","","","","","","",false,"")
         }
 

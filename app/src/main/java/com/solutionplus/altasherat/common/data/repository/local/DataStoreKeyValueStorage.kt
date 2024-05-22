@@ -53,8 +53,8 @@ class DataStoreKeyValueStorage(private val context: Context) : IKeyValueStorageP
         }
     }
 
-    override suspend fun <Model> hasKey(key: IStorageKeyEnum, type: Type): Boolean {
-        val preferencesKey = getPreferenceKey<Model>(key, type)
+    override suspend fun <Model> hasKey(key: IStorageKeyEnum, value: Model): Boolean {
+        val preferencesKey = getPreferenceKey<Model>(key, Boolean::class.java)
         val preferences = context.dataStore.data.first()
         return preferences.contains(preferencesKey)
     }

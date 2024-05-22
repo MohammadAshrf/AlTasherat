@@ -15,6 +15,7 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentSignupBinding
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.presentation.ui.adapter.CountryAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnSignupActionListener
@@ -29,7 +30,9 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
 
     private val viewModel: SignupViewModel by viewModels()
 
-    override fun onFragmentReady(savedInstanceState: Bundle?) { }
+    override fun onFragmentReady(savedInstanceState: Bundle?) {
+        subscribeToObservables()
+    }
 
     override fun viewInit() { }
 
@@ -44,6 +47,11 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
                 launch {
                     viewModel.singleEvent.collect { event ->
                         handleEvent(event)
+                    }
+                }
+                launch {
+                    viewModel.countries.collect{ countries ->
+                        setupCountrySpinner(countries)
                     }
                 }
             }
@@ -73,7 +81,12 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
             is SignUpContract.SignupEvent.SignupError -> {
                 Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
             }
+
         }
+    }
+    private fun setupCountrySpinner(countries: List<Country>) {
+        val adapter = CountryAdapter(requireContext(), countries)
+        binding.etCountruCode.adapter = adapter
     }
     override fun onSignupAction() {
         if (validateLoginDetails()) {
@@ -81,11 +94,11 @@ class SignupFragment :BaseFragment<FragmentSignupBinding>(), OnSignupActionListe
             val lastName = binding.etLastName.text.toString()
             val email = binding.etEmail.text.toString()
             val phoneNumber = binding.etPhoneClient.text.toString()
-            val countryCode = binding.etCountruCode
+            val countryCode =(binding.etCountruCode.selectedItem as Country).code
             val password = binding.etPassword.text.toString()
             viewModel.onActionTrigger(
                 SignUpContract.SignupActions.Signup(
-                    firstName, lastName, email, phoneNumber, "0020", password
+                    firstName, lastName, email, phoneNumber, countryCode, password
                 )
             )
         }
