@@ -34,10 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
-        android:textSize="@dimen/_14sdp"
         android:layout_marginStart="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="@id/ic_right_rounded"
-        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ic_right_rounded"
         app:layout_constraintTop_toTopOf="@id/ic_right_rounded" />
 

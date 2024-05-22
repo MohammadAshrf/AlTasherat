@@ -58,7 +58,6 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:text="@string/choose_language"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_language"
                 app:layout_constraintStart_toStartOf="@id/rectangle_language"
                 app:layout_constraintTop_toTopOf="@id/rectangle_language" />
@@ -142,7 +141,6 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:text="@string/choose_state"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_state"
                 app:layout_constraintStart_toStartOf="@id/rectangle_state"
                 app:layout_constraintTop_toTopOf="@id/rectangle_state" />
