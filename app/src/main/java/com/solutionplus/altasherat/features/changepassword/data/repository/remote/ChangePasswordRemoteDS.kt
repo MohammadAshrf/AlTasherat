@@ -9,12 +9,20 @@ import javax.inject.Inject
 class ChangePasswordRemoteDS @Inject constructor(private val provider: INetworkProvider) :
     IChangePasswordRemoteDS {
 
-    override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): ChangePasswordDto? {
+/*    override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): ChangePasswordDto? {
         return provider.post(
             responseWrappedModel = ChangePasswordDto::class.java,
             pathUrl = "change-password",
             headers = hashMapOf("accept" to "application/json",
                 "Authorization" to "Bearer ${changePasswordRequest.token}"),
+            requestBody = changePasswordRequest
+        )
+    }  */
+
+    override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest): ChangePasswordDto? {
+        return provider.post(
+            responseWrappedModel = ChangePasswordDto::class.java,
+            pathUrl = "change-password",
             requestBody = changePasswordRequest
         )
     }

@@ -67,7 +67,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             }
         }
         binding.imgback.setOnClickListener {
-            findNavController().navigate(R.id.action_changePasswordFragment_to_homeActivity)
+            findNavController().popBackStack()
         }
     }
 
@@ -93,7 +93,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
                     "Your Password Changed successfully",
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().navigate(R.id.action_changePasswordFragment_to_homeActivity)
+                //findNavController().navigate(R.id.action_changePasswordFragment_to_homeActivity)
             }
 
             is ChangePasswordContract.ChangePasswordEvents.ChangePasswordError -> {
