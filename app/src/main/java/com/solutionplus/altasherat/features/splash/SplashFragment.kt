@@ -30,15 +30,15 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(splashVM.singleEvent) {
             when (it) {
-                is SplashContract.SplashEvent.NavigateToOnBoarding -> navigateToOnboarding()
+                is SplashContract.SplashEvent.NavigateToLanguage -> navigateToLanguage()
                 is SplashContract.SplashEvent.NavigateToHome -> startHomeActivity()
             }
         }
     }
 
-    private fun navigateToOnboarding() {
+    private fun navigateToLanguage() {
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_onBoardingFirstFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
         }, 1200)
     }
 

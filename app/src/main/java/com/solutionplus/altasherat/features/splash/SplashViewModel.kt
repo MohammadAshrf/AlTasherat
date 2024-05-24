@@ -20,13 +20,13 @@ class SplashViewModel @Inject constructor(
 ) :
     AlTasheratViewModel<SplashAction, SplashEvent, SplashState>(SplashState.initial()) {
 
-    private fun fetchCountries() {
+    private fun fetchAndSaveCountries() {
         viewModelScope.launch {
-            getCountriesUC.emitCountries().collect {
+            getCountriesUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(SplashEvent.NavigateToOnBoarding)
+                    is Resource.Success -> sendEvent(SplashEvent.NavigateToLanguage)
                 }
             }
         }
@@ -41,7 +41,7 @@ class SplashViewModel @Inject constructor(
                     is Resource.Success -> if (it.model) {
                         sendEvent(SplashEvent.NavigateToHome)
                     } else {
-                        fetchCountries()
+                        fetchAndSaveCountries()
                     }
                 }
             }

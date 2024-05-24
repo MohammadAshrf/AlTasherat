@@ -31,7 +31,7 @@
         android:id="@+id/loginFragment"
         android:name="com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
 
         <action
             android:id="@+id/action_loginFragment_to_homeActivity"
@@ -45,7 +45,7 @@
         android:id="@+id/signupFragment"
         android:name="com.solutionplus.altasherat.features.signup.presentation.ui.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -61,7 +61,7 @@
         android:id="@+id/viewPagerFragment"
         android:name="com.solutionplus.altasherat.presentation.ui.fragment.viewpager.ViewPagerFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" >
+        tools:layout="@layout/fragment_view_pager">
         <action
             android:id="@+id/action_viewPagerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -87,12 +87,11 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" >
+        tools:layout="@layout/fragment_change_password">
         <action
             android:id="@+id/action_changePasswordFragment_to_homeActivity"
             app:destination="@id/homeActivity" />
     </fragment>
-
 
 
     <fragment
@@ -100,13 +99,11 @@
         android:name="com.solutionplus.altasherat.features.splash.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_onBoardingFirstFragment"
-            app:destination="@id/onBoardingFragment"
-            />
-        <action
             android:id="@+id/action_splashFragment_to_homeActivity"
-            app:destination="@id/homeActivity"
-            />
+            app:destination="@id/homeActivity" />
+        <action
+            android:id="@+id/action_splashFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
 
     <fragment
@@ -115,8 +112,7 @@
         tools:layout="@layout/fragment_on_boarding">
         <action
             android:id="@+id/action_onBoardingFragment_to_homeActivity"
-            app:destination="@id/homeActivity"
-            />
+            app:destination="@id/homeActivity" />
         <action
             android:id="@+id/action_onBoardingFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
@@ -125,10 +121,19 @@
         android:id="@+id/visaPlatformFragment"
         android:name="com.solutionplus.altasherat.presentation.ui.fragment.dashboard.VisaPlatformFragment"
         android:label="fragment_visa_platform"
-        tools:layout="@layout/fragment_visa_platform" >
+        tools:layout="@layout/fragment_visa_platform">
         <action
             android:id="@+id/action_visaPlatformFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.solutionplus.altasherat.features.language.presentation.ui.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language">
+        <action
+            android:id="@+id/action_languageFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
     </fragment>
 
 

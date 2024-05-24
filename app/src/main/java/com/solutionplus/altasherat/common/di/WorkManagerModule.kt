@@ -11,19 +11,20 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
-/*
 @Module
 @InstallIn(SingletonComponent::class)
 object WorkManagerModule {
     @Provides
     @Singleton
 
-    fun provideWorkManga(@ApplicationContext context: Context, factory: HiltWorkerFactory): WorkManager {
+    fun provideWorkManger(
+        @ApplicationContext context: Context,
+        factory: HiltWorkerFactory
+    ): WorkManager {
 
         val configuration = Configuration.Builder().setWorkerFactory(factory).build()
         WorkManager.initialize(context, configuration)
 
         return WorkManager.getInstance(context)
     }
-}*/
+}

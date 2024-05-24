@@ -6,6 +6,6 @@ enum class StorageKeyEnum(override val keyValue: String) : IStorageKeyEnum {
     ACCESS_TOKEN("accessToken"),
     USER("user"),
     COUNTRY_NAME("country_name"),
-    COUNTRIES("countries")
-
+    ARABIC_COUNTRIES("countries"),
+    ENGLISH_COUNTRIES("countries")
 }

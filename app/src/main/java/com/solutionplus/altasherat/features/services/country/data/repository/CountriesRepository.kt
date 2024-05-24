@@ -10,19 +10,27 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.r
 class CountriesRepository(
     private val localDS: ICountriesLocalDS, private val remoteDS: ICountriesRemoteDS
 ) : ICountriesRepository {
-    override suspend fun getCountriesFromRemote(): List<Country> {
-        val result = remoteDS.getCountiesFromRemote().data
+    override suspend fun getCountriesFromRemote(params: String): List<Country> {
+        val result = remoteDS.getCountiesFromRemote(params).data
         return result?.map {
             CountryMapper.dtoToDomain(it ?: CountryDto())
         } ?: emptyList()
     }
 
-    override suspend fun getCountriesFromLocal(): List<Country> {
-        return CountryMapper.entityToDomain(localDS.getCountriesFromLocal())
+    override suspend fun getArabicCountriesFromLocal(): List<Country> {
+        return CountryMapper.entityToDomain(localDS.getArabicCountriesFromLocal())
     }
 
-    override suspend fun saveCountries(countries: List<Country>) {
-        localDS.saveCountriesToLocal(countries)
+    override suspend fun getEnglishCountriesFromLocal(): List<Country> {
+        return CountryMapper.entityToDomain(localDS.getEnglishCountriesFromLocal())
+    }
+
+    override suspend fun saveArabicCountries(countries: List<Country>) {
+        localDS.saveArabicCountriesToLocal(countries)
+    }
+
+    override suspend fun saveEnglishCountries(countries: List<Country>) {
+        localDS.saveArabicCountriesToLocal(countries)
     }
 
     override suspend fun isOnBoardingShown(): Boolean {

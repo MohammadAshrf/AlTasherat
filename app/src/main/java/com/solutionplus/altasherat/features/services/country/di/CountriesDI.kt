@@ -25,33 +25,36 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 internal object CountriesDI {
     @Provides
+    @Singleton
     fun provideCountriesUC(repository: ICountriesRepository): GetCountriesUC =
         GetCountriesUC(repository)
-
+    @Singleton
     @Provides
     fun provideGetCountriesFromLocalUC(repository: ICountriesRepository): GetCountriesFromLocalUC =
         GetCountriesFromLocalUC(repository)
 
-
+    @Singleton
     @Provides
     fun provideIsOnboardingShownUC(repository: ICountriesRepository): IsOnboardingShownUC =
         IsOnboardingShownUC(repository)
-
+    @Singleton
     @Provides
     fun provideRemoteDS(networkProvider: INetworkProvider): ICountriesRemoteDS =
         CountriesRemoteDS(networkProvider)
-
+    @Singleton
     @Provides
     fun provideLocalDS(
         localDSProvider: IKeyValueStorageProvider,
     ): ICountriesLocalDS =
         CountriesLocalDS(localDSProvider)
-
+    @Singleton
     @Provides
     fun provideRepository(
         localDS: ICountriesLocalDS,
