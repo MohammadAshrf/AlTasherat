@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,20 +13,14 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.constants.Constants.EMAIL_KEY_BUNDLE
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentProfileMenuBinding
-import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowAdapter
 import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuViewModel
 import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
 import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
-import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.createRowItem
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
 import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowItemClickListener {
@@ -112,21 +105,16 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
 
     private fun setupRecyclerView(isUserLoggedIn: Boolean) {
         val items = listOf(
-            createRowItem(
+            RowItem(
                 icon = if (isUserLoggedIn) R.drawable.ic_edt_password else R.drawable.ic_login,
-                text = getString(R.string.login),
+                text =if (isUserLoggedIn) getString(R.string.edit_password) else getString(R.string.login),
                 destinationActivity = if (isUserLoggedIn) null else AuthenticationActivity::class.java,
                 destinationFragmentId = if (isUserLoggedIn) R.id.action_profileMenuFragment_to_changePasswordFragment2 else null
             ),
-            createRowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
-            createRowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
-            createRowItem(
-                R.drawable.ic_terms,
-                getString(R.string.edit_password),
-                R.id.fakeFragment
-            ),
-            createRowItem(R.drawable.ic_plicy, getString(R.string.policy), R.id.fakeFragment),
-            createRowItem(R.drawable.ic_language, getString(R.string.language), R.id.fakeFragment)
+            RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
+            RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
+            RowItem(R.drawable.ic_plicy, getString(R.string.policy), R.id.fakeFragment),
+            RowItem(R.drawable.ic_language, getString(R.string.language), R.id.fakeFragment)
         )
 
         val adapter = RowAdapter(items, this)

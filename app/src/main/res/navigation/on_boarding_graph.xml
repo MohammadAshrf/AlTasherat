@@ -14,9 +14,6 @@
             android:id="@+id/action_splashFragment_to_onBoardingFirstFragment"
             app:destination="@id/onBoardingFragment"
             />
-        <action
-            android:id="@+id/action_splashFragment_to_homeActivity"
-            />
     </fragment>
 
     <fragment

@@ -6,12 +6,3 @@ data class RowItem(
     val destinationFragmentId: Int? = null,
     val destinationActivity: Class<*>? = null
 )
-
-fun createRowItem(
-    icon: Int,
-    text: String,
-    destinationFragmentId: Int? = null,
-    destinationActivity: Class<*>? = null
-): RowItem {
-    return RowItem(icon, text, destinationFragmentId, destinationActivity)
-}
