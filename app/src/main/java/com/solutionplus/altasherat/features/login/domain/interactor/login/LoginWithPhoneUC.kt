@@ -6,7 +6,7 @@ import com.solutionplus.altasherat.features.login.domain.repository.ILoginReposi
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import javax.inject.Inject
 
-class LoginWithPhoneUC  @Inject constructor(
+class LoginWithPhoneUC  (
     private val repository: ILoginRepository,
 ) : BaseUseCase<User, LoginRequest>(){
     public override suspend fun execute(params: LoginRequest?): User {

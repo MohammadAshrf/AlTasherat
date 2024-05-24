@@ -5,13 +5,12 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <ImageView
+    <TextView
         android:id="@+id/flagImageView"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background" />
+       />
 
     <TextView
         android:id="@+id/countryNameTextView"

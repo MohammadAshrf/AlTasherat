@@ -118,7 +118,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
             .show()
     }
 
-    protected fun showErrorSnackBar( message: String, errorMessage: Boolean) {
+    protected fun showErrorSnackBar(message: String, errorMessage: Boolean) {
         val snackBar = Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
 
@@ -146,5 +146,6 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         _binding = null
         mProgressDialog?.dismiss()
         mProgressDialog = null
+
     }
 }

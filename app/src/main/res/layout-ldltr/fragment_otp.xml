@@ -95,10 +95,11 @@
         android:src="@drawable/ic_location_en"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/btn_send_otp"
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
@@ -112,7 +113,8 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        android:drawableStart="@drawable/ic_left_rounded" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -120,7 +122,7 @@
         android:layout_height="150dp"
         android:src="@drawable/image_plane"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

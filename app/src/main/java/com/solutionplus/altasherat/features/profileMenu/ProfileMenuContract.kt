@@ -9,7 +9,6 @@ import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 interface ProfileMenuContract {
     sealed class ProfileMenuAction : ViewAction {
         object SignOut : ProfileMenuAction()
-        object GoBack : ProfileMenuAction()
         object ChangeProfile : ProfileMenuAction()
         object CheckUserLogin : ProfileMenuAction()
     }
@@ -17,7 +16,6 @@ interface ProfileMenuContract {
     sealed class ProfileMenuEvent : ViewEvent {
         object NavigateToSignup : ProfileMenuEvent()
         data class IsUserLoggedIn(val user: User) : ProfileMenuEvent()
-        // Navigate to Signup
     }
 
     data class ProfileMenuState(

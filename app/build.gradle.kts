@@ -151,4 +151,7 @@ dependencies {
 
 
 
+    // Dots Indicator
+    implementation(libs.dotsindicator)
+
 }

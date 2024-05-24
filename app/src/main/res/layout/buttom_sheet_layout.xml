@@ -54,6 +54,7 @@
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        android:drawableStart="@drawable/small_image_login" />
 
 </LinearLayout>

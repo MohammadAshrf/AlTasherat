@@ -1,9 +1,9 @@
-package com.solutionplus.altasherat.feature.services.country.data.mappers
+package com.solutionplus.altasherat.features.services.country.data.mappers
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
-import com.solutionplus.altasherat.feature.services.country.data.models.dto.CountryDto
-import com.solutionplus.altasherat.feature.services.country.data.models.entity.CountryEntity
-import com.solutionplus.altasherat.feature.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
     override fun dtoToDomain(model: CountryDto): Country {
@@ -11,9 +11,7 @@ internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
             id = model.id ?: -1,
             name = model.name.orEmpty(),
             code = model.code.orEmpty(),
-            visible = model.visible ?: false,
             flag = model.flag.orEmpty(),
-            nationality = model.nationality.orEmpty(),
             currency = model.currency.orEmpty(),
             phoneCode = model.phoneCode.orEmpty()
         )
@@ -24,9 +22,7 @@ internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
             id = model.id,
             name = model.name,
             code = model.code,
-            visible = model.visible,
             flag = model.flag,
-            nationality = model.nationality,
             currency = model.currency,
             phoneCode = model.phoneCode
         )
@@ -37,9 +33,7 @@ internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
             id = model.id,
             name = model.name,
             code = model.code,
-            visible = model.visible,
             flag = model.flag,
-            nationality = model.nationality,
             currency = model.currency,
             phoneCode = model.phoneCode
         )
