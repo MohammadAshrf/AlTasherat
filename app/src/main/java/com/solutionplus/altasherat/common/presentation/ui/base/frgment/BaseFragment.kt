@@ -74,7 +74,8 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
 
     private var mProgressDialog: Dialog? = null
 
-    fun showLoading(message: String) {
+    fun showLoading(message: String?=null ) {
+
         if (mProgressDialog == null) {
             mProgressDialog = Dialog(requireActivity()).apply {
                 setContentView(R.layout.view_loading)
@@ -82,7 +83,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
                 setCanceledOnTouchOutside(false)
             }
         }
-        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text = message
+        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text = message ?: resources.getString(R.string.please_wait)
         mProgressDialog?.show()
     }
 

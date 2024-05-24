@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 abstract class BaseUseCase<out Model, in Params> {
     protected abstract suspend fun execute(params: Params?): Model
@@ -36,6 +37,15 @@ abstract class BaseUseCase<out Model, in Params> {
                 withContext(Dispatchers.Main) {
                     onResult.invoke(Resource.loading(false))
                 }
+            } catch (e: HttpException){
+                withContext(Dispatchers.IO) {
+                    val mappedException = ExceptionMapper.map(e)
+                    onResult.invoke(Resource.failure(mappedException))
+                }
+
+                withContext(Dispatchers.Main) {
+                    onResult.invoke(Resource.loading(false))
+                }
             }
         }
     }
@@ -45,6 +55,10 @@ abstract class BaseUseCase<out Model, in Params> {
         try {
             val result = execute(params)
             send(Resource.success(result))
+            send(Resource.loading(false))
+        } catch (e: HttpException) {
+            val mappedException = ExceptionMapper.map(e)
+            send(Resource.failure(mappedException))
             send(Resource.loading(false))
         } catch (e: Exception) {
             val mappedException = ExceptionMapper.map(e)

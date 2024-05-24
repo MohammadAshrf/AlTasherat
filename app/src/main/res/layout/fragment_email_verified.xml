@@ -67,6 +67,7 @@
         tools:text=" test@!gmail.com" />
 
     <Button
+        android:id="@+id/btn_skip"
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

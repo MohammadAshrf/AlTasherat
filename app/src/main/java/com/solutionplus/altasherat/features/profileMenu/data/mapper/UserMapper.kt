@@ -15,7 +15,7 @@ internal object UserMapper : Mapper<Unit, User, UserEntity>() {
             lastName = model.lastName,
             phone = model.phone,
             birthDate = model.birthDate,
-            imageUrl = model.imageUrl,
+            imageUrl = "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon4631.jpg",
             fullName = model.fullName,
             email = model.email,
             emailVerified = false
@@ -31,11 +31,10 @@ internal object UserMapper : Mapper<Unit, User, UserEntity>() {
             lastName = model.lastName,
             phone = model.phone,
             birthDate = model.birthDate,
-            imageUrl = model.imageUrl,
+            imageUrl = "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon4631.jpg",
             fullName = model.fullName,
             email = model.email,
             emailVerified = model.emailVerified,
-            password = ""
         )
     }
 
@@ -45,13 +44,12 @@ internal object UserMapper : Mapper<Unit, User, UserEntity>() {
             userName = "",
             fullName = "",
             email = "",
-            password = "",
             firstName = "",
             middleName = "",
             lastName = "",
             phone = "",
             birthDate = "",
-            imageUrl = "",
+            imageUrl = "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon4631.jpg",
             emailVerified = false
         )
     }

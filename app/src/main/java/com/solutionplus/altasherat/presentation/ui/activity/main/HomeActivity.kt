@@ -22,7 +22,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun viewInit() {
         val host =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        setupWithNavController(binding.navView, host.navController)
+        setupWithNavController(binding.bottomNav, host.navController)
     }
 
     override fun onActivityReady(savedInstanceState: Bundle?) {

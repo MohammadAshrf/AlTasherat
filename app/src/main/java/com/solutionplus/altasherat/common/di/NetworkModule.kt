@@ -4,7 +4,13 @@ import com.solutionplus.altasherat.BuildConfig
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.constants.Constants
 import com.solutionplus.altasherat.common.data.repository.remote.AlTasheratApiServices
+import com.solutionplus.altasherat.common.data.repository.remote.interceptors.authInterceptor.AuthInterceptor
+import com.solutionplus.altasherat.common.data.repository.remote.interceptors.authInterceptor.AuthTokenProvider
+import com.solutionplus.altasherat.common.data.repository.remote.interceptors.authInterceptor.DataStoreAuthTokenProvider
 import com.solutionplus.altasherat.common.data.repository.remote.RetrofitNetworkProvider
+import com.solutionplus.altasherat.common.data.repository.remote.interceptors.contentTypeInterceptor.ContentTypeInterceptor
+import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
+import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
 import dagger.Module
 import dagger.Provides
@@ -47,7 +53,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient.Builder {
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
+
+    ): OkHttpClient.Builder {
         return OkHttpClient().newBuilder().apply {
             connectTimeout(30L, TimeUnit.SECONDS)
             retryOnConnectionFailure(true)
@@ -56,7 +66,9 @@ object NetworkModule {
             )
             readTimeout(30L, TimeUnit.SECONDS)
             writeTimeout(30L, TimeUnit.SECONDS)
+            addInterceptor(ContentTypeInterceptor())
             addInterceptor(httpLoggingInterceptor)
+            addInterceptor(authInterceptor)
         }
     }
 
@@ -75,6 +87,16 @@ object NetworkModule {
             level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         }
+
+
+    @Provides
+    @Singleton
+    fun provideDataStoreAuthTokenProvider(
+         storageKV: IKeyValueStorageProvider,
+         encryptionProvider: IEncryptionProvider
+    ): AuthTokenProvider {
+        return DataStoreAuthTokenProvider(storageKV, encryptionProvider)
+    }
 
     private val logger = getClassLogger()
 }

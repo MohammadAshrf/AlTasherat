@@ -39,6 +39,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 launch {
                     viewModel.viewState.collect { state ->
                         renderState(state)
+
+                        state.exception?.let {
+                            handleHttpExceptions(it)
+                        }
                     }
                 }
                 launch {
