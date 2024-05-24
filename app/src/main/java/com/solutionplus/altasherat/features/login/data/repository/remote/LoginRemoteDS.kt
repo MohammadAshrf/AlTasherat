@@ -13,7 +13,7 @@ internal class LoginRemoteDS(private val provider: INetworkProvider) : ILoginRem
     ): LoginDto? {
         return provider.post(
             responseWrappedModel = LoginDto::class.java, pathUrl = "login",
-            headers = hashMapOf(NO_AUTHENTICATION to true), requestBody = loginRequest
+            headers = NO_AUTHENTICATION, requestBody = loginRequest
         )
     }
 

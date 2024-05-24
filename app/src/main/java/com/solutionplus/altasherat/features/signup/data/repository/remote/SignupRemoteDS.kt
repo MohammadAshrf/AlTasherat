@@ -15,7 +15,7 @@ internal class SignupRemoteDS(private val provider: INetworkProvider) : ISignupR
     ): SignupDto? {
         return provider.post(
             responseWrappedModel = SignupDto::class.java, pathUrl = "signup",
-            headers = hashMapOf(NO_AUTHENTICATION to true) , requestBody = signupRequest
+            headers = NO_AUTHENTICATION , requestBody = signupRequest
         )
     }
 

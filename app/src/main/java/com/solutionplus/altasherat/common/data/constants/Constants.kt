@@ -6,5 +6,5 @@ object Constants {
     const val BASE_URL = "https://intern.api.altashirat.solutionplus.net/api/"
     const val WORK_NAME = "updateListValuesWorker"
     const val EMAIL_KEY_BUNDLE = "emailKey"
-    const val NO_AUTHENTICATION = "No-Authentication"
+    val NO_AUTHENTICATION = hashMapOf("No-Authentication" to "true")
 }
