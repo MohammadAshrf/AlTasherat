@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowItemClickListener {
 
     private val viewModel: ProfileMenuViewModel by viewModels<ProfileMenuViewModel>()
-    lateinit var emailBundle: Bundle
+    private lateinit var emailBundle: Bundle
 
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {

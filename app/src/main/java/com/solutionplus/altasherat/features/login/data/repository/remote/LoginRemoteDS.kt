@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.login.data.repository.remote
 
+import com.solutionplus.altasherat.common.data.constants.Constants.NO_AUTHENTICATION
 import com.solutionplus.altasherat.features.login.data.model.dto.LoginDto
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.repository.remote.ILoginRemoteDS
@@ -12,7 +13,7 @@ internal class LoginRemoteDS(private val provider: INetworkProvider) : ILoginRem
     ): LoginDto? {
         return provider.post(
             responseWrappedModel = LoginDto::class.java, pathUrl = "login",
-            headers = hashMapOf("accept" to "application/json"), requestBody = loginRequest
+            headers = hashMapOf(NO_AUTHENTICATION to true), requestBody = loginRequest
         )
     }
 
