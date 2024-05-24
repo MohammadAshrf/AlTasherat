@@ -20,9 +20,6 @@
         <action
             android:id="@+id/action_navigation_visa_platform_to_navigation_visa_applications"
             app:destination="@id/navigation_visa_applications" />
-        <action
-            android:id="@+id/action_navigation_visa_platform_to_profileMenuFragment"
-            app:destination="@id/profileMenuFragment" />
     </fragment>
 
     <fragment
@@ -39,6 +36,9 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_changePasswordFragment2"
             app:destination="@id/changePasswordFragment2" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_navigation_visa_platform"
+            app:destination="@id/navigation_visa_platform" />
 
     </fragment>
     <fragment
