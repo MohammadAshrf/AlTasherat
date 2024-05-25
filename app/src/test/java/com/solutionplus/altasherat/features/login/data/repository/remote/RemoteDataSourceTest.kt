@@ -32,7 +32,7 @@ class RemoteDataSourceTest {
     }
 
     @Test
-    fun `when login with phone given valid request expect expected result`() = runTest {
+    fun `when login with phone given valid request then expected result`() = runTest {
         val loginRequest = LoginRequest(Phone("002", "100100100"), "123456789")
         val expectedResponse = LoginDto("hi","testToken", null)
 
@@ -45,7 +45,7 @@ class RemoteDataSourceTest {
 
 
     @Test
-    fun `when login with phone given request and provider returns null expect null result`() = runTest {
+    fun `when login with phone given request and provider returns null then null result`() = runTest {
         val loginRequest = LoginRequest(Phone("002", "100100100"), "testCode")
         val expectedResponse = null
 

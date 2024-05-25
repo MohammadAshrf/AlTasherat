@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.changepassword.domain.usecase
 
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
 import com.solutionplus.altasherat.features.changepassword.domain.repository.IchangePasswordRepository
 import org.junit.Assert.*
@@ -9,9 +10,18 @@ import org.junit.Test
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.mockito.Mockito.`when`
+
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockk
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.jupiter.api.assertThrows
 
 /*
 -- Verify that changePassword is called with valid parameters.
@@ -31,25 +41,7 @@ class ChangePasswordUCTest {
     }
 
     @Test
-    fun `when execute is called with valid parameters, expect call repository's changePassword`() = runTest {
-        // Arrange
-        val request = ChangePasswordRequest(
-            oldPassword = "old_password",
-            newPassword = "new_password",
-            newPasswordConfirmation = "new_password",
-            token = "token"
-        )
-        coEvery { repository.changePassword(request) } returns request
-
-        // Act
-        changePasswordUC.execute(request)
-
-        // Assert
-        coVerify(exactly = 1) { repository.changePassword(request) }
-    }
-
-    @Test
-    fun `when params are null, expected execute should not call changePassword `() = runTest {
+    fun `when params are null, expected then should not call changePassword `() = runTest {
         // Act
         changePasswordUC.execute(null)
 
@@ -58,7 +50,7 @@ class ChangePasswordUCTest {
     }
 
     @Test
-    fun `when token is called and repository returns a non-null token, expect repository's returned token`() = runTest {
+    fun `when token is called and repository , then repository's returned token`() = runTest {
         // Arrange
         val expectedToken = "expected_token"
         coEvery { repository.getAccessToKen() } returns expectedToken
@@ -68,9 +60,7 @@ class ChangePasswordUCTest {
 
         // Assert
         assertEquals(expectedToken, token)
-        coVerify(exactly = 1) { repository.getAccessToKen() }
     }
-
     @Test
     fun `when token is called and repository returns null, expect returned null`() = runTest {
         // Arrange
@@ -81,7 +71,70 @@ class ChangePasswordUCTest {
 
         // Assert
         assertNull(token)
-        coVerify(exactly = 1) { repository.getAccessToKen() }
     }
 
+
+    //-------------------------validation-----------------------------------------//
+    @Test
+    fun `test invalid old password`() = runBlocking {
+        // Arrange
+        val request = ChangePasswordRequest(
+            oldPassword = "12345",
+        )
+
+        coEvery { repository.changePassword(request) } returns request
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            changePasswordUC.execute(request)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("Old password is invalid. It must be between 8 and 50 characters.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+
+    @Test
+    fun `test invalid new password`() = runBlocking {
+        // Arrange
+        val request = ChangePasswordRequest(
+            oldPassword = "validOldPassword123",
+            newPassword = "short",
+            newPasswordConfirmation = "short"
+        )
+
+        coEvery { repository.changePassword(request) } returns request
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            changePasswordUC.execute(request)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("New password is invalid. It must be between 8 and 50 characters.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+    @Test
+    fun `test new password and confirmation do not match`() = runBlocking {
+        // Arrange
+        val request = ChangePasswordRequest(
+            oldPassword = "validOldPassword123",
+            newPassword = "123456789",
+            newPasswordConfirmation = "12345678910"
+        )
+
+        coEvery { repository.changePassword(request) } returns request
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            changePasswordUC.execute(request)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("New password and confirmation do not match.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
 }

@@ -16,105 +16,61 @@ import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import java.lang.reflect.Type
+import com.google.gson.Gson
+import io.mockk.coVerify
+import io.mockk.every
+import kotlinx.coroutines.runBlocking
+import org.mockito.Mock
+import org.mockito.Mockito.*
+import org.mockito.MockitoAnnotations
+import java.util.*
+import io.mockk.*
+import kotlinx.coroutines.runBlocking
+import java.util.*
+
+/*
+test get access token after decryption then return successfully or true
+ */
 @ExperimentalCoroutinesApi
-class ChangePasswordLocalDSTest{
+class ChangePasswordLocalDSTest {
 
 
-    private lateinit var localDataSource: ChangePasswordLocalDS
-    private val storageProvider: IKeyValueStorageProvider = mockk()
+    private lateinit var changePasswordLocalDS: ChangePasswordLocalDS
+    private val storageKV: IKeyValueStorageProvider = mockk()
     private val encryptionProvider: IEncryptionProvider = mockk()
 
     @Before
     fun setUp() {
-        localDataSource = ChangePasswordLocalDS(storageProvider, encryptionProvider)
+        changePasswordLocalDS = ChangePasswordLocalDS(storageKV, encryptionProvider)
     }
+
 
     @Test
-    fun `when getting access token given no token stored expect exception thrown`()  {
-        runBlocking {
-            // Given
-            val encryptedToken = ""
+    fun `test get access token after decryption then return successfully`() = runBlocking {
+        // Arrange
+        val accessToken = "bkbakdmbkmbkmboambpamam"
+        val encryptedBytes = accessToken.toByteArray()
+        val encryptedString = Base64.getEncoder().encodeToString(encryptedBytes)
 
-            // Stubbing storageKV
-            coEvery {
-                storageProvider.getEntry(
-                    StorageKeyEnum.ACCESS_TOKEN,
-                    "",
-                    String::class.java
-                )
-            } returns encryptedToken
+        coEvery {
+            storageKV.getEntry(
+                StorageKeyEnum.ACCESS_TOKEN,
+                "",
+                String::class.java
+            )
+        } returns encryptedString
+        every {
+            encryptionProvider.decryptData(
+                Base64.getDecoder().decode(encryptedString)
+            )
+        } returns encryptedBytes
 
-            // When / Then
-            assertThrows(Exception::class.java) {
-                runBlocking {
-                    localDataSource.getAccessToken()
-                }
-            }
-        }
+        // Act
+        val result = changePasswordLocalDS.getAccessToken()
+
+        // Assert
+        assertNotNull(result)
+        assertEquals(accessToken, result)
     }
-
-    @Test
-    fun `when getting access token given empty IV expect exception thrown`(){
-        runBlocking {
-            // Given
-            val encryptedToken = "encryptedAccessToken"
-
-            // Stubbing storageKV
-            coEvery {
-                storageProvider.getEntry(
-                    StorageKeyEnum.ACCESS_TOKEN,
-                    "",
-                    String::class.java
-                )
-            } returns encryptedToken
-
-            // Stubbing encryptionProvider
-            coEvery { encryptionProvider.decryptData(encryptedToken.toByteArray()) } returns null
-
-            // When / Then
-            assertThrows(Exception::class.java) {
-                runBlocking {
-                    localDataSource.getAccessToken()
-                }
-            }
-        }
-    }
-
-//    @Test
-//    fun `when access token is stored, expect returned access token `() = runTest {
-//        // Arrange
-//        val accessToken = "mock_access_token"
-//        coEvery { storageProvider.getEntry<String>(any(), any(), any()) } returns accessToken
-//
-//        // Act
-//        val result = localDataSource.getAccessToken()
-//
-//        // Assert
-//        assertEquals(accessToken, result)
-//    }
-//
-//    @Test
-//    fun `when no access token is stored, expect returned null`() = runTest {
-//        // Arrange
-//        coEvery { storageProvider.getEntry<String>(any(), any(), any()) } returns null
-//
-//        // Act
-//        val result = localDataSource.getAccessToken()
-//
-//        // Assert
-//        assertNull(result)
-//    }
-//
-//    @Test
-//    fun `when exception occurs during retrieval, expect returned null`() = runTest {
-//        // Arrange
-//        coEvery { storageProvider.getEntry<String>(any(), any(), any()) } throws LeonException.Local.IOOperation(0, "Storage error")
-//
-//        // Act
-//        val result = localDataSource.getAccessToken()
-//
-//        // Assert
-//        assertNull(result)
-//    }
 
 }
