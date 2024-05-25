@@ -15,32 +15,24 @@ import dagger.hilt.android.AndroidEntryPoint
 class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     private val languageVM: LanguageViewModel by viewModels()
     override fun viewInit() {
+        binding.arabicRadioBtn.setOnClickListener {
+            binding.englishRadioBtn.isEnabled = true
+            binding.arabicRadioBtn.isEnabled = false
+            languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("ar"))
+        }
+        binding.englishRadioBtn.setOnClickListener {
+            binding.englishRadioBtn.isEnabled = false
+            binding.arabicRadioBtn.isEnabled = true
+            languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("en"))
+        }
         binding.continueButton.setOnClickListener {
-            languageVM.onActionTrigger(LanguageContract.LanguageAction.ContinueToOnBoarding)
-        }
-        binding.englishRadioBtn.setOnCheckedChangeListener { btn, isChecked ->
-            btn.setBackgroundResource(if (isChecked) R.drawable.item_default_single_radio_selection else R.drawable.item_single_radio_selection)
-            if (isChecked) {
-                languageVM.onActionTrigger(LanguageContract.LanguageAction.GetEnCountries)
-                //languageVM.onActionTrigger(LanguageContract.LanguageAction.StartLanguageWorker)
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"))
-
-            }
-        }
-        binding.arabicRadioBtn.setOnCheckedChangeListener { btn, isChecked ->
-            btn.setBackgroundResource(if (isChecked) R.drawable.item_default_single_radio_selection else R.drawable.item_single_radio_selection)
-            if (isChecked) {
-                languageVM.onActionTrigger(LanguageContract.LanguageAction.GetArCountries)
-                //languageVM.onActionTrigger(LanguageContract.LanguageAction.StartEnLanguageWorker)
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
-
-            }
+            languageVM.processIntent(LanguageContract.LanguageAction.ContinueToOnBoarding)
         }
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        languageVM.onActionTrigger(LanguageContract.LanguageAction.GetArCountries)
-        languageVM.onActionTrigger(LanguageContract.LanguageAction.GetEnCountries)
+        languageVM.processIntent(LanguageContract.LanguageAction.GetCountries)
+//        languageVM.processIntent(LanguageContract.LanguageAction.GetEnCountries)
     }
 
     override fun subscribeToObservables() {
@@ -55,14 +47,15 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
                     binding.countriesSpinner.adapter = spinnerAdapter
                 }
 
-                LanguageContract.LanguageEvent.NavigateToOnBoarding -> navigateToOnBoarding()
-                LanguageContract.LanguageEvent.LanguageWorkerStarted -> changeAppLocale()
+                is LanguageContract.LanguageEvent.NavigateToOnBoarding -> navigateToOnBoarding()
+
+                is LanguageContract.LanguageEvent.LanguageWorkerStarted -> changeAppLocale(it.language)
             }
         }
     }
 
-    private fun changeAppLocale() {
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"))
+    private fun changeAppLocale(language: String) {
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
     }
 
     private fun navigateToOnBoarding() {

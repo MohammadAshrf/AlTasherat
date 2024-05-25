@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class LanguageWorkerImpl @Inject constructor(private val context: Context) {
 
-    suspend fun updateLanguage(language: Boolean): Flow<WorkInfo> = flow {
+    suspend fun updateLanguage(language: String): Flow<WorkInfo> = flow {
         val inputData = workDataOf(LanguageWorker.LANGUAGE to language)
 
         val languageWorkRequest = OneTimeWorkRequestBuilder<LanguageWorker>()

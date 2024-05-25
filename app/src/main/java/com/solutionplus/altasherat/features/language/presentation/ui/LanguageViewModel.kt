@@ -24,29 +24,15 @@ class LanguageViewModel @Inject constructor(
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
-            LanguageAction.GetArCountries -> getArCountries()
-            LanguageAction.GetEnCountries -> getErCountries()
-            LanguageAction.StartLanguageWorker -> invokeLanguageWorker(true)
-            LanguageAction.StartEnLanguageWorker -> invokeLanguageWorker(false)
-            LanguageAction.ContinueToOnBoarding -> navigateToOnBoarding()
+            is LanguageAction.GetCountries -> getCountries()
+            is LanguageAction.StartLanguageWorker -> invokeLanguageWorker(action.language)
+            is LanguageAction.ContinueToOnBoarding -> navigateToOnBoarding()
         }
     }
 
-    private fun getArCountries() {
+    private fun getCountries() {
         viewModelScope.launch {
-            getCountriesFromLocalUC.invoke(true).collect {
-                when (it) {
-                    is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(LanguageEvent.CountriesIndex(countries = it.model))
-                }
-            }
-        }
-    }
-
-    private fun getErCountries() {
-        viewModelScope.launch {
-            getCountriesFromLocalUC.invoke(false).collect {
+            getCountriesFromLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
@@ -60,17 +46,15 @@ class LanguageViewModel @Inject constructor(
         sendEvent(LanguageEvent.NavigateToOnBoarding)
     }
 
-    private fun invokeLanguageWorker(language: Boolean) {
+    private fun invokeLanguageWorker(language: String) {
         viewModelScope.launch {
             languageWorkerImpl.updateLanguage(language).collect {
                 when (it.state) {
-                    WorkInfo.State.ENQUEUED -> {
-                        sendEvent(LanguageEvent.LanguageWorkerStarted)
-                    }
-
+                    WorkInfo.State.ENQUEUED -> {}
                     WorkInfo.State.RUNNING -> {}
                     WorkInfo.State.SUCCEEDED -> {
                         val succeededMessage = it.outputData.getString(LanguageWorker.KEY_SUCCESS)
+                        sendEvent(LanguageEvent.LanguageWorkerStarted(language))
                         succeededMessage ?: return@collect
                     }
 
