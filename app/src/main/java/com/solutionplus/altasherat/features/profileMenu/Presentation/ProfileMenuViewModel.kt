@@ -25,12 +25,7 @@ class ProfileMenuViewModel @Inject constructor(
         setState(ProfileMenuState.initial())
     }
 
-    private fun fetchLogoutState() {
-            logoutUC.invoke(viewModelScope,null) {
-                sendEvent(ProfileMenuEvent.LogoutSuccess("Logout successful"))
-            }
 
-    }
 
     override fun onActionTrigger(action: ViewAction?) {
         when (action) {
@@ -41,8 +36,8 @@ class ProfileMenuViewModel @Inject constructor(
     }
 
     private fun handleLogout() {
-        viewModelScope.launch {
-            fetchLogoutState()
+        logoutUC.invoke(viewModelScope,null) {
+            sendEvent(ProfileMenuEvent.LogoutSuccess("Logout successful"))
         }
     }
 
