@@ -7,13 +7,9 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.I
 import kotlinx.coroutines.flow.Flow
 
 class GetCountriesFromLocalUC(private val repository: ICountriesRepository) :
-    BaseUseCase<List<Country>, Boolean?>() {
-    override suspend fun execute(params: Boolean?) : List<Country> {
-        return if (params == true) {
-            repository.getArabicCountriesFromLocal()
-        }else{
-            repository.getEnglishCountriesFromLocal()
-        }
+    BaseUseCase<List<Country>, String?>() {
+    override suspend fun execute(params: String?) : List<Country> {
+      return repository.getCountriesFromLocal()
     }
 
     fun emitCountriesFromLocal(): Flow<Resource<List<Country>>> = invoke()

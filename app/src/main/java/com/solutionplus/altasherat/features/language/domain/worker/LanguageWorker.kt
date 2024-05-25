@@ -8,6 +8,7 @@ import androidx.work.workDataOf
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CompletableDeferred
@@ -18,18 +19,19 @@ import kotlinx.coroutines.withContext
 class LanguageWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParams: WorkerParameters,
-    private val getCountriesFromLocalUC: GetCountriesFromLocalUC
+    private val getCountries: GetCountriesUC
 ) : CoroutineWorker(context, workerParams) {
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val deferredResult = CompletableDeferred<Result>()
 
         return@withContext with(deferredResult) {
             try {
-                val language = inputData.getBoolean(LANGUAGE, true) ?: return@withContext Result.failure()
+                val language = inputData.getString(LANGUAGE) ?: return@withContext Result.failure()
 
-                getCountriesFromLocalUC.invoke(params = language).collect {
+                getCountries.invoke(language).collect {
                     when (it) {
-                        is Resource.Loading -> {}
+                        is Resource.Loading -> {
+                        }
                         is Resource.Success -> {
                             val successMessage = SUCCESS_MESSAGE
                             val outputData = workDataOf(KEY_SUCCESS to successMessage)

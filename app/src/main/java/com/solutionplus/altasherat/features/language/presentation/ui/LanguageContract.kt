@@ -9,16 +9,14 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 interface LanguageContract {
 
     sealed class LanguageAction : ViewAction {
-        data object GetArCountries : LanguageAction()
-        data object GetEnCountries : LanguageAction()
-        data object StartLanguageWorker : LanguageAction()
-        data object StartEnLanguageWorker : LanguageAction()
+        data object GetCountries : LanguageAction()
+        data class StartLanguageWorker(val language: String) : LanguageAction()
         data object ContinueToOnBoarding : LanguageAction()
     }
 
     sealed class LanguageEvent : ViewEvent {
         data class CountriesIndex(val countries: List<Country>) : LanguageEvent()
-        data object LanguageWorkerStarted : LanguageEvent()
+        data class LanguageWorkerStarted(val language: String) : LanguageEvent()
         data object NavigateToOnBoarding : LanguageEvent()
     }
 

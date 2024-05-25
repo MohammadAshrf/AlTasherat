@@ -1,7 +1,6 @@
 package com.solutionplus.altasherat.features.services.country.data.repository
 
 import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
-import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
 import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
@@ -12,25 +11,15 @@ class CountriesRepository(
 ) : ICountriesRepository {
     override suspend fun getCountriesFromRemote(params: String): List<Country> {
         val result = remoteDS.getCountiesFromRemote(params).data
-        return result?.map {
-            CountryMapper.dtoToDomain(it ?: CountryDto())
-        } ?: emptyList()
+        return CountryMapper.dtoToDomain(result)
     }
 
-    override suspend fun getArabicCountriesFromLocal(): List<Country> {
-        return CountryMapper.entityToDomain(localDS.getArabicCountriesFromLocal())
+    override suspend fun getCountriesFromLocal(): List<Country> {
+        return CountryMapper.entityToDomain(localDS.getCountriesFromLocal())
     }
 
-    override suspend fun getEnglishCountriesFromLocal(): List<Country> {
-        return CountryMapper.entityToDomain(localDS.getEnglishCountriesFromLocal())
-    }
-
-    override suspend fun saveArabicCountries(countries: List<Country>) {
-        localDS.saveArabicCountriesToLocal(countries)
-    }
-
-    override suspend fun saveEnglishCountries(countries: List<Country>) {
-        localDS.saveEnglishCountriesToLocal(countries)
+    override suspend fun saveCountries(countries: List<Country>) {
+        localDS.saveCountriesToLocal(countries)
     }
 
     override suspend fun isOnBoardingShown(): Boolean {
