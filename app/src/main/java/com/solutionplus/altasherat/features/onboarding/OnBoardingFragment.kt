@@ -1,10 +1,9 @@
 package com.solutionplus.altasherat.features.onboarding
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentOnBoardingBinding
@@ -16,7 +15,6 @@ import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 
 class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     override fun viewInit() {
-
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
@@ -27,12 +25,13 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
             ViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
-        binding.icRightRounded.visibility =
-            if (binding.viewPager.currentItem == adapter.itemCount - 1) View.INVISIBLE else View.VISIBLE
-
-//        if (fragmentList.size == 1) {
-//            binding.icRightRounded.visibility = View.INVISIBLE
-//        }
+        val callback = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateRightIconVisibility(adapter.itemCount - 3)
+            }
+        }
+        binding.viewPager.registerOnPageChangeCallback(callback)
 
         binding.icRightRounded.setOnClickListener {
             if (binding.viewPager.currentItem + 1 < adapter.itemCount) {
@@ -53,6 +52,13 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
         binding.dotsIndicator.attachTo(binding.viewPager)
     }
 
+    private fun updateRightIconVisibility(lastIndex: Int) {
+        binding.icRightRounded.visibility =
+            if (binding.viewPager.currentItem == lastIndex) View.INVISIBLE else View.VISIBLE
+
+        binding.backButton.visibility =
+            if (binding.viewPager.currentItem == lastIndex) View.INVISIBLE else View.VISIBLE
+    }
 
     private fun navigateToHome() {
         val intent = Intent(requireContext(), HomeActivity::class.java)
