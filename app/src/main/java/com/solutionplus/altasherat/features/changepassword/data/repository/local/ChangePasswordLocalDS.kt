@@ -28,8 +28,8 @@ internal class ChangePasswordLocalDS @Inject constructor(private val storageKV: 
 
 
     private fun logAccessTokenAfterEncryption(token: String, encryptData: String){
-        logger.warning("the Token is --> $token ")
-        logger.warning("the token after encryption --> $encryptData ")
+        logger.warning("the Token encryption --> $token ")
+        logger.warning("the token after decryption --> $encryptData ")
     }
 
     companion object {

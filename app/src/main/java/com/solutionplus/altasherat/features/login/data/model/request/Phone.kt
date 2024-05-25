@@ -7,4 +7,8 @@ data class Phone(
     val countryCode : String,
     @SerializedName("number")
     val number : String ,
-)
+){
+    fun validatePhone():Boolean {
+        return !(number.any(){!it.isDigit()} || number.isBlank() || number.length < 9 || number.length > 15 )
+    }
+}

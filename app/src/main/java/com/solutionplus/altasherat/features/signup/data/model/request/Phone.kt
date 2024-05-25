@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.signup.data.model.request
 
+import android.util.Patterns
 import com.google.gson.annotations.SerializedName
 
 data class Phone(
@@ -12,4 +13,9 @@ data class Phone(
     @SerializedName("number")
     val number : String ,
 //    val type: Any?= null
-)
+){
+    fun validatePhone():Boolean {
+        return !(number.any(){!it.isDigit()} || number.isBlank() || number.length < 9 || number.length > 15 )
+    }
+}
+
