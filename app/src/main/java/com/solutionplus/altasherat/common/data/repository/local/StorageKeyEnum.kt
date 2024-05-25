@@ -9,4 +9,6 @@ enum class StorageKeyEnum(override val keyValue: String) : IStorageKeyEnum {
     COUNTRIES("countries"),
     IS_USER_LOGGED_IN("is_user_logged_in"),
     ON_BOARDING_SHOWN("onBoardingShown"),
+    ARABIC_COUNTRIES("ar_countries"),
+    ENGLISH_COUNTRIES("en_countries")
 }

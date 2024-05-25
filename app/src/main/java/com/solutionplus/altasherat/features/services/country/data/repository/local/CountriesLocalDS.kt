@@ -10,23 +10,31 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.l
 
 internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStorageProvider) :
     ICountriesLocalDS {
-    override suspend fun getCountriesFromLocal(): List<CountryEntity> {
+    override suspend fun getArabicCountriesFromLocal(): List<CountryEntity> {
         val countries =
-            localStorageProvider.getEntry(StorageKeyEnum.COUNTRIES, "", String::class.java)
+            localStorageProvider.getEntry(StorageKeyEnum.ARABIC_COUNTRIES, "", String::class.java)
         return Gson().fromJson(countries, Array<CountryEntity>::class.java).toList()
     }
 
-    override suspend fun saveCountriesToLocal(countries: List<Country>) {
+    override suspend fun getEnglishCountriesFromLocal(): List<CountryEntity> {
+        val countries =
+            localStorageProvider.getEntry(StorageKeyEnum.ENGLISH_COUNTRIES, "", String::class.java)
+        return Gson().fromJson(countries, Array<CountryEntity>::class.java).toList()    }
+
+    override suspend fun saveArabicCountriesToLocal(countries: List<Country>) {
         localStorageProvider
-            .saveEntry(StorageKeyEnum.COUNTRIES, Gson().toJson(countries), String::class.java)
+            .saveEntry(StorageKeyEnum.ARABIC_COUNTRIES, Gson().toJson(countries), String::class.java)
+    }
+
+    override suspend fun saveEnglishCountriesToLocal(countries: List<Country>) {
+        localStorageProvider
+            .saveEntry(StorageKeyEnum.ENGLISH_COUNTRIES, Gson().toJson(countries), String::class.java)
     }
 
     override suspend fun isOnBoardingShown(): Boolean {
-
-        val key = localStorageProvider.hasKey(StorageKeyEnum.COUNTRIES, String::class.java)
+        val key = localStorageProvider.hasKey(StorageKeyEnum.COUNTRY_NAME, String::class.java)
         logger.info(key.toString())
         return key
-
     }
 
     companion object {
