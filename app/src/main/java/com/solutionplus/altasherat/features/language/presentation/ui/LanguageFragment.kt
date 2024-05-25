@@ -18,15 +18,23 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
         binding.continueButton.setOnClickListener {
             languageVM.onActionTrigger(LanguageContract.LanguageAction.ContinueToOnBoarding)
         }
-        binding.englishRadioBtn.setOnCheckedChangeListener {
-            btn, isChecked ->
+        binding.englishRadioBtn.setOnCheckedChangeListener { btn, isChecked ->
             btn.setBackgroundResource(if (isChecked) R.drawable.item_default_single_radio_selection else R.drawable.item_single_radio_selection)
-            languageVM.onActionTrigger(LanguageContract.LanguageAction.StartLanguageWorker)
+            if (isChecked) {
+                languageVM.onActionTrigger(LanguageContract.LanguageAction.GetEnCountries)
+                //languageVM.onActionTrigger(LanguageContract.LanguageAction.StartLanguageWorker)
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"))
+
+            }
         }
-        binding.arabicRadioBtn.setOnCheckedChangeListener {
-            btn, isChecked ->
+        binding.arabicRadioBtn.setOnCheckedChangeListener { btn, isChecked ->
             btn.setBackgroundResource(if (isChecked) R.drawable.item_default_single_radio_selection else R.drawable.item_single_radio_selection)
-            languageVM.onActionTrigger(LanguageContract.LanguageAction.StartEnLanguageWorker)
+            if (isChecked) {
+                languageVM.onActionTrigger(LanguageContract.LanguageAction.GetArCountries)
+                //languageVM.onActionTrigger(LanguageContract.LanguageAction.StartEnLanguageWorker)
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
+
+            }
         }
     }
 

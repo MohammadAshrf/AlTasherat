@@ -10,7 +10,7 @@ internal class CountriesRemoteDS(private val networkProvider: INetworkProvider) 
         return networkProvider.get(
             responseWrappedModel = CountriesResponse::class.java,
             "countries",
-            headers = mapOf("X-locale" to locale)
+            headers =  mapOf("X-locale" to locale , "accept" to "application/json")
         )
     }
 }

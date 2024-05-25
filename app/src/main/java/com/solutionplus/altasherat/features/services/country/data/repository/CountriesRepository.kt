@@ -30,7 +30,7 @@ class CountriesRepository(
     }
 
     override suspend fun saveEnglishCountries(countries: List<Country>) {
-        localDS.saveArabicCountriesToLocal(countries)
+        localDS.saveEnglishCountriesToLocal(countries)
     }
 
     override suspend fun isOnBoardingShown(): Boolean {
