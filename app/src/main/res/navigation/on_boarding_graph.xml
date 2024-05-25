@@ -11,9 +11,8 @@
         android:name="com.solutionplus.altasherat.features.splash.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_onBoardingFirstFragment"
-            app:destination="@id/onBoardingFragment"
-            />
+            android:id="@+id/action_splashFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
 
     <fragment
@@ -21,5 +20,13 @@
         android:name="com.solutionplus.altasherat.features.onboarding.OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding"/>
 
-
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.solutionplus.altasherat.features.language.presentation.ui.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language">
+        <action
+            android:id="@+id/action_languageFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
+    </fragment>
 </navigation>
