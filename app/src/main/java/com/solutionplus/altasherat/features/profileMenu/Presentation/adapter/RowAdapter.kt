@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.solutionplus.altasherat.databinding.ItemMenuBinding
+import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
+import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
 
 class RowAdapter(
     private val items: List<RowItem>,
-    private val navController: NavController
+    private val listener: OnRowItemClickListener
 ) : RecyclerView.Adapter<RowAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMenuBinding) : RecyclerView.ViewHolder(binding.root)
@@ -23,11 +25,10 @@ class RowAdapter(
         holder.binding.iconImage.setImageResource(item.icon)
         holder.binding.textView.text = item.text
         holder.itemView.setOnClickListener {
-            navController.navigate(item.destinationFragmentId)
+            listener.onRowItemClick(item.destinationFragmentId, item.destinationActivity)
         }
     }
 
     override fun getItemCount() = items.size
 }
 
-data class RowItem(val icon: Int, val text: String, val destinationFragmentId: Int)

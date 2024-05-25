@@ -5,12 +5,11 @@ data class User(
     val userName: String,
     val fullName: String,
     val email: String,
-    val password: String,
     val firstName: String,
     val middleName: String,
     val lastName: String,
     val phone: String,
     val birthDate: String,
-    val emailVerified: Boolean,
     val imageUrl: String,
-    )
+    val emailVerified: Boolean
+)

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authentication_graph"
+    app:startDestination="@id/viewPagerFragment">
+
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.viewpager.ViewPagerFragment"
+        tools:layout="@layout/fragment_view_pager"
+        android:label="fragment_view_pager">
+        <action
+            android:id="@+id/action_viewPagerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_resetPasswordByPhoneFragment"
+            app:destination="@id/resetPasswordByPhoneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.OtpFragment"
+        tools:layout="@layout/fragment_otp"
+        android:label="fragment_otp">
+        <action
+            android:id="@+id/action_otpFragment_to_enterNewPasswordFragment"
+            app:destination="@id/enterNewPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.solutionplus.altasherat.features.signup.presentation.ui.SignupFragment"
+        tools:layout="@layout/fragment_signup"
+        android:label="fragment_signup">
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterNewPasswordFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.EnterNewPasswordFragment"
+        tools:layout="@layout/fragment_enter_new_password"
+        android:label="fragment_enter_new_password" />
+    <fragment
+        android:id="@+id/resetPasswordByPhoneFragment"
+        android:name="com.solutionplus.altasherat.features.resetPassword.presentation.ResetPasswordByPhoneFragment"
+        tools:layout="@layout/fragment_reset_password_by_phone"
+        android:label="fragment_reset_password_by_phone">
+        <action
+            android:id="@+id/action_resetPasswordByPhoneFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+</navigation>

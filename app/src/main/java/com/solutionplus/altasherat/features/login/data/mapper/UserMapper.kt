@@ -1,4 +1,3 @@
-
 package com.solutionplus.altasherat.features.login.data.mapper
 
 import com.solutionplus.altasherat.features.login.data.model.dto.UserDto
@@ -20,7 +19,8 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             middleName = model.middlename.orEmpty(),
             birthDate = model.birthdate.orEmpty(),
             phone = model.phone?.countryCode.orEmpty() + "-" + model.phone?.number.orEmpty(),
-            imageUrl = ""
+            imageUrl = "",
+            emailVerified = model.emailVerified ?: false
 
         )
     }
@@ -37,6 +37,7 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             imageUrl = model.imageUrl.orEmpty(),
             fullName = model.fullName.orEmpty(),
             email = model.email.orEmpty(),
+            emailVerified = model.emailVerified ?: false
         )
     }
 }

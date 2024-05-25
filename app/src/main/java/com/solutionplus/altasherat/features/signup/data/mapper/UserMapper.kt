@@ -17,7 +17,9 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             firstName = model.firstname.orEmpty(),
             middleName = model.middlename.orEmpty(),
             birthDate = model.birthdate.orEmpty(),
-            phone = model.phone?.countryCode.orEmpty() + "-" + model.phone?.number.orEmpty()
+            phone = model.phone?.countryCode.orEmpty() + "-" + model.phone?.number.orEmpty(),
+            emailVerified = model.emailVerified ?: false
+
         )
     }
     override fun domainToEntity(model: User): UserEntity {
@@ -32,6 +34,7 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             imageUrl = model.imageUrl.orEmpty(),
             fullName = model.fullName.orEmpty(),
             email = model.email.orEmpty(),
+            emailVerified = model.emailVerified ?: false
         )
     }
 }

@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.presentation.ui.fragment.dashboard
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -21,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.databinding.FragmentVisaPlatformBinding
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginViewModel
+import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
@@ -56,7 +58,8 @@ class VisaPlatformFragment : Fragment() {
     }
 
     private fun navigateToNextFragment() {
-        findNavController().navigate(R.id.action_navigation_visa_platform_to_viewPagerFragment2)
+        val intent = Intent(requireActivity() , AuthenticationActivity::class.java)
+        startActivity(intent)
     }
 
     private fun showBottomSheetDialog() {
