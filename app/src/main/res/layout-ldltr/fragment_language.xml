@@ -175,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_55sdp"
-        android:src="@drawable/location_logo"
+        android:src="@drawable/ic_location"
         app:layout_constraintBottom_toTopOf="@id/language_cardView"
         app:layout_constraintEnd_toEndOf="@id/language_cardView"
         app:layout_constraintTop_toTopOf="@id/language_cardView" />
@@ -185,7 +185,7 @@
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/ic_left"
+        android:drawableEnd="@drawable/ic_right"
         android:drawableTint="#FFFFFF"
         android:text="@string/lang_continue"
         android:textSize="@dimen/_10sdp"

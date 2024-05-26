@@ -20,8 +20,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-//        splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
         splashVM.processIntent(SplashContract.SplashAction.HasCountries)
+
     }
 
     override fun subscribeToObservables() {
