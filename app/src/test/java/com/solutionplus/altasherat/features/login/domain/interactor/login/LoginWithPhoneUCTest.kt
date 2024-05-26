@@ -77,4 +77,28 @@ class LoginWithPhoneUCTest {
         }
     }
 
+    @Test
+    fun `when login is Failed then throw exception`() = runBlocking {
+        // Arrange
+        val phone = Phone(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phone = phone, password = "password")
+        val exception = LeonException.Server.InternalServerError(404, "internal server error")
+
+        coEvery { repository.loginWithPhone(loginRequest) } throws exception
+
+        // Act
+        var thrownException: LeonException.Server.InternalServerError? = null
+        try {
+            loginWithPhoneUC.execute(loginRequest)
+        } catch (e: LeonException.Server.InternalServerError) {
+            thrownException = e
+        }
+
+        // Assert
+        assertTrue(thrownException is LeonException.Server.InternalServerError)
+        assertEquals(exception.message, thrownException?.message)
+    }
+
+
+
 }

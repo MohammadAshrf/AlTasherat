@@ -8,39 +8,36 @@ import com.solutionplus.altasherat.features.signup.data.model.request.Phone
 
 data class SignupRequest(
     @SerializedName("firstname")
-    val firstName: String,
+    val firstName: String?= null,
     @SerializedName("lastname")
-    val lastName: String,
+    val lastName: String?= null,
     @SerializedName("email")
     val email: String?= null,
     @SerializedName("phone")
-    val phone : Phone,
+    val phone : Phone?= null,
     @SerializedName("password")
-    val password : String,
+    val password : String?= null,
     @SerializedName("password_confirmation")
-    val passwordConfirmation : String,
+    val passwordConfirmation : String?= null,
     @SerializedName("country")
-    val countryId : Int,
+    val countryId : Int?= null,
     @SerializedName("country_code")
-    val countryCode: String
+    val countryCode: String?= null,
 ){
 
-    fun validateEmail():Boolean {
-        return !(email!!.length > 50 || !Patterns.EMAIL_ADDRESS.matcher(email).matches())
-    }
     fun validateFirstName():Boolean {
-        return !(firstName.isBlank() || firstName.length < 3 || firstName.length > 15)
+        return !(firstName!!.isBlank() || firstName.length < 3 || firstName.length > 15)
     }
     fun validateLastName():Boolean {
-        return !(lastName.isBlank() || lastName.length < 3 || lastName.length > 15)
+        return !(lastName!!.isBlank() || lastName.length < 3 || lastName.length > 15)
     }
 
     fun validatePassword():Boolean {
-        return !(password.isBlank() ||password.length < 8 || password.length > 50)
+        return !(password!!.isBlank() ||password.length < 8 || password.length > 50)
     }
 
     fun validatePhone():Boolean {
-        return phone.validatePhone()
+        return phone!!.validatePhone()
     }
 
 }

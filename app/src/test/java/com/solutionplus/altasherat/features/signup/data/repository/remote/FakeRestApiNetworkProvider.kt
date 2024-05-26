@@ -6,6 +6,8 @@ import java.lang.reflect.Type
 class FakeRestApiNetworkProvider : INetworkProvider {
 
         var postResponse: Any? = null
+    var shouldThrowException: Boolean = false
+    var exceptionToThrow: Exception? = null
 
     override suspend fun <ResponseBody> get(
         responseWrappedModel: Type,

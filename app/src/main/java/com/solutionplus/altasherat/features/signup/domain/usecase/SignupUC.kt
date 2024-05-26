@@ -35,7 +35,6 @@ class SignupUC(
             when {
                 !validateFirstName() -> "First name is invalid. It must be between 3 and 15 characters."
                 !validateLastName() -> "Last name is invalid. It must be between 3 and 15 characters."
-                !validateEmail() -> "Email is invalid. It must be a valid email address and not exceed 50 characters."
                 !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
                 !validatePhone() -> "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long."
                 else -> null

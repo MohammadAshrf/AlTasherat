@@ -154,6 +154,7 @@ dependencies {
 
     // Dots Indicator
     implementation(libs.dotsindicator)
+    implementation(kotlin("test"))
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
