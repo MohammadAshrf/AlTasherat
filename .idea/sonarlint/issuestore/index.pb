@@ -101,3 +101,17 @@ eapp/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/S
 xapp/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/local/encryption/EncryptionProviderTest.kt,a\3\a3c9ede2eaedd89c320365f1bb62c2a36125db88
 ˜
 happ/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/local/SignUpLocalDSTest.kt,3\7\37957d9e24b7bf3483a43c080b2584289cd40902
+‚
+Rapp/src/main/java/com/solutionplus/altasherat/features/signup/domain/model/User.kt,7\f\7f2a3cc3174f06f5feb15669c78da5b7b225269d
+—
+gapp/src/main/java/com/solutionplus/altasherat/features/signup/domain/repository/local/ISignupLocalDS.kt,8\2\820b93a2b75c1411de9f28e462734a4ca19283a5
+”
+dapp/src/main/java/com/solutionplus/altasherat/features/signup/data/repository/local/SignupLocalDS.kt,d\9\d9c781bed2a4214a6238908b7311d187c27b1ca0
+œ
+lapp/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/remote/RemoteDataSourceTest.kt,a\2\a23d4d4fc47fde378f2fbecfb10f6bb4570490c5
+¢
+rapp/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/remote/FakeRestApiNetworkProvider.kt,c\f\cf1ac1d69cd2f94b3698b36a2b808653357355ed
+–
+fapp/src/main/java/com/solutionplus/altasherat/features/signup/data/repository/remote/SignupRemoteDS.kt,2\e\2eee131ebac99d8715ccd35d5caf0ecf1d13eea6
+–
+fapp/src/main/java/com/solutionplus/altasherat/common/data/repository/remote/RetrofitNetworkProvider.kt,2\7\27b6adeb113f8f79afed3bce06bae9f24e1dd5f2

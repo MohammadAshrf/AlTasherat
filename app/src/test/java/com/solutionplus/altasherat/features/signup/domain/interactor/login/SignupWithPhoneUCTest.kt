@@ -38,40 +38,40 @@ import kotlinx.coroutines.test.runBlockingTest
         signupUC = SignupUC(repository)
     }
 
-//    @Test
-//    fun `when login is successful_given phone country code and password then user details are returned`() = runBlocking {
-//        // Arrange
-//        val phone = Phone(
-//            countryCode = "0020",
-//            number = "100100100"
-//        )
-//        val signupRequest = SignupRequest(phone = phone, password = "123456789", countryCode = "0020", countryId = 1, email = "mahmoud@gmail", firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
-//        val userInfo = User(
-//            id = 1,
-//            userName = "jdoe",
-//            fullName = "John Doe",
-//            email = "jdoe@example.com",
-//            phone = phone.number
-//        )
-//        val accessToken = "token123"
-//        val signup = Signup(message = "Success", token = "token123", user = userInfo)
-//
-//        coEvery { repository.signupWithPhone(signupRequest) } returns signup
-//        coEvery { repository.saveUser(userInfo) } just Runs
-//        coEvery { repository.saveAccessToken(accessToken) } just Runs
-//        coEvery { repository.getUser() } returns domainToEntity(userInfo)
-//
-//        // Act
-//        val result = signupUC.execute(signupRequest)
-//
-//        // Assert
-//        assertEquals(userInfo, result)
-//        assertNotNull(result)
-//        coVerify {
-//            repository.signupWithPhone(signupRequest)
-//            repository.saveUser(userInfo)
-//            repository.saveAccessToken(accessToken)
-//            repository.getUser()
-//        }
-//    }
+    @Test
+    fun `when signup is successful_ then user details are returned`() = runBlocking {
+        // Arrange
+        val phone = Phone(
+            countryCode = "0020",
+            number = "100100100"
+        )
+        val signupRequest = SignupRequest(phone = phone, password = "123456789", countryCode = "0020", countryId = 1,  firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
+        val userInfo = User(
+            id = 1,
+            userName = "jdoe",
+            fullName = "John Doe",
+            email = "jdoe@example.com",
+            phone = phone.number
+        )
+        val accessToken = "token123"
+        val signup = Signup(message = "Success", token = "token123", user = userInfo)
+
+        coEvery { repository.signupWithPhone(signupRequest) } returns signup
+        coEvery { repository.saveUser(userInfo) } just Runs
+        coEvery { repository.saveAccessToken(accessToken) } just Runs
+        coEvery { repository.getUser() } returns domainToEntity(userInfo)
+
+        // Act
+        val result = signupUC.execute(signupRequest)
+
+        // Assert
+        assertEquals(userInfo, result)
+        assertNotNull(result)
+        coVerify {
+            repository.signupWithPhone(signupRequest)
+            repository.saveUser(userInfo)
+            repository.saveAccessToken(accessToken)
+            repository.getUser()
+        }
+    }
 }
