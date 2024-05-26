@@ -54,7 +54,7 @@
     <string name="WritePassword">&#160;&#160;&#160;ادخل كلمه المرور</string>
     <string name="Password"> كلمه المرور</string>
     <string name="Email">البريد الالكتروني</string>
-    <string name="network_unavailable">Please check your internet connection and try again.</string>
+    <string name="network_unavailable">يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</string>
     <string name="timeout_error">The operation timed out. Please try again later.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
