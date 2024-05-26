@@ -30,12 +30,14 @@ class CountryAdapter(context: Context, countries: List<Country>) :
             false
         )
 
-        val countryNameTextView: TextView = view.findViewById(R.id.countryNameTextView)
+        val countryCodeTextView: TextView = view.findViewById(R.id.countryCode)
         val flagImageView: TextView = view.findViewById(R.id.flagImageView)
 
         country?.let {
-            countryNameTextView.text = it.name
+            countryCodeTextView.text = it.phoneCode
             flagImageView.text = it.flag
+            // Set visibility to VISIBLE for demonstration purposes
+            countryCodeTextView.visibility = View.VISIBLE
         }
         return view
     }

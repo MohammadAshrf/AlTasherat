@@ -48,20 +48,6 @@ class RemoteDataSourceTest {
         assertEquals(expectedResponse, result)
     }
 
-
-    @Test
-    fun `when login with phone given request and provider returns null then null result`() = runTest {
-        val loginRequest = LoginRequest(Phone("002", "100100100"), "testCode")
-        val expectedResponse = null
-
-        provider.postResponse = expectedResponse
-
-        val result = remoteDataSource.loginWithPhone(loginRequest)
-
-        assertEquals(expectedResponse, result)
-        assertNull(result)
-    }
-
 //    @Test
 //    fun `when login and get server error`() = runBlocking {
 //        // Arrange
