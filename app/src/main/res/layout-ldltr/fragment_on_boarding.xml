@@ -65,7 +65,7 @@
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
-        android:drawableEnd="@drawable/ic_left"
+        android:drawableEnd="@drawable/ic_right"
         android:drawableTint="#FFFFFF"
         android:text="@string/next"
         android:textSize="@dimen/_10sdp"

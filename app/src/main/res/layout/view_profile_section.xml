@@ -39,7 +39,7 @@
         android:background="@drawable/background_gradient"
         android:drawableTint="#FFFFFF"
         android:fontFamily="@font/app_font_heavy"
-        android:text="تعــديل الملف الشخصي"
+        android:text="@string/edit_profile"
         android:textAppearance="@style/Font.Heavy"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"

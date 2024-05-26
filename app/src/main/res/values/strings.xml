@@ -79,4 +79,7 @@
     <string name="you_can_sell_your_visa">تستطيع عرض فيزا</string>
     <string name="order_job_visa">اطلب فيزا توظيف</string>
     <string name="visa_hedder_text">لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل</string>
+    <string name="email_not_verified">البريد الإلكتروني غير مؤكد</string>
+    <string name="confirm">تأكيد</string>
+    <string name="edit_profile">تعــديل الملف الشخصي</string>
 </resources>
