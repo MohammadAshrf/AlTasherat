@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.splash
+package com.solutionplus.altasherat.features.splash.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +20,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        splashVM.onActionTrigger(SplashContract.SplashAction.IsOnBoardingShown)
+//        splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
+        splashVM.processIntent(SplashContract.SplashAction.HasCountries)
     }
 
     override fun subscribeToObservables() {
@@ -32,8 +33,15 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
             when (it) {
                 is SplashContract.SplashEvent.NavigateToLanguage -> navigateToLanguage()
                 is SplashContract.SplashEvent.NavigateToHome -> startHomeActivity()
+                is SplashContract.SplashEvent.NavigateToOnBoarding -> navigateToOnBoarding()
             }
         }
+    }
+
+    private fun navigateToOnBoarding() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment)
+        }, 1200)
     }
 
     private fun navigateToLanguage() {

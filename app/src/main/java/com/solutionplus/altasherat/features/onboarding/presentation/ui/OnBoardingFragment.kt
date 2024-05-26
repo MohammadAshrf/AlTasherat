@@ -1,23 +1,36 @@
-package com.solutionplus.altasherat.features.onboarding
+package com.solutionplus.altasherat.features.onboarding.presentation.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentOnBoardingBinding
-import com.solutionplus.altasherat.features.onboarding.screens.OnBoardingFirst
-import com.solutionplus.altasherat.features.onboarding.screens.OnBoardingSecond
-import com.solutionplus.altasherat.features.onboarding.screens.OnBoardingThird
+import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingFirst
+import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingSecond
+import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingThird
 import com.solutionplus.altasherat.presentation.adapters.onboarding.ViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
+    private val onBoardingVM: OnBoardingViewModel by viewModels()
+
     override fun viewInit() {
+        handleViews()
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
+    }
+
+    override fun subscribeToObservables() {
+        handleEvents()
+    }
+
+    private fun handleViews() {
         val fragmentList = arrayListOf<Fragment>(
             OnBoardingFirst(), OnBoardingSecond(), OnBoardingThird()
         )
@@ -45,11 +58,20 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
             if (binding.viewPager.currentItem + 1 < adapter.itemCount) {
                 binding.viewPager.currentItem += 1
             } else {
-                navigateToHome()
+                onBoardingVM.processIntent(OnBoardingContract.OnBoardingAction.ContinueToHome)
+                onBoardingVM.processIntent(OnBoardingContract.OnBoardingAction.SetOnBoardingShown)
             }
         }
 
         binding.dotsIndicator.attachTo(binding.viewPager)
+    }
+
+    private fun handleEvents() {
+        collectFlowWithLifecycle(onBoardingVM.singleEvent) {
+            when (it) {
+                OnBoardingContract.OnBoardingEvent.NavigateToHome -> navigateToHome()
+            }
+        }
     }
 
     private fun updateRightIconVisibility(lastIndex: Int) {
@@ -63,9 +85,4 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     private fun navigateToHome() {
         findNavController().navigate(R.id.action_onBoardingFragment_to_homeActivity)
     }
-
-    override fun subscribeToObservables() {
-    }
-
-
 }

@@ -15,6 +15,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     private val languageVM: LanguageViewModel by viewModels()
     override fun viewInit() {
+        handleViews()
+    }
+
+    override fun onFragmentReady(savedInstanceState: Bundle?) {
+        languageVM.processIntent(LanguageContract.LanguageAction.GetCountries)
+    }
+
+    override fun subscribeToObservables() {
+        handleEvents()
+    }
+
+    private fun handleViews() {
         binding.arabicRadioBtn.setOnClickListener {
             binding.englishRadioBtn.isEnabled = true
             binding.arabicRadioBtn.isEnabled = false
@@ -28,15 +40,6 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
         binding.continueButton.setOnClickListener {
             languageVM.processIntent(LanguageContract.LanguageAction.ContinueToOnBoarding)
         }
-    }
-
-    override fun onFragmentReady(savedInstanceState: Bundle?) {
-        languageVM.processIntent(LanguageContract.LanguageAction.GetCountries)
-//        languageVM.processIntent(LanguageContract.LanguageAction.GetEnCountries)
-    }
-
-    override fun subscribeToObservables() {
-        handleEvents()
     }
 
     private fun handleEvents() {

@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.splash
+package com.solutionplus.altasherat.features.splash.presentation.ui
 
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
@@ -9,11 +9,13 @@ interface SplashContract {
 
     sealed class SplashAction : ViewAction {
         data object IsOnBoardingShown : SplashAction()
+        data object HasCountries : SplashAction()
     }
 
     sealed class SplashEvent : ViewEvent {
         data object NavigateToLanguage : SplashEvent()
         data object NavigateToHome : SplashEvent()
+        data object NavigateToOnBoarding : SplashEvent()
     }
 
     data class SplashState(
