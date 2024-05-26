@@ -90,6 +90,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
 
             }
+            binding.viewProfileSection.nameTextView.text = user.fullName
         }
     }
 
@@ -99,7 +100,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         val packageInfo =
             requireContext().packageManager!!.getPackageInfo(requireContext().packageName, 0)
         val version = packageInfo.versionName
-        binding.tvVersion.text = "v $version"
+        binding.tvVersion.text = "V $version"
     }
 
 

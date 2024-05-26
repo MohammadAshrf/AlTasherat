@@ -82,4 +82,5 @@
     <string name="email_not_verified">البريد الإلكتروني غير مؤكد</string>
     <string name="confirm">تأكيد</string>
     <string name="edit_profile">تعــديل الملف الشخصي</string>
+    <string name="current_version">النسخة الحالية:</string>
 </resources>

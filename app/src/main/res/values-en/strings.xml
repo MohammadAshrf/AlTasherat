@@ -60,4 +60,5 @@
     <string name="email_not_verified">email is not verified</string>
     <string name="confirm">confirm</string>
     <string name="edit_profile">edit profile</string>
+    <string name="current_version">current version :</string>
 </resources>
