@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
-    tools:context=".features.language.LanguageFragment">
+    tools:context=".features.language.presentation.ui.LanguageFragment">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                 style="@style/TextView.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/choose_language"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_language"
@@ -137,7 +137,7 @@
                 style="@style/TextView.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/choose_state"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_state"
@@ -185,9 +185,10 @@
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_left_rounded"
+        android:drawableEnd="@drawable/ic_left_rounded"
         android:drawableTint="#FFFFFF"
         android:text="@string/lang_continue"
+        android:textSize="@dimen/_10sdp"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@id/language_cardView"

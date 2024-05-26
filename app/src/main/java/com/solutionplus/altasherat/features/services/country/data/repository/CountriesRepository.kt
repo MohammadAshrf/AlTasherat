@@ -22,9 +22,7 @@ class CountriesRepository(
         localDS.saveCountriesToLocal(countries)
     }
 
-    override suspend fun isOnBoardingShown(): Boolean {
-        return localDS.isOnBoardingShown()
+    override suspend fun hasCountries(): Boolean {
+        return localDS.hasCountriesInLocal()
     }
-
-
 }
