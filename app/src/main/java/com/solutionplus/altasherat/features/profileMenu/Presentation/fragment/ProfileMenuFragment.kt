@@ -46,7 +46,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
                 is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
-                    handleState(it.user)
+                    handleUserState(it.user)
                 }
 
                 is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
@@ -76,7 +76,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         }
     }
 
-    private fun handleState(user: User) {
+    private fun handleUserState(user: User) {
         emailBundle = Bundle().apply {
             putString(EMAIL_KEY_BUNDLE, user.email)
         }

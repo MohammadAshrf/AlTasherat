@@ -24,13 +24,11 @@
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/shape_spinner_background_left"
+        android:background="@drawable/shape_spinner_background"
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/et_Phone_Client"
-        app:layout_constraintTop_toTopOf="@+id/et_Phone_Client"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/et_Phone_Client" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"

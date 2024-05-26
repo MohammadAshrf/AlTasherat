@@ -89,8 +89,6 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
         startActivity(intent)
     }
 
-    override fun subscribeToObservables() {
-    }
-
+  
 
 }

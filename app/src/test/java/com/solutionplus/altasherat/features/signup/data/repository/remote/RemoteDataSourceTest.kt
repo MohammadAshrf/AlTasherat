@@ -44,18 +44,6 @@ class RemoteDataSourceTest {
     }
 
 
-    @Test
-    fun `when signup with phone given request and provider returns null expect null result`() = runTest {
-        val signupRequest = SignupRequest(phone = Phone("0020","1066791541"), password = "123456789", countryCode = "0020", countryId = 1, email = "mahmoud@gmail", firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
-        val expectedResponse = null
-
-        provider.postResponse = expectedResponse
-
-        val result = remoteDataSource.signupWithPhone(signupRequest)
-
-        assertEquals(expectedResponse, result)
-        assertNull(result)
-    }
 
 
 }

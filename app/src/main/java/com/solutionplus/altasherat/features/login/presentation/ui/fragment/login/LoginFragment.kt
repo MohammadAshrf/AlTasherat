@@ -78,10 +78,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             } else {
                 hideLoading()
             }
-            state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
-                    .show()
-            }
+
         }
     }
 
@@ -109,6 +106,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             viewModel.onActionTrigger(
                 LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
+
+
         }
     }
 

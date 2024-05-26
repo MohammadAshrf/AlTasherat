@@ -8,16 +8,19 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.solutionplus.altasherat.features.splash.SplashFragment"
+        android:name="com.solutionplus.altasherat.features.splash.presentation.ui.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_languageFragment"
             app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/onBoardingFragment"
-        android:name="com.solutionplus.altasherat.features.onboarding.OnBoardingFragment"
+        android:name="com.solutionplus.altasherat.features.onboarding.presentation.ui.OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding"/>
 
     <fragment

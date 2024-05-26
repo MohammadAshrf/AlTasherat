@@ -3,6 +3,8 @@ package com.solutionplus.altasherat.features.splash.presentation.ui
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import android.os.Looper
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +24,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {
 //        splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
         splashVM.processIntent(SplashContract.SplashAction.HasCountries)
+        //  AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
+
     }
 
     override fun subscribeToObservables() {
