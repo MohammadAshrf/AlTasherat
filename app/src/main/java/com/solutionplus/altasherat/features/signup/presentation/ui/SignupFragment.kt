@@ -67,8 +67,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                 hideLoading()
             }
             state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
-                    .show()
+                handleHttpExceptions(it)
             }
         }
     }
@@ -95,7 +94,6 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     }
 
     override fun onSignupAction() {
-        if (validateLoginDetails()) {
             val firstName = binding.etFirstname.text.toString()
             val lastName = binding.etLastName.text.toString()
             val email = binding.etEmail.text.toString()
@@ -108,10 +106,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                     firstName, lastName, email, phoneNumber, countryCode, countryId, password
                 )
             )
-        }
     }
 
-    private fun validateLoginDetails(): Boolean {
+    /*private fun validateLoginDetails(): Boolean {
         return when {
             binding.etFirstname.text?.trim()?.length !in 3..15 -> {
                 showErrorSnackBar(
@@ -147,7 +144,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                 true
             }
         }
-    }
+    }*/
 
     companion object {
         val logger = getClassLogger()

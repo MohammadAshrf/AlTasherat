@@ -50,9 +50,11 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
             is LeonException.Network.Retrial -> TODO()
 
             is LeonException.Client.ResponseValidation -> {
-                //showSnackbar(exception.message ?: "Unknown validation error")
+                showSnackbar(exception.message ?: "Unknown validation error")
             }
-            is LeonException.Local.RequestValidation -> TODO()
+            is LeonException.Local.RequestValidation -> {
+                showSnackbar(exception.message ?: "Unknown validation error")
+            }
 
             is LeonException.Network.Unhandled -> showToasts("Unhandled Network Error")
             is LeonException.Client.Unhandled -> showToasts("Unhandled Client Error")
