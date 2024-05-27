@@ -73,4 +73,9 @@
     <string name="SignIn">تسجيل الدخول</string>
     <string name="Already_have_an_account">لديك حساب بالفعل؟</string>
     <string name="forgot_password">نسيت كلمه المرور؟</string>
+    <string name="Job_visas">تاشيرات وظائف</string>
+    <string name="Tourist_visas">تاشيرات سياحيه</string>
+    <string name="View_visas">عرض التاشيرات</string>
+    <string name="Request_your_visa_now">اطلب الان التاشيره</string>
+    <string name="FillOut_the_form_now">املأ الاستماره الان</string>
 </resources>
