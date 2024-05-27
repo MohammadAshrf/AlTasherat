@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_visaPlatformFragment"
             app:destination="@id/visaPlatformFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_changeLanguage"
+            app:destination="@id/changeLanguage" />
 
 
     </fragment>
@@ -62,4 +65,9 @@
         android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/changeLanguage"
+        android:name="com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguage"
+        android:label="fragment_change_language"
+        tools:layout="@layout/fragment_change_language" />
 </navigation>
