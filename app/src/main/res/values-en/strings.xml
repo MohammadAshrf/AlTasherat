@@ -57,4 +57,8 @@
     <string name="change_language">You can change your country and language at any time from the list</string>
     <string name="back">Previous</string>
     <string name="altasherat_platform">AlTasherat Platform</string>
+    <string name="email_not_verified">email is not verified</string>
+    <string name="confirm">confirm</string>
+    <string name="edit_profile">edit profile</string>
+    <string name="current_version">current version :</string>
 </resources>

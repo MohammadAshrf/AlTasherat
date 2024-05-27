@@ -65,7 +65,7 @@
         android:layout_height="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="@drawable/rounded_button_background"
-        android:drawableEnd="@drawable/ic_sign_out_ar"
+        android:drawableEnd="@drawable/ic_sign_out"
         android:text="@string/sign_out"
         android:textColor="#FF1C1F"
         android:visibility="gone"

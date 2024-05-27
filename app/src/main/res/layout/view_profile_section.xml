@@ -12,7 +12,7 @@
         layout="@layout/view_profile_picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="@dimen/_42sdp"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
@@ -39,7 +39,7 @@
         android:background="@drawable/background_gradient"
         android:drawableTint="#FFFFFF"
         android:fontFamily="@font/app_font_heavy"
-        android:text="تعــديل الملف الشخصي"
+        android:text="@string/edit_profile"
         android:textAppearance="@style/Font.Heavy"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
@@ -51,11 +51,11 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="24dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginEnd="24dp"
-        android:background="#D3D3D3"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:background="#F1F4FB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_edit_profile"
