@@ -67,7 +67,7 @@
         <item name="android:textColor">@color/Error</item>
     </style>
 
-    // ------------------------------------------- EditText----------------------------------------
+    // ------------------------------------------- EditText ----------------------------------------
 
     <style name="EditText" parent="ThemeOverlay.Material3.TextInputEditText">
         <item name="android:layout_width">0dp</item>
@@ -75,10 +75,9 @@
         <item name="android:background">@drawable/rounded_edittext_register_login</item>
         <item name="android:ems">10</item>
         <item name="android:paddingLeft">16dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textAppearance">@style/Font</item>
-        <item name="fontStyle">normal</item>
+        <item name="android:textAppearance">@style/Font.Regular</item>
     </style>
 
 
@@ -123,7 +122,7 @@
     </style>
 
 
-    //---------------------------------------tab layout -----------------------------//
+    //--------------------------------------- TabLayout -----------------------------//
 
     <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorHeight">0dp</item>
@@ -155,4 +154,40 @@
         <item name="android:paddingRight">4dp</item>
         <item name="android:textColor">?android:textColorHint</item>
     </style>
+
+    //--------------------------------------- TextInputLayout -----------------------------//
+
+    <style name="TextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_marginStart">@dimen/_16sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_16sdp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/icon</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+    </style>
+
+
+    //--------------------------------------- TextInputEditText -----------------------------//
+
+    <style name="TextInputEditText" parent="Widget.Design.TextInputEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_16sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_16sdp</item>
+        <item name="background">@drawable/rounded_button_background</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingLeft">@dimen/_14sdp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAppearance">@style/Font.Regular</item>
+    </style>
+
+
 </resources>
+
