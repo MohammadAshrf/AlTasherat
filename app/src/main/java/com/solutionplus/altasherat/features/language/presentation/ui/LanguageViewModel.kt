@@ -24,7 +24,7 @@ class LanguageViewModel @Inject constructor(
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
-            is LanguageAction.GetCountries -> getCountries()
+            is LanguageAction.GetCountriesFromLocal -> getCountries()
             is LanguageAction.StartLanguageWorker -> invokeLanguageWorker(action.language)
             is LanguageAction.ContinueToOnBoarding -> navigateToOnBoarding()
         }

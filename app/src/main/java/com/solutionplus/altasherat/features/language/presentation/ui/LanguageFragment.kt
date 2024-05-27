@@ -19,7 +19,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        languageVM.processIntent(LanguageContract.LanguageAction.GetCountries)
+        languageVM.processIntent(LanguageContract.LanguageAction.GetCountriesFromLocal)
     }
 
     override fun subscribeToObservables() {
