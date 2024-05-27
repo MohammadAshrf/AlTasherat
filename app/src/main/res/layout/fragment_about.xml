@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.about.presentation.ui.AboutFragment">
+
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:src="@drawable/ic_back_right"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/terms_title"
+        style="@style/TextView.Heavy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/about"
+        app:layout_constraintBottom_toBottomOf="@id/back_arrow"
+        app:layout_constraintStart_toEndOf="@+id/back_arrow"
+        app:layout_constraintTop_toTopOf="@id/back_arrow" />
+
+
+    <ImageView
+        android:id="@+id/terms_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/about_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/terms_title" />
+
+    <Button
+        android:id="@+id/altasherat_platform_button"
+        style="@style/Button"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:clickable="false"
+        android:drawableTint="#FFFFFF"
+        android:text="@string/altasherat_platform"
+        android:textAppearance="@style/Font.Bold"
+        android:textSize="@dimen/_12ssp"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@id/terms_img"
+        app:layout_constraintEnd_toEndOf="@+id/terms_img"
+        app:layout_constraintStart_toStartOf="@+id/terms_img"
+        app:layout_constraintTop_toBottomOf="@id/terms_img"
+        tools:ignore="RtlHardcoded" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_8sdp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/altasherat_platform_button">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/altasherat_platform_text"
+                style="@style/TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="@dimen/_4sdp"
+                android:text="@string/about_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/about_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:src="@drawable/about_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/altasherat_platform_text" />
+
+            <ImageView
+                android:id="@+id/first_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:src="@drawable/check_green"
+                app:layout_constraintStart_toEndOf="@+id/about_pic"
+                app:layout_constraintTop_toTopOf="@+id/about_pic" />
+
+            <TextView
+                style="@style/TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:text="طلب الحصول على تأشيرة سياحية"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="@id/first_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/first_check"
+                app:layout_constraintTop_toTopOf="@id/first_check" />
+
+            <ImageView
+                android:id="@+id/second_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:src="@drawable/check_purple"
+                app:layout_constraintStart_toEndOf="@id/about_pic"
+                app:layout_constraintTop_toBottomOf="@id/first_check" />
+
+            <TextView
+                android:id="@+id/second_about_text"
+                style="@style/TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:text="طلب الحصول على تأشيرة وظيفية"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="@id/second_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/second_check"
+                app:layout_constraintTop_toTopOf="@id/second_check" />
+
+            <ImageView
+                android:id="@+id/third_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:src="@drawable/check_green"
+                app:layout_constraintStart_toEndOf="@id/about_pic"
+                app:layout_constraintTop_toBottomOf="@id/second_check" />
+
+            <TextView
+                style="@style/TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="خدمـــات السفارات"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="@id/third_check"
+                app:layout_constraintStart_toStartOf="@+id/second_about_text"
+                app:layout_constraintTop_toTopOf="@id/third_check" />
+
+            <ImageView
+                android:id="@+id/fourth_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:src="@drawable/check_purple"
+                app:layout_constraintStart_toEndOf="@id/about_pic"
+                app:layout_constraintTop_toBottomOf="@id/third_check" />
+
+            <TextView
+                style="@style/TextView.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:text="خدمات القنصـــليات"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="@id/fourth_check"
+                app:layout_constraintStart_toStartOf="@id/second_about_text"
+                app:layout_constraintTop_toTopOf="@id/fourth_check" />
+
+            <LinearLayout
+                android:id="@+id/about_linear_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:background="@color/surface"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fourth_check">
+
+                <TextView
+                    android:id="@+id/about_platform"
+                    style="@style/TextView.Heavy"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="ماذا تقدم؟" />
+
+                <TextView
+                    android:id="@+id/about_platform_text"
+                    style="@style/TextView.Medium"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:padding="@dimen/_4sdp"
+                    android:text="@string/about_text" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:src="@drawable/eg_sa_flags"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_linear_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

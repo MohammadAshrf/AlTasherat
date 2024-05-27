@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.solutionplus.altasherat.R
@@ -24,12 +23,9 @@ import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorH
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegate
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegateImpl
 import com.solutionplus.altasherat.databinding.ViewLoadingBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
     InternetConnectionDelegate by InternetConnectionDelegateImpl(), ErrorHandling {
@@ -74,7 +70,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
 
     private var mProgressDialog: Dialog? = null
 
-    fun showLoading(message: String?=null ) {
+    fun showLoading(message: String? = null) {
 
         if (mProgressDialog == null) {
             mProgressDialog = Dialog(requireActivity()).apply {
@@ -83,7 +79,8 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
                 setCanceledOnTouchOutside(false)
             }
         }
-        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text = message ?: resources.getString(R.string.please_wait)
+        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text =
+            message ?: resources.getString(R.string.please_wait)
         mProgressDialog?.show()
     }
 
@@ -147,6 +144,5 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         _binding = null
         mProgressDialog?.dismiss()
         mProgressDialog = null
-
     }
 }

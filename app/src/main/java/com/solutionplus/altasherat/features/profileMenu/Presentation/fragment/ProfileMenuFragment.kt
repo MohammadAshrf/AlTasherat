@@ -111,9 +111,10 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 destinationActivity = if (isUserLoggedIn) null else AuthenticationActivity::class.java,
                 destinationFragmentId = if (isUserLoggedIn) R.id.action_profileMenuFragment_to_changePasswordFragment2 else null
             ),
-            RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
-            RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
-            RowItem(R.drawable.ic_plicy, getString(R.string.policy), R.id.fakeFragment),
+            RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.action_profileMenuFragment_to_aboutFragment),
+            RowItem(R.drawable.ic_support, getString(R.string.contact_us), R.id.fakeFragment),
+            RowItem(R.drawable.ic_terms, getString(R.string.terms_and_conditions), R.id.action_profileMenuFragment_to_termsFragment),
+            RowItem(R.drawable.ic_policy, getString(R.string.privacy_policy), R.id.action_profileMenuFragment_to_privacyFragment),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.fakeFragment)
         )
 

@@ -15,7 +15,7 @@
         android:id="@+id/visaPlatformFragment"
         android:name="com.solutionplus.altasherat.presentation.ui.fragment.dashboard.VisaPlatformFragment"
         android:label="visa platform"
-        tools:layout="@layout/fragment_visa_platform" >
+        tools:layout="@layout/fragment_visa_platform">
 
         <action
             android:id="@+id/action_navigation_visa_platform_to_navigation_visa_applications"
@@ -26,7 +26,7 @@
         android:id="@+id/profileMenuFragment"
         android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.ProfileMenuFragment"
         android:label="fragment_profile_menu"
-        tools:layout="@layout/fragment_profile_menu" >
+        tools:layout="@layout/fragment_profile_menu">
         <action
             android:id="@+id/action_profileMenuFragment_to_fakeFragment"
             app:destination="@id/fakeFragment" />
@@ -39,6 +39,15 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_visaPlatformFragment"
             app:destination="@id/visaPlatformFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
 
 
     </fragment>
@@ -51,7 +60,7 @@
         android:id="@+id/emailVerifiedFragment"
         android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
         android:label="fragment_email_verified"
-        tools:layout="@layout/fragment_email_verified" >
+        tools:layout="@layout/fragment_email_verified">
         <action
             android:id="@+id/action_emailVerifiedFragment_to_profileMenuFragment"
             app:destination="@id/profileMenuFragment" />
@@ -62,4 +71,19 @@
         android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.solutionplus.altasherat.features.terms.presentation.ui.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.solutionplus.altasherat.features.privacy.presentation.ui.PrivacyFragment"
+        android:label="fragment_privacy"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.solutionplus.altasherat.features.about.presentation.ui.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>
