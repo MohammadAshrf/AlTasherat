@@ -72,7 +72,7 @@
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/phone_background"
+        android:background="@drawable/phone_backgroundrtl"
         android:inputType="phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
@@ -81,7 +81,7 @@
         android:id="@+id/et_CountruCode"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:background="@drawable/shape_spinner_background"
+        android:background="@drawable/shape_spinner_background_left"
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toEndOf="@+id/et_firstname"
         app:layout_constraintHorizontal_bias="0.0"

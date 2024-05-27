@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
@@ -28,12 +30,14 @@ class CountryAdapter(context: Context, countries: List<Country>) :
             false
         )
 
-        val countryNameTextView: TextView = view.findViewById(R.id.countryTv)
-        val flagImageView: TextView = view.findViewById(R.id.flagImage)
+        val countryCodeTextView: TextView = view.findViewById(R.id.countryCode)
+        val flagImageView: TextView = view.findViewById(R.id.flagImageView)
 
         country?.let {
-            countryNameTextView.text = it.name
+            countryCodeTextView.text = it.phoneCode
             flagImageView.text = it.flag
+            // Set visibility to VISIBLE for demonstration purposes
+            countryCodeTextView.visibility = View.VISIBLE
         }
         return view
     }

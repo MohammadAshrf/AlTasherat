@@ -10,11 +10,11 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/et_Phone_Client"
         style="@style/EditText"
-        android:layout_width="220dp"
+        android:layout_width="240dp"
         android:layout_height="46dp"
         android:layout_marginTop="120dp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:background="@drawable/phone_background"
+        android:layout_marginLeft="@dimen/_13sdp"
+        android:background="@drawable/phone_backgroundrtl"
         android:inputType="phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,8 +23,8 @@
         android:id="@+id/et_CountruCode"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/shape_spinner_background"
+        android:layout_marginRight="@dimen/_13sdp"
+        android:background="@drawable/shape_spinner_background_left"
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_Phone_Client"
@@ -57,27 +57,29 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_button_background"
-            android:hint="    ادخل كلمه المرور"
+            android:hint="@string/WritePassword"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_forgot_password"
-        style="@style/TextView"
+        style="@style/TextView.Medium"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="نسيت كلمه المرور؟"
+        android:text="@string/forgot_password"
         android:textColor="@color/text"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
     <TextView
         android:id="@+id/textView2"
-        style="@style/Font.Heavy"
+        style="@style/TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="الجوال"
+        android:text="@string/Phone"
         android:textColor="@color/text"
         android:textStyle="bold"
         android:layout_marginStart="@dimen/_16sdp"
@@ -87,13 +89,13 @@
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/Font.SemiBold"
+        style="@style/TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:text="كلمه المرور"
+        android:text="@string/Password"
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
