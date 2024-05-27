@@ -7,7 +7,6 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -32,6 +31,7 @@ class LanguageWorker @AssistedInject constructor(
                     when (it) {
                         is Resource.Loading -> {
                         }
+
                         is Resource.Success -> {
                             val successMessage = SUCCESS_MESSAGE
                             val outputData = workDataOf(KEY_SUCCESS to successMessage)

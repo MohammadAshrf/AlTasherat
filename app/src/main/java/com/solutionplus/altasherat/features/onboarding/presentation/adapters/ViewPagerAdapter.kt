@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.presentation.adapters.onboarding
+package com.solutionplus.altasherat.features.onboarding.presentation.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

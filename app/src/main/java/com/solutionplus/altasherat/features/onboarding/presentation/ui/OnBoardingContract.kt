@@ -9,7 +9,6 @@ interface OnBoardingContract {
 
     sealed class OnBoardingAction : ViewAction {
         data object SetOnBoardingShown : OnBoardingAction()
-        data object ContinueToHome : OnBoardingAction()
     }
 
     sealed class OnBoardingEvent : ViewEvent {

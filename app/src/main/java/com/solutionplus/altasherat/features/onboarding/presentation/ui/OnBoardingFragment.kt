@@ -5,15 +5,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentOnBoardingBinding
+import com.solutionplus.altasherat.features.onboarding.presentation.adapters.ViewPagerAdapter
 import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingFirst
 import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingSecond
 import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingThird
-import com.solutionplus.altasherat.presentation.adapters.onboarding.ViewPagerAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,7 +58,6 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
             if (binding.viewPager.currentItem + 1 < adapter.itemCount) {
                 binding.viewPager.currentItem += 1
             } else {
-                onBoardingVM.processIntent(OnBoardingContract.OnBoardingAction.ContinueToHome)
                 onBoardingVM.processIntent(OnBoardingContract.OnBoardingAction.SetOnBoardingShown)
             }
         }
@@ -87,8 +84,6 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     private fun navigateToHome() {
         val intent = Intent(requireContext(), HomeActivity::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
-
-  
-
 }

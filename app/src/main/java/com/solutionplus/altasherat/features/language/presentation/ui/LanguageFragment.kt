@@ -1,9 +1,6 @@
 package com.solutionplus.altasherat.features.language.presentation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.viewModels
@@ -20,8 +17,6 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     override fun viewInit() {
         handleViews()
     }
-
-
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         languageVM.processIntent(LanguageContract.LanguageAction.GetCountries)

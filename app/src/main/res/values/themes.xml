@@ -46,13 +46,13 @@
     <style name="TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:gravity">start|center</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textAppearance">@style/Font</item>
-        <item name="fontStyle">normal</item>
+
     </style>
 
     <style name="TextView.Medium" parent="TextView">
@@ -61,6 +61,26 @@
 
     <style name="TextView.Bold" parent="TextView">
         <item name="android:textAppearance">@style/Font.Bold</item>
+    </style>
+
+    <style name="TextView.Heavy" parent="TextView">
+        <item name="android:textAppearance">@style/Font.Heavy</item>
+    </style>
+
+    <style name="TextView.Regular" parent="TextView">
+        <item name="android:textAppearance">@style/Font.Regular</item>
+    </style>
+
+    <style name="TextView.SemiBold" parent="TextView">
+        <item name="android:textAppearance">@style/Font.SemiBold</item>
+    </style>
+
+    <style name="TextView.Thin" parent="TextView">
+        <item name="android:textAppearance">@style/Font.Thin</item>
+    </style>
+
+    <style name="TextView.Black" parent="TextView">
+        <item name="android:textAppearance">@style/Font.Black</item>
     </style>
 
     <style name="TextView.Error" parent="TextView">

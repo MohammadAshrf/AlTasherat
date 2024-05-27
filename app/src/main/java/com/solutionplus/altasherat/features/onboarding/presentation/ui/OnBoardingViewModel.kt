@@ -22,12 +22,7 @@ class OnBoardingViewModel @Inject constructor(
         setState(oldViewState.copy(action = action))
         when (action) {
             is OnBoardingAction.SetOnBoardingShown -> setOnboardingShown()
-            is OnBoardingAction.ContinueToHome -> navigateToHome()
         }
-    }
-
-    private fun navigateToHome() {
-        sendEvent(OnBoardingEvent.NavigateToHome)
     }
 
     private fun setOnboardingShown() {

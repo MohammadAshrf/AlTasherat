@@ -25,7 +25,7 @@
     <string name="policy">Privacy policy</string>
     <string name="language">Language</string>
     <string name="sign_out">Sign out</string>
-    <string name="login">" Sign in"</string>
+    <string name="login">"Sign in"</string>
     <string name="conferm_email_txt">"Verify your E-mail"</string>
     <string name="we_send_msg_txt">"We sent a confirmation E-mail to you"</string>
     <string name="check_email_txt">"Check your email and click the confirmation link to continue"</string>
@@ -33,9 +33,9 @@
     <string name="enter_otp_text">"Enter the code sent to your mobile phone to continue"</string>
     <string name="enter_password_text">"Enter the password "</string>
     <string name="enter_password_again_text">"Re-enter the password again"</string>
-    <string name="enter_password">"      Enter the new password"</string>
-    <string name="enter_old_password">"      Enter the old password"</string>
-    <string name="repete_new_password">"      ReEnter the new password"</string>
+    <string name="enter_password">"Enter the new password"</string>
+    <string name="enter_old_password">"Enter the old password"</string>
+    <string name="repete_new_password">"ReEnter the new password"</string>
     <string name="save">Save</string>
     <string name="old_password_txt">Old password</string>
     <string name="new_password_text">New password</string>

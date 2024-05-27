@@ -9,13 +9,11 @@ interface SplashContract {
 
     sealed class SplashAction : ViewAction {
         data object IsOnBoardingShown : SplashAction()
-        data object HasCountries : SplashAction()
     }
 
     sealed class SplashEvent : ViewEvent {
         data object NavigateToLanguage : SplashEvent()
         data object NavigateToHome : SplashEvent()
-        data object NavigateToOnBoarding : SplashEvent()
     }
 
     data class SplashState(

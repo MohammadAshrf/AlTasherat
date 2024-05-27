@@ -7,5 +7,5 @@ interface IKeyValueStorageProvider {
     suspend fun <Model> getEntry(key: IStorageKeyEnum, defaultValue: Model, type: Type): Model
     suspend fun <Model> updateEntry(key: IStorageKeyEnum, value: Model, type: Type)
     suspend fun <Model> deleteEntry(key: IStorageKeyEnum, type: Type)
-    suspend fun <Model> hasKey(key: IStorageKeyEnum, value: Model): Boolean
+    suspend fun <Model> hasKey(key: IStorageKeyEnum, defaultValue: Model): Boolean
 }
