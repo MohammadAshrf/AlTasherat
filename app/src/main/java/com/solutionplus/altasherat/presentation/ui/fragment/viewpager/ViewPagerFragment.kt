@@ -106,12 +106,12 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
     private fun updateImageViewVisibility(position: Int) {
         when (position) {
             0 -> {
-                binding.imageView5.visibility = View.GONE
-                binding.imageViewp2.visibility = View.VISIBLE
-            }
-            1 -> {
                 binding.imageView5.visibility = View.VISIBLE
                 binding.imageViewp2.visibility = View.GONE
+            }
+            1 -> {
+                binding.imageView5.visibility = View.GONE
+                binding.imageViewp2.visibility = View.VISIBLE
             }
         }
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_image"
     tools:context="com.solutionplus.altasherat.presentation.ui.fragment.viewpager.ViewPagerFragment">
 
 
@@ -47,6 +47,7 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
+                style="@style/CustomTabLayout"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:background="@drawable/tab_bkg"
@@ -55,7 +56,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0"
-                style="@style/CustomTabLayout"/>
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -66,7 +67,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="-40dp"
-        android:src="@drawable/img1"
+        android:src="@drawable/groupviewpager"
         android:translationZ="10dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
@@ -79,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-24dp"
         android:background="@drawable/button_background"
-        android:drawableLeft="@drawable/small_image_login"
+        android:drawableLeft="@drawable/svgexport620220821t132423"
         android:drawableTint="#FFFFFF"
 
         android:text="@string/send"
@@ -139,22 +140,24 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="@dimen/_35sdp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="65dp"
         android:src="@drawable/pl1"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="@+id/cardView" />
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/imageViewp2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="@dimen/_35sdp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
         android:src="@drawable/pl2"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView" />
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

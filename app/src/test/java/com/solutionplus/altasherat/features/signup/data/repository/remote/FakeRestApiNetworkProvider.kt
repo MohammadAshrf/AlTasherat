@@ -35,6 +35,9 @@ class FakeRestApiNetworkProvider : INetworkProvider {
         queryParams: Map<String, Any>?,
         requestBody: RequestBody?
     ): ResponseBody {
+        if (shouldThrowException && exceptionToThrow != null) {
+            throw exceptionToThrow as Throwable
+        }
         @Suppress("UNCHECKED_CAST")
         return postResponse as ResponseBody
     }

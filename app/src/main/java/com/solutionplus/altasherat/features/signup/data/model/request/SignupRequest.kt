@@ -25,19 +25,19 @@ data class SignupRequest(
     val countryCode: String?= null,
 ){
 
-    fun validateFirstName():Boolean {
-        return !(firstName!!.isBlank() || firstName.length < 3 || firstName.length > 15)
-    }
-    fun validateLastName():Boolean {
-        return !(lastName!!.isBlank() || lastName.length < 3 || lastName.length > 15)
+    fun validateFirstName(): Boolean {
+        return !firstName.isNullOrBlank() && firstName.length in 3..15
     }
 
-    fun validatePassword():Boolean {
-        return !(password!!.isBlank() ||password.length < 8 || password.length > 50)
+    fun validateLastName(): Boolean {
+        return !lastName.isNullOrBlank() && lastName.length in 3..15
     }
 
-    fun validatePhone():Boolean {
-        return phone!!.validatePhone()
+    fun validatePassword(): Boolean {
+        return !password.isNullOrBlank() && password.length in 8..50
     }
 
+    fun validatePhone(): Boolean {
+        return phone?.validatePhone() ?: false
+    }
 }

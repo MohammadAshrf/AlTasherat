@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/navigation_visa_platform"
-        android:icon="@drawable/group3x"
+        android:icon="@drawable/iconnav3"
         android:title="@string/visa_platform" />
     <item
         android:id="@+id/navigation_visa_applications"
-        android:icon="@drawable/iconvp3"
+        android:icon="@drawable/iconnav11"
         android:title="@string/visa_applications" />
 
     <item

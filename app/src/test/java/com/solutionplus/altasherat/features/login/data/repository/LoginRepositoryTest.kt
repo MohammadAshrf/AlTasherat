@@ -75,6 +75,19 @@ class LoginRepositoryTest {
     }
 
     @Test
+    fun `when saving access token with empty then token saved`() = runBlocking{
+        val token = ""
+
+        coEvery { localDs.saveAccessToken(token) } returns Unit
+
+        // Act
+        repository.saveAccessToken(token)
+
+        // Assert
+        coVerify { localDs.saveAccessToken(token) }
+    }
+
+    @Test
     fun `when getting user then return user entity `() = runBlocking{
         val userEntity = UserEntity()
 

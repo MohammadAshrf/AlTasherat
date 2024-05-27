@@ -15,18 +15,34 @@ class SignupUC(
 ) : BaseUseCase<User, SignupRequest>() {
 
     public override suspend fun execute(params: SignupRequest?): User {
-        val result = repository.signupWithPhone(params!!)
-        repository.saveUser(result.user)
-        repository.saveAccessToken(result.token)
-        repository.getUser()
 
-        validateRequest(params)?.let { message ->
-            throw LeonException.Local.RequestValidation(
-                clazz = ChangePasswordRequest::class,
-                message = message
-            )
-        }
-        return result.user
+        params?.let {
+            validateRequest(it)?.let { message ->
+                throw LeonException.Local.RequestValidation(
+                    clazz = ChangePasswordRequest::class,
+                    message = message
+                )
+            }
+            val result = repository.signupWithPhone(it)
+            repository.saveUser(result.user)
+            repository.saveAccessToken(result.token)
+            repository.getUser()
+            return result.user
+        } ?: return User()
+//        val request = params ?: throw IllegalArgumentException("Params cannot be null")
+//
+//        validateRequest(request)?.let { message ->
+//            throw LeonException.Local.RequestValidation(
+//                clazz = SignupRequest::class,
+//                message = message
+//            )
+//        }
+//
+//        val result = repository.signupWithPhone(request)
+//        repository.saveUser(result.user)
+//        repository.saveAccessToken(result.token)
+//
+//        return result.user
     }
 
 

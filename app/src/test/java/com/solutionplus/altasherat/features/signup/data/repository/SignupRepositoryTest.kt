@@ -35,21 +35,23 @@ class SignupRepositoryTest {
 
     @Before
     fun setUp() {
-        remoteDs = mock(ISignupRemoteDS::class.java)
-        localDs = mock(ISignupLocalDS::class.java)
+        remoteDs = mockk()
+        localDs = mockk()
         repository = SignupRepository(remoteDs, localDs)
     }
 
     @Test
     fun `when saving user given valid user expect user saved`() = runBlocking {
+        // Arrange
         val user = User()
         val userEntity = UserMapper.domainToEntity(user)
+        coEvery { localDs.saveUser(userEntity) } returns Unit
 
-
+        // Act
         repository.saveUser(user)
 
-
-        verify(localDs).saveUser(userEntity)
+        // Assert
+        coVerify { localDs.saveUser(userEntity) }
     }
 
     @Test
@@ -57,12 +59,12 @@ class SignupRepositoryTest {
         //Arrange
         val user = User(id = null, userName = null, email = null, phone = null)
         val userEntity = UserMapper.domainToEntity(user)
-
+        coEvery { localDs.saveUser(userEntity) } returns Unit
         // Act
         repository.saveUser(user)
 
         // Assert
-        verify(localDs).saveUser(userEntity)
+        coVerify {localDs.saveUser(userEntity)}
     }
 
 
@@ -71,24 +73,38 @@ class SignupRepositoryTest {
     fun `when saving access token given valid token then token saved`() = runBlocking {
        //Arrange
         val token = "sampleToken"
+        coEvery { localDs.saveAccessToken(token) } returns Unit
 
         //Act
         repository.saveAccessToken(token)
 
         // Assert
-        verify(localDs).saveAccessToken(token)
+        coVerify { localDs.saveAccessToken(token) }
+    }
+
+    @Test
+    fun `when saving access token with empty string then token saved`() = runBlocking {
+        //Arrange
+        val token = ""
+        coEvery { localDs.saveAccessToken(token) } returns Unit
+
+        //Act
+        repository.saveAccessToken(token)
+
+        // Assert
+        coVerify { localDs.saveAccessToken(token) }
     }
 
     @Test
     fun `when getting user then return user entity `() = runBlocking {
         val userEntity = UserEntity()
 
-        whenever(localDs.getUser()).thenReturn(userEntity)
+        coEvery { localDs.getUser() } returns  userEntity
 
         val result = repository.getUser()
 
 
-        verify(localDs).getUser()
+        coVerify { localDs.getUser() }
         assertEquals(userEntity, result)
     }
 
