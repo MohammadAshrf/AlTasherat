@@ -23,7 +23,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         splashVM.processIntent(SplashContract.SplashAction.HasCountries)
-       //AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
+       AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
     }
 
     override fun subscribeToObservables() {

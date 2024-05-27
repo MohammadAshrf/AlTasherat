@@ -138,9 +138,9 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="@dimen/_35sdp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="65dp"
         android:src="@drawable/pl1"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
@@ -149,9 +149,9 @@
 
     <ImageView
         android:id="@+id/imageViewp2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="@dimen/_35sdp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="65dp"
         android:src="@drawable/pl2"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"

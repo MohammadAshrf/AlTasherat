@@ -28,8 +28,8 @@ internal class CountriesSpinnerAdapter
             view = convertView
         }
         val country = countries[position]
-        binding.flagImage.text = country.flag
-        binding.countryTv.text = country.name
+        binding.flagImageView.text = country.flag
+        binding.countryNameTextView.text = country.name
         return view
     }
 
