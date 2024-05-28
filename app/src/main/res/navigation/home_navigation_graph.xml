@@ -20,6 +20,12 @@
         <action
             android:id="@+id/action_navigation_visa_platform_to_navigation_visa_applications"
             app:destination="@id/visaApplicationsFragment" />
+        <action
+            android:id="@+id/action_visaPlatformFragment_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment" />
+        <action
+            android:id="@+id/action_visaPlatformFragment_to_gotoDeleteAccountFragment"
+            app:destination="@id/gotoDeleteAccountFragment" />
     </fragment>
 
     <fragment
@@ -62,4 +68,22 @@
         android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.solutionplus.altasherat.features.deleteaccount.presentation.ui.DeleteAccountFragment"
+        android:label="fragment_delete_account"
+        tools:layout="@layout/fragment_delete_account" >
+        <action
+            android:id="@+id/action_deleteAccountFragment_to_visaPlatformFragment"
+            app:destination="@id/visaPlatformFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gotoDeleteAccountFragment"
+        android:name="com.solutionplus.altasherat.features.deleteaccount.presentation.ui.GotoDeleteAccountFragment"
+        android:label="fragment_goto_delete_account"
+        tools:layout="@layout/fragment_goto_delete_account" >
+        <action
+            android:id="@+id/action_gotoDeleteAccountFragment_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment" />
+    </fragment>
 </navigation>

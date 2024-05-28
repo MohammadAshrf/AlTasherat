@@ -14,11 +14,12 @@
         android:text="@string/name"
         android:textColor="@color/text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/et_lastName"
-        app:layout_constraintStart_toStartOf="@+id/et_lastName" />
+        app:layout_constraintBottom_toTopOf="@+id/et_firstname"
+        app:layout_constraintStart_toStartOf="@+id/et_firstname" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_firstname"
+
+        android:id="@+id/et_lastName"
         style="@style/EditText"
         android:layout_width="0dp"
         android:layout_height="46dp"
@@ -26,13 +27,13 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:background="@drawable/rounded_button_background"
-        android:hint="@string/firstname"
+        android:hint="@string/LastName"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_lastName"
+        android:id="@+id/et_firstname"
         style="@style/EditText"
         android:layout_width="0dp"
         android:layout_height="46dp"
@@ -41,13 +42,13 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:background="@drawable/rounded_button_background"
-        android:hint="@string/LastName"
+        android:hint="@string/firstname"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/et_firstname"
-        app:layout_constraintEnd_toStartOf="@+id/et_firstname"
+        app:layout_constraintBottom_toBottomOf="@+id/et_lastName"
+        app:layout_constraintEnd_toStartOf="@+id/et_lastName"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_firstname"
+        app:layout_constraintTop_toTopOf="@+id/et_lastName"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -59,9 +60,9 @@
         android:background="@drawable/rounded_button_background"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/et_firstname"
-        app:layout_constraintStart_toStartOf="@+id/et_lastName"
-        app:layout_constraintTop_toBottomOf="@+id/et_firstname"
+        app:layout_constraintEnd_toEndOf="@+id/et_lastName"
+        app:layout_constraintStart_toStartOf="@+id/et_firstname"
+        app:layout_constraintTop_toBottomOf="@+id/et_lastName"
 
         />
 
@@ -70,11 +71,10 @@
         style="@style/EditText"
         android:layout_width="240dp"
         android:layout_height="46dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/phone_background"
         android:inputType="phone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/et_firstname"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <Spinner
@@ -84,7 +84,7 @@
         android:background="@drawable/shape_spinner_background"
         android:popupBackground="#4426F5"
         app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
-        app:layout_constraintEnd_toEndOf="@+id/et_firstname"
+        app:layout_constraintEnd_toEndOf="@+id/et_lastName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/et_Phone_Client"
         app:layout_constraintTop_toTopOf="@+id/et_Phone_Client" />
@@ -101,8 +101,8 @@
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeColor="@color/icon"
-        app:layout_constraintEnd_toEndOf="@+id/et_firstname"
-        app:layout_constraintStart_toStartOf="@+id/et_lastName"
+        app:layout_constraintEnd_toEndOf="@+id/et_lastName"
+        app:layout_constraintStart_toStartOf="@+id/et_firstname"
         app:layout_constraintTop_toBottomOf="@+id/et_CountruCode"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/icon"

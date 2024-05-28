@@ -46,7 +46,9 @@ class VisaPlatformFragment : Fragment() {
         binding.button.setOnClickListener { handleButtonClick() }
         binding.button2.setOnClickListener { handleButtonClick() }
         binding.button3.setOnClickListener { handleButtonClick() }
-        binding.button4.setOnClickListener { handleButtonClick() }
+        binding.button4.setOnClickListener {
+            findNavController().navigate(R.id.action_visaPlatformFragment_to_gotoDeleteAccountFragment)
+        }
         binding.button5.setOnClickListener { handleButtonClick() }
         binding.button6.setOnClickListener { handleButtonClick() }
     }

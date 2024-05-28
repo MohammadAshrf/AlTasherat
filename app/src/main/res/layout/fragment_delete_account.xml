@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.deleteaccount.presentation.ui.DeleteAccountFragment">
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:src="@drawable/imagedeletaccount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/btnShowBottomSheet"
+        style="@style/Button"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:drawableLeft="@drawable/icondelete"
+        android:drawableTint="#FFFFFF"
+        android:elevation="12dp"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:text="تأكيد الحذف"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView16"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/btnCancellation"
+        style="@style/Button"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_cancellation_background"
+        android:drawableTint="#FFFFFF"
+        android:elevation="12dp"
+        android:text="إلغاء"
+        android:textColor="#d71010"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnShowBottomSheet"
+        app:layout_constraintStart_toStartOf="@+id/btnShowBottomSheet"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowBottomSheet"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/textView17"
+        style="@style/TextView.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:text="إلغاء تنشيط الحساب نهائياً"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        style="@style/TextView.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_13sdp"
+        android:text="إدارة الحســــاب"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+        app:layout_constraintEnd_toStartOf="@+id/imageView17"
+        app:layout_constraintTop_toTopOf="@+id/imageView17" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/icon_front"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
