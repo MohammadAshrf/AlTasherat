@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentOnBoardingBinding
 import com.solutionplus.altasherat.features.onboarding.presentation.ui.screens.OnBoardingFirst
@@ -89,6 +87,5 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
         startActivity(intent)
     }
 
-  
 
 }

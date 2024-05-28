@@ -6,273 +6,273 @@
     android:layout_height="match_parent"
     tools:context=".features.personalInfo.presentation.ui.PersonalInfoFragment">
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/back_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/_8sdp"-->
+<!--        android:src="@drawable/ic_back"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <include
-        android:id="@+id/view_profile_section"
-        layout="@layout/view_profile_pic_rtl"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <include-->
+<!--        android:id="@+id/view_profile_section"-->
+<!--        layout="@layout/view_profile_pic_rtl"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="@dimen/_16sdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
-        android:id="@+id/more_button"
-        style="@style/TextView.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_margin="@dimen/_8sdp"
-        android:backgroundTint="@color/surface"
-        android:paddingVertical="-5dp"
-        android:text="@string/more"
-        android:textColor="@color/Primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/more_button"-->
+<!--        style="@style/TextView.Bold"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="@dimen/_30sdp"-->
+<!--        android:layout_margin="@dimen/_8sdp"-->
+<!--        android:backgroundTint="@color/surface"-->
+<!--        android:paddingVertical="-5dp"-->
+<!--        android:text="@string/more"-->
+<!--        android:textColor="@color/Primary"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/_10sdp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_profile_section">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_margin="@dimen/_10sdp"-->
+<!--        android:scrollbars="none"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/view_profile_section">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent">-->
 
-            <TextView
-                android:id="@+id/first_name"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/first_name"
-                app:layout_constraintBottom_toTopOf="@id/first_name_text_input_layout"
-                app:layout_constraintStart_toStartOf="@id/first_name_text_input_layout" />
+<!--            <TextView-->
+<!--                android:id="@+id/first_name"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/first_name"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/first_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/first_name_text_input_layout" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/first_name_text_input_layout"
-                style="@style/TextInputLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/first_name">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/first_name_text_input_layout"-->
+<!--                style="@style/TextInputLayout"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/first_name">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/first_name_edit_text"
-                    style="@style/TextInputEditText"
-                    android:autofillHints="name"
-                    android:drawableStart="@drawable/username"
-                    android:hint="@string/enter_first_name"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <TextView
-                android:id="@+id/middle_name"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/middle_name"
-                app:layout_constraintBottom_toTopOf="@+id/middle_name_text_input_layout"
-                app:layout_constraintStart_toStartOf="@id/middle_name_text_input_layout" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/first_name_edit_text"-->
+<!--                    style="@style/TextInputEditText"-->
+<!--                    android:autofillHints="name"-->
+<!--                    android:drawableStart="@drawable/username"-->
+<!--                    android:hint="@string/enter_first_name"-->
+<!--                    android:inputType="textPersonName" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/middle_name_text_input_layout"
-                style="@style/TextInputLayout"
-                android:layout_marginTop="@dimen/_30sdp"
-                app:layout_constraintEnd_toEndOf="@id/first_name_text_input_layout"
-                app:layout_constraintStart_toStartOf="@id/first_name_text_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/first_name_text_input_layout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/middle_name_edit_text"
-                    style="@style/TextInputEditText"
-                    android:autofillHints="name"
-                    android:drawableStart="@drawable/username"
-                    android:hint="@string/enter_middle_name"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/last_name"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/last_name"
-                app:layout_constraintBottom_toTopOf="@+id/last_name_text_input_layout"
-                app:layout_constraintStart_toStartOf="@id/last_name_text_input_layout" />
+<!--            <TextView-->
+<!--                android:id="@+id/middle_name"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/middle_name"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/middle_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/middle_name_text_input_layout" />-->
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/last_name_text_input_layout"
-                style="@style/TextInputLayout"
-                android:layout_marginTop="@dimen/_30sdp"
-                app:layout_constraintEnd_toEndOf="@id/middle_name_text_input_layout"
-                app:layout_constraintStart_toStartOf="@id/middle_name_text_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/middle_name_text_input_layout">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/middle_name_text_input_layout"-->
+<!--                style="@style/TextInputLayout"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/first_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/first_name_text_input_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/first_name_text_input_layout">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/last_name_edit_text"
-                    style="@style/TextInputEditText"
-                    android:autofillHints="name"
-                    android:drawableStart="@drawable/username"
-                    android:hint="@string/enter_last_name"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/middle_name_edit_text"-->
+<!--                    style="@style/TextInputEditText"-->
+<!--                    android:autofillHints="name"-->
+<!--                    android:drawableStart="@drawable/username"-->
+<!--                    android:hint="@string/enter_middle_name"-->
+<!--                    android:inputType="textPersonName" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <TextView
-                android:id="@+id/phone_number"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/phone_number"
-                app:layout_constraintBottom_toTopOf="@+id/phone_input_layout"
-                app:layout_constraintStart_toStartOf="@id/phone_input_layout" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phone_input_layout"
-                style="@style/TextInputLayout"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_80sdp"
-                app:layout_constraintEnd_toEndOf="@id/last_name_text_input_layout"
-                app:layout_constraintStart_toStartOf="@id/last_name_text_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/last_name_text_input_layout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phone_edit_text"
-                    style="@style/TextInputEditText"
-                    android:autofillHints="phone"
-                    android:background="@drawable/phone_backgroundrtl"
-                    android:drawableStart="@drawable/ic_mobile"
-                    android:hint="@string/enter_mobile"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Spinner
-                android:id="@+id/spinner_country_code"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:background="@drawable/shape_spinner_rtl"
-                android:popupBackground="#4426F5"
-                app:layout_constraintBottom_toBottomOf="@+id/phone_input_layout"
-                app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout"
-                app:layout_constraintStart_toEndOf="@+id/phone_input_layout"
-                app:layout_constraintTop_toTopOf="@+id/phone_input_layout" />
+<!--            <TextView-->
+<!--                android:id="@+id/last_name"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/last_name"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/last_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/last_name_text_input_layout" />-->
 
 
-            <TextView
-                android:id="@+id/email"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_address"
-                app:layout_constraintBottom_toTopOf="@+id/email_input_layout"
-                app:layout_constraintStart_toStartOf="@id/email_input_layout" />
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/last_name_text_input_layout"-->
+<!--                style="@style/TextInputLayout"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/middle_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/middle_name_text_input_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/middle_name_text_input_layout">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/last_name_edit_text"-->
+<!--                    style="@style/TextInputEditText"-->
+<!--                    android:autofillHints="name"-->
+<!--                    android:drawableStart="@drawable/username"-->
+<!--                    android:hint="@string/enter_last_name"-->
+<!--                    android:inputType="textPersonName" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/phone_number"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/phone_number"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/phone_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/phone_input_layout" />-->
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_input_layout"
-                style="@style/TextInputLayout"
-                android:layout_marginTop="@dimen/_30sdp"
-                app:layout_constraintEnd_toEndOf="@id/spinner_country_code"
-                app:layout_constraintStart_toStartOf="@id/phone_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/phone_input_layout">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/phone_input_layout"-->
+<!--                style="@style/TextInputLayout"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                android:layout_marginEnd="@dimen/_80sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/last_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/last_name_text_input_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/last_name_text_input_layout">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_edit_text"
-                    style="@style/TextInputEditText"
-                    android:autofillHints="emailAddress"
-                    android:drawableStart="@drawable/ic_email"
-                    android:hint="@string/enter_email"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/phone_edit_text"-->
+<!--                    style="@style/TextInputEditText"-->
+<!--                    android:autofillHints="phone"-->
+<!--                    android:background="@drawable/phone_backgroundrtl"-->
+<!--                    android:drawableStart="@drawable/ic_mobile"-->
+<!--                    android:hint="@string/enter_mobile"-->
+<!--                    android:inputType="phone" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-
-            <TextView
-                android:id="@+id/birthdate"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/birthdate"
-                app:layout_constraintBottom_toTopOf="@+id/birthdate_input_layout"
-                app:layout_constraintStart_toStartOf="@id/birthdate_input_layout" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/birthdate_input_layout"
-                style="@style/TextInputLayout"
-                android:layout_marginTop="@dimen/_30sdp"
-                app:layout_constraintEnd_toEndOf="@id/email_input_layout"
-                app:layout_constraintStart_toStartOf="@id/email_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/email_input_layout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/birthdate_edit_text"
-                    style="@style/TextInputEditText"
-                    android:drawableStart="@drawable/birthdate"
-                    android:hint="@string/enter_birthdate"
-                    android:inputType="date" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner_country_code"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="@dimen/_45sdp"-->
+<!--                android:layout_marginTop="@dimen/_3sdp"-->
+<!--                android:background="@drawable/shape_spinner_rtl"-->
+<!--                android:popupBackground="#4426F5"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/phone_input_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/phone_input_layout"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/phone_input_layout" />-->
 
 
-            <TextView
-                android:id="@+id/country"
-                style="@style/TextView.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:text="@string/state"
-                app:layout_constraintBottom_toTopOf="@+id/state_spinner"
-                app:layout_constraintStart_toStartOf="@id/state_spinner" />
-
-            <Spinner
-                android:id="@+id/state_spinner"
-                style="@style/TextInputEditText"
-                android:layout_marginTop="@dimen/_32sdp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="@id/birthdate_input_layout"
-                app:layout_constraintStart_toStartOf="@id/birthdate_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/birthdate_input_layout" />
-
-            <Button
-                android:id="@+id/btnSave"
-                style="@style/Button"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:background="@drawable/button_background"
-                android:drawableEnd="@drawable/save"
-                android:drawableTint="#FFFFFF"
-                android:elevation="12dp"
-                android:paddingStart="@dimen/_100sdp"
-                android:paddingEnd="@dimen/_100sdp"
-                android:text="@string/save"
-                android:textAppearance="@style/Font.Bold"
-                android:textSize="@dimen/_18ssp"
-                app:backgroundTint="@null"
-                app:iconTint="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/state_spinner"
-                app:layout_constraintStart_toStartOf="@+id/state_spinner"
-                app:layout_constraintTop_toBottomOf="@+id/state_spinner" />
+<!--            <TextView-->
+<!--                android:id="@+id/email"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/email_address"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/email_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/email_input_layout" />-->
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/email_input_layout"-->
+<!--                style="@style/TextInputLayout"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/spinner_country_code"-->
+<!--                app:layout_constraintStart_toStartOf="@id/phone_input_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/phone_input_layout">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/email_edit_text"-->
+<!--                    style="@style/TextInputEditText"-->
+<!--                    android:autofillHints="emailAddress"-->
+<!--                    android:drawableStart="@drawable/ic_email"-->
+<!--                    android:hint="@string/enter_email"-->
+<!--                    android:inputType="textEmailAddress" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/birthdate"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/birthdate"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/birthdate_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/birthdate_input_layout" />-->
+
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/birthdate_input_layout"-->
+<!--                style="@style/TextInputLayout"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/email_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/email_input_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/email_input_layout">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/birthdate_edit_text"-->
+<!--                    style="@style/TextInputEditText"-->
+<!--                    android:drawableStart="@drawable/birthdate"-->
+<!--                    android:hint="@string/enter_birthdate"-->
+<!--                    android:inputType="date" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/country"-->
+<!--                style="@style/TextView.Bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                android:layout_marginBottom="@dimen/_3sdp"-->
+<!--                android:text="@string/state"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/state_spinner"-->
+<!--                app:layout_constraintStart_toStartOf="@id/state_spinner" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/state_spinner"-->
+<!--                style="@style/TextInputEditText"-->
+<!--                android:layout_marginTop="@dimen/_32sdp"-->
+<!--                android:spinnerMode="dropdown"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/birthdate_input_layout"-->
+<!--                app:layout_constraintStart_toStartOf="@id/birthdate_input_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/birthdate_input_layout" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btnSave"-->
+<!--                style="@style/Button"-->
+<!--                android:layout_marginTop="@dimen/_30sdp"-->
+<!--                android:background="@drawable/button_background"-->
+<!--                android:drawableEnd="@drawable/save"-->
+<!--                android:drawableTint="#FFFFFF"-->
+<!--                android:elevation="12dp"-->
+<!--                android:paddingStart="@dimen/_100sdp"-->
+<!--                android:paddingEnd="@dimen/_100sdp"-->
+<!--                android:text="@string/save"-->
+<!--                android:textAppearance="@style/Font.Bold"-->
+<!--                android:textSize="@dimen/_18ssp"-->
+<!--                app:backgroundTint="@null"-->
+<!--                app:iconTint="#FFFFFF"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/state_spinner"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/state_spinner"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/state_spinner" />-->
+
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
