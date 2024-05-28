@@ -78,7 +78,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             } else {
                 hideLoading()
             }
-
+            state.exception?.let {
+                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
@@ -99,7 +102,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun onLoginAction() {
         if (validateLoginDetails()) {
-            val phoneNumber = binding.etPhoneClient.text.toString()
+            val phoneNumber = binding.etPhoneClient?.text.toString()
             val password = binding.etPassword.text.toString()
             val countryCode =(binding.etCountruCode.selectedItem as Country).phoneCode
 

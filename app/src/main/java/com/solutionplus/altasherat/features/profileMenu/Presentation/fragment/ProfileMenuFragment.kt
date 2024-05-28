@@ -38,7 +38,10 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         getAppVersion()
         binding.btnLogOut.setOnClickListener {
             viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.Logout)
+        }
 
+        binding.viewProfileSection.btnEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_profileMenuFragment_to_personalInfoFragment)
         }
     }
 

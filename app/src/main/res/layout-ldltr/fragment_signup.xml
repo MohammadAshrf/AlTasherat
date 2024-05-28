@@ -66,7 +66,7 @@
         />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/phone_edit_text"
+        android:id="@+id/et_Phone_Client"
         style="@style/EditText"
         android:layout_width="240dp"
         android:layout_height="46dp"
@@ -83,11 +83,11 @@
         android:layout_height="46dp"
         android:background="@drawable/shape_spinner_background_left"
         android:popupBackground="#4426F5"
-        app:layout_constraintBottom_toBottomOf="@+id/phone_edit_text"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
         app:layout_constraintEnd_toEndOf="@+id/et_firstname"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/phone_edit_text"
-        app:layout_constraintTop_toTopOf="@+id/phone_edit_text" />
+        app:layout_constraintStart_toEndOf="@+id/et_Phone_Client"
+        app:layout_constraintTop_toTopOf="@+id/et_Phone_Client" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
@@ -141,8 +141,8 @@
         android:text="@string/Phone"
         android:textColor="@color/text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/phone_edit_text"
-        app:layout_constraintStart_toStartOf="@+id/phone_edit_text" />
+        app:layout_constraintBottom_toTopOf="@+id/et_Phone_Client"
+        app:layout_constraintStart_toStartOf="@+id/et_Phone_Client" />
 
     <TextView
         android:id="@+id/textView3"

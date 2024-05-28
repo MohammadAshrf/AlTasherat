@@ -97,7 +97,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
             val firstName = binding.etFirstname.text.toString()
             val lastName = binding.etLastName.text.toString()
             val email = binding.etEmail.text.toString()
-            val phoneNumber = binding.etPhoneClient.text.toString()
+            val phoneNumber = binding.etPhoneClient?.text.toString()
             val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
             val countryId = (binding.etCountruCode.selectedItem as Country).id
             val password = binding.etPassword.text.toString()

@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_visaPlatformFragment"
             app:destination="@id/visaPlatformFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
 
 
     </fragment>
@@ -62,4 +65,9 @@
         android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoFragment"
+        android:label="fragment_personal_info"
+        tools:layout="@layout/fragment_personal_info" />
 </navigation>
