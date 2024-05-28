@@ -5,37 +5,34 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="wrap_content">
 
-<EditText
-    android:id="@+id/editTextPhone"
-    style="@style/EditText"
-    android:layout_width="0dp"
-    android:layout_height="@dimen/_32sdp"
-    android:layout_alignParentEnd="true"
-    android:layout_marginEnd="16dp"
-    android:drawableStart="@drawable/ic_phone_with_margin"
-    android:drawablePadding="20dp"
-    android:ems="10"
-    android:gravity="center"
-    android:hint="@string/enter_phone_text"
-    android:inputType="phone"
-    android:paddingTop="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/editTextPhone"
+        style="@style/EditText"
+        android:layout_width="240dp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:drawableStart="@drawable/ic_phone_with_margin"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/enter_phone_text"
+        android:inputType="phone"
+        android:paddingTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/et_CountruCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/spinner"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0" />
-
-<Spinner
-    android:id="@+id/spinner"
-    android:layout_width="0dp"
-    android:layout_height="@dimen/_32sdp"
-    android:background="@drawable/shape_spinner_background"
-    android:entries="@android:array/postalAddressTypes"
-    android:layout_marginStart="16dp"
-
-    android:gravity="center"
-    app:layout_constraintBottom_toBottomOf="@+id/editTextPhone"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/editTextPhone" />
+    <Spinner
+        android:id="@+id/et_CountruCode"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/shape_spinner_background"
+        android:popupBackground="#4426F5"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextPhone"
+        app:layout_constraintTop_toTopOf="@+id/editTextPhone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,14 +31,17 @@
             android:id="@+id/action_profileMenuFragment_to_fakeFragment"
             app:destination="@id/fakeFragment" />
         <action
-            android:id="@+id/action_profileMenuFragment_to_emailVerifiedFragment"
-            app:destination="@id/emailVerifiedFragment" />
-        <action
             android:id="@+id/action_profileMenuFragment_to_changePasswordFragment2"
             app:destination="@id/changePasswordFragment2" />
         <action
             android:id="@+id/action_profileMenuFragment_to_visaPlatformFragment"
             app:destination="@id/visaPlatformFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_emailVerifiedFragment"
+            app:destination="@id/emailVerifiedFragment" />
 
 
     </fragment>
@@ -51,15 +54,16 @@
         android:id="@+id/emailVerifiedFragment"
         android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
         android:label="fragment_email_verified"
-        tools:layout="@layout/fragment_email_verified" >
-        <action
-            android:id="@+id/action_emailVerifiedFragment_to_profileMenuFragment"
-            app:destination="@id/profileMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_email_verified" />
 
     <fragment
         android:id="@+id/changePasswordFragment2"
         android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.solutionplus.altasherat.features.contactUs.presentation.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
 </navigation>

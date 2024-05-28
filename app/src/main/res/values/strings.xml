@@ -87,4 +87,15 @@
     <string name="edit_profile">تعــديل الملف الشخصي</string>
     <string name="current_version">النسخة الحالية:</string>
     <string name="FillOut_the_form_now">املأ الاستمارةالان</string>
+    <string name="contact_us">تواصـــل معنا</string>
+    <string name="contact_info">بيــــانات التواصل</string>
+    <string name="_20_1011777751_966_550440787">( +20) 1011777751 - (+966) 550440787</string>
+    <string name="travel_altaherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
+    <string name="saudi_Riad">السعودية - الرياض</string>
+    <string name="cairo_location">القاهرة - جاردن سيتي</string>
+    <string name="edit_text_name">اكتب الاسم للتواصل</string>
+    <string name="subject">الموضوع</string>
+    <string name="phone">الجوال</string>
+    <string name="subject_text">اختر موضوع التواصل</string>
+    <string name="msg_text">الرسالة</string>
 </resources>

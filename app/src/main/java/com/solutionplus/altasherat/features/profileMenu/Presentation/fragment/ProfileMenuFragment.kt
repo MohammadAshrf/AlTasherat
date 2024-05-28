@@ -113,7 +113,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 destinationFragmentId = if (isUserLoggedIn) R.id.action_profileMenuFragment_to_changePasswordFragment2 else null
             ),
             RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
-            RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
+            RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.contactUsFragment),
             RowItem(R.drawable.ic_plicy, getString(R.string.policy), R.id.fakeFragment),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.fakeFragment)
         )

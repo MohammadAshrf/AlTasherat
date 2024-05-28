@@ -71,6 +71,8 @@
             android:text="لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل"
             android:textColor="@color/Bg"
             android:textStyle="bold"
+            android:lineSpacingExtra="4sp"
+
             app:layout_constraintBottom_toBottomOf="@+id/imageView10"
             app:layout_constraintEnd_toEndOf="@+id/imageView10"
             app:layout_constraintHorizontal_bias="0.10"
