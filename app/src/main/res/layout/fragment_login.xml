@@ -8,7 +8,7 @@
     tools:context=".features.login.presentation.ui.fragment.login.LoginFragment">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_Phone_Client"
+        android:id="@+id/phone_edit_text"
         style="@style/EditText"
         android:layout_width="240dp"
         android:layout_height="46dp"
@@ -26,10 +26,10 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:background="@drawable/shape_spinner_background"
         android:popupBackground="#4426F5"
-        app:layout_constraintBottom_toBottomOf="@+id/et_Phone_Client"
+        app:layout_constraintBottom_toBottomOf="@+id/phone_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_Phone_Client"
-        app:layout_constraintTop_toTopOf="@+id/et_Phone_Client" />
+        app:layout_constraintStart_toEndOf="@+id/phone_edit_text"
+        app:layout_constraintTop_toTopOf="@+id/phone_edit_text" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
@@ -44,8 +44,8 @@
         app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeColor="@color/icon"
         app:layout_constraintEnd_toEndOf="@+id/et_CountruCode"
-        app:layout_constraintStart_toStartOf="@+id/et_Phone_Client"
-        app:layout_constraintTop_toBottomOf="@+id/et_Phone_Client"
+        app:layout_constraintStart_toStartOf="@+id/phone_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/phone_edit_text"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/icon"
         app:startIconDrawable="@drawable/ic_lock">
@@ -101,7 +101,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Phone_Client" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

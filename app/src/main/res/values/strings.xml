@@ -93,4 +93,11 @@
     <string name="enter_middle_name">أدخل الإسم الأوسط</string>
     <string name="last_name">الإسم الأخير</string>
     <string name="enter_last_name">أدخل الإسم الأخير</string>
+    <string name="phone_number">الجوال</string>
+    <string name="enter_mobile">أدخل رقم الجوال للمتابعة</string>
+    <string name="enter_email">أدخل البريد الإلكتروني</string>
+    <string name="email_address">البريد الإلكتروني</string>
+    <string name="birthdate">تاريخ الميلاد</string>
+    <string name="enter_birthdate">أدخل تاريخ الميلاد</string>
+    <string name="state">الدولة</string>
 </resources>

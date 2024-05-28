@@ -17,7 +17,7 @@
 
     <include
         android:id="@+id/view_profile_section"
-        layout="@layout/view_profile_pic"
+        layout="@layout/view_profile_pic_rtl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_16sdp"
@@ -158,7 +158,7 @@
                     android:id="@+id/phone_edit_text"
                     style="@style/TextInputEditText"
                     android:autofillHints="phone"
-                    android:background="@drawable/phone_background"
+                    android:background="@drawable/phone_backgroundrtl"
                     android:drawableStart="@drawable/ic_mobile"
                     android:hint="@string/enter_mobile"
                     android:inputType="phone" />
@@ -169,7 +169,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:background="@drawable/shape_spinner_background"
+                android:background="@drawable/shape_spinner_rtl"
                 android:popupBackground="#4426F5"
                 app:layout_constraintBottom_toBottomOf="@+id/phone_input_layout"
                 app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout"
