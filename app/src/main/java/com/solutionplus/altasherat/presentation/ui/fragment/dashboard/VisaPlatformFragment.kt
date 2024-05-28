@@ -67,6 +67,9 @@ class VisaPlatformFragment : Fragment() {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         val binding = ButtomSheetLayoutBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(binding.root)
+        binding.btnLoginAndSignup.setOnClickListener {
+            navigateToNextFragment()
+        }
         bottomSheetDialog.show()
     }
 }

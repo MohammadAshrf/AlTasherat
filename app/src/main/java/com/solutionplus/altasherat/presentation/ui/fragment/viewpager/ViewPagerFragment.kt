@@ -89,7 +89,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
 
     private fun setupTabLayout() {
         val inflater = LayoutInflater.from(requireContext())
-        val tabTitles = arrayOf("تسجيل الدخول", "حساب جديد")
+        val tabTitles = arrayOf(getString(R.string.sigin_in), getString(R.string.new_account))
         tabTitles.forEachIndexed { index, title ->
             val tab = binding.tabLayout.newTab()
             val tabView = inflater.inflate(R.layout.custom_tab_with_underline, null)
@@ -101,20 +101,20 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
 
     private fun updateButtonText(position: Int) {
         when (position) {
-            0 -> binding.btnLoginAndSignup.text = "تسجيل الدخول"
-            1 -> binding.btnLoginAndSignup.text = "حساب جديد"
+            0 -> binding.btnLoginAndSignup.text = getString(R.string.sigin_in)
+            1 -> binding.btnLoginAndSignup.text = getString(R.string.new_account)
         }
     }
 
     private fun updateImageViewVisibility(position: Int) {
         when (position) {
             0 -> {
-                binding.imageView5.visibility = View.VISIBLE
-                binding.imageViewp2.visibility = View.GONE
-            }
-            1 -> {
                 binding.imageView5.visibility = View.GONE
                 binding.imageViewp2.visibility = View.VISIBLE
+            }
+            1 -> {
+                binding.imageView5.visibility = View.VISIBLE
+                binding.imageViewp2.visibility = View.GONE
             }
         }
     }

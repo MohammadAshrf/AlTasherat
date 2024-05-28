@@ -127,4 +127,6 @@
     <string name="offer_visa">View Visa</string>
     <string name="sign_in">Log in to start</string>
     <string name="you_have_to_sign_in">You must log in to continue completing the application</string>
+    <string name="new_account">New Account</string>
+    <string name="sigin_in">Sign in</string>
 </resources>

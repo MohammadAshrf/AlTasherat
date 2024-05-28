@@ -135,4 +135,6 @@
     <string name="offer_visa">تستطيع عرض فيزا</string>
     <string name="sign_in">تسجيل الدخول للمتابعه</string>
     <string name="you_have_to_sign_in">يجب عليك تسجيل الدخول للمتابعة في استكمال الطلب</string>
+    <string name="new_account">حساب جديد</string>
+    <string name="sigin_in">تسجيل الدخول</string>
 </resources>
