@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">AlTasherat</string>
     <string name="unsupported_type">Unsupported type…</string>
+    <string name="Phone">&#160;&#160;&#160;Mobile</string>
+    <string name="name">&#160;&#160;&#160;Name</string>
+    <string name="firstname">&#160;&#160;&#160;First name</string>
+    <string name="LastName">&#160;&#160;&#160;Last name</string>
+    <string name="email">&#160;&#160;&#160;Enter your email</string>
+    <string name="WritePassword">&#160;&#160;&#160;Enter the password</string>
     <string name="Password">Password</string>
     <string name="Email">E-mail</string>
     <string name="network_unavailable">Please check your internet!</string>
@@ -19,8 +25,10 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
     <string name="edit_password">Change Password</string>
     <string name="about_us">About Us</string>
+    <string name="terms">Terms and Conditions</string>
     <string name="language">Language</string>
     <string name="sign_out">Sign out</string>
     <string name="login">"Sign In"</string>
@@ -55,6 +63,16 @@
     <string name="change_language">You can change your country and language at any time from the list</string>
     <string name="back">Previous</string>
     <string name="altasherat_platform">AlTasherat Platform</string>
+    <string name="saudi_Riad">Riyadh, Saudi Arabia</string>
+    <string name="cairo_location">Cairo - Garden City</string>
+    <string name="edit_text_name">Enter the name to contact</string>
+    <string name="subject">the topic</string>
+    <string name="phone">الجوال</string>
+    <string name="subject_text">Choose a communication topic</string>
+    <string name="msg_text">the message</string>
+    <string name="changing_language">The language is changed</string>
+    <string name="login_success">You have been logged in successfully</string>
+    <string name="privacy">privacy policy</string>
     <string name="terms_and_conditions">Terms and Conditions"</string>
     <string name="terms_and_conditions_text">Welcome to the visa platform. Below are the terms and conditions that pertain to the terms of use and access to the pages of the Egypt Key website, giving the words and expressions contained in this agreement.   The customer\'s use of the site is considered an explicit and clear acknowledgment that he has read and understood the terms and conditions of this agreement and the method of using the site. This is considered an express acceptance and approval of the terms and conditions of this agreement and response thereto. The customer\'s use of the site is also considered an explicit acknowledgment of his commitment to and compliance with all terms and conditions of the agreement and all terms and conditions of the Egypt Key Application Foundation.  General Provisions Applicable Law: These Terms of Use and any related non-contractual rights or duties shall be governed by and construed in accordance with the laws of the Kingdom of Saudi Arabia and the Arab Republic of Egypt. Problem Solving: If you have any problems with our services please contact us. We will work hard to solve the problem you face as soon as possible. Any disputes or disagreements related to these Terms of Use, including any related non-contractual rights or duties, shall be settled by the Kingdom of Saudi Arabia and the Arab Republic of Egypt. Rights of Third Parties: A person who is not part of these Terms of Use does not have any right to enforce any of its terms. The relationship of the parties: There is nothing in these terms of use that the parties or others can interpret or interpret to interpret the relationship between us as between partners or agents or create a joint project between the parties, but it is understood and clear that all parties to the agreement are independent parties. Additional Assurances: The Parties will act or arrange to act, document, and other matters within their authority to enforce and verify these Terms of Use, including but not limited to assisting each party to comply with applicable law. Assignment: These Terms of Use are bound to the benefit of the parties and their respective successors and authorized assigns. You agree that you will not assign or transfer these Terms of Use or any of your rights or duties in connection with these Terms of Use, whether directly or indirectly, without prior written consent from us. Entire Agreement: These Terms of Use and the documents referred to or included in these Terms of Use represent the entire agreement between the parties with respect to the subject matter of the Agreement and supersede and supersede all prior agreements, negotiations and representations, written or oral, relating to the subject matter. Except as specified in the Terms of Use and the documents referred to or included in these Terms of Use, there are no conditions, representations, warranties, undertakings or agreements between the parties, whether direct, indirect, collective, express or implied. Amendments: It is not permissible to make any amendment to these terms of use or make any addition or supplement. We reserve the right to amend, alter, add or supplement these Terms of Use at any time or from time to time. We will post the current version of the Terms of Use on the Site and it will be effective when posted on the Site or upon the date specified by us as the “Effective Date” (if any). Your continued use of the Services in the event of any changes constitutes your agreement to be bound by the modified Terms of Use. Severability of clauses: If any of the provisions of these Terms of Use are considered invalid by any of the competent courts or illegal or unenforceable, then this clause of these Terms of Use will be canceled and the rest of the terms and conditions will remain in force as long as the legal and economic substance remains. The transactions concluded under its terms remain valid without any adverse effect on its parties. Disclaimer: Neither party shall be liable for loss, damage, delay, or non-fulfillment resulting from acts beyond the control of either party whether such act could have been foreseen (such as acts of God and actions of legislative, judicial, or regulatory authorities of any federal, state or local government). jurisdictions, actions taken by any of our subcontractors or any third party supplier of goods or services to us, labor disturbances, power outages, or economic boycotts). Non-waiver: Waiver of any of the provisions contained in the Terms of Use does not constitute a waiver of any of the other provisions (similar or not), nor does any other waiver constitute a continuing waiver of any of the provisions in question, unless this is expressly stated in writing. Communication: You can communicate with us via email, through our social media sites, direct chat on the website, or by calling our call center. Continued effectiveness: All provisions which are stated to remain in force or which by their nature apply after the termination of the contract shall remain in effect after the termination or suspension of your membership in the Site.</string>
     <string name="contact_us">Contact Us</string>
@@ -67,6 +85,17 @@
     <string name="about_third">Embassies services</string>
     <string name="about_fourth">Consular services</string>
     <string name="what_we_offer">What does it offer?</string>
+    <string name="skip">Skip</string>
+    <string name="visit_visa">Tourist visas</string>
+    <string name="jobs_visa">Job visas</string>
+    <string name="visa_offers">View visas</string>
+    <string name="order_visa_now">Request your visa now</string>
+    <string name="you_can_sell_your_visa">You can view Visa</string>
+    <string name="order_job_visa">Request an employment visa</string>
+    <string name="visa_hedder_text">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
+    <string name="SignIn">sign in</string>
+    <string name="Already_have_an_account">Already have an account?</string>
+    <string name="forgot_password">Forgot your password?</string>
     <string name="email_not_verified">email is not verified</string>
     <string name="confirm">confirm</string>
     <string name="edit_profile">edit profile</string>
@@ -86,6 +115,16 @@
     <string name="enter_birthdate">Enter Birthdate</string>
     <string name="state">State</string>
     <string name="FillOut_the_form_now">fill the form now</string>
+    <string name="contact_info">Communication data</string>
     <string name="_20_1011777751_966_550440787">( +20) 1011777751 - (+966) 550440787</string>
     <string name="travel_altaherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
+    <string name="hedder_info">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
+    <string name="obtain_visa">Obtain visas</string>
+    <string name="easy_tourism">Tourism is easy</string>
+    <string name="With_ease_with">With ease with the visa platform</string>
+    <string name="through_visa_platform">Through the visa platform</string>
+    <string name="Request_employment">Request an employment visa</string>
+    <string name="offer_visa">You can view Visa</string>
+    <string name="sign_in">Log in to start</string>
+    <string name="you_have_to_sign_in">You must log in to continue completing the application</string>
 </resources>

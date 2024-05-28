@@ -19,7 +19,7 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             middleName = model.middlename.orEmpty(),
             birthDate = model.birthdate.orEmpty(),
             phone = model.phone?.countryCode.orEmpty() + "-" + model.phone?.number.orEmpty(),
-            imageUrl = "",
+            imageUrl = model.image?.path.orEmpty(),
             emailVerified = model.emailVerified ?: false
 
         )

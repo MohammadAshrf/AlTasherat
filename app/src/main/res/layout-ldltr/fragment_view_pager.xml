@@ -47,6 +47,7 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
+                style="@style/CustomTabLayout"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:background="@drawable/tab_bkg"
@@ -55,7 +56,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0"
-                style="@style/CustomTabLayout"/>
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -106,7 +107,7 @@
             android:id="@+id/tv_don_t_have_an_account"
             style="@style/TextView.Bold"
             android:padding="5dp"
-            android:text="لديك حساب بالفعل؟"
+            android:text="@string/Already_have_an_account"
             android:textColor="@color/Bg"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
@@ -116,7 +117,7 @@
             style="@style/TextView.Bold"
             android:foreground="?attr/selectableItemBackground"
             android:padding="5dp"
-            android:text="تسجيل الدخول"
+            android:text="@string/SignIn"
             android:textColor="@color/Secondary"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
@@ -127,9 +128,10 @@
         style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_28sdp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="58dp"
-        android:text="تخطي"
+        android:layout_marginEnd="28dp"
+        android:text="@string/skip"
         android:textColor="@color/text"
         android:textSize="@dimen/_16sdp"
         android:textStyle="bold"
@@ -140,22 +142,22 @@
         android:id="@+id/imageView5"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="65dp"
+        android:layout_marginEnd="65dp"
         android:src="@drawable/ic_plane_right"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-      />
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/imageViewp2"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="65dp"
+        android:layout_marginStart="60dp"
         android:src="@drawable/ic_plane_left"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-         />
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

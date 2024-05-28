@@ -21,7 +21,7 @@ internal data class UserDto(
     @SerializedName("id")
     val id: Int? = null,
     @SerializedName("image")
-    val image: Any? = null,
+    val image: ImageDto? = null,
     @SerializedName("lastname")
     val lastname: String? = null,
     @SerializedName("middlename")

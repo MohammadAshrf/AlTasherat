@@ -25,9 +25,7 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListener {
 
     private val viewModel: LoginViewModel by viewModels()
-    private val adapter: CountryAdapter by lazy {
-        CountryAdapter(requireContext(), emptyList())
-    }
+
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         subscribeToObservables()

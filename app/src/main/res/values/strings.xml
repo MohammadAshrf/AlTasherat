@@ -126,4 +126,13 @@
     <string name="birthdate">تاريخ الميلاد</string>
     <string name="enter_birthdate">أدخل تاريخ الميلاد</string>
     <string name="state">الدولة</string>
+    <string name="hedder_info">لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل</string>
+    <string name="obtain_visa">استخرج التاشيرات</string>
+    <string name="easy_tourism">السياحه بسهوله</string>
+    <string name="With_ease_with">بكل سهولة مع منصة التأشيرات</string>
+    <string name="through_visa_platform">من خلال منصة التأشيرات</string>
+    <string name="Request_employment">اطلب فيزا توظيف</string>
+    <string name="offer_visa">تستطيع عرض فيزا</string>
+    <string name="sign_in">تسجيل الدخول للمتابعه</string>
+    <string name="you_have_to_sign_in">يجب عليك تسجيل الدخول للمتابعة في استكمال الطلب</string>
 </resources>

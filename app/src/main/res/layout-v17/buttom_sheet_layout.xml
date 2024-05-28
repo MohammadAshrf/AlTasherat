@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="تسجيل الدخول للمتابعه"
+        style="@style/Font.Regular"
+        android:text="@string/sign_in"
         android:textColor="@color/Bg"
         android:layout_marginTop="5dp"
         android:textSize="25sp"
@@ -33,10 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         android:textColor="@color/Bg"
-        android:text="يجب عليك تسجيل الدخول للمتابعة في استكمال الطلب" />
+        android:text="@string/you_have_to_sign_in" />
 
     <Button
         android:id="@+id/btnLoginAndSignup"
@@ -49,11 +50,12 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:drawableTint="#FFFFFF"
         android:elevation="12dp"
-        android:text="تسجيل الدخول"
+        android:text="@string/SignIn"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        />
 
 </LinearLayout>

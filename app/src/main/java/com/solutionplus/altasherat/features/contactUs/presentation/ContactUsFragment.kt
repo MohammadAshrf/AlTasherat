@@ -16,9 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
-    private val adapter: CountryAdapter by lazy {
-        CountryAdapter(requireContext(), emptyList())
-    }
 
     private val contactUsVM: ContactUsViewModel by viewModels()
 
@@ -35,10 +32,7 @@ class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(contactUsVM.singleEvent) {
             when (it) {
-                is ContactUsContract.ContactUsEvent.CountriesIndex ->{
-                    val spinnerAdapter = CountryAdapter(requireContext(), it.countries)
-                    binding.phoneNumberPicker.etCountruCode.adapter = spinnerAdapter
-                }
+                is ContactUsContract.ContactUsEvent.CountriesIndex ->{ setupCountrySpinner(it.countries) }
             }
         }
     }

@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.databinding.ButtomSheetLayoutBinding
 import com.solutionplus.altasherat.databinding.FragmentVisaPlatformBinding
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginViewModel
 import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
@@ -63,23 +64,9 @@ class VisaPlatformFragment : Fragment() {
     }
 
     private fun showBottomSheetDialog() {
-        bottomSheetDialog = BottomSheetDialog(requireContext())
-        val view = layoutInflater.inflate(R.layout.buttom_sheet_layout, null)
-        val btnClose = view.findViewById<Button>(R.id.btnLoginAndSignup)
-        btnClose.setOnClickListener {
-            navigateToNextFragment()
-            bottomSheetDialog.dismiss()
-        }
-        bottomSheetDialog.setCancelable(true)
-        bottomSheetDialog.setContentView(view)
-        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val binding = ButtomSheetLayoutBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(binding.root)
         bottomSheetDialog.show()
-
-        bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                bottomSheetDialog.dismiss()
-            }
-            false
-        }
     }
 }
