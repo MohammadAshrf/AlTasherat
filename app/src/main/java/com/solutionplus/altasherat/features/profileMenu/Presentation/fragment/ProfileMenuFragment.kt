@@ -47,7 +47,6 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
                     handleUserState(it.user)
                 }
-
                 is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
                     setupRecyclerView(it.isUserLoggedIn)
                     logger.info(it.isUserLoggedIn.toString())
@@ -59,17 +58,10 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                         binding.viewProfileSection.fullView.visibility = View.GONE
                     }
                 }
-
-                is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
-                    handleUserState(it.user)
-                }
-
-
                 is ProfileMenuContract.ProfileMenuEvent.LogoutSuccess -> {
-                    //findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
                     showSnackBar(it.message, false)
                     viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
-
+                    findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
                 }
             }
         }
@@ -120,8 +112,8 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 destinationFragmentId = if (isUserLoggedIn) R.id.action_profileMenuFragment_to_changePasswordFragment2 else null
             ),
             RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
-            RowItem(R.drawable.ic_support, getString(R.string.contact_with_us), R.id.fakeFragment),
-            RowItem(R.drawable.ic_terms, getString(R.string.terms), R.id.contactUsFragment),
+            RowItem(R.drawable.ic_support, getString(R.string.contact_with_us), R.id.contactUsFragment),
+            RowItem(R.drawable.ic_terms, getString(R.string.terms), R.id.fakeFragment),
             RowItem(R.drawable.ic_plicy, getString(R.string.privacy), R.id.fakeFragment),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.changeLanguage)
         )
