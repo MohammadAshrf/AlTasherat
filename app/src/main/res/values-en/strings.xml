@@ -121,10 +121,10 @@
     <string name="hedder_info">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
     <string name="obtain_visa">Obtain visas</string>
     <string name="easy_tourism">Tourism is easy</string>
-    <string name="With_ease_with">With ease with the visa platform</string>
+    <string name="With_ease_with">ease with the visa platform</string>
     <string name="through_visa_platform">Through the visa platform</string>
-    <string name="Request_employment">Request an employment visa</string>
-    <string name="offer_visa">You can view Visa</string>
+    <string name="Request_employment">Request an visa</string>
+    <string name="offer_visa">View Visa</string>
     <string name="sign_in">Log in to start</string>
     <string name="you_have_to_sign_in">You must log in to continue completing the application</string>
 </resources>
