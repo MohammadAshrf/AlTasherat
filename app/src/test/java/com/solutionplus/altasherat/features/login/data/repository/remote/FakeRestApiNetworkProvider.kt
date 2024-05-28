@@ -37,14 +37,15 @@ class FakeRestApiNetworkProvider : INetworkProvider {
         return postResponse as ResponseBody
     }
 
-    override suspend fun <ResponseBody, RequestBody> delete(
+    override suspend fun <ResponseBody> delete(
         responseWrappedModel: Type,
         pathUrl: String,
         headers: Map<String, Any>?,
-        queryParams: Map<String, Any>?,
-        requestBody: RequestBody?
+        queryParams: Map<String, Any>?
     ): ResponseBody {
-        throw UnsupportedOperationException("Not implemented")
+        return postResponse as ResponseBody
     }
+
+
 
 }

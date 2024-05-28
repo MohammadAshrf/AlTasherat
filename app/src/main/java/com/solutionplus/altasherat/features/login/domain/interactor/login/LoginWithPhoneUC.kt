@@ -1,19 +1,61 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
+import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
+import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import javax.inject.Inject
 
 class LoginWithPhoneUC  (
     private val repository: ILoginRepository,
 ) : BaseUseCase<User, LoginRequest>(){
     public override suspend fun execute(params: LoginRequest?): User {
-        val result = repository.loginWithPhone(params!!)
-        repository.saveUser(result.userInfo)
-        repository.saveAccessToken(result.accessToken)
-        repository.getUser()
-        return result.userInfo
+        params?.let {
+            validateRequest(it)?.let { message ->
+                throw LeonException.Local.RequestValidation(
+                    clazz = ChangePasswordRequest::class,
+                    message = message
+                )
+            }
+            val result = repository.loginWithPhone(it)
+            repository.saveUser(result.userInfo)
+            repository.saveAccessToken(result.accessToken)
+            repository.getUser()
+
+            return result.userInfo
+        }?: return User()
+        //---------to make the validations pass in testing  ----------------------------//
+//        // Ensure params is not null at the beginning
+//        val request = params ?: throw IllegalArgumentException("Params cannot be null")
+//
+//        // Validate the request before any repository interaction
+//        validateRequest(request)?.let { message ->
+//            throw LeonException.Local.RequestValidation(
+//                clazz = LoginRequest::class,
+//                message = message
+//            )
+//        }
+//
+//        // Perform the repository interactions
+//        val result = repository.loginWithPhone(request)
+//        repository.saveUser(result.userInfo)
+//        repository.saveAccessToken(result.accessToken)
+//
+//        // Return the result
+//        return result.userInfo
+    }
+
+
+    private fun validateRequest(request: LoginRequest): String? {
+        return request.run {
+            when {
+                !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
+                !validatePhone() -> "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long."
+                else -> null
+            }
+        }
     }
 }

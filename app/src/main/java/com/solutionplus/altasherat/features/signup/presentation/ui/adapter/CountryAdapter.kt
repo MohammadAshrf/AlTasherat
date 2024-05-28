@@ -5,38 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.databinding.ItemCountrySpinnerBinding
+import com.solutionplus.altasherat.databinding.ItemCountrySpinnerWithPhoneBinding
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
-class CountryAdapter(context: Context, countries: List<Country>) :
-    ArrayAdapter<Country>(context, 0, countries) {
+internal class CountryAdapter
+    (private val context: Context, private val countries: List<Country>) : BaseAdapter() {
+    override fun getCount(): Int = countries.size
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        return createView(position, convertView, parent)
-    }
+    override fun getItem(position: Int): Country = countries[position]
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-        return createView(position, convertView, parent)
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
-    private fun createView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val country = getItem(position)
-        val view = convertView ?: LayoutInflater.from(context).inflate(
-            R.layout.item_country_spinner,
-            parent,
-            false
-        )
-
-        val countryNameTextView: TextView = view.findViewById(R.id.countryNameTextView)
-        val flagImageView: TextView = view.findViewById(R.id.flagImageView)
-
-        country?.let {
-            countryNameTextView.text = it.name
-            flagImageView.text = it.flag
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val binding: ItemCountrySpinnerWithPhoneBinding
+        val view: View
+        if (convertView == null) {
+            binding = ItemCountrySpinnerWithPhoneBinding.inflate(LayoutInflater.from(context), parent, false)
+            view = binding.root
+            view.tag = binding
+        } else {
+            binding = convertView.tag as ItemCountrySpinnerWithPhoneBinding
+            view = convertView
         }
+        val country = countries[position]
+        binding.flagImageView.text = country.flag
+        binding.countryCode.text = "(${country.phoneCode})"
         return view
     }
+
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        return getView(position, convertView, parent)
+    }
+
 }

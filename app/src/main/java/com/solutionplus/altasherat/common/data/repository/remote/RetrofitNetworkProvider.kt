@@ -17,16 +17,15 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
         return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }
 
-    override suspend fun <ResponseBody, RequestBody> delete(
+    override suspend fun <ResponseBody> delete(
         responseWrappedModel: Type,
         pathUrl: String,
         headers: Map<String, Any>?,
-        queryParams: Map<String, Any>?,
-        requestBody: RequestBody?
+        queryParams: Map<String, Any>?
     ): ResponseBody {
         val response = apiServices.delete(
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
-            queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
+            queryParams = queryParams ?: hashMapOf()
         )
         return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }

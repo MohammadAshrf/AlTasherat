@@ -12,5 +12,6 @@ data class User(
     val phone: String? = null,
     val birthDate: String? = null,
     val imageUrl: String? = null,
+    val emailVerified: Boolean?= null,
 
     )

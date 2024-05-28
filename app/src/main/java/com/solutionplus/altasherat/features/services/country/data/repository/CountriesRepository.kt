@@ -1,7 +1,6 @@
 package com.solutionplus.altasherat.features.services.country.data.repository
 
 import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
-import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
 import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
@@ -10,11 +9,9 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.r
 class CountriesRepository(
     private val localDS: ICountriesLocalDS, private val remoteDS: ICountriesRemoteDS
 ) : ICountriesRepository {
-    override suspend fun getCountriesFromRemote(): List<Country> {
-        val result = remoteDS.getCountiesFromRemote().data
-        return result?.map {
-            CountryMapper.dtoToDomain(it ?: CountryDto())
-        } ?: emptyList()
+    override suspend fun getCountriesFromRemote(params: String): List<Country> {
+        val result = remoteDS.getCountiesFromRemote(params).data
+        return CountryMapper.dtoToDomain(result)
     }
 
     override suspend fun getCountriesFromLocal(): List<Country> {
@@ -25,9 +22,7 @@ class CountriesRepository(
         localDS.saveCountriesToLocal(countries)
     }
 
-    override suspend fun isOnBoardingShown(): Boolean {
-        return localDS.isOnBoardingShown()
+    override suspend fun hasCountries(): Boolean {
+        return localDS.hasCountriesInLocal()
     }
-
-
 }

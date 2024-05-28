@@ -45,7 +45,7 @@ class LoginViewModel @Inject constructor(
 
     private fun fetchCountries() {
         viewModelScope.launch {
-            getCountriesUC.emitCountriesFromLocal().collect { resource ->
+            getCountriesUC.invoke().collect { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))

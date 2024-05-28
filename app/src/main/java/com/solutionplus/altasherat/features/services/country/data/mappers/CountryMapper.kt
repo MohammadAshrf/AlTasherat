@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.services.country.data.mappers
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountriesResponse
 import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
 import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
@@ -37,5 +38,10 @@ internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
             currency = model.currency,
             phoneCode = model.phoneCode
         )
+    }
+
+    fun mapDtoListToDomain(dtoList: List<CountryDto?>?): List<Country?> {
+        val countries = dtoList?.map { it?.let { it1 -> dtoToDomain(it1) } } ?: emptyList()
+        return countries
     }
 }

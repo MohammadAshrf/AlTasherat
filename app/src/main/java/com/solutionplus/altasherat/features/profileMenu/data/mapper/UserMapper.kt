@@ -4,7 +4,7 @@ import com.solutionplus.altasherat.common.data.mapper.Mapper
 import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 
-internal object UserMapper : Mapper<Unit,User, UserEntity>() {
+internal object UserMapper : Mapper<Unit, User, UserEntity>() {
 
     override fun domainToEntity(model: User): UserEntity {
         return UserEntity(
@@ -15,12 +15,13 @@ internal object UserMapper : Mapper<Unit,User, UserEntity>() {
             lastName = model.lastName,
             phone = model.phone,
             birthDate = model.birthDate,
-            imageUrl = model.imageUrl,
+            imageUrl = "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon4631.jpg",
             fullName = model.fullName,
             email = model.email,
             emailVerified = false
         )
     }
+
     override fun entityToDomain(model: UserEntity): User {
         return User(
             id = model.id,
@@ -30,11 +31,10 @@ internal object UserMapper : Mapper<Unit,User, UserEntity>() {
             lastName = model.lastName,
             phone = model.phone,
             birthDate = model.birthDate,
-            imageUrl = model.imageUrl,
+            imageUrl = "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon4631.jpg",
             fullName = model.fullName,
             email = model.email,
             emailVerified = model.emailVerified,
-            password = ""
         )
     }
 
@@ -44,13 +44,12 @@ internal object UserMapper : Mapper<Unit,User, UserEntity>() {
             userName = "",
             fullName = "",
             email = "",
-            password = "",
             firstName = "",
             middleName = "",
             lastName = "",
             phone = "",
             birthDate = "",
-            imageUrl = "",
+            imageUrl = "https://opgg-static.akamaized.net/meta/images/profile_icons/profileIcon4631.jpg",
             emailVerified = false
         )
     }

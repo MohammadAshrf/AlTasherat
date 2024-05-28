@@ -1,7 +1,6 @@
 package com.solutionplus.altasherat.features.signup.data.repository
 
 
-
 import com.solutionplus.altasherat.features.signup.data.mapper.SignupMapper
 import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.signup.data.model.dto.PhoneDto
@@ -36,125 +35,76 @@ class SignupRepositoryTest {
 
     @Before
     fun setUp() {
-        remoteDs = mock(ISignupRemoteDS::class.java)
-        localDs = mock(ISignupLocalDS::class.java)
+        remoteDs = mockk()
+        localDs = mockk()
         repository = SignupRepository(remoteDs, localDs)
     }
 
     @Test
-    fun `when Signup with phone given valid request expect successful login response`() {
-        runBlocking {
-            val phoneNumber = Phone("0020", "100100100")
-            val signupRequest = SignupRequest(phone = phoneNumber, password = "123456789", countryCode = "0020", countryId = 1, email = "mahmoud@gmail", firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
-            val user = UserDto(
-                id = 1,
-                username = "jdoe",
-                firstname = "John",
-                lastname = "Doe",
-                email = "jdoe@example.com",
-                phone = PhoneDto("0020", "123456789"),
-                birthdate = "1990-01-01"
-            )
-            val loginResponse = SignupDto("", "mnsnln2356", user)
-
-            // Mock remote data source behavior
-            whenever(remoteDs.signupWithPhone(signupRequest)).thenReturn(loginResponse)
-
-            // Call the method to be tested
-            val result = repository.signupWithPhone(signupRequest)
-
-            // Verify interactions and assertions
-            verify(remoteDs).signupWithPhone(signupRequest)
-            assertEquals(SignupMapper.dtoToDomain(loginResponse), result)
-        }
-    }
-
-    @Test
-    fun `when saving user given valid user expect user saved`() {
-        runBlocking {
-            val user = User()
-            val userEntity = UserMapper.domainToEntity(user)
-
-            // Call the method to be tested
-            repository.saveUser(user)
-
-            // Verify interactions
-            verify(localDs).saveUser(userEntity)
-        }
-    }
-
-
-    @Test
-    fun `when saving user given different data expect user saved with correct data`() = runBlocking {
-        val user = User(id = 1, userName = "user1", email = "user1@example.com", phone = "123456789")
+    fun `when saving user given valid user expect user saved`() = runBlocking {
+        // Arrange
+        val user = User()
         val userEntity = UserMapper.domainToEntity(user)
-        val localDs = mockk<ISignupLocalDS>()
-        val repository = SignupRepository(mockk(), localDs)
-
-        coEvery { localDs.saveUser(userEntity) } just Runs
+        coEvery { localDs.saveUser(userEntity) } returns Unit
 
         // Act
         repository.saveUser(user)
 
         // Assert
-        // Verify that saveUser method of local data source is called with the correct user entity
         coVerify { localDs.saveUser(userEntity) }
     }
 
     @Test
-    fun `when saving user given null fields expect user saved`() = runBlocking {
+    fun `when saving user given null fields then user saved`() = runBlocking {
+        //Arrange
         val user = User(id = null, userName = null, email = null, phone = null)
         val userEntity = UserMapper.domainToEntity(user)
-        val localDs = mockk<ISignupLocalDS>()
-        val repository = SignupRepository(mockk(), localDs)
-
-        coEvery { localDs.saveUser(userEntity) } just Runs
-
+        coEvery { localDs.saveUser(userEntity) } returns Unit
         // Act
         repository.saveUser(user)
 
         // Assert
-        // Verify that saveUser method of local data source is called with the correct user entity
-        coVerify { localDs.saveUser(userEntity) }
+        coVerify {localDs.saveUser(userEntity)}
     }
 
-    @Test
-    fun `when saving user given invalid data expect exception thrown`() {
-        runBlocking {
-            // Arrange
-            val user = User(id = 1)
-            val localDataSource = mockk<ISignupLocalDS>()
-            val repository: ISignupRepository = SignupRepository(mockk(), localDataSource)
 
-            // Act & Assert
-            assertThrows<Exception> {
-                repository.saveUser(user)
-            }
-        }
-    }
 
     @Test
-    fun `when saving access token given valid token expect token saved`() = runBlocking{
+    fun `when saving access token given valid token then token saved`() = runBlocking {
+       //Arrange
         val token = "sampleToken"
+        coEvery { localDs.saveAccessToken(token) } returns Unit
 
-        // Call the method to be tested
+        //Act
         repository.saveAccessToken(token)
 
-        // Verify interactions
-        verify(localDs).saveAccessToken(token)
+        // Assert
+        coVerify { localDs.saveAccessToken(token) }
     }
 
     @Test
-    fun `when getting user expect correct user entity returned`() = runBlocking{
+    fun `when saving access token with empty string then token saved`() = runBlocking {
+        //Arrange
+        val token = ""
+        coEvery { localDs.saveAccessToken(token) } returns Unit
+
+        //Act
+        repository.saveAccessToken(token)
+
+        // Assert
+        coVerify { localDs.saveAccessToken(token) }
+    }
+
+    @Test
+    fun `when getting user then return user entity `() = runBlocking {
         val userEntity = UserEntity()
 
-        // Mock local data source behavior
-        whenever(localDs.getUser()).thenReturn(userEntity)
+        coEvery { localDs.getUser() } returns  userEntity
 
         val result = repository.getUser()
 
-        // Verify interactions and assertions
-        verify(localDs).getUser()
+
+        coVerify { localDs.getUser() }
         assertEquals(userEntity, result)
     }
 

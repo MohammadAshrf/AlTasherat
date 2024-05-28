@@ -70,4 +70,21 @@
     <string name="lang_continue">الإستمرار</string>
     <string name="change_language">بإمكانك تغيير بلدك ولغتك في اي وقت من القائمة</string>
     <string name="back">السابق</string>
+    <string name="altasherat_platform">منصــة التأشـــيرات</string>
+    <string name="skip">تخطي</string>
+    <string name="visit_visa">تاشيرات سياحيه</string>
+    <string name="jobs_visa">تاشيرات وظائف</string>
+    <string name="visa_offers">عرض التاشيرات</string>
+    <string name="order_visa_now">اطلب الان التاشيره</string>
+    <string name="you_can_sell_your_visa">تستطيع عرض فيزا</string>
+    <string name="order_job_visa">اطلب فيزا توظيف</string>
+    <string name="visa_hedder_text">لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل</string>
+    <string name="SignIn">تسجيل الدخول</string>
+    <string name="Already_have_an_account">لديك حساب بالفعل؟</string>
+    <string name="forgot_password">نسيت كلمه المرور؟</string>
+    <string name="email_not_verified">البريد الإلكتروني غير مؤكد</string>
+    <string name="confirm">تأكيد</string>
+    <string name="edit_profile">تعــديل الملف الشخصي</string>
+    <string name="current_version">النسخة الحالية:</string>
+    <string name="FillOut_the_form_now">املأ الاستمارةالان</string>
 </resources>

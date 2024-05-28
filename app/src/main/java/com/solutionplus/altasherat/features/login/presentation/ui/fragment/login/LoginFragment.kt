@@ -39,6 +39,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 launch {
                     viewModel.viewState.collect { state ->
                         renderState(state)
+
+                        state.exception?.let {
+                            handleHttpExceptions(it)
+                        }
                     }
                 }
                 launch {
@@ -62,7 +66,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun viewInit() {
         binding.tvForgotPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_resetPasswordByPhoneFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_resetPasswordByPhoneFragment)
 
         }
     }
@@ -74,10 +78,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             } else {
                 hideLoading()
             }
-            state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
-                    .show()
-            }
+
         }
     }
 
@@ -105,6 +106,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             viewModel.onActionTrigger(
                 LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
+
+
         }
     }
 

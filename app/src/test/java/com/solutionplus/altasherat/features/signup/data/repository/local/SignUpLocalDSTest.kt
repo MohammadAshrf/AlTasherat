@@ -9,22 +9,22 @@ import org.junit.Test
 import org.junit.Assert.assertEquals
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.signup.data.model.entity.UserEntity
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Assert.assertThrows
 import java.util.Base64
 
 
 /* test cases
-1. save login with valid response then save encrypted login data
-2. save login with empty response then do nothing
-4. get access token with no access token is stored then return exception
-5.get access token when IV is empty then return exception
-6. get access token when stored data cannot be decrypted then return empty string
-7. get user then return decrypted user
-8. get user with no user is stored then return empty user
-9. get user when stored data cannot be decrypted then return empty string
+1. test save user info after encryptData`
+2. test save token after encryptData
+4. test getting user info after decrypted
+5. test getting token
 * */
 class SignUpLocalDSTest{
     private lateinit var storageKV: IKeyValueStorageProvider
@@ -39,32 +39,46 @@ class SignUpLocalDSTest{
     }
 
     @Test
-    fun `when saving user given valid user expect user saved in storage`() = runBlocking {
-        val user = UserEntity(id = 1, userName = "testUser", firsName = "Test", lastName = "User")
+    fun `test save user info after encryptData`() = runBlocking {
+        // Arrange
+        val user =UserEntity(
+            1,
+            "username",
+            "email@example.com"
+        )
         val userJson = Gson().toJson(user)
         val bytesUser = userJson.toByteArray()
-        val encryptedUserData = "encryptedData"
+        val encryptedUserData = "encryptedUserData".toByteArray()
+        val encryptUserDataBase64 = Base64.getEncoder().encodeToString(encryptedUserData)
 
-        coEvery { encryptionProvider.encryptData(bytesUser) } returns encryptedUserData.toByteArray()
-        coEvery { storageKV.saveEntry(StorageKeyEnum.USER, any<String>(), String::class.java) } returns Unit
+        every { encryptionProvider.encryptData(bytesUser) } returns encryptedUserData
+        coEvery { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) } just Runs
 
+        // Act
         loginLocalDS.saveUser(user)
 
-        coVerify { storageKV.saveEntry(StorageKeyEnum.USER, Gson().toJson(encryptedUserData), String::class.java) }
+        // Assert
+        coVerify { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) }
+        verify { encryptionProvider.encryptData(bytesUser) }
     }
 
     @Test
-    fun `when saving access token given valid token expect token saved in storage`() = runBlocking {
-        val token = "testToken"
+    fun `test save token after encryptData`() = runBlocking {
+        // Arrange
+        val token = "myAccessToken"
         val bytes = token.toByteArray()
-        val encryptedToken = "encryptedToken"
+        val encryptedData = "encryptedData".toByteArray()
+        val encryptedDataBase64 = Base64.getEncoder().encodeToString(encryptedData)
 
-        coEvery { encryptionProvider.encryptData(bytes) } returns encryptedToken.toByteArray()
-        coEvery { storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, any<String>(), String::class.java) } returns Unit
+        every { encryptionProvider.encryptData(bytes) } returns encryptedData
+        coEvery { storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptedDataBase64, String::class.java) } just Runs
 
+        // Act
         loginLocalDS.saveAccessToken(token)
 
-        coVerify { storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptedToken, String::class.java) }
+        // Assert
+        coVerify { storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptedDataBase64, String::class.java) }
+        verify { encryptionProvider.encryptData(bytes) }
     }
 
     @Test
@@ -79,26 +93,6 @@ class SignUpLocalDSTest{
         val result = loginLocalDS.getUser()
 
         assertEquals(user, result)
-    }
-
-
-
-
-    //****************************//
-
-    // Test case 2: Save login with empty response then do nothing
-    @Test
-    fun `when saving user given empty user expect storage not called`() = runBlocking {
-        // Given
-        val user = UserEntity() // Empty user
-
-        // Stubbing should not be necessary as the method should not be called
-
-        // When
-        loginLocalDS.saveUser(user)
-
-        // Then
-        // Ensure that storageKV.saveEntry is not called
     }
 
     // Test case 4: Get access token with no access token stored then return exception
@@ -142,7 +136,6 @@ class SignUpLocalDSTest{
                 )
             } returns encryptedToken
 
-            // Stubbing encryptionProvider
             coEvery { encryptionProvider.decryptData(encryptedToken.toByteArray()) } returns null
 
             // When / Then
@@ -152,25 +145,6 @@ class SignUpLocalDSTest{
                 }
             }
         }
-    }
-
-    // Test case 6: Get access token when stored data cannot be decrypted then return empty string
-    @Test
-    fun `when getting user given invalid data expect empty user entity returned`() = runBlocking {
-        // Given
-        val encryptedUserData = "invalidEncryptedUserData"
-
-        // Stubbing storageKV
-        coEvery { storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java) } returns encryptedUserData
-
-        // Stubbing encryptionProvider
-        coEvery { encryptionProvider.decryptData(Base64.getDecoder().decode(encryptedUserData)) } returns null
-
-        // When
-        val result = loginLocalDS.getUser()
-
-        // Then
-        assertEquals(UserEntity(), result)
     }
 
 

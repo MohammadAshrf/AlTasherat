@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
-    tools:context=".features.language.LanguageFragment">
+    tools:context=".features.language.presentation.ui.LanguageFragment">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
                 android:id="@+id/rectangle_language"
                 android:layout_width="@dimen/_3sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/Primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +55,7 @@
                 style="@style/TextView.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/choose_language"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_language"
@@ -83,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_8sdp"
-                    android:background="@drawable/item_default_single_radio_selection"
+                    android:background="@drawable/selector_radio_button_background"
                     android:button="@null"
                     android:checked="true"
                     android:drawableStart="@drawable/arabic"
@@ -92,7 +92,7 @@
                     android:paddingEnd="@dimen/_4sdp"
                     android:text="@string/arabic"
                     android:textAlignment="viewStart"
-                    android:textAppearance="@style/TextView.Medium" />
+                    android:textAppearance="@style/TextView.Bold" />
 
                 <RadioButton
                     android:id="@+id/english_radioBtn"
@@ -100,16 +100,15 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_8sdp"
-                    android:background="@drawable/item_single_radio_selection"
+                    android:background="@drawable/selector_radio_button_background"
                     android:button="@null"
-                    android:checked="true"
                     android:drawableStart="@drawable/english"
                     android:drawablePadding="@dimen/_4sdp"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_4sdp"
                     android:text="@string/english"
                     android:textAlignment="viewStart"
-                    android:textAppearance="@style/TextView.Medium" />
+                    android:textAppearance="@style/TextView.Bold" />
             </RadioGroup>
 
             <View
@@ -127,8 +126,8 @@
                 android:id="@+id/rectangle_state"
                 android:layout_width="@dimen/_3sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/Primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line" />
@@ -138,7 +137,7 @@
                 style="@style/TextView.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/choose_state"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_state"
@@ -146,7 +145,7 @@
                 app:layout_constraintTop_toTopOf="@id/rectangle_state" />
 
             <Spinner
-                android:id="@+id/language_spinner"
+                android:id="@+id/countriesSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
@@ -176,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_55sdp"
-        android:src="@drawable/location_logo"
+        android:src="@drawable/ic_location_en"
         app:layout_constraintBottom_toTopOf="@id/language_cardView"
         app:layout_constraintEnd_toEndOf="@id/language_cardView"
         app:layout_constraintTop_toTopOf="@id/language_cardView" />
@@ -186,9 +185,10 @@
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_left_rounded"
+        android:drawableEnd="@drawable/ic_left"
         android:drawableTint="#FFFFFF"
         android:text="@string/lang_continue"
+        android:textSize="@dimen/_10sdp"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@id/language_cardView"

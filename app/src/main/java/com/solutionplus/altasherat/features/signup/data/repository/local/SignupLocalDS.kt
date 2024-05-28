@@ -23,6 +23,7 @@ internal class SignupLocalDS (private val storageKV: IKeyValueStorageProvider, p
         val encryptUserDataBase64 = Base64.getEncoder().encodeToString(encryptedUserData)
         logUserInfoAfterEncryption(userJson, encryptUserDataBase64)
         storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java)
+        storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java)
     }
 
     override suspend fun saveAccessToken(token: String) {

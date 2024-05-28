@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation_graph"
+    app:startDestination="@id/visaPlatformFragment">
+
+    <fragment
+        android:id="@+id/visaApplicationsFragment"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.home.VisaApplicationsFragment"
+        android:label="visa applications"
+        tools:layout="@layout/fragment_visa_applications" />
+
+    <fragment
+        android:id="@+id/visaPlatformFragment"
+        android:name="com.solutionplus.altasherat.presentation.ui.fragment.dashboard.VisaPlatformFragment"
+        android:label="visa platform"
+        tools:layout="@layout/fragment_visa_platform" >
+
+        <action
+            android:id="@+id/action_navigation_visa_platform_to_navigation_visa_applications"
+            app:destination="@id/visaApplicationsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileMenuFragment"
+        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.ProfileMenuFragment"
+        android:label="fragment_profile_menu"
+        tools:layout="@layout/fragment_profile_menu" >
+        <action
+            android:id="@+id/action_profileMenuFragment_to_fakeFragment"
+            app:destination="@id/fakeFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_emailVerifiedFragment"
+            app:destination="@id/emailVerifiedFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_changePasswordFragment2"
+            app:destination="@id/changePasswordFragment2" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_visaPlatformFragment"
+            app:destination="@id/visaPlatformFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/fakeFragment"
+        android:name="com.solutionplus.altasherat.fakeFragment"
+        android:label="fragment_fake"
+        tools:layout="@layout/fragment_fake" />
+    <fragment
+        android:id="@+id/emailVerifiedFragment"
+        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
+        android:label="fragment_email_verified"
+        tools:layout="@layout/fragment_email_verified" >
+        <action
+            android:id="@+id/action_emailVerifiedFragment_to_profileMenuFragment"
+            app:destination="@id/profileMenuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePasswordFragment2"
+        android:name="com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+</navigation>

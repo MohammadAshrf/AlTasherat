@@ -6,6 +6,8 @@ import java.lang.reflect.Type
 class FakeRestApiNetworkProvider : INetworkProvider {
 
         var postResponse: Any? = null
+    var shouldThrowException: Boolean = false
+    var exceptionToThrow: Exception? = null
 
     override suspend fun <ResponseBody> get(
         responseWrappedModel: Type,
@@ -33,18 +35,21 @@ class FakeRestApiNetworkProvider : INetworkProvider {
         queryParams: Map<String, Any>?,
         requestBody: RequestBody?
     ): ResponseBody {
+        if (shouldThrowException && exceptionToThrow != null) {
+            throw exceptionToThrow as Throwable
+        }
         @Suppress("UNCHECKED_CAST")
         return postResponse as ResponseBody
     }
 
-    override suspend fun <ResponseBody, RequestBody> delete(
+    override suspend fun <ResponseBody> delete(
         responseWrappedModel: Type,
         pathUrl: String,
         headers: Map<String, Any>?,
-        queryParams: Map<String, Any>?,
-        requestBody: RequestBody?
+        queryParams: Map<String, Any>?
     ): ResponseBody {
-        throw UnsupportedOperationException("Not implemented")
+        return postResponse as ResponseBody
     }
+
 
 }

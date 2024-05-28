@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.onboarding.screens.OnBoardingSecond">
+    tools:context=".features.onboarding.presentation.ui.screens.OnBoardingSecond">
 
 
     <ImageView
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_110sdp"
-        android:src="@drawable/second_onboarding"
+        android:src="@drawable/image_second_onboarding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentChangePasswordBinding
@@ -29,7 +30,10 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
 
     private val viewModel: ChangePasswordViewModel by viewModels()
 
-    override fun onFragmentReady(savedInstanceState: Bundle?) {}
+    override fun onFragmentReady(savedInstanceState: Bundle?) {
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.GONE
+    }
 
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -121,5 +125,11 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
 
             else -> true
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.VISIBLE
     }
 }

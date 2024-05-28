@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_image"
     tools:context="com.solutionplus.altasherat.presentation.ui.fragment.viewpager.ViewPagerFragment">
 
 
@@ -15,6 +15,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/custom_edittext"
         app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +55,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0" />
+                app:layout_constraintVertical_bias="0"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -65,7 +67,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="-40dp"
-        android:src="@drawable/img1"
+        android:src="@drawable/splash_logo"
         android:translationZ="10dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
@@ -78,9 +80,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-24dp"
         android:background="@drawable/button_background"
-        android:drawableLeft="@drawable/small_image_login"
+        android:drawableLeft="@drawable/svgexport620220821t132423"
         android:drawableTint="#FFFFFF"
-        android:elevation="12dp"
+
         android:text="@string/send"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
@@ -89,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-         />
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -105,7 +107,7 @@
             android:id="@+id/tv_don_t_have_an_account"
             style="@style/TextView.Bold"
             android:padding="5dp"
-            android:text="لديك حساب بالفعل؟"
+            android:text="@string/Already_have_an_account"
             android:textColor="@color/Bg"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
@@ -115,7 +117,7 @@
             style="@style/TextView.Bold"
             android:foreground="?attr/selectableItemBackground"
             android:padding="5dp"
-            android:text="تسجيل الدخول"
+            android:text="@string/SignIn"
             android:textColor="@color/Secondary"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
@@ -123,7 +125,7 @@
 
     <TextView
         android:id="@+id/skip"
-        style="@style/Font.SemiBold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -138,22 +140,24 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="44dp"
-        android:src="@drawable/pl1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="65dp"
+        android:src="@drawable/ic_plane_right"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="@+id/cardView" />
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/imageViewp2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="28dp"
-        android:src="@drawable/pl2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
+        android:src="@drawable/ic_plane_left"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView" />
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

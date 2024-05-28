@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.presentation.ui.fragment.viewpager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragm
 import com.solutionplus.altasherat.databinding.FragmentViewPagerBinding
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment
 import com.solutionplus.altasherat.features.signup.presentation.ui.SignupFragment
+import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,7 +54,8 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
             }
         }
         binding.skip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_homeActivity)
+          val intent = Intent(requireContext(), HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -106,12 +109,12 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
     private fun updateImageViewVisibility(position: Int) {
         when (position) {
             0 -> {
-                binding.imageView5.visibility = View.GONE
-                binding.imageViewp2.visibility = View.VISIBLE
-            }
-            1 -> {
                 binding.imageView5.visibility = View.VISIBLE
                 binding.imageViewp2.visibility = View.GONE
+            }
+            1 -> {
+                binding.imageView5.visibility = View.GONE
+                binding.imageViewp2.visibility = View.VISIBLE
             }
         }
     }

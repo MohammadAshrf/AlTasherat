@@ -8,6 +8,9 @@
         <item name="colorSurface">@color/BgCard</item> <!-- Dark Blue Card Background -->
         <item name="android:colorBackground">@color/Bg</item> <!-- Dark Blue Main Background -->
         <item name="colorError">@color/Error</item> <!-- Error Color -->
+
+        <item name="android:windowIsTranslucent">true</item>
+
     </style>
 
     // ------------------------------------------- Fonts -------------------------------------------
