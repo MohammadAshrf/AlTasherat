@@ -79,6 +79,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         }
     }
 
+
     private fun handleUserState(user: User) {
         emailBundle = Bundle().apply {
             putString(EMAIL_KEY_BUNDLE, user.email)
@@ -91,12 +92,9 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 .load(user.imageUrl)
                 .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
 
-            }
         }
         binding.viewProfileSection.nameTextView.text = user.fullName
     }
-
-
     @SuppressLint("SetTextI18n")
     private fun getAppVersion() {
         val packageInfo =
@@ -116,7 +114,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
             ),
 
             RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.action_profileMenuFragment_to_aboutFragment),
-            RowItem(R.drawable.ic_support, getString(R.string.contact_with_us), R.id.contactUsFragment),
+            RowItem(R.drawable.ic_support, getString(R.string.contact_us), R.id.contactUsFragment),
             RowItem(R.drawable.ic_terms, getString(R.string.terms_and_conditions), R.id.action_profileMenuFragment_to_termsFragment),
             RowItem(R.drawable.ic_policy, getString(R.string.privacy_policy), R.id.action_profileMenuFragment_to_privacyFragment),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.changeLanguage)

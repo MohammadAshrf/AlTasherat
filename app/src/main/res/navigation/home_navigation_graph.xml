@@ -28,9 +28,6 @@
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
         <action
-            android:id="@+id/action_profileMenuFragment_to_fakeFragment"
-            app:destination="@id/fakeFragment" />
-        <action
             android:id="@+id/action_profileMenuFragment_to_changePasswordFragment2"
             app:destination="@id/changePasswordFragment2" />
         <action
@@ -57,11 +54,6 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/fakeFragment"
-        android:name="com.solutionplus.altasherat.fakeFragment"
-        android:label="fragment_fake"
-        tools:layout="@layout/fragment_fake" />
     <fragment
         android:id="@+id/emailVerifiedFragment"
         android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
