@@ -2,10 +2,7 @@ package com.solutionplus.altasherat.features.changepassword.presentation.ui.frag
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
@@ -17,9 +14,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentChangePasswordBinding
-import com.solutionplus.altasherat.features.changepassword.domain.repository.local.IChangePasswordLocalDS
-import com.solutionplus.altasherat.features.changepassword.presentation.ui.fragment.ChangePasswordViewModel
-import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -109,17 +103,17 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     private fun validateChangePasswordDetails(): Boolean {
         return when {
             binding.etOldPassword.text.isNullOrEmpty() -> {
-                showErrorSnackBar("Please enter the old password", true)
+                showSnackBar("Please enter the old password", true)
                 false
             }
 
             binding.etNewPassword.text.isNullOrEmpty() || binding.etNewPassword.text!!.length < 8 -> {
-                showErrorSnackBar("Please enter a valid new password (at least 8 characters)", true)
+                showSnackBar("Please enter a valid new password (at least 8 characters)", true)
                 false
             }
 
             binding.etReTypeNewPassword.text.toString() != binding.etNewPassword.text.toString() -> {
-                showErrorSnackBar("New password and confirmation do not match", true)
+                showSnackBar("New password and confirmation do not match", true)
                 false
             }
 

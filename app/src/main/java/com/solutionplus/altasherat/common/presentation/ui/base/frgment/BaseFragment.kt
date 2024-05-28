@@ -24,12 +24,9 @@ import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorH
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegate
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegateImpl
 import com.solutionplus.altasherat.databinding.ViewLoadingBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
     InternetConnectionDelegate by InternetConnectionDelegateImpl(), ErrorHandling {
@@ -119,7 +116,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
             .show()
     }
 
-    protected fun showErrorSnackBar(message: String, errorMessage: Boolean) {
+    protected fun showSnackBar(message: String, errorMessage: Boolean) {
         val snackBar = Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
 

@@ -19,7 +19,7 @@ internal class LoginRepository  (
 
     override suspend fun loginWithPhone(loginRequest: LoginRequest): Login {
         val result = remoteDs.loginWithPhone(loginRequest)
-        return LoginMapper.dtoToDomain(result!!)
+        return LoginMapper.dtoToDomain(result)
     }
 
     override suspend fun saveUser(user: User) {

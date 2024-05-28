@@ -21,6 +21,7 @@ class ProfileMenuViewModel @Inject constructor(
     private val checkUserStateUC: CheckUserStateUC,
     private val logoutUC: LogoutUC
 ) : AlTasheratViewModel<ProfileMenuAction, ProfileMenuEvent, ProfileMenuState>(ProfileMenuState.initial()) {
+
     override fun clearState() {
         setState(ProfileMenuState.initial())
     }

@@ -53,7 +53,8 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
                 showSnackbar(exception.message ?: "Unknown validation error")
             }
             is LeonException.Local.RequestValidation -> {
-                showSnackbar(exception.message ?: "Unknown validation error")
+                logger.error(exception.message)
+                showSnackbar( exception.message ?: "Unknown validation error")
             }
 
             is LeonException.Network.Unhandled -> showToasts("Unhandled Network Error")

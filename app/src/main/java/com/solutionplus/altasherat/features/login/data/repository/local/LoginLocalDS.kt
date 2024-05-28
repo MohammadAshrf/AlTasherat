@@ -39,7 +39,7 @@ internal class LoginLocalDS (private val storageKV: IKeyValueStorageProvider,pri
         val decryptedBytes = encryptionProvider.decryptData(encryptedBytes)
         val decryptedString = decryptedBytes?.decodeToString()
         val result = Gson().fromJson(decryptedString, UserEntity::class.java)
-        logUserInfoAfterDecryption(userJsonBase64!!, result)
+        logUserInfoAfterDecryption(userJsonBase64, result)
         return result
     }
 
