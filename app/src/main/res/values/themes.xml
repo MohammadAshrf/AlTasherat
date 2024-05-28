@@ -46,13 +46,13 @@
     <style name="TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
         <item name="android:gravity">start|center</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textAppearance">@style/Font</item>
-
+        <item name="fontStyle">normal</item>
     </style>
 
     <style name="TextView.Medium" parent="TextView">
@@ -95,11 +95,9 @@
         <item name="android:background">@drawable/rounded_edittext_register_login</item>
         <item name="android:ems">10</item>
         <item name="android:paddingLeft">16dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textAppearance">@style/Font</item>
-
-        <item name="fontStyle">normal</item>
+        <item name="android:textAppearance">@style/Font.Regular</item>
     </style>
 
 
@@ -107,11 +105,11 @@
 
     <style name="Button" parent="Widget.Material3.Button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">56dp</item>
-        <item name="android:layout_marginStart">16dp</item>
-        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_height">@dimen/_45sdp</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_8sdp</item>
         <item name="android:text">@string/app_name</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textAppearance">@style/Font.SemiBold</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="android:insetTop">0dp</item>
@@ -119,7 +117,7 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">@dimen/_4sdp</item>
     </style>
 
     <style name="Button.OutLine" parent="Button">
@@ -176,4 +174,38 @@
         <item name="android:paddingRight">4dp</item>
         <item name="android:textColor">?android:textColorHint</item>
     </style>
+
+    //--------------------------------------- TextInputLayout -----------------------------//
+
+    <style name="TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
+        <item name="android:layout_marginTop">@dimen/_4sdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_16sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_16sdp</item>
+        <item name="boxStrokeColor">@color/icon</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_16sdp</item>
+        <item name="android:textColorHint">@color/textInputIcon</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_16sdp</item>
+        <item name="startIconTint">@color/icon</item>
+    </style>
+
+
+    //--------------------------------------- TextInputEditText -----------------------------//
+
+    <style name="TextInputEditText" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+        <item name="android:background">@drawable/rounded_button_background</item>
+        <item name="android:padding">@dimen/_14sdp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:drawablePadding">@dimen/_6sdp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAppearance">@style/Font.Regular</item>
+    </style>
+
+
 </resources>
+

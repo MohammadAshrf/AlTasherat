@@ -23,6 +23,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="edit_password">تعديل كلمة المرور</string>
     <string name="about_us">من نحن</string>
+    <string name="terms">الشروط والاحكام</string>
+    <string name="policy">الشروط والاحكام</string>
     <string name="language">اللغة</string>
     <string name="sign_out">تسجيل الخروج</string>
     <string name="login">تسجيل الدخول</string>
@@ -110,4 +112,18 @@
     <string name="about_third">خدمـــات السفارات</string>
     <string name="about_fourth">خدمات القنصـــليات</string>
     <string name="what_we_offer">ماذا تقدم؟</string>
+    <string name="more">المـــزيد</string>
+    <string name="first_name">الإسم الأول</string>
+    <string name="enter_first_name">أدخل الإسم الأول</string>
+    <string name="middle_name">الإسم الأوسط</string>
+    <string name="enter_middle_name">أدخل الإسم الأوسط</string>
+    <string name="last_name">الإسم الأخير</string>
+    <string name="enter_last_name">أدخل الإسم الأخير</string>
+    <string name="phone_number">الجوال</string>
+    <string name="enter_mobile">أدخل رقم الجوال للمتابعة</string>
+    <string name="enter_email">أدخل البريد الإلكتروني</string>
+    <string name="email_address">البريد الإلكتروني</string>
+    <string name="birthdate">تاريخ الميلاد</string>
+    <string name="enter_birthdate">أدخل تاريخ الميلاد</string>
+    <string name="state">الدولة</string>
 </resources>

@@ -38,6 +38,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.viewState.collect { state ->
+                        renderState(state)
+
                         state.exception?.let {
                             handleHttpExceptions(it)
                         }
@@ -98,6 +100,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             viewModel.onActionTrigger(
                 LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
+
 
         }
     }
