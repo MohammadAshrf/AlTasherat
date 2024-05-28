@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_visa_platform"
+        android:id="@+id/visaPlatformFragment"
         android:icon="@drawable/iconnav3"
         android:title="@string/visa_platform" />
     <item
-        android:id="@+id/navigation_visa_applications"
+        android:id="@+id/visaApplicationsFragment"
         android:icon="@drawable/ic_visa_order"
         android:title="@string/visa_applications" />
 
