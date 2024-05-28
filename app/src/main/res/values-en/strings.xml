@@ -61,4 +61,5 @@
     <string name="confirm">confirm</string>
     <string name="edit_profile">edit profile</string>
     <string name="current_version">current version :</string>
+    <string name="FillOut_the_form_now">fill the form now</string>
 </resources>
