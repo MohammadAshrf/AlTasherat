@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.features.profileMenu.di
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.solutionplus.altasherat.common.data.repository.remote.interceptors.authInterceptor.AuthTokenProvider
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
@@ -35,7 +36,7 @@ internal object profileMenuModule {
 
     @Provides
     fun provideRemoteDS(provider: INetworkProvider): IProfileMenuRemoteDS =
-        ProfileMenuRemoteDS(provider)
+        ProfileMenuRemoteDS(provider )
 
     @Provides
     fun provideRepository(

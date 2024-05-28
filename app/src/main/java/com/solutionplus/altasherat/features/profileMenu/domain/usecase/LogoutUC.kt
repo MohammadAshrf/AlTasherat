@@ -14,10 +14,11 @@ class LogoutUC(
     private val repository: IProfileMenuRepository
 ) : BaseUseCase<Logout, Unit>() {
     public override suspend fun execute(params: Unit? ,): Logout {
+        val logoutResponse = repository.logout()
         repository.deleteUser()
         repository.deleteAccessToken()
         repository.changeUserLoginState(false)
-        return repository.logout()
+        return logoutResponse
     }
 
 }

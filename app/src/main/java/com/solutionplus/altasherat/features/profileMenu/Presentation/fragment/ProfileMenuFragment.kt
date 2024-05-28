@@ -28,27 +28,21 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
     private val viewModel: ProfileMenuViewModel by viewModels<ProfileMenuViewModel>()
     private lateinit var emailBundle: Bundle
 
-
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.GetUser)
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
+        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.GetUser)
     }
 
     override fun viewInit() {
         getAppVersion()
         binding.btnLogOut.setOnClickListener {
             viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.Logout)
-
         }
     }
 
     override fun subscribeToObservables() {
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
-                is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
-                    handleUserState(it.user)
-                }
-
                 is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
                     setupRecyclerView(it.isUserLoggedIn)
                     logger.info(it.isUserLoggedIn.toString())
@@ -61,13 +55,23 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     }
                 }
 
+                is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
+                    handleUserState(it.user)
+                }
+
+
                 is ProfileMenuContract.ProfileMenuEvent.LogoutSuccess -> {
-                    findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
+                    //findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
+                    showSnackBar(it.message, false)
+                    viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
+
                 }
             }
         }
-
         collectFlowWithLifecycle(viewModel.viewState) { state ->
+            state.exception?.let {
+                handleHttpExceptions(it)
+            }
             if (state.isLoading) {
                 showLoading()
             } else {
@@ -80,18 +84,16 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         emailBundle = Bundle().apply {
             putString(EMAIL_KEY_BUNDLE, user.email)
         }
-        if (user.id != -1) {
-            if (!user.emailVerified) {
-                showCustomSnackbar()
-            }
-            if (user.imageUrl != "") {
-                Glide.with(this)
-                    .load(user.imageUrl)
-                    .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
-
-            }
-            binding.viewProfileSection.nameTextView.text = user.fullName
+        if (!user.emailVerified && user.id != -1) {
+            showCustomSnackbar()
         }
+        if (user.imageUrl != "") {
+            Glide.with(this)
+                .load(user.imageUrl)
+                .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
+
+        }
+        binding.viewProfileSection.nameTextView.text = user.fullName
     }
 
 
@@ -108,18 +110,17 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         val items = listOf(
             RowItem(
                 icon = if (isUserLoggedIn) R.drawable.ic_edt_password else R.drawable.ic_login,
-                text =if (isUserLoggedIn) getString(R.string.edit_password) else getString(R.string.login),
+                text = if (isUserLoggedIn) getString(R.string.edit_password) else getString(R.string.login),
                 destinationActivity = if (isUserLoggedIn) null else AuthenticationActivity::class.java,
                 destinationFragmentId = if (isUserLoggedIn) R.id.action_profileMenuFragment_to_changePasswordFragment2 else null
             ),
             RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
-            RowItem(R.drawable.ic_support, getString(R.string.terms), R.id.fakeFragment),
-            RowItem(R.drawable.ic_plicy, getString(R.string.policy), R.id.fakeFragment),
+            RowItem(R.drawable.ic_support, getString(R.string.contact_with_us), R.id.fakeFragment),
+            RowItem(R.drawable.ic_terms, getString(R.string.terms), R.id.fakeFragment),
+            RowItem(R.drawable.ic_plicy, getString(R.string.privacy), R.id.fakeFragment),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.changeLanguage)
         )
-
         val adapter = RowAdapter(items, this)
-
         binding.rvRow.layoutManager = LinearLayoutManager(requireContext())
         binding.rvRow.adapter = adapter
     }
@@ -127,7 +128,6 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
 
     private fun showCustomSnackbar() {
         binding.messageVerefication.VerificationMessage.visibility = View.VISIBLE
-
         binding.messageVerefication.snackbarAction.setOnClickListener {
             findNavController().navigate(
                 R.id.action_profileMenuFragment_to_emailVerifiedFragment,

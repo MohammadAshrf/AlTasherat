@@ -12,6 +12,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.model.Login
 import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper
@@ -27,7 +28,7 @@ import kotlinx.coroutines.test.runBlockingTest
 /*
 - validation
  */
- class SignupWithPhoneUCTest {
+class SignupWithPhoneUCTest {
 
     private lateinit var repository: ISignupRepository
     private lateinit var signupUC: SignupUC
@@ -45,7 +46,15 @@ import kotlinx.coroutines.test.runBlockingTest
             countryCode = "0020",
             number = "100100100"
         )
-        val signupRequest = SignupRequest(phone = phone, password = "123456789", countryCode = "0020", countryId = 1,  firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
+        val signupRequest = SignupRequest(
+            phone = phone,
+            password = "123456789",
+            countryCode = "0020",
+            countryId = 1,
+            firstName = "mahmoud",
+            lastName = "Abdo",
+            passwordConfirmation = "123456789"
+        )
         val userInfo = User(
             id = 1,
             userName = "jdoe",
@@ -74,4 +83,19 @@ import kotlinx.coroutines.test.runBlockingTest
             repository.getUser()
         }
     }
+
+
+    @Test(expected = LeonException.Local.RequestValidation::class)
+    fun `test execute() with wrong SignupRequest and expected to throw RequestValidation exception`() =
+        runBlocking {
+            val signupRequest = SignupRequest(
+                firstName = "m",
+                lastName = "a",
+                email = "m",
+                phone = Phone("0020", "100100100"),
+                password = "1234567",
+                passwordConfirmation = "1234567",
+            )
+           signupUC.execute(signupRequest)
+        }
 }

@@ -43,6 +43,7 @@ class ChangeLanguage : BaseFragment<FragmentChangeLanguageBinding>() {
 
             findNavController().popBackStack()
         }
+        //ToDo fix the arabic support
     }
 
 

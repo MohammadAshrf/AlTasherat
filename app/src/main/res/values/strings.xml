@@ -87,4 +87,7 @@
     <string name="edit_profile">تعــديل الملف الشخصي</string>
     <string name="current_version">النسخة الحالية:</string>
     <string name="changing_language">يتم تغيير اللغة</string>
+    <string name="login_success">تم تسجيل الدخول بنجاح</string>
+    <string name="privacy">سياسة الخصوصية</string>
+    <string name="contact_with_us">تواصل معنا</string>
 </resources>

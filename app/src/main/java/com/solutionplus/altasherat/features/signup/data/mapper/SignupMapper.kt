@@ -20,7 +20,6 @@ internal object SignupMapper : Mapper<SignupDto, Signup, SignupEntity>() {
             token = model.token,
             user = UserMapper.domainToEntity(model.user)
         )
-
     }
 
 

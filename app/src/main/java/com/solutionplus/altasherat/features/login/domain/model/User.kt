@@ -1,17 +1,17 @@
 package com.solutionplus.altasherat.features.login.domain.model
 
 data class User(
-    val id: Int? = null,
-    val userName: String? = null,
-    val fullName: String? = null,
-    val email: String? = null,
-    val password: String? = null,
-    val firstName: String? = null,
-    val middleName: String? = null,
-    val lastName: String? = null,
-    val phone: String? = null,
-    val birthDate: String? = null,
-    val imageUrl: String? = null,
-    val emailVerified: Boolean?= null,
+    val id: Int,
+    val userName: String,
+    val fullName: String,
+    val email: String,
+    val password: String,
+    val firstName: String,
+    val middleName: String,
+    val lastName: String,
+    val phone: String,
+    val birthDate: String?,
+    val imageUrl: String,
+    val emailVerified: Boolean,
 
     )

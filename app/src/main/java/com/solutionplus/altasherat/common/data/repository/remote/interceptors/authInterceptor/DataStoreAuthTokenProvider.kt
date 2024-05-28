@@ -3,6 +3,7 @@ package com.solutionplus.altasherat.common.data.repository.remote.interceptors.a
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
@@ -15,6 +16,7 @@ class DataStoreAuthTokenProvider(
 ) : AuthTokenProvider {
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun getAuthToken(): String? {
+        logger.info("getAuthToken called from DataStoreAuthTokenProvider")
         val userJsonBase64 = storageKV.getEntry(StorageKeyEnum.ACCESS_TOKEN, "", String::class.java)
         if (userJsonBase64.isNullOrEmpty()) {
             return null
@@ -24,5 +26,8 @@ class DataStoreAuthTokenProvider(
         val decryptedString = decryptedBytes?.decodeToString()
         val result = Gson().fromJson(decryptedString, String::class.java)
         return result
+    }
+    companion object {
+        private val logger = getClassLogger()
     }
 }

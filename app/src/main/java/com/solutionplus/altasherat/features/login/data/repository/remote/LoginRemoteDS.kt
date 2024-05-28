@@ -10,7 +10,7 @@ internal class LoginRemoteDS(private val provider: INetworkProvider) : ILoginRem
 
     override suspend fun loginWithPhone(
         loginRequest: LoginRequest
-    ): LoginDto? {
+    ): LoginDto {
         return provider.post(
             responseWrappedModel = LoginDto::class.java, pathUrl = "login",
             headers = NO_AUTHENTICATION, requestBody = loginRequest

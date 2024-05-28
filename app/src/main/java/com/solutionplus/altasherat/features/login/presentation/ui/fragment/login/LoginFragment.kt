@@ -38,10 +38,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.viewState.collect { state ->
-                        renderState(state)
-
                         state.exception?.let {
                             handleHttpExceptions(it)
+                        }
+                        if (state.isLoading) {
+                            showLoading()
+                        } else {
+                            hideLoading()
                         }
                     }
                 }
@@ -71,24 +74,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         }
     }
 
-    private fun renderState(state: LoginContract.LoginState) {
-        CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading) {
-                showLoading(resources.getString(R.string.please_wait))
-            } else {
-                hideLoading()
-            }
-
-        }
-    }
-
     private fun handleEvent(event: LoginContract.LoginEvents) {
         when (event) {
             is LoginContract.LoginEvents.LoginSuccess -> {
                 val intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(requireContext(), "You logged in successfully", Toast.LENGTH_SHORT)
-                    .show()
+               showSnackBar(resources.getString(R.string.login_success), false)
+                requireActivity().finish()
             }
 
             is LoginContract.LoginEvents.LoginError -> {
@@ -107,19 +99,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
 
-
         }
     }
 
     private fun validateLoginDetails(): Boolean {
         return when {
             binding.etPhoneClient.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.etPhoneClient.text.toString()) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
+                showSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
                 false
             }
 
             binding.etPassword.text?.trim()?.length !in 8..50 -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
+                showSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
                 false
             }
 
