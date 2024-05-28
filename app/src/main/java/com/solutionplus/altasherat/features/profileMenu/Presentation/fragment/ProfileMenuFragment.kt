@@ -37,12 +37,17 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         getAppVersion()
         binding.btnLogOut.setOnClickListener {
             viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.Logout)
+
         }
     }
 
     override fun subscribeToObservables() {
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
+                is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
+                    handleUserState(it.user)
+                }
+
                 is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
                     setupRecyclerView(it.isUserLoggedIn)
                     logger.info(it.isUserLoggedIn.toString())
@@ -116,7 +121,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
             ),
             RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.fakeFragment),
             RowItem(R.drawable.ic_support, getString(R.string.contact_with_us), R.id.fakeFragment),
-            RowItem(R.drawable.ic_terms, getString(R.string.terms), R.id.fakeFragment),
+            RowItem(R.drawable.ic_terms, getString(R.string.terms), R.id.contactUsFragment),
             RowItem(R.drawable.ic_plicy, getString(R.string.privacy), R.id.fakeFragment),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.changeLanguage)
         )
@@ -128,6 +133,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
 
     private fun showCustomSnackbar() {
         binding.messageVerefication.VerificationMessage.visibility = View.VISIBLE
+
         binding.messageVerefication.snackbarAction.setOnClickListener {
             findNavController().navigate(
                 R.id.action_profileMenuFragment_to_emailVerifiedFragment,
