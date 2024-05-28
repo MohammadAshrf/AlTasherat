@@ -257,7 +257,7 @@
                 style="@style/Button"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/button_background"
-                android:drawableEnd="@drawable/save"
+                android:drawableEnd="@drawable/ic_save"
                 android:drawableTint="#FFFFFF"
                 android:elevation="12dp"
                 android:paddingStart="@dimen/_100sdp"

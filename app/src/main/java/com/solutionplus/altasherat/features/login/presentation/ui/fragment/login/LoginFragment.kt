@@ -38,7 +38,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.viewState.collect { state ->
-                        renderState(state)
 
                         state.exception?.let {
                             handleHttpExceptions(it)

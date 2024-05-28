@@ -60,7 +60,6 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
             if (binding.viewPager.currentItem + 1 < adapter.itemCount) {
                 binding.viewPager.currentItem += 1
             } else {
-                onBoardingVM.processIntent(OnBoardingContract.OnBoardingAction.ContinueToHome)
                 onBoardingVM.processIntent(OnBoardingContract.OnBoardingAction.SetOnBoardingShown)
             }
         }
