@@ -87,4 +87,10 @@
     <string name="edit_profile">تعــديل الملف الشخصي</string>
     <string name="current_version">النسخة الحالية:</string>
     <string name="more">المـــزيد</string>
+    <string name="first_name">الإسم الأول</string>
+    <string name="enter_first_name">أدخل الإسم الأول</string>
+    <string name="middle_name">الإسم الأوسط</string>
+    <string name="enter_middle_name">أدخل الإسم الأوسط</string>
+    <string name="last_name">الإسم الأخير</string>
+    <string name="enter_last_name">أدخل الإسم الأخير</string>
 </resources>
