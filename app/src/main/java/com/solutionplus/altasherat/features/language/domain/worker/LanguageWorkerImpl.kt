@@ -31,5 +31,4 @@ class LanguageWorkerImpl @Inject constructor(private val context: Context) {
         val workInfo = workManager.getWorkInfoByIdFlow(languageWorkRequest.id)
         emitAll(workInfo.filterNotNull())
     }
-
 }

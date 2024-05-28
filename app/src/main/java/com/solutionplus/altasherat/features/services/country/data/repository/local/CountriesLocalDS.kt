@@ -22,7 +22,9 @@ internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStora
     }
 
     override suspend fun hasCountriesInLocal(): Boolean {
-        return localStorageProvider.hasKey(StorageKeyEnum.COUNTRIES, String::class.java)
+        val key = localStorageProvider.hasKey(StorageKeyEnum.COUNTRIES, false)
+        logger.info(key.toString())
+        return key
     }
 
     companion object {

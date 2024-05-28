@@ -22,8 +22,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        splashVM.processIntent(SplashContract.SplashAction.HasCountries)
-       AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
+        splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
     }
 
     override fun subscribeToObservables() {
@@ -35,15 +34,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
             when (it) {
                 is SplashContract.SplashEvent.NavigateToLanguage -> navigateToLanguage()
                 is SplashContract.SplashEvent.NavigateToHome -> startHomeActivity()
-                is SplashContract.SplashEvent.NavigateToOnBoarding -> navigateToOnBoarding()
             }
         }
-    }
-
-    private fun navigateToOnBoarding() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment)
-        }, 1200)
     }
 
     private fun navigateToLanguage() {
@@ -55,10 +47,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     private fun startHomeActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(
-                Intent(
-                    requireContext(),
-                    HomeActivity::class.java
-                )
+                Intent(requireContext(), HomeActivity::class.java)
             ).also { requireActivity().finish() }
         }, 1200)
     }

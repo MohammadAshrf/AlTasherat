@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/on_boarding_grapg"
+    android:id="@+id/on_boarding_graph"
     app:startDestination="@id/splashFragment">
 
 
@@ -12,16 +12,15 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_languageFragment"
-            app:destination="@id/languageFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_onBoardingFragment"
-            app:destination="@id/onBoardingFragment" />
+            app:destination="@id/languageFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/onBoardingFragment"
         android:name="com.solutionplus.altasherat.features.onboarding.presentation.ui.OnBoardingFragment"
-        tools:layout="@layout/fragment_on_boarding"/>
+        tools:layout="@layout/fragment_on_boarding" />
 
     <fragment
         android:id="@+id/languageFragment"
@@ -30,6 +29,8 @@
         tools:layout="@layout/fragment_language">
         <action
             android:id="@+id/action_languageFragment_to_onBoardingFragment"
-            app:destination="@id/onBoardingFragment" />
+            app:destination="@id/onBoardingFragment"
+            app:popUpTo="@id/languageFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

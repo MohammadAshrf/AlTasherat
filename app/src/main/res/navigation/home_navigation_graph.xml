@@ -37,6 +37,15 @@
             android:id="@+id/action_profileMenuFragment_to_visaPlatformFragment"
             app:destination="@id/visaPlatformFragment" />
         <action
+            android:id="@+id/action_profileMenuFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
             android:id="@+id/action_profileMenuFragment_to_changeLanguage"
             app:destination="@id/changeLanguage" />
         <action
@@ -74,4 +83,19 @@
         android:name="com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguage"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.solutionplus.altasherat.features.terms.presentation.ui.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.solutionplus.altasherat.features.privacy.presentation.ui.PrivacyFragment"
+        android:label="fragment_privacy"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.solutionplus.altasherat.features.about.presentation.ui.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

@@ -9,7 +9,7 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 interface LanguageContract {
 
     sealed class LanguageAction : ViewAction {
-        data object GetCountries : LanguageAction()
+        data object GetCountriesFromLocal : LanguageAction()
         data class StartLanguageWorker(val language: String) : LanguageAction()
         data object ContinueToOnBoarding : LanguageAction()
     }

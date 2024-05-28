@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.solutionplus.altasherat.R
@@ -71,7 +70,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
 
     private var mProgressDialog: Dialog? = null
 
-    fun showLoading(message: String?=null ) {
+    fun showLoading(message: String? = null) {
 
         if (mProgressDialog == null) {
             mProgressDialog = Dialog(requireActivity()).apply {
@@ -80,7 +79,8 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
                 setCanceledOnTouchOutside(false)
             }
         }
-        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text = message ?: resources.getString(R.string.please_wait)
+        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text =
+            message ?: resources.getString(R.string.please_wait)
         mProgressDialog?.show()
     }
 
@@ -144,6 +144,5 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         _binding = null
         mProgressDialog?.dismiss()
         mProgressDialog = null
-
     }
 }

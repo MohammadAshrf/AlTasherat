@@ -11,16 +11,13 @@
     <color name="bgInput">#F1F4FB</color>
     <color name="textInputIcon">#b2aecc</color>
     <color name="Error">#CE6679</color>
-
     <color name="surface">#F1F4FB</color>
     <color name="background">#b2aecc</color>
     <color name="Bg">#010533</color>
     <color name="BgCard">#1C204C</color>
     <color name="Bg_bt">#282D6E</color>
     <color name="icon">#B2AECC</color>
-
     <color name="backgroundEditText">#f1f4fb</color>
-
 
 
 </resources>

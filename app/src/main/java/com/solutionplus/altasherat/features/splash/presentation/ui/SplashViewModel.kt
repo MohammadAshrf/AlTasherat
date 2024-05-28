@@ -6,7 +6,6 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewM
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.onboarding.domain.interactor.IsOnboardingShownUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
-import com.solutionplus.altasherat.features.services.country.domain.interactor.HasCountriesUC
 import com.solutionplus.altasherat.features.splash.presentation.ui.SplashContract.SplashAction
 import com.solutionplus.altasherat.features.splash.presentation.ui.SplashContract.SplashEvent
 import com.solutionplus.altasherat.features.splash.presentation.ui.SplashContract.SplashState
@@ -18,31 +17,13 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val getCountriesUC: GetCountriesUC,
     private val isOnboardingShownUC: IsOnboardingShownUC,
-    private val hasCountriesUC: HasCountriesUC
 ) :
     AlTasheratViewModel<SplashAction, SplashEvent, SplashState>(SplashState.initial()) {
 
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
-            SplashAction.IsOnBoardingShown -> isOnboardingShown()
-            SplashAction.HasCountries -> hasCountries()
-        }
-    }
-
-    private fun hasCountries() {
-        viewModelScope.launch {
-            hasCountriesUC.invoke().collect {
-                when (it) {
-                    is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> if (it.model) {
-                        processIntent(SplashAction.IsOnBoardingShown)
-                    } else {
-                        fetchCountriesAndNavigateToLanguage()
-                    }
-                }
-            }
+            is SplashAction.IsOnBoardingShown -> isOnboardingShown()
         }
     }
 
@@ -54,8 +35,8 @@ class SplashViewModel @Inject constructor(
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
                     is Resource.Success -> if (it.model) {
                         sendEvent(SplashEvent.NavigateToHome)
-                        } else {
-                        sendEvent(SplashEvent.NavigateToOnBoarding)
+                    } else {
+                        fetchCountriesAndNavigateToLanguage()
                     }
                 }
             }
