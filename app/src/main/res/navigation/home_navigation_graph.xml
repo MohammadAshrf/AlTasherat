@@ -28,9 +28,6 @@
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
         <action
-            android:id="@+id/action_profileMenuFragment_to_fakeFragment"
-            app:destination="@id/fakeFragment" />
-        <action
             android:id="@+id/action_profileMenuFragment_to_emailVerifiedFragment"
             app:destination="@id/emailVerifiedFragment" />
         <action
@@ -57,26 +54,15 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_contactUsFragment"
             app:destination="@id/contactUsFragment" />
-        <action
-            android:id="@+id/action_profileMenuFragment_to_emailVerifiedFragment"
-            app:destination="@id/emailVerifiedFragment" />
+
 
 
     </fragment>
-    <fragment
-        android:id="@+id/fakeFragment"
-        android:name="com.solutionplus.altasherat.fakeFragment"
-        android:label="fragment_fake"
-        tools:layout="@layout/fragment_fake" />
     <fragment
         android:id="@+id/emailVerifiedFragment"
         android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
         android:label="fragment_email_verified"
-        tools:layout="@layout/fragment_email_verified" >
-        <action
-            android:id="@+id/action_emailVerifiedFragment_to_profileMenuFragment"
-            app:destination="@id/profileMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_email_verified" />
 
     <fragment
         android:id="@+id/changePasswordFragment2"
