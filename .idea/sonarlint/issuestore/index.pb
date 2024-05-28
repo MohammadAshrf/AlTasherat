@@ -113,3 +113,7 @@ kapp/src/main/java/com/solutionplus/altasherat/common/data/repository/local/encr
 lapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/adapter/ViewPagerAdapter.kt,8\4\847f3834ca5f7721ba904b7835e2f95a688aaf0e
 —
 gapp/src/main/java/com/solutionplus/altasherat/features/signup/presentation/ui/adapter/CountryAdapter.kt,9\3\931a7d58a911ece95eaef1edb42bd95ff4539015
+p
+@app/src/test/java/com/solutionplus/altasherat/ExampleUnitTest.kt,e\5\e5c1a0ec19c6280de71b0b337d75a007b57467be
+•
+eapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/ViewPagerFragment.kt,8\7\8717cb553940d0f6185da21fddc23044c850b329

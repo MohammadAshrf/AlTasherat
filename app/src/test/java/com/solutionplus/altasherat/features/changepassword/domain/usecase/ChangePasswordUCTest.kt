@@ -96,6 +96,26 @@ class ChangePasswordUCTest {
     }
 
     @Test
+    fun `test invalid when old password Empty`() = runBlocking {
+        // Arrange
+        val request = ChangePasswordRequest(
+            oldPassword = "",
+        )
+
+        coEvery { repository.changePassword(request) } returns request
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            changePasswordUC.execute(request)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("Old password is invalid. It must be between 8 and 50 characters.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+
+    @Test
     fun `test invalid new password`() = runBlocking {
         // Arrange
         val request = ChangePasswordRequest(
@@ -116,6 +136,29 @@ class ChangePasswordUCTest {
         }
         assertTrue(exceptionThrown)
     }
+
+    @Test
+    fun `test invalid when new password Empty`() = runBlocking {
+        // Arrange
+        val request = ChangePasswordRequest(
+            oldPassword = "validOldPassword123",
+            newPassword = "",
+            newPasswordConfirmation = "short"
+        )
+
+        coEvery { repository.changePassword(request) } returns request
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            changePasswordUC.execute(request)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("New password is invalid. It must be between 8 and 50 characters.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+
     @Test
     fun `test new password and confirmation do not match`() = runBlocking {
         // Arrange

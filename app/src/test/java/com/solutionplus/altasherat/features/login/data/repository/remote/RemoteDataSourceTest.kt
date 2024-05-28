@@ -48,24 +48,24 @@ class RemoteDataSourceTest {
         assertEquals(expectedResponse, result)
     }
 
-//    @Test
-//    fun `when login and get server error`() = runBlocking {
-//        // Arrange
-//        val exception = LeonException.Server.InternalServerError(404, "internal server error")
-//        val phone = Phone(countryCode = "0020", number = "100100100")
-//        val loginRequest = LoginRequest(phone = phone, password = "password")
-//
-//        provider.shouldThrowException = true
-//        provider.exceptionToThrow = exception
-//
-//        // Act & Assert
-//        try {
-//            remoteDataSource.loginWithPhone(loginRequest)
-//            fail("Expected an exception to be thrown")
-//        } catch (e: LeonException.Server.InternalServerError) {
-//            assertEquals(exception.message, e.message)
-//        }
-//    }
+    @Test
+    fun `when login and get server error`() = runBlocking {
+        // Arrange
+        val exception = LeonException.Server.InternalServerError(404, "internal server error")
+        val phone = Phone(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phone = phone, password = "password")
+
+        provider.shouldThrowException = true
+        provider.exceptionToThrow = exception
+
+        // Act & Assert
+        try {
+            remoteDataSource.loginWithPhone(loginRequest)
+            fail("Expected an exception to be thrown")
+        } catch (e: LeonException.Server.InternalServerError) {
+            assertEquals(exception.message, e.message)
+        }
+    }
 
 
 }

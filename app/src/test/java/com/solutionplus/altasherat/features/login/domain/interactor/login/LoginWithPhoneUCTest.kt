@@ -1,33 +1,23 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
-import io.mockk.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import com.google.common.truth.Truth.assertThat
-import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.common.data.model.Resource
+
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.Phone
-import com.solutionplus.altasherat.features.login.domain.interactor.login.LoginWithPhoneUC
 import com.solutionplus.altasherat.features.login.domain.model.Login
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
-import okhttp3.ResponseBody
-import retrofit2.HttpException
-import retrofit2.Response
-import java.io.IOException
+import io.mockk.Runs
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.runs
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Test
 
 /*
 - validation
@@ -41,7 +31,6 @@ class LoginWithPhoneUCTest {
         repository = mockk()
         loginWithPhoneUC = LoginWithPhoneUC(repository)
     }
-
 
     @Test
     fun `when login is successful_given phone country code and password then user details are returned`() = runBlocking {
@@ -99,6 +88,75 @@ class LoginWithPhoneUCTest {
         assertEquals(exception.message, thrownException?.message)
     }
 
+//-------------------------Validation Tests-----------------------------------------//
+
+    @Test
+    fun `test invalid phone number`() = runBlocking {
+        // Arrange
+        val phone = Phone(countryCode = "0020", number = "12345678")
+        val loginRequest = LoginRequest(phone = phone, password = "password")
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            loginWithPhoneUC.execute(loginRequest)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+
+    @Test
+    fun `test invalid phone number is empty`() = runBlocking {
+        // Arrange
+        val phone = Phone(countryCode = "0020", number = "")
+        val loginRequest = LoginRequest(phone = phone, password = "password")
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            loginWithPhoneUC.execute(loginRequest)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+
+    @Test
+    fun `test invalid password`() = runBlocking {
+        // Arrange
+        val phone = Phone(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phone = phone, password = "12345")
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            loginWithPhoneUC.execute(loginRequest)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
+
+    @Test
+    fun `test invalid password is empty`() = runBlocking {
+        // Arrange
+        val phone = Phone(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phone = phone, password = "")
+
+        // Act & Assert
+        var exceptionThrown = false
+        try {
+            loginWithPhoneUC.execute(loginRequest)
+        } catch (e: LeonException.Local.RequestValidation) {
+            exceptionThrown = true
+            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
+        }
+        assertTrue(exceptionThrown)
+    }
 
 
 }
