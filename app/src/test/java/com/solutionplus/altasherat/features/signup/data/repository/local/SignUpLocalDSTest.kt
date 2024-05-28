@@ -53,12 +53,13 @@ class SignUpLocalDSTest{
 
         every { encryptionProvider.encryptData(bytesUser) } returns encryptedUserData
         coEvery { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) } just Runs
-
+        coEvery{ storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java)} just  Runs
         // Act
         loginLocalDS.saveUser(user)
 
         // Assert
         coVerify { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) }
+        coVerify { storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java) }
         verify { encryptionProvider.encryptData(bytesUser) }
     }
 
