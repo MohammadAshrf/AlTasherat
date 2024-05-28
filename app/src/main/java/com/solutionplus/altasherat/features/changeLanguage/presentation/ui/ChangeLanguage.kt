@@ -35,25 +35,14 @@ class ChangeLanguage : BaseFragment<FragmentChangeLanguageBinding>() {
     override fun viewInit() {
         binding.btnSave.setOnClickListener {
             if (binding.arabicRadioBtn.isChecked) {
-                updateLocale("ar")
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
+
             } else {
-                updateLocale("en")
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"))
             }
-            activity?.recreate()
 
             findNavController().popBackStack()
         }
-        //ToDo fix the arabic support
     }
 
-
-    private fun updateLocale(language: String): Context {
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-
-        val config = resources.configuration
-        config.setLocale(locale)
-
-        return requireContext().createConfigurationContext(config)
-    }
 }
