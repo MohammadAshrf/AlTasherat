@@ -103,7 +103,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         val packageInfo =
             requireContext().packageManager!!.getPackageInfo(requireContext().packageName, 0)
         val version = packageInfo.versionName
-        binding.tvVersion.text = "V $version"
+        binding.tvVersion.text = "v$version"
     }
 
 

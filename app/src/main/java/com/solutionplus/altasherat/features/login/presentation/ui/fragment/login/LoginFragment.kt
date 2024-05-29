@@ -13,7 +13,7 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.signup.presentation.ui.adapter.CountryAdapter
+import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +25,9 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListener {
 
     private val viewModel: LoginViewModel by viewModels()
-
+    private val adapter: CountryCodeSpinnerAdapter by lazy {
+        CountryCodeSpinnerAdapter(requireContext(), emptyList())
+    }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         subscribeToObservables()
@@ -62,7 +64,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     }
 
     private fun setupCountrySpinner(countries: List<Country>) {
-        val adapter = CountryAdapter(requireContext(), countries)
+        val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
     }
 

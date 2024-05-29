@@ -1,20 +1,15 @@
-package com.solutionplus.altasherat.features.signup.presentation.ui.adapter
+package com.solutionplus.altasherat.features.services.country.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.databinding.ItemCountrySpinnerBinding
 import com.solutionplus.altasherat.databinding.ItemCountrySpinnerWithPhoneBinding
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
-internal class CountryAdapter
+internal class CountryCodeSpinnerAdapter
     (private val context: Context, private val countries: List<Country>) : BaseAdapter() {
     override fun getCount(): Int = countries.size
 
@@ -35,7 +30,7 @@ internal class CountryAdapter
         }
         val country = countries[position]
         binding.flagImageView.text = country.flag
-        binding.countryCode.text = "(${country.phoneCode})"
+        binding.countryCode.text = context.getString(R.string.binding_phone_code, country.phoneCode)
         return view
     }
 

@@ -17,6 +17,7 @@
     <string name="enter_phone_text">Enter your phone</string>
     <string name="err_msg_enter_countrycode">Please Enter Country Code</string>
     <string name="err_msg_enter_valid_first_name">First name must be between 3 and 15 characters.</string>
+    <string name="err_msg_enter_valid_middle_name">Middle name must be less than 15 characters.</string>
     <string name="err_msg_enter_valid_last_name">Last name must be between 3 and 15 characters.</string>
     <string name="err_msg_enter_valid_email">Please enter a valid email address with maximum 15 characters.</string>
     <string name="err_msg_enter_valid_phone">Phone number must be numeric and between 9 and 15 characters.</string>
@@ -46,10 +47,10 @@
     <string name="old_password_txt">Old password</string>
     <string name="new_password_text">New password</string>
     <string name="repete_new_password_text">Repeat the new password</string>
-    <string name="change_password">Change password</string>
-    <string name="visa_platform">Visa platform</string>
-    <string name="visa_applications">Visa applications</string>
-    <string name="profile_personly">Profile personly</string>
+    <string name="change_password">Change Password</string>
+    <string name="visa_platform">Visa Platform</string>
+    <string name="visa_applications">Visa Applications</string>
+    <string name="profile_personly">Profile Personally</string>
     <string name="next">Next</string>
     <string name="hello_onboarding">Welcom to AlTasherat App</string>
     <string name="third_onboarding">Whether you are looking for work or you are a company owner looking for workers, a team of experts at the highest level will be at your service. Just fill out your application in easy steps without complications.</string>
@@ -85,6 +86,10 @@
     <string name="about_third">Embassies services</string>
     <string name="about_fourth">Consular services</string>
     <string name="what_we_offer">What does it offer?</string>
+    <string name="email_not_verified">E-mail is not verified</string>
+    <string name="confirm">Confirm</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="current_version">Current Version: </string>
     <string name="skip">Skip</string>
     <string name="visit_visa">Tourist visas</string>
     <string name="jobs_visa">Job visas</string>
@@ -96,10 +101,6 @@
     <string name="SignIn">sign in</string>
     <string name="Already_have_an_account">Already have an account?</string>
     <string name="forgot_password">Forgot your password?</string>
-    <string name="email_not_verified">email is not verified</string>
-    <string name="confirm">confirm</string>
-    <string name="edit_profile">edit profile</string>
-    <string name="current_version">current version :</string>
     <string name="more">More</string>
     <string name="first_name">First Name</string>
     <string name="enter_first_name">Enter First Name</string>
@@ -118,6 +119,8 @@
     <string name="contact_info">Communication data</string>
     <string name="_20_1011777751_966_550440787">( +20) 1011777751 - (+966) 550440787</string>
     <string name="travel_altaherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
+    <string name="enter_your_state">Enter Your State</string>
+    <string name="binding_phone_code">(%1$s)</string>
     <string name="hedder_info">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
     <string name="obtain_visa">Obtain visas</string>
     <string name="easy_tourism">Tourism is easy</string>

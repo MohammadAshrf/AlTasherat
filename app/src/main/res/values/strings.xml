@@ -9,11 +9,12 @@
 
 
     <string name="err_msg_enter_countrycode">الرجاء ادخال كود الدولة</string>
-    <string name="err_msg_enter_valid_first_name">الإسم الاول يجب ان لا يقل عن 3 حروف ولا يزيد عن 15</string>
-    <string name="err_msg_enter_valid_last_name">الإسم الأخير يجب ان لا يقل عن 3 حروف ولا يزيد عن 15</string>
-    <string name="err_msg_enter_valid_email">الإيميل  يجب ان لا  يزيد عن 15</string>
-    <string name="err_msg_enter_valid_phone">رقم الهاتف يجب ان لا يقل عن 3 ارقام ولا يزيد عن 15</string>
-    <string name="err_msg_enter_valid_password">كلمة المرور يجب ان لا تقل عن 9 حروف ولا يزيد عن 50</string>
+    <string name="err_msg_enter_valid_first_name">الإسم الأول يجب أن لا يقل عن 3 حروف ولا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_middle_name">الإسم الأوسط يجب أن لا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_last_name">الإسم الأخير يجب أن لا يقل عن 3 حروف ولا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_email">الإيميل يجب أن لا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_phone">رقم الهاتف يجب أن لا يقل عن 9 أرقام ولا يزيد عن 15</string>
+    <string name="err_msg_enter_valid_password">كلمة المرور يجب أن لا تقل عن 9 حروف ولا يزيد عن 50</string>
 
     <string name="please_wait">الرجاء الإنتظار</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -145,4 +146,6 @@
     <string name="manage_account_delete">إدارة الحســــاب</string>
     <string name="delete_account">حذف الحساب</string>
     <string name="conferm_password">كلمه المرور للتاكيد</string>
+    <string name="enter_your_state">أدخل دولتك</string>
+    <string name="binding_phone_code">(%1$s)</string>
 </resources>

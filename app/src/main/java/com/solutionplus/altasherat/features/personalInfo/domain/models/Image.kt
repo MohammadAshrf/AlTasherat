@@ -5,13 +5,13 @@ import android.os.Parcelable
 
 @Parcelize
 data class Image(
+	val id: Int,
+	val type: String,
 	val path: String,
+	val title: String,
 	val updatedAt: String,
 	val description: String,
 	val createdAt: String,
 	val main: Boolean,
-	val id: Int,
-	val type: String,
-	val title: String,
 	val priority: Int
 ) : Parcelable
