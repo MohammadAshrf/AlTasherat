@@ -31,7 +31,6 @@ class VisaPlatformFragment : Fragment() {
 
     private lateinit var binding: FragmentVisaPlatformBinding
     val controller: NavController by lazy { findNavController() }
-    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +46,7 @@ class VisaPlatformFragment : Fragment() {
         binding.button.setOnClickListener { handleButtonClick() }
         binding.button2.setOnClickListener { handleButtonClick() }
         binding.button3.setOnClickListener { handleButtonClick() }
-        binding.button4.setOnClickListener {
-            findNavController().navigate(R.id.action_visaPlatformFragment_to_gotoDeleteAccountFragment)
-        }
+        binding.button4.setOnClickListener { handleButtonClick() }
         binding.button5.setOnClickListener { handleButtonClick() }
         binding.button6.setOnClickListener { handleButtonClick() }
     }

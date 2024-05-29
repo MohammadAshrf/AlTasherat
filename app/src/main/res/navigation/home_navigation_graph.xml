@@ -98,5 +98,23 @@
         android:id="@+id/personalInfoFragment"
         android:name="com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoFragment"
         android:label="fragment_personal_info"
-        tools:layout="@layout/fragment_personal_info" />
+        tools:layout="@layout/fragment_personal_info" >
+        <action
+            android:id="@+id/action_personalInfoFragment_to_gotoDeleteAccountFragment"
+            app:destination="@id/gotoDeleteAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gotoDeleteAccountFragment"
+        android:name="com.solutionplus.altasherat.features.deleteaccount.presentation.ui.GotoDeleteAccountFragment"
+        android:label="fragment_goto_delete_account"
+        tools:layout="@layout/fragment_goto_delete_account" >
+        <action
+            android:id="@+id/action_gotoDeleteAccountFragment_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.solutionplus.altasherat.features.deleteaccount.presentation.ui.DeleteAccountFragment"
+        android:label="fragment_delete_account"
+        tools:layout="@layout/fragment_delete_account" />
 </navigation>

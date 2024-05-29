@@ -143,4 +143,6 @@
     <string name="cancel">إلغاء</string>
     <string name="Deactivate_the_account_permanently">إلغاء تنشيط الحساب نهائياً</string>
     <string name="manage_account_delete">إدارة الحســــاب</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="conferm_password">كلمه المرور للتاكيد</string>
 </resources>

@@ -65,10 +65,13 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun viewInit() {
         binding.btnCancellation.setOnClickListener {
-            findNavController().navigate(R.id.action_deleteAccountFragment_to_visaPlatformFragment)
+            findNavController().popBackStack()
         }
         binding.btnShowBottomSheet.setOnClickListener {
             handleButtonClick()
+        }
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -116,6 +119,7 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         bindingBottomSheet = DeleteAccountButtomSheetBinding.inflate(layoutInflater)
         bindingBottomSheet.btnDelete.setOnClickListener {
             val password = bindingBottomSheet.etPassword.text.toString()
+            //todo we need to check if the password is correct or not
             viewModel.onActionTrigger(
                 DeleteAccountContract.DeleteAccountActions.DeleteAccount(
                     password,
@@ -133,11 +137,5 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetDialog.show()
 
-        bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                bottomSheetDialog.dismiss()
-            }
-            false
-        }
     }
 }
