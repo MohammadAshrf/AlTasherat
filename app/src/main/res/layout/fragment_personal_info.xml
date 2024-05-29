@@ -235,7 +235,10 @@
                     style="@style/TextInputEditText"
                     android:drawableStart="@drawable/birthdate"
                     android:hint="@string/enter_birthdate"
+                    android:clickable="false"
+
                     android:inputType="date" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
 

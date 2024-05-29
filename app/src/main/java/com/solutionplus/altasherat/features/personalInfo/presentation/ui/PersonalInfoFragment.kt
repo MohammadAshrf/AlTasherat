@@ -34,7 +34,11 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     override fun viewInit() {
         handleViews()
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.VISIBLE
+    }
     private fun validatePersonalInfo(): Boolean {
         return when {
             binding.firstNameEditText.text?.trim()?.length !in 3..15 -> {
@@ -123,7 +127,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         binding.birthdateEditText.setOnClickListener {
             showDatePickerDialog(Calendar.getInstance())
         }
-        binding.moreButton?.setOnClickListener {
+        binding.moreButton.setOnClickListener {
             findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
         }
     }

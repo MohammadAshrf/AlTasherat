@@ -25,6 +25,7 @@ class DataStoreAuthTokenProvider(
         val decryptedBytes = encryptionProvider.decryptData(encryptedBytes)
         val decryptedString = decryptedBytes?.decodeToString()
         val result = Gson().fromJson(decryptedString, String::class.java)
+        logger.info("getAuthToken result --> $result")
         return result
     }
     companion object {
