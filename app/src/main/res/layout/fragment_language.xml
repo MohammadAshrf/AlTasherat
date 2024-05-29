@@ -162,7 +162,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_35sdp"
                 android:text="@string/change_language"
-                android:textAppearance="@style/TextView.Medium"
+                android:textAppearance="@style/Font.Medium"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
