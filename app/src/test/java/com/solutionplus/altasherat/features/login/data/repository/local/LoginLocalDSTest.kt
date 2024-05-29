@@ -32,7 +32,7 @@ import java.util.Base64
 2. test save token after encryptData
 3. test get user after decrypt data
 * */
-class LoginLocalDSTest{
+class LoginLocalDSTest {
     private lateinit var storageKV: IKeyValueStorageProvider
     private lateinit var encryptionProvider: IEncryptionProvider
     private lateinit var loginLocalDS: LoginLocalDS
@@ -45,27 +45,61 @@ class LoginLocalDSTest{
     }
 
 
-
-
     @Test
     fun `test save user info after encryptData`() = runBlocking {
         // Arrange
-        val user = UserEntity(1, "username", "email@example.com")
+        val user = UserEntity(
+            id = 1,
+            userName = "testUser",
+            firsName = "John",
+            middleName = "Doe",
+            lastName = "Smith",
+            fullName = "John Doe Smith",
+            email = "testUser@example.com",
+            phone = "1234567890",
+            birthDate = "1990-01-01",
+            imageUrl = "http://example.com/image.jpg",
+            emailVerified = true
+        )
         val userJson = Gson().toJson(user)
         val bytesUser = userJson.toByteArray()
         val encryptedUserData = "encryptedUserData".toByteArray()
         val encryptUserDataBase64 = Base64.getEncoder().encodeToString(encryptedUserData)
 
         every { encryptionProvider.encryptData(bytesUser) } returns encryptedUserData
-        coEvery { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) } just Runs
-        coEvery{ storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java)} just  Runs
+        coEvery {
+            storageKV.saveEntry(
+                StorageKeyEnum.USER,
+                encryptUserDataBase64,
+                String::class.java
+            )
+        } just Runs
+        coEvery {
+            storageKV.saveEntry(
+                StorageKeyEnum.IS_USER_LOGGED_IN,
+                true,
+                Boolean::class.java
+            )
+        } just Runs
 
         // Act
         loginLocalDS.saveUser(user)
 
         // Assert
-        coVerify { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) }
-        coVerify { storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java) }
+        coVerify {
+            storageKV.saveEntry(
+                StorageKeyEnum.USER,
+                encryptUserDataBase64,
+                String::class.java
+            )
+        }
+        coVerify {
+            storageKV.saveEntry(
+                StorageKeyEnum.IS_USER_LOGGED_IN,
+                true,
+                Boolean::class.java
+            )
+        }
         verify { encryptionProvider.encryptData(bytesUser) }
     }
 
@@ -78,24 +112,58 @@ class LoginLocalDSTest{
         val encryptedDataBase64 = Base64.getEncoder().encodeToString(encryptedData)
 
         every { encryptionProvider.encryptData(bytes) } returns encryptedData
-        coEvery { storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptedDataBase64, String::class.java) } just Runs
+        coEvery {
+            storageKV.saveEntry(
+                StorageKeyEnum.ACCESS_TOKEN,
+                encryptedDataBase64,
+                String::class.java
+            )
+        } just Runs
 
         // Act
         loginLocalDS.saveAccessToken(token)
 
         // Assert
-        coVerify { storageKV.saveEntry(StorageKeyEnum.ACCESS_TOKEN, encryptedDataBase64, String::class.java) }
+        coVerify {
+            storageKV.saveEntry(
+                StorageKeyEnum.ACCESS_TOKEN,
+                encryptedDataBase64,
+                String::class.java
+            )
+        }
         verify { encryptionProvider.encryptData(bytes) }
     }
 
     @Test
     fun `when getting user expect user returned from storage`() = runBlocking {
-        val user = UserEntity(id = 1, userName = "testUser", firsName = "Test", lastName = "User")
+        val user = UserEntity(
+            id = 1,
+            userName = "testUser",
+            firsName = "John",
+            middleName = "Doe",
+            lastName = "Smith",
+            fullName = "John Doe Smith",
+            email = "testUser@example.com",
+            phone = "1234567890",
+            birthDate = "1990-01-01",
+            imageUrl = "http://example.com/image.jpg",
+            emailVerified = true
+        )
         val userJson = Gson().toJson(user)
         val encryptedUserData = Base64.getEncoder().encodeToString(userJson.toByteArray())
 
-        coEvery { storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java) } returns encryptedUserData
-        coEvery { encryptionProvider.decryptData(Base64.getDecoder().decode(encryptedUserData)) } returns userJson.toByteArray()
+        coEvery {
+            storageKV.getEntry(
+                StorageKeyEnum.USER,
+                "",
+                String::class.java
+            )
+        } returns encryptedUserData
+        coEvery {
+            encryptionProvider.decryptData(
+                Base64.getDecoder().decode(encryptedUserData)
+            )
+        } returns userJson.toByteArray()
 
         val result = loginLocalDS.getUser()
 

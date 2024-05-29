@@ -39,10 +39,16 @@ class LoginWithPhoneUCTest {
         val loginRequest = LoginRequest(phone = phone, password = "password")
         val userInfo = User(
             id = 1,
-            userName = "jdoe",
-            fullName = "John Doe",
-            email = "jdoe@example.com",
-            phone = phone.number
+            userName = "fakeUser",
+            fullName = "Fake User",
+            email = "fake.user@example.com",
+            firstName = "Fake",
+            middleName = "User",
+            lastName = "Example",
+            phone = phone.toString(),
+            birthDate = "2000-01-01",
+            imageUrl = "http://example.com/image.jpg",
+            emailVerified = true
         )
         val accessToken = "token123"
         val loginResponse = Login(message = "Success", accessToken = accessToken, userInfo = userInfo)

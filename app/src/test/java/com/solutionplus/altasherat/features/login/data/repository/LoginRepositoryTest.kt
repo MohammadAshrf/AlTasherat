@@ -49,7 +49,20 @@ class LoginRepositoryTest {
     @Test
     fun `when saving user given valid user then user saved`() = runBlocking {
         // Arrange
-        val user = User()
+        val user = User(
+            id = 1,
+            userName = "userName",
+            fullName = "fullName",
+            email = "email",
+            firstName = "firstName",
+            middleName = "middleName",
+            lastName = "lastName",
+            phone = "phone",
+            birthDate = null,
+            imageUrl = "imageUrl",
+            emailVerified = true
+        )
+
         val userEntity = UserMapper.domainToEntity(user)
 
         coEvery { localDs.saveUser(userEntity) } returns Unit
@@ -62,7 +75,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun `when saving access token given valid token expect token saved`() = runBlocking{
+    fun `when saving access token given valid token expect token saved`() = runBlocking {
         val token = "sampleToken"
 
         coEvery { localDs.saveAccessToken(token) } returns Unit
@@ -75,7 +88,7 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun `when saving access token with empty then token saved`() = runBlocking{
+    fun `when saving access token with empty then token saved`() = runBlocking {
         val token = ""
 
         coEvery { localDs.saveAccessToken(token) } returns Unit
@@ -88,17 +101,28 @@ class LoginRepositoryTest {
     }
 
     @Test
-    fun `when getting user then return user entity `() = runBlocking{
-        val userEntity = UserEntity()
+    fun `when getting user then return user entity `() = runBlocking {
+        val userEntity = UserEntity(
+        id = 1,
+        userName = "testUser",
+        firsName = "John",
+        middleName = "Doe",
+        lastName = "Smith",
+        fullName = "John Doe Smith",
+        email = "testUser@example.com",
+        phone = "1234567890",
+        birthDate = "1990-01-01",
+        imageUrl = "http://example.com/image.jpg",
+        emailVerified = true
+    )
 
-        coEvery { localDs.getUser() } returns  userEntity
+        coEvery { localDs.getUser() } returns userEntity
 
         val result = repository.getUser()
 
         coVerify { localDs.getUser() }
         assertEquals(userEntity, result)
     }
-
 
 
 }
