@@ -9,14 +9,14 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 
-class EncryptionProvider: IEncryptionProvider {
+class EncryptionProvider : IEncryptionProvider {
 
-    private val keyStore = KeyStore.getInstance("AndroidKeyStore").apply {
+    private val keyStore = KeyStore.getInstance(PROVIDER).apply {
         load(null)
     }
 
-     fun getKey(): SecretKey {
-        val existingKey = keyStore.getEntry("secret_key", null) as? KeyStore.SecretKeyEntry
+    private fun getKey(): SecretKey {
+        val existingKey = keyStore.getEntry(ALIAS, null) as? KeyStore.SecretKeyEntry
         return existingKey?.secretKey ?: createKey()
     }
 
@@ -24,16 +24,15 @@ class EncryptionProvider: IEncryptionProvider {
         return KeyGenerator.getInstance(ALGORITHM).apply {
             init(
                 KeyGenParameterSpec.Builder(
-                    "secret_key",
+                    ALIAS,
                     KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
                 ).setBlockModes(BLOCK_MODE)
                     .setEncryptionPaddings(PADDING)
-                    .setKeySize(128)
+                    .setKeySize(KEY_SIZE)
                     .build()
             )
         }.generateKey()
     }
-
 
 
     private val cipher = Cipher.getInstance(TRANSFORMATION)
@@ -48,9 +47,9 @@ class EncryptionProvider: IEncryptionProvider {
 
     override fun decryptData(bytes: ByteArray): ByteArray? {
         val initialVector = bytes.copyOfRange(0, cipher.blockSize)
-        val data = bytes.copyOfRange(cipher.blockSize, bytes.size)
+        val encryptedData = bytes.copyOfRange(cipher.blockSize, bytes.size)
         cipher.init(Cipher.DECRYPT_MODE, getKey(), IvParameterSpec(initialVector))
-        return cipher.doFinal(data)
+        return cipher.doFinal(encryptedData)
     }
 
     companion object {
@@ -58,5 +57,8 @@ class EncryptionProvider: IEncryptionProvider {
         private const val BLOCK_MODE = KeyProperties.BLOCK_MODE_CBC
         private const val PADDING = KeyProperties.ENCRYPTION_PADDING_PKCS7
         private const val TRANSFORMATION = "$ALGORITHM/$BLOCK_MODE/$PADDING"
+        private const val PROVIDER = "AndroidKeyStore"
+        private const val ALIAS = "secret_key"
+        private const val KEY_SIZE = 128
     }
 }

@@ -13,5 +13,4 @@ data class User(
     val birthDate: String? = null,
     val imageUrl: String? = null,
     val emailVerified: Boolean?= null,
-
     )

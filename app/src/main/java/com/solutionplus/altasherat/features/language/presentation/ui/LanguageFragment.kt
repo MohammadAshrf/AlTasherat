@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLanguageBinding
-import com.solutionplus.altasherat.features.language.presentation.adapters.CountriesSpinnerAdapter
+import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

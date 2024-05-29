@@ -1,20 +1,20 @@
 package com.solutionplus.altasherat.features.personalInfo.domain.models
 
-import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-	val image: Image,
-	val firstname: String,
-	val isBlocked: Int,
-	val emailVerified: Boolean,
-	val phoneVerified: Boolean,
-	val phone: Phone,
-	val birthDate: String,
-	val middlename: String,
-	val id: Int,
-	val email: String,
-	val username: String,
-	val lastname: String
+    val image: String,
+    val firstName: String,
+    val isBlocked: Int,
+    val emailVerified: Boolean,
+    val phoneVerified: Boolean,
+    val phone: String,
+    val birthDate: String,
+    val middleName: String,
+    val id: Int,
+    val email: String,
+    val userName: String,
+    val lastName: String
 ) : Parcelable

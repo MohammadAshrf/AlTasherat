@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.language.presentation.adapters
+package com.solutionplus.altasherat.features.services.country.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

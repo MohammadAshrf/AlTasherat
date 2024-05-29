@@ -22,7 +22,7 @@ internal class ChangePasswordLocalDS @Inject constructor(private val storageKV: 
         val decryptedBytes = encryptionProvider.decryptData(encryptedBytes)
         val decryptedString = decryptedBytes?.decodeToString()
         val result = Gson().fromJson(decryptedString, String::class.java)
-        logAccessTokenAfterEncryption(userJsonBase64!!, result)
+        logAccessTokenAfterEncryption(userJsonBase64, result)
         return result
     }
 
