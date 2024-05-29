@@ -92,7 +92,7 @@
                     android:paddingEnd="@dimen/_4sdp"
                     android:text="@string/arabic"
                     android:textAlignment="viewStart"
-                    android:textAppearance="@style/TextView.Bold" />
+                    android:textAppearance="@style/Font.Bold" />
 
                 <RadioButton
                     android:id="@+id/english_radioBtn"
@@ -108,7 +108,7 @@
                     android:paddingEnd="@dimen/_4sdp"
                     android:text="@string/english"
                     android:textAlignment="viewStart"
-                    android:textAppearance="@style/TextView.Bold" />
+                    android:textAppearance="@style/Font.Bold" />
             </RadioGroup>
 
             <View
