@@ -62,4 +62,10 @@
     <string name="edit_profile">edit profile</string>
     <string name="current_version">current version :</string>
     <string name="FillOut_the_form_now">fill the form now</string>
+    <string name="account_settings">Account settings, account deactivation and deletion</string>
+    <string name="account_settings_goto">Account management</string>
+    <string name="conerm_delete">Confirm deletion</string>
+    <string name="cancel">cancellation</string>
+    <string name="Deactivate_the_account_permanently">Deactivate the account permanently</string>
+    <string name="manage_account_delete">Account management</string>
 </resources>

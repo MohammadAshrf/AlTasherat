@@ -26,10 +26,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
         android:drawableLeft="@drawable/icondelete"
-        android:drawableTint="#FFFFFF"
         android:elevation="12dp"
         android:layout_marginTop="@dimen/_70sdp"
-        android:text="تأكيد الحذف"
+        android:text="@string/conerm_delete"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
         app:backgroundTint="@null"
@@ -48,15 +47,17 @@
         android:background="@drawable/btn_cancellation_background"
         android:drawableTint="#FFFFFF"
         android:elevation="12dp"
-        android:text="إلغاء"
+        android:text="@string/cancel"
         android:textColor="#d71010"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnShowBottomSheet"
         app:layout_constraintStart_toStartOf="@+id/btnShowBottomSheet"
         app:layout_constraintTop_toBottomOf="@+id/btnShowBottomSheet"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlHardcoded" />
 
     <TextView
@@ -65,9 +66,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
-        android:text="إلغاء تنشيط الحساب نهائياً"
+        android:text="@string/Deactivate_the_account_permanently"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,10 +77,10 @@
         style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/_13sdp"
-        android:text="إدارة الحســــاب"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:text="@string/manage_account_delete"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
-        app:layout_constraintEnd_toStartOf="@+id/imageView17"
+        app:layout_constraintStart_toEndOf="@+id/imageView17"
         app:layout_constraintTop_toTopOf="@+id/imageView17" />
 
     <ImageView
@@ -87,8 +88,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
         android:src="@drawable/icon_front"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

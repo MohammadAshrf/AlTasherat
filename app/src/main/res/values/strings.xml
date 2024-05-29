@@ -87,4 +87,10 @@
     <string name="edit_profile">تعــديل الملف الشخصي</string>
     <string name="current_version">النسخة الحالية:</string>
     <string name="FillOut_the_form_now">املأ الاستمارةالان</string>
+    <string name="account_settings">اعدادات الحساب والغاء تنشيط الحساب وحذفهً</string>
+    <string name="account_settings_goto">إدارة الحســــاب</string>
+    <string name="conerm_delete">تأكيد الحذف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="Deactivate_the_account_permanently">إلغاء تنشيط الحساب نهائياً</string>
+    <string name="manage_account_delete">إدارة الحســــاب</string>
 </resources>

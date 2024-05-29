@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.solutionplus.altasherat.R
@@ -36,7 +37,11 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
     private val viewModel: DeleteAccountVM by viewModels()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var bindingBottomSheet: DeleteAccountButtomSheetBinding
-    override fun onFragmentReady(savedInstanceState: Bundle?) { }
+    override fun onFragmentReady(savedInstanceState: Bundle?) {
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.GONE
+    }
+
 
 
     override fun subscribeToObservables() {
