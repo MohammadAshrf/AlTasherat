@@ -1,5 +1,7 @@
 package com.solutionplus.altasherat.common.data.mapper
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import retrofit2.HttpException
@@ -13,7 +15,14 @@ object ExceptionMapper {
             is HttpException -> {
                 when (val code = exception.code()) {
                     401 -> LeonException.Client.Unauthorized
-                    422 -> LeonException.Client.ResponseValidation(emptyMap(), exception.message())
+                    422 -> {
+                        val errorBody = exception.response()?.errorBody()?.string()
+                        val type = object : TypeToken<Map<String, Any>>() {}.type
+                        val errorMap: Map<String, Any> = Gson().fromJson(errorBody, type)
+                        val errors = errorMap["errors"] as? Map<String, String> ?: emptyMap()
+                        val message = errorMap["message"] as? String ?: "Unknown validation error"
+                        LeonException.Client.ResponseValidation(errors, message)
+                    }
                     in 400..499 -> LeonException.Client.Unhandled(code, exception.message())
                     in 500..599 -> LeonException.Server.InternalServerError(
                         code,
