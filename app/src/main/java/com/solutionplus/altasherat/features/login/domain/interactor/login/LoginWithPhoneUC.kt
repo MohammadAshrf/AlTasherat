@@ -27,25 +27,6 @@ class LoginWithPhoneUC  (
 
             return result.userInfo
         }?: return User()
-        //---------to make the validations pass in testing  ----------------------------//
-//        // Ensure params is not null at the beginning
-//        val request = params ?: throw IllegalArgumentException("Params cannot be null")
-//
-//        // Validate the request before any repository interaction
-//        validateRequest(request)?.let { message ->
-//            throw LeonException.Local.RequestValidation(
-//                clazz = LoginRequest::class,
-//                message = message
-//            )
-//        }
-//
-//        // Perform the repository interactions
-//        val result = repository.loginWithPhone(request)
-//        repository.saveUser(result.userInfo)
-//        repository.saveAccessToken(result.accessToken)
-//
-//        // Return the result
-//        return result.userInfo
     }
 
 

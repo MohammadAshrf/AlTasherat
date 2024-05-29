@@ -6,4 +6,7 @@ data class DeleteAccountRequest (
     val password : String?= null,
 
 ){
+    fun validatePassword(): Boolean {
+        return !password.isNullOrBlank()
+    }
 }
