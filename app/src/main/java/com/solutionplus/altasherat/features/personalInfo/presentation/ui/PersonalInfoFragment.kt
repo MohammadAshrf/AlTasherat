@@ -38,6 +38,9 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun viewInit() {
         handleViews()
+        binding.moreButton.setOnClickListener {
+            findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
+        }
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
