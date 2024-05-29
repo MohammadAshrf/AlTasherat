@@ -230,8 +230,8 @@
                     android:id="@+id/birthdate_edit_text"
                     style="@style/TextInputEditText"
                     android:drawableStart="@drawable/birthdate"
-                    android:hint="@string/enter_birthdate"
-                    android:inputType="date" />
+                    android:focusable="false"
+                    android:hint="@string/enter_birthdate" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
