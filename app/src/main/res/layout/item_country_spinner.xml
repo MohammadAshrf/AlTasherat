@@ -19,6 +19,7 @@
         android:id="@+id/countryNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TextView.Bold"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_12ssp"
         tools:text="@string/first_name" />
@@ -27,6 +28,7 @@
         android:id="@+id/countryCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TextView.Regular"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_12ssp"
         tools:text="@string/first_name" />
