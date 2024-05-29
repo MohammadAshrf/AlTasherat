@@ -137,4 +137,10 @@
     <string name="you_have_to_sign_in">يجب عليك تسجيل الدخول للمتابعة في استكمال الطلب</string>
     <string name="new_account">حساب جديد</string>
     <string name="sigin_in">تسجيل الدخول</string>
+    <string name="account_settings">اعدادات الحساب والغاء تنشيط الحساب وحذفهً</string>
+    <string name="account_settings_goto">إدارة الحســــاب</string>
+    <string name="conerm_delete">تأكيد الحذف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="Deactivate_the_account_permanently">إلغاء تنشيط الحساب نهائياً</string>
+    <string name="manage_account_delete">إدارة الحســــاب</string>
 </resources>

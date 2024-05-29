@@ -129,4 +129,10 @@
     <string name="you_have_to_sign_in">You must log in to continue completing the application</string>
     <string name="new_account">New Account</string>
     <string name="sigin_in">Sign in</string>
+    <string name="account_settings">Account settings, account deactivation and deletion</string>
+    <string name="account_settings_goto">Account management</string>
+    <string name="conerm_delete">Confirm deletion</string>
+    <string name="cancel">cancellation</string>
+    <string name="Deactivate_the_account_permanently">Deactivate the account permanently</string>
+    <string name="manage_account_delete">Account management</string>
 </resources>

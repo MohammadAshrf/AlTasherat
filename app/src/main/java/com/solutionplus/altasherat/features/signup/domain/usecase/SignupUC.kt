@@ -29,20 +29,6 @@ class SignupUC(
             repository.getUser()
             return result.user
         } ?: return User()
-//        val request = params ?: throw IllegalArgumentException("Params cannot be null")
-//
-//        validateRequest(request)?.let { message ->
-//            throw LeonException.Local.RequestValidation(
-//                clazz = SignupRequest::class,
-//                message = message
-//            )
-//        }
-//
-//        val result = repository.signupWithPhone(request)
-//        repository.saveUser(result.user)
-//        repository.saveAccessToken(result.token)
-//
-//        return result.user
     }
 
 

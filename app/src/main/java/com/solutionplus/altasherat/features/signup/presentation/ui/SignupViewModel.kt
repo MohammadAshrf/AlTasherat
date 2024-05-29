@@ -83,8 +83,6 @@ class SignupViewModel @Inject constructor(
                 countryCode = countryCode
             )
 
-            setState(oldViewState.copy(isLoading = true))
-
             signupUC.invoke(viewModelScope, signupRequest) { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(
