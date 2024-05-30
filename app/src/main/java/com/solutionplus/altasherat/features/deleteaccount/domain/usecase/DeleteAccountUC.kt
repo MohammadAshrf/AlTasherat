@@ -23,6 +23,8 @@ class DeleteAccountUC (
             repository.deleteAccount(it)
             repository.deleteUser()
             repository.deleteAccessToken()
+            repository.changeUserLoginState(false)
+
         }
     }
 

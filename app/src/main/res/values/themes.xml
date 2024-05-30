@@ -208,6 +208,12 @@
         <item name="android:textAppearance">@style/Font.Regular</item>
     </style>
 
+    //------------------- Custom TextAppearance for BottomNavigationView --------------------//
+    <style name="CustomBottomNavigationViewText" parent="TextView">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textAppearance">@style/Font.Bold</item>
+    </style>
 
 </resources>
 

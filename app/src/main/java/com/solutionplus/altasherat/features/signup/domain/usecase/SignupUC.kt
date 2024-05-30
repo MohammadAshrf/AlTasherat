@@ -15,7 +15,6 @@ class SignupUC(
 ) : BaseUseCase<User, SignupRequest>() {
 
     public override suspend fun execute(params: SignupRequest?): User {
-
         params?.let {
             validateRequest(it)?.let { message ->
                 throw LeonException.Local.RequestValidation(

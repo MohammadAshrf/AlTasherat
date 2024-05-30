@@ -2,6 +2,8 @@ package com.solutionplus.altasherat.features.signup.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -85,9 +87,13 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
+        if (countries.isNotEmpty()) {
+            binding.etCountruCode.setSelection(0)
+        }
     }
 
     override fun onSignupAction() {
+        if (validateLoginDetails()) {
             val firstName = binding.etFirstname.text.toString()
             val lastName = binding.etLastName.text.toString()
             val email = binding.etEmail.text.toString()
@@ -100,12 +106,28 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                     firstName, lastName, email, phoneNumber, countryCode, countryId, password
                 )
             )
+        }
+
+        if (validateLoginDetails()) {
+            val firstName = binding.etFirstname.text.toString()
+            val lastName = binding.etLastName.text.toString()
+            val email = binding.etEmail.text.toString()
+            val phoneNumber = binding.etPhoneClient.text.toString()
+            val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
+            val countryId = (binding.etCountruCode.selectedItem as Country).id
+            val password = binding.etPassword.text.toString()
+            viewModel.onActionTrigger(
+                SignUpContract.SignupActions.Signup(
+                    firstName, lastName, email, phoneNumber, countryCode, countryId, password
+                )
+            )
+        }
     }
 
-    /*private fun validateLoginDetails(): Boolean {
+    private fun validateLoginDetails(): Boolean {
         return when {
             binding.etFirstname.text?.trim()?.length !in 3..15 -> {
-                showErrorSnackBar(
+                showSnackBar(
                     resources.getString(R.string.err_msg_enter_valid_first_name),
                     true
                 )
@@ -113,24 +135,24 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
             }
 
             binding.etLastName.text?.trim()?.length !in 3..15 -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_last_name), true)
+                showSnackBar(resources.getString(R.string.err_msg_enter_valid_last_name), true)
                 false
             }
 
             binding.etEmail.text?.trim()?.length !in 1..25 || !Patterns.EMAIL_ADDRESS.matcher(
                 binding.etEmail.text.toString()
             ).matches() -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_email), true)
+                showSnackBar(resources.getString(R.string.err_msg_enter_valid_email), true)
                 false
             }
 
             binding.etPhoneClient.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.etPhoneClient.text.toString()) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
+                showSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
                 false
             }
 
             binding.etPassword.text?.trim()?.length !in 8..50 -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
+                showSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
                 false
             }
 
@@ -138,7 +160,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                 true
             }
         }
-    }*/
+    }
 
     companion object {
         val logger = getClassLogger()

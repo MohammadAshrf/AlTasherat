@@ -25,9 +25,6 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListener {
 
     private val viewModel: LoginViewModel by viewModels()
-    private val adapter: CountryCodeSpinnerAdapter by lazy {
-        CountryCodeSpinnerAdapter(requireContext(), emptyList())
-    }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         subscribeToObservables()
@@ -99,9 +96,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             viewModel.onActionTrigger(
                 LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
             )
-
-
         }
+
     }
 
     private fun validateLoginDetails(): Boolean {

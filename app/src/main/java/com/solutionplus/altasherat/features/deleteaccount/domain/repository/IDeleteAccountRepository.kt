@@ -6,4 +6,5 @@ interface IDeleteAccountRepository {
     suspend fun deleteAccount(deleteAccountRequest: DeleteAccountRequest): DeleteAccountRequest
     suspend fun deleteUser()
     suspend fun deleteAccessToken()
+    suspend fun changeUserLoginState(isLoggedIn: Boolean)
 }
