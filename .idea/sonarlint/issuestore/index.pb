@@ -163,3 +163,5 @@ kapp/src/main/java/com/solutionplus/altasherat/features/changepassword/domain/mo
 _app/src/main/java/com/solutionplus/altasherat/features/signup/presentation/ui/SignUpContract.kt,c\b\cbd7a256144c71213c84ac6a54067d78a8f5a1f6
 è
 _app/src/main/java/com/solutionplus/altasherat/features/login/data/model/request/LoginRequest.kt,d\3\d38d5a4b402dfa5a69bd303d10b607f583bed012
+ú
+lapp/src/test/java/com/solutionplus/altasherat/features/changepassword/domain/usecase/ChangePasswordUCTest.kt,0\2\0209f806b4a24768836757616173c39ecdec97ff

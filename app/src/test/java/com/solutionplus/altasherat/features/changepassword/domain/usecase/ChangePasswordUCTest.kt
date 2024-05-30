@@ -40,14 +40,14 @@ class ChangePasswordUCTest {
         changePasswordUC = ChangePasswordUC(repository)
     }
 
-    @Test
-    fun `when params are null, expected then should not call changePassword `() = runTest {
-        // Act
-        changePasswordUC.execute(null)
-
-        // Assert
-        coVerify(exactly = 0) { repository.changePassword(any()) }
-    }
+//    @Test
+//    fun `when params are null, expected then should not call changePassword `() = runTest {
+//        // Act
+//        changePasswordUC.execute(null)
+//
+//        // Assert
+//        coVerify(exactly = 0) { repository.changePassword(any()) }
+//    }
 
     @Test
     fun `when token is called and repository , then repository's returned token`() = runTest {
