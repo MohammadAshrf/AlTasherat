@@ -72,8 +72,23 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
                 updateButtonText(position)
                 updateImageViewVisibility(position)
                 updateTabUnderline(position)
+                updateCardViewSize(position)
             }
         })
+    }
+
+    private fun updateCardViewSize(position: Int) {
+        val params = binding.cardView.layoutParams
+        when (position) {
+            0 -> {
+                params.height = resources.getDimensionPixelSize(R.dimen.height_for_position_0)
+                binding.cardView.layoutParams = params
+            }
+            1 -> {
+                params.height = resources.getDimensionPixelSize(R.dimen.height_for_position_1)
+                binding.cardView.layoutParams = params
+            }
+        }
     }
 
     private fun setupTabLayoutSelectedListener() {

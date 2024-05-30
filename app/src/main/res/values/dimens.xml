@@ -11,4 +11,6 @@
     <dimen name="_32sdp">32dp</dimen>
     <dimen name="your_margin_top">32dp</dimen>
     <dimen name="margin_top_profile_menu">48dp</dimen>
+    <dimen name="height_for_position_1">@dimen/_350sdp</dimen>
+    <dimen name="height_for_position_0">@dimen/_275sdp</dimen>
 </resources>
