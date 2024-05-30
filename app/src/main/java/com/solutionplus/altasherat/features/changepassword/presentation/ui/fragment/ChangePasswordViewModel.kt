@@ -17,8 +17,8 @@ class ChangePasswordViewModel @Inject constructor(
     private val changePasswordUC: ChangePasswordUC
 ): AlTasheratViewModel<ChangePasswordContract.ChangePasswordActions, ChangePasswordContract.ChangePasswordEvents, ChangePasswordContract.ChangePasswordState>(initialState = ChangePasswordContract.ChangePasswordState.initial())  {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActionTrigger(action: ViewAction?) {
+        setState(oldViewState.copy(action = action))
             when (action) {
                 is ChangePasswordContract.ChangePasswordActions.ChangePassword -> changePassword(
                     action.oldPassword,
@@ -28,8 +28,7 @@ class ChangePasswordViewModel @Inject constructor(
             }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun changePassword(oldPassword:String, newPassword:String, newPasswordConfirmation:String){
+    private fun changePassword(oldPassword:String, newPassword:String, newPasswordConfirmation:String){
         viewModelScope.launch {
             val changePasswordRequest = ChangePasswordRequest(
                 oldPassword = oldPassword,
@@ -38,25 +37,11 @@ class ChangePasswordViewModel @Inject constructor(
                 token = changePasswordUC.token()
             )
 
-            setState(oldViewState.copy(isLoading = true))
             changePasswordUC.invoke(viewModelScope,changePasswordRequest){ resource ->
-//                when (resource){
-//                    is Resource.Loading -> setState(ChangePasswordState.Loading)
-//                    is Resource.Success -> {
-//                        setState(ChangePasswordContract.ChangePasswordState.Success(null))
-//                        sendEvent(ChangePasswordEvents.ChangePasswordSuccess("Password changed successfully"))
-//                    }
-//                    is Resource.Failure -> {
-//                        setState(ChangePasswordState.Error(resource.exception.message ?: "Error changing password"))
-//                    }
-//
-//                }
-
                 when (resource) {
-                    is Resource.Failure -> setState(oldViewState.copy(isLoading = false, exception = resource.exception))
+                    is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> {
-                        setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(ChangePasswordContract.ChangePasswordEvents.ChangePasswordSuccess("Password changed successfully"))
                     }
                 }

@@ -73,14 +73,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
             is SignUpContract.SignupEvent.SignupSuccess -> {
                 val intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(requireContext(), "You signed up successfully", Toast.LENGTH_SHORT)
-                    .show()
+                showSnackBar(resources.getString(R.string.login_success), false)
+                requireActivity().finish()
             }
-
-            is SignUpContract.SignupEvent.SignupError -> {
-                Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
-            }
-
         }
     }
 
@@ -93,7 +88,6 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     }
 
     override fun onSignupAction() {
-        if (validateLoginDetails()) {
             val firstName = binding.etFirstname.text.toString()
             val lastName = binding.etLastName.text.toString()
             val email = binding.etEmail.text.toString()
@@ -106,60 +100,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                     firstName, lastName, email, phoneNumber, countryCode, countryId, password
                 )
             )
-        }
 
-        if (validateLoginDetails()) {
-            val firstName = binding.etFirstname.text.toString()
-            val lastName = binding.etLastName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val phoneNumber = binding.etPhoneClient.text.toString()
-            val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
-            val countryId = (binding.etCountruCode.selectedItem as Country).id
-            val password = binding.etPassword.text.toString()
-            viewModel.onActionTrigger(
-                SignUpContract.SignupActions.Signup(
-                    firstName, lastName, email, phoneNumber, countryCode, countryId, password
-                )
-            )
-        }
-    }
-
-    private fun validateLoginDetails(): Boolean {
-        return when {
-            binding.etFirstname.text?.trim()?.length !in 3..15 -> {
-                showSnackBar(
-                    resources.getString(R.string.err_msg_enter_valid_first_name),
-                    true
-                )
-                false
-            }
-
-            binding.etLastName.text?.trim()?.length !in 3..15 -> {
-                showSnackBar(resources.getString(R.string.err_msg_enter_valid_last_name), true)
-                false
-            }
-
-            binding.etEmail.text?.trim()?.length !in 1..25 || !Patterns.EMAIL_ADDRESS.matcher(
-                binding.etEmail.text.toString()
-            ).matches() -> {
-                showSnackBar(resources.getString(R.string.err_msg_enter_valid_email), true)
-                false
-            }
-
-            binding.etPhoneClient.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.etPhoneClient.text.toString()) -> {
-                showSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
-                false
-            }
-
-            binding.etPassword.text?.trim()?.length !in 8..50 -> {
-                showSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
-                false
-            }
-
-            else -> {
-                true
-            }
-        }
     }
 
     companion object {

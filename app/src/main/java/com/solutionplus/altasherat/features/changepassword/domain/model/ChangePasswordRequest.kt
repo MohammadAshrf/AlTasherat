@@ -10,15 +10,17 @@ data class ChangePasswordRequest (
     val token: String ?=null ,
 ){
     fun validateOldPassword(): Boolean {
-        return !oldPassword.isNullOrBlank() && oldPassword.length in 8..50
+        return !(oldPassword!!.isBlank() ||oldPassword.length < 8 || oldPassword.length > 50)
     }
 
     fun validateNewPassword(): Boolean {
-        return !newPassword.isNullOrBlank() && newPassword.length in 8..50
+        return !(newPassword!!.isBlank() || newPassword.length < 8 || newPassword.length > 50)
+
+
     }
 
     fun validateNewPasswordConfirmation(): Boolean {
-        return !newPasswordConfirmation.isNullOrBlank() && newPasswordConfirmation.length in 8..50
+        return !(newPasswordConfirmation!!.isBlank() || newPasswordConfirmation.length < 8|| newPasswordConfirmation.length > 50)
     }
 
     fun validateNewPasswordEqualNewPasswordConfirmation(): Boolean {

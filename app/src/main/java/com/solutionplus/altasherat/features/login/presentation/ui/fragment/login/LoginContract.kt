@@ -18,7 +18,7 @@ interface LoginContract {
 
     sealed class LoginEvents:ViewEvent {
         data class LoginSuccess(val user: User) : LoginEvents()
-        data class LoginError(val message: String) : LoginEvents()
+//        data class LoginError(val message: String) : LoginEvents()
     }
 
     data class LoginState(

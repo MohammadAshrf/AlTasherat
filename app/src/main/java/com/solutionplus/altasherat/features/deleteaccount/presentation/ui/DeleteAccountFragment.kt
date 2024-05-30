@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.DeleteAccountButtomSheetBinding
 import com.solutionplus.altasherat.databinding.FragmentDeleteAccountBinding
@@ -54,9 +55,17 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.viewState.collect { state ->
-                        renderState(state)
-                    }
+                        getClassLogger().info(state.exception.toString())
 
+                        state.exception?.let {
+                            handleHttpExceptions(it)
+                        }
+                        if (state.isLoading) {
+                            showLoading()
+                        } else {
+                            hideLoading()
+                        }
+                    }
                 }
                 launch {
                     viewModel.singleEvent.collect { event ->
@@ -67,7 +76,6 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun viewInit() {
         binding.btnCancellation.setOnClickListener {
             findNavController().popBackStack()
@@ -80,29 +88,11 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         }
     }
 
-    private fun renderState(state: DeleteAccountContract.DeleteAccountState) {
-        CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading) {
-                showLoading(resources.getString(R.string.please_wait))
-            } else {
-                hideLoading()
-            }
-            state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-    }
-
     private fun handleEvent(event: DeleteAccountContract.DeleteAccountEvents) {
         when (event) {
             is DeleteAccountContract.DeleteAccountEvents.DeleteAccountSuccess -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Your Account is deleted successfully",
-                    Toast.LENGTH_SHORT
-                ).show()
-                //findNavController().navigate(R.id.action_changePasswordFragment_to_homeActivity)
+                showSnackBar("Your Account is deleted successfully", false)
+                requireActivity().finish()
             }
 
             is DeleteAccountContract.DeleteAccountEvents.DeleteAccountError -> {
@@ -111,20 +101,17 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun handleButtonClick() {
         viewLifecycleOwner.lifecycleScope.launch {
             showBottomSheetDialog()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun showBottomSheetDialog() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bindingBottomSheet = DeleteAccountButtomSheetBinding.inflate(layoutInflater)
         bindingBottomSheet.btnDelete.setOnClickListener {
             val password = bindingBottomSheet.etPassword.text.toString()
-            //todo we need to check if the password is correct or not
             viewModel.onActionTrigger(
                 DeleteAccountContract.DeleteAccountActions.DeleteAccount(
                     password,

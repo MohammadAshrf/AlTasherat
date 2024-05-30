@@ -25,7 +25,7 @@ interface SignUpContract {
     sealed class SignupEvent : ViewEvent {
         //        data class CountriesIndex(val countries: List<Country>) : SignupEvent()
         data class SignupSuccess(val user: User) : SignupEvent()
-        data class SignupError(val message: String) : SignupEvent()
+//        data class SignupError(val message: String) : SignupEvent()
     }
 
     data class SignUpState(

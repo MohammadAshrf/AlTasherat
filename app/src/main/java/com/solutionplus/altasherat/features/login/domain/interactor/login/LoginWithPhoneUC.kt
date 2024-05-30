@@ -5,27 +5,18 @@ import com.solutionplus.altasherat.features.login.data.model.request.LoginReques
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
-import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import javax.inject.Inject
 
 class LoginWithPhoneUC  (
     private val repository: ILoginRepository,
 ) : BaseUseCase<User, LoginRequest>(){
     public override suspend fun execute(params: LoginRequest?): User {
-        requireNotNull(params) {
+        validateRequest(params!!)?.let { message ->
             throw LeonException.Local.RequestValidation(
-                clazz = ChangePasswordRequest::class,
-                message = "Request is null"
-            )
-        }
-        validateRequest(params)?.let { message ->
-            throw LeonException.Local.RequestValidation(
-                clazz = ChangePasswordRequest::class,
+                clazz = LoginRequest::class,
                 message = message
             )
         }
-
         val result = repository.loginWithPhone(params)
         repository.saveUser(result.userInfo)
         repository.saveAccessToken(result.accessToken)

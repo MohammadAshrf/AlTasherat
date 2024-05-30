@@ -18,8 +18,8 @@ class DeleteAccountVM @Inject constructor(
     private val deleteAccountUC:DeleteAccountUC
 ) : AlTasheratViewModel<DeleteAccountContract.DeleteAccountActions, DeleteAccountContract.DeleteAccountEvents, DeleteAccountContract.DeleteAccountState>(initialState = DeleteAccountContract.DeleteAccountState.initial())  {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActionTrigger(action: ViewAction?) {
+        setState(oldViewState.copy(action = action))
         when (action) {
             is DeleteAccountContract.DeleteAccountActions.DeleteAccount -> handleDeleteAccount(action.password)
         }
@@ -29,15 +29,13 @@ class DeleteAccountVM @Inject constructor(
         setState(DeleteAccountContract.DeleteAccountState.initial())
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun handleDeleteAccount(password:String) {
         val deleteAccountRequest = DeleteAccountRequest(password =  password)
         deleteAccountUC.invoke(viewModelScope,deleteAccountRequest){ resource ->
             when (resource) {
-                is Resource.Failure -> setState(oldViewState.copy(isLoading = false, exception = resource.exception))
+                is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
                 is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                 is Resource.Success -> {
-                    setState(oldViewState.copy(isLoading = false, exception = null))
                     sendEvent(DeleteAccountContract.DeleteAccountEvents.DeleteAccountSuccess("Your Account is Deleted successfully"))
                 }
             }

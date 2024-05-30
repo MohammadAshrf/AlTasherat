@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentChangePasswordBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,9 +35,16 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.viewState.collect { state ->
-                        renderState(state)
+                        getClassLogger().info(state.exception.toString())
+                        state.exception?.let {
+                            handleHttpExceptions(it)
+                        }
+                        if (state.isLoading) {
+                            showLoading()
+                        } else {
+                            hideLoading()
+                        }
                     }
-
                 }
                 launch {
                     viewModel.singleEvent.collect { event ->
@@ -50,74 +58,35 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun viewInit() {
         binding.btnSave.setOnClickListener {
-            if (validateChangePasswordDetails()) {
-                val oldPassword = binding.etOldPassword.text.toString()
-                val newPassword = binding.etNewPassword.text.toString()
-                val newPasswordConfirmation = binding.etReTypeNewPassword.text.toString()
+            val oldPassword = binding.etOldPassword.text.toString()
+            val newPassword = binding.etNewPassword.text.toString()
+            val newPasswordConfirmation = binding.etReTypeNewPassword.text.toString()
 
-                viewModel.onActionTrigger(
-                    ChangePasswordContract.ChangePasswordActions.ChangePassword(
-                        oldPassword,
-                        newPassword,
-                        newPasswordConfirmation
-                    )
+            viewModel.onActionTrigger(
+                ChangePasswordContract.ChangePasswordActions.ChangePassword(
+                    oldPassword,
+                    newPassword,
+                    newPasswordConfirmation
                 )
-            }
+            )
+
         }
         binding.imgback.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
-    private fun renderState(state: ChangePasswordContract.ChangePasswordState) {
-        CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading) {
-                showLoading(resources.getString(R.string.please_wait))
-            } else {
-                hideLoading()
-            }
-            state.exception?.let {
-                Toast.makeText(requireContext(), it.message ?: "Unknown error", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-    }
-
     private fun handleEvent(event: ChangePasswordContract.ChangePasswordEvents) {
         when (event) {
             is ChangePasswordContract.ChangePasswordEvents.ChangePasswordSuccess -> {
+                showSnackBar(resources.getString(R.string.login_success), false)
+                requireActivity().finish()
                 Toast.makeText(
                     requireContext(),
                     "Your Password Changed successfully",
                     Toast.LENGTH_SHORT
                 ).show()
-                //findNavController().navigate(R.id.action_changePasswordFragment_to_homeActivity)
             }
-
-            is ChangePasswordContract.ChangePasswordEvents.ChangePasswordError -> {
-                Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun validateChangePasswordDetails(): Boolean {
-        return when {
-            binding.etOldPassword.text.isNullOrEmpty() -> {
-                showSnackBar("Please enter the old password", true)
-                false
-            }
-
-            binding.etNewPassword.text.isNullOrEmpty() || binding.etNewPassword.text!!.length < 8 -> {
-                showSnackBar("Please enter a valid new password (at least 8 characters)", true)
-                false
-            }
-
-            binding.etReTypeNewPassword.text.toString() != binding.etNewPassword.text.toString() -> {
-                showSnackBar("New password and confirmation do not match", true)
-                false
-            }
-
-            else -> true
         }
     }
 

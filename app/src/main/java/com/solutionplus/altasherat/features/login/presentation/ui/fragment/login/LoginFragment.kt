@@ -81,11 +81,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 showSnackBar(resources.getString(R.string.login_success), false)
                 requireActivity().finish()
             }
-
-            is LoginContract.LoginEvents.LoginError -> {
-              //  showSnackBar(event.message, true)
-
-            }
         }
     }
 
