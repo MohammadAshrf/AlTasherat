@@ -4,18 +4,23 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 interface LanguageContract {
 
     sealed class LanguageAction : ViewAction {
         data object GetCountriesFromLocal : LanguageAction()
+        data class SaveSelectedCountry(val country: Country) : LanguageAction()
+        data object GetSelectedCountry : LanguageAction()
         data class StartLanguageWorker(val language: String) : LanguageAction()
         data object ContinueToOnBoarding : LanguageAction()
     }
 
     sealed class LanguageEvent : ViewEvent {
         data class CountriesIndex(val countries: List<Country>) : LanguageEvent()
+        data class SaveSelectedCountry(val country: Country) : LanguageEvent()
+        data class GetSelectedCountry(val country: Country): LanguageEvent()
         data class LanguageWorkerStarted(val language: String) : LanguageEvent()
         data object NavigateToOnBoarding : LanguageEvent()
     }

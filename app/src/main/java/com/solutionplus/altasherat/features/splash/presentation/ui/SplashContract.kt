@@ -12,7 +12,8 @@ interface SplashContract {
     }
 
     sealed class SplashEvent : ViewEvent {
-        data object NavigateToLanguage : SplashEvent()
+        data object FetchCountriesAndNavigateToLanguage : SplashEvent()
+        data object FetchCountriesFromRemote : SplashEvent()
         data object NavigateToHome : SplashEvent()
     }
 

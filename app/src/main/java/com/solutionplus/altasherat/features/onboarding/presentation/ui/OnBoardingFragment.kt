@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentOnBoardingBinding
 import com.solutionplus.altasherat.features.onboarding.presentation.adapters.ViewPagerAdapter
@@ -33,11 +31,11 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     }
 
     private fun handleViews() {
-        val fragmentList = arrayListOf<Fragment>(
+        val fragments = mutableListOf<Fragment>(
             OnBoardingFirst(), OnBoardingSecond(), OnBoardingThird()
         )
         val adapter =
-            ViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager, lifecycle)
+            ViewPagerAdapter(fragments, requireActivity().supportFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
         val callback = object : ViewPager2.OnPageChangeCallback() {
@@ -87,6 +85,4 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
         val intent = Intent(requireContext(), HomeActivity::class.java)
         startActivity(intent)
     }
-
-
 }
