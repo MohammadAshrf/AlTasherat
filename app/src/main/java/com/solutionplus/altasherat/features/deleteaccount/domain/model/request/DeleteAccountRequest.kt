@@ -7,6 +7,6 @@ data class DeleteAccountRequest (
 
 ){
     fun validatePassword(): Boolean {
-        return !password.isNullOrBlank()
+        return !(password!!.isBlank() ||password.length < 8 || password.length > 50)
     }
 }
