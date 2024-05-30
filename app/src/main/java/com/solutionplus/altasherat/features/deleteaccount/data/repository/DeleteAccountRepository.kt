@@ -23,4 +23,7 @@ internal class DeleteAccountRepository(
     override suspend fun deleteAccessToken() {
         localDs.deleteAccessToken()
     }
+    override suspend fun changeUserLoginState(isLoggedIn: Boolean) {
+        localDs.changeUserLoginState(isLoggedIn)
+    }
 }

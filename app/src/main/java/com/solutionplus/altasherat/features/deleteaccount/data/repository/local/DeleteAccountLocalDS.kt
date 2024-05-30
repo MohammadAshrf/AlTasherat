@@ -15,4 +15,8 @@ internal class DeleteAccountLocalDS (
     override suspend fun deleteAccessToken() {
         storageKV.deleteEntry<String>(StorageKeyEnum.ACCESS_TOKEN, String::class.java)
     }
+
+    override suspend fun changeUserLoginState(isLoggedIn: Boolean) {
+        storageKV.updateEntry(StorageKeyEnum.IS_USER_LOGGED_IN, isLoggedIn, Boolean::class.java)
+    }
 }
