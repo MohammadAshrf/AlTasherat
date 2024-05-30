@@ -13,17 +13,23 @@ class LoginWithPhoneUC  (
     private val repository: ILoginRepository,
 ) : BaseUseCase<User, LoginRequest>(){
     public override suspend fun execute(params: LoginRequest?): User {
-        val result = repository.loginWithPhone(params!!)
-        repository.saveUser(result.userInfo)
-        repository.saveAccessToken(result.accessToken)
-        repository.getUser()
-
+        requireNotNull(params) {
+            throw LeonException.Local.RequestValidation(
+                clazz = ChangePasswordRequest::class,
+                message = "Request is null"
+            )
+        }
         validateRequest(params)?.let { message ->
             throw LeonException.Local.RequestValidation(
                 clazz = ChangePasswordRequest::class,
                 message = message
             )
         }
+
+        val result = repository.loginWithPhone(params)
+        repository.saveUser(result.userInfo)
+        repository.saveAccessToken(result.accessToken)
+        repository.getUser()
         return result.userInfo
     }
 
@@ -31,8 +37,8 @@ class LoginWithPhoneUC  (
     private fun validateRequest(request: LoginRequest): String? {
         return request.run {
             when {
-                !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
                 !validatePhone() -> "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long."
+                !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
                 else -> null
             }
         }

@@ -23,6 +23,7 @@ object ExceptionMapper {
                         val message = errorMap["message"] as? String ?: "Unknown validation error"
                         LeonException.Client.ResponseValidation(errors, message)
                     }
+
                     in 400..499 -> LeonException.Client.Unhandled(code, exception.message())
                     in 500..599 -> LeonException.Server.InternalServerError(
                         code,
@@ -53,6 +54,10 @@ object ExceptionMapper {
                             message = "Network Error: ${exception.message}"
                         )
                 }
+            }
+
+            is LeonException.Local.RequestValidation -> {
+                LeonException.Local.RequestValidation(exception.clazz, exception.message)
             }
 
             else -> LeonException.Unknown("An unknown error occurred: ${exception.message}")

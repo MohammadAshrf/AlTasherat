@@ -57,16 +57,13 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
                 showSnackbar( exception.message ?: "Unknown validation error")
             }
 
-            is LeonException.Network.Unhandled -> showToasts("Unhandled Network Error")
-            is LeonException.Client.Unhandled -> showToasts("Unhandled Client Error")
-            is LeonException.Server.InternalServerError -> showToasts("Internal Server Error")
-            is LeonException.Unknown -> showToasts("Unknown Error")
+            is LeonException.Network.Unhandled -> showSnackbar("Unhandled Network Error")
+            is LeonException.Client.Unhandled -> showSnackbar("Unhandled Client Error")
+            is LeonException.Server.InternalServerError -> showSnackbar("Internal Server Error")
+            is LeonException.Unknown -> showSnackbar("Unknown Error")
         }
     }
 
-    private fun showToasts(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
     private fun showSnackbar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }

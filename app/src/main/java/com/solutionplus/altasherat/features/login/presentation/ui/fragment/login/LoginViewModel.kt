@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.features.login.presentation.ui.fragment.logi
 
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
@@ -56,17 +57,17 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun loginWithPhone(phoneNumber: String, countryCode: String, password: String) {
+        val loginRequest = LoginRequest(
+            phone = Phone(countryCode, phoneNumber),
+            password = password
+        )
+
         viewModelScope.launch {
-            val loginRequest = LoginRequest(
-                phone = Phone(countryCode, phoneNumber),
-                password = password
-            )
             loginWithPhoneUC.invoke(viewModelScope, loginRequest) { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> sendEvent(LoginContract.LoginEvents.LoginSuccess(resource.model))
-
                 }
             }
         }

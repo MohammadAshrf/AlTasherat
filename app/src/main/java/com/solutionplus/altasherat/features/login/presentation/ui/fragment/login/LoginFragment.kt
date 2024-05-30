@@ -2,14 +2,14 @@ package com.solutionplus.altasherat.features.login.presentation.ui.fragment.logi
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.widget.Toast
+
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
@@ -35,6 +35,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.viewState.collect { state ->
+                        getClassLogger().info(state.exception.toString())
 
                         state.exception?.let {
                             handleHttpExceptions(it)
@@ -77,44 +78,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             is LoginContract.LoginEvents.LoginSuccess -> {
                 val intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
-               showSnackBar(resources.getString(R.string.login_success), false)
+                showSnackBar(resources.getString(R.string.login_success), false)
                 requireActivity().finish()
             }
 
             is LoginContract.LoginEvents.LoginError -> {
-                Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
+              //  showSnackBar(event.message, true)
+
             }
         }
     }
 
     override fun onLoginAction() {
-        if (validateLoginDetails()) {
-            val phoneNumber = binding.etPhoneClient.text.toString()
-            val password = binding.etPassword.text.toString()
-            val countryCode =(binding.etCountruCode.selectedItem as Country).phoneCode
-
-            viewModel.onActionTrigger(
-                LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
-            )
-        }
-
+        val phoneNumber = binding.etPhoneClient.text.toString()
+        val password = binding.etPassword.text.toString()
+        val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
+        viewModel.onActionTrigger(
+            LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
+        )
     }
 
-    private fun validateLoginDetails(): Boolean {
-        return when {
-            binding.etPhoneClient.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.etPhoneClient.text.toString()) -> {
-                showSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
-                false
-            }
 
-            binding.etPassword.text?.trim()?.length !in 8..50 -> {
-                showSnackBar(resources.getString(R.string.err_msg_enter_valid_password), true)
-                false
-            }
-
-            else -> {
-                true
-            }
-        }
-    }
 }
