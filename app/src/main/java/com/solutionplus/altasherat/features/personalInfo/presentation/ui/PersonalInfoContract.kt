@@ -4,6 +4,7 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
+import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 interface PersonalInfoContract {
@@ -24,13 +25,19 @@ interface PersonalInfoContract {
 //            val imageTitle: String?= null,
         ) : PersonalInfoAction()
 
+        data object GetSelectedCountryLocal : PersonalInfoAction()
         data object GetCountriesFromLocal : PersonalInfoAction()
+        data object GetUpdatedUser : PersonalInfoAction()
+        data object GetUpdatedUserFromLocal : PersonalInfoAction()
     }
 
     sealed class PersonalInfoEvent : ViewEvent {
-        data class CountriesIndex(val countries: List<Country>) : PersonalInfoEvent()
+        data class GetSelectedCountryFromLocal(val country: Country) : PersonalInfoEvent()
+        data class GetCountriesFromLocal(val countries: List<Country>) : PersonalInfoEvent()
         data class UpdateDoneSuccessfully(val message: String) : PersonalInfoEvent()
         data class UpdateFailed(val message: String) : PersonalInfoEvent()
+        data class GetUpdatedUserSuccessfully(val user: User) : PersonalInfoEvent()
+        data class GetUpdatedUserFromLocal(val user: User) : PersonalInfoEvent()
     }
 
     data class PersonalInfoState(

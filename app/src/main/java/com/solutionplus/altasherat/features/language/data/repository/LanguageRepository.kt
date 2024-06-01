@@ -16,13 +16,11 @@ class LanguageRepository(
         return CountryMapper.entityToDomain(localDS.getSelectedCountry())
     }
 
-    override suspend fun saveSelectedLanguage(country: Country) {
-        TODO("Not yet implemented")
+    override suspend fun saveSelectedLanguage(language: String) {
+        localDS.saveSelectedLanguage(language)
     }
 
-    override suspend fun getSelectedLanguage(): Country {
-        TODO("Not yet implemented")
+    override suspend fun getSelectedLanguage(): String {
+        return localDS.getSelectedLanguage()
     }
-
-
 }

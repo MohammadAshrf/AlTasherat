@@ -1,5 +1,7 @@
 package com.solutionplus.altasherat.features.splash.presentation.ui
 
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
@@ -26,7 +28,12 @@ class SplashViewModel @Inject constructor(
         setState(oldViewState.copy(action = action))
         when (action) {
             is SplashAction.IsOnBoardingShown -> isOnboardingShown()
+            is SplashAction.StartAppWithArabicLocale -> startAppWithArabicLocale(action.language)
         }
+    }
+
+    private fun startAppWithArabicLocale(language: String) {
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
     }
 
     private fun isOnboardingShown() {
@@ -52,7 +59,7 @@ class SplashViewModel @Inject constructor(
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
                     is Resource.Success -> if (it.model) {
-                        sendEvent(SplashEvent.FetchCountriesAndNavigateToLanguage)
+                        sendEvent(SplashEvent.FetchCountriesFromLocalAndNavigateToLanguage)
                     } else {
                         fetchCountryFromRemote()
                     }

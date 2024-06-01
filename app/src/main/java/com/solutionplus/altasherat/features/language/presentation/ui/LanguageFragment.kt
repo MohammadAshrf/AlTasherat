@@ -18,6 +18,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
     private val languageVM: LanguageViewModel by viewModels()
     override fun viewInit() {
+        if (AppCompatDelegate.getApplicationLocales().get(0)?.language.equals("ar")) {
+            binding.arabicRadioBtn.isChecked = true
+            binding.englishRadioBtn.isChecked = false
+            binding.englishRadioBtn.isEnabled = true
+            binding.arabicRadioBtn.isEnabled = false
+        } else {
+            binding.englishRadioBtn.isChecked = true
+            binding.arabicRadioBtn.isChecked = false
+            binding.englishRadioBtn.isEnabled = false
+            binding.arabicRadioBtn.isEnabled = true
+        }
         handleViews()
     }
 
@@ -32,13 +43,9 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
 
     private fun handleViews() {
         binding.arabicRadioBtn.setOnClickListener {
-            binding.englishRadioBtn.isEnabled = true
-            binding.arabicRadioBtn.isEnabled = false
             languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("ar"))
         }
         binding.englishRadioBtn.setOnClickListener {
-            binding.englishRadioBtn.isEnabled = false
-            binding.arabicRadioBtn.isEnabled = true
             languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("en"))
         }
         binding.continueButton.setOnClickListener {

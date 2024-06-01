@@ -5,6 +5,6 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 interface ILanguageRepository {
     suspend fun saveSelectedCountry(country: Country)
     suspend fun getSelectedCountry(): Country
-    suspend fun saveSelectedLanguage(country: Country)
-    suspend fun getSelectedLanguage(): Country
+    suspend fun saveSelectedLanguage(language: String)
+    suspend fun getSelectedLanguage(): String
 }
