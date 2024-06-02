@@ -2,36 +2,21 @@
 package com.solutionplus.altasherat.features.login.data.model.dto
 
 import com.google.gson.annotations.SerializedName
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
 
 internal data class UserDto(
-    @SerializedName("all_permissions")
-    val allPermissions: List<Any?>? = null,
-    @SerializedName("birthdate")
-    val birthdate: String? = null,
-    @SerializedName("blocked")
-    val blocked: Int? = null,
-    @SerializedName("country")
-    val country: CountryDto? = null,
-    @SerializedName("email")
-    val email: String? = null,
-    @SerializedName("email_verified")
-    val emailVerified: Boolean? = null,
-    @SerializedName("firstname")
-    val firstname: String? = null,
-    @SerializedName("id")
-    val id: Int? = null,
-    @SerializedName("image")
-    val image: ImageDto? = null,
-    @SerializedName("lastname")
-    val lastname: String? = null,
-    @SerializedName("middlename")
-    val middleName: String? = null,
-    @SerializedName("phoneRequest")
-    val phone: PhoneDto? = null,
-    @SerializedName("phone_verified")
-    val phoneVerified: Boolean? = null,
-    @SerializedName("username")
-    val username: String? = null,
-    @SerializedName("fullName")
-    val fullName: String? = null,
+    @field:SerializedName("id") val id: Int? = null,
+    @field:SerializedName("username") val username: String? = null,
+    @field:SerializedName("firstname") val firstname: String? = null,
+    @field:SerializedName("middlename") val middleName: String? = null,
+    @field:SerializedName("lastname") val lastname: String? = null,
+    @field:SerializedName("email") val email: String? = null,
+    @field:SerializedName("phoneRequest") val phone: PhoneDto? = null,
+    @field:SerializedName("image") val image: ImageDto? = null,
+    @field:SerializedName("birthdate") val birthdate: String? = null,
+    @field:SerializedName("email_verified") val emailVerified: Boolean? = null,
+    @field:SerializedName("phone_verified") val phoneVerified: Boolean? = null,
+    @field:SerializedName("blocked") val blocked: Int? = null,
+    @field:SerializedName("country") val country: CountryDto? = null,
+    @field:SerializedName("all_permissions") val allPermissions: List<String>? = null
 )

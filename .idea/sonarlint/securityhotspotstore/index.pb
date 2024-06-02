@@ -123,3 +123,5 @@ eapp/src/main/java/com/solutionplus/altasherat/features/services/country/data/ma
 eapp/src/main/java/com/solutionplus/altasherat/features/services/country/data/models/dto/CountryDto.kt,1\8\18fff7c4269b28910129e9b374f53c7070173ff6
 z
 Japp/src/main/java/com/solutionplus/altasherat/common/data/mapper/Mapper.kt,3\c\3cfd640f3559e0341599f4750a0d23de9498b75d
+Ž
+^app/src/main/java/com/solutionplus/altasherat/features/personalInfo/data/models/dto/UserDto.kt,6\3\6398df5fff6f3a3bcea91cec5ee431318c3fb893
