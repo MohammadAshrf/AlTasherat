@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
@@ -42,6 +43,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+    private lateinit var countriesList: List<Country>
     private val personalInfoVM: PersonalInfoViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -51,7 +53,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         personalInfoVM.processIntent(GetCountriesFromLocal)
-//        personalInfoVM.processIntent(GetSelectedCountryLocal)
         personalInfoVM.processIntent(GetUpdatedUserFromLocal)
         binding.swipeRefreshLayout.setOnRefreshListener {
             personalInfoVM.processIntent(GetUpdatedUserFromRemote)
@@ -75,7 +76,10 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             val firstname = binding.firstNameEditText.text.toString()
             val middleName = binding.middleNameEditText.text.toString()
             val lastname = binding.lastNameEditText.text.toString()
-            val phone = PhoneRequest((binding.phoneEditText.text.toString()), binding.spinnerCountryCode.selectedItem.toString())
+            val phone = PhoneRequest(
+                (binding.phoneEditText.text.toString()),
+                binding.spinnerCountryCode.selectedItem.toString()
+            )
             val email = binding.emailEditText.text.toString()
             val image = binding.viewProfileSection.profilePicture.drawable.toBitmap().let {
                 ImageRequest(it.generationId, "image/jpeg", "image", "image")
@@ -132,11 +136,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(personalInfoVM.singleEvent) {
             when (it) {
-                is PersonalInfoEvent.GetSelectedCountryFromLocal -> {
-//                    binding.stateSpinner.setSelection(it.country.id - 1)
-//                    binding.spinnerCountryCode.setSelection(it.country.phoneCode.toInt() - 1)
-                }
-
                 is PersonalInfoEvent.UpdateDoneSuccessfully -> showSnackBar(
                     "Your Profile Updated Successfully!",
                     false
@@ -150,10 +149,14 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 is PersonalInfoEvent.GetUpdatedUserFromRemote -> handleRemoteInfo(it.user)
 
                 is PersonalInfoEvent.GetCountriesFromLocal -> {
+                    countriesList = it.countries
                     binding.stateSpinner.adapter =
                         CountriesSpinnerAdapter(requireContext(), it.countries)
                     binding.spinnerCountryCode.adapter =
                         CountryCodeSpinnerAdapter(requireContext(), it.countries)
+                    binding.stateSpinner.setSelection(0)
+                    binding.spinnerCountryCode.setSelection(0)
+                    logger.info(countriesList.toString())
                 }
 
                 is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleLocalInfo(it.user)
@@ -163,9 +166,12 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     private fun handleLocalInfo(it: User) {
         binding.firstNameEditText.setText(it.firstname)
-        binding.middleNameEditText.setText(it.middlename)
+        binding.middleNameEditText.setText(it.middleName)
         binding.lastNameEditText.setText(it.lastname)
-        PhoneRequest((binding.phoneEditText.text.toString()), binding.spinnerCountryCode.selectedItem.toString())
+        PhoneRequest(
+            (binding.phoneEditText.text.toString()),
+            binding.spinnerCountryCode.selectedItem.toString()
+        )
         binding.phoneEditText.setText(it.phone.number)
         binding.emailEditText.setText(it.email)
         binding.birthdateEditText.setText(it.birthdate)
@@ -174,13 +180,13 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     private fun handleRemoteInfo(it: User) {
         binding.firstNameEditText.setText(it.firstname)
-        binding.middleNameEditText.setText(it.middlename)
+        binding.middleNameEditText.setText(it.middleName)
         binding.lastNameEditText.setText(it.lastname)
-        binding.spinnerCountryCode.setSelection(it.country.phoneCode.toInt())
+        binding.spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
         binding.phoneEditText.setText(it.phone.number)
         binding.emailEditText.setText(it.email)
         binding.birthdateEditText.setText(it.birthdate)
-        binding.stateSpinner.setSelection(it.country.id)
+        binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
     }
 
     private fun renderState(state: PersonalInfoState) {
@@ -235,6 +241,9 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         }
     }
 
+    companion object {
+        val logger = getClassLogger()
+    }
 
 //    private fun validatePersonalInfo(): Boolean {
 //        return when {

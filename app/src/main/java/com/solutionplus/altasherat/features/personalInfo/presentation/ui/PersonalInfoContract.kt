@@ -24,14 +24,12 @@ interface PersonalInfoContract {
             val country: CountryRequest,
         ) : PersonalInfoAction()
 
-        data object GetSelectedCountryLocal : PersonalInfoAction()
         data object GetCountriesFromLocal : PersonalInfoAction()
         data object GetUpdatedUserFromRemote : PersonalInfoAction()
         data object GetUpdatedUserFromLocal : PersonalInfoAction()
     }
 
     sealed class PersonalInfoEvent : ViewEvent {
-        data class GetSelectedCountryFromLocal(val country: Country) : PersonalInfoEvent()
         data class GetCountriesFromLocal(val countries: List<Country>) : PersonalInfoEvent()
         data class UpdateDoneSuccessfully(val message: String) : PersonalInfoEvent()
         data class UpdateFailed(val message: String) : PersonalInfoEvent()

@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageAction.GetCountriesFromLocal
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
@@ -14,7 +13,6 @@ import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUs
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromRemoteUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserUC
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetSelectedCountryLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
