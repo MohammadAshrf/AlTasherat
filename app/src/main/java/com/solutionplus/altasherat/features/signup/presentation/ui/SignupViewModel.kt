@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
+import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.data.model.request.Phone
@@ -18,15 +19,20 @@ import javax.inject.Inject
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
-    private val getCountriesUC: GetCountriesFromLocalUC
+    private val getCountriesUC: GetCountriesFromLocalUC,
+    private val getSelectedCountryUC: GetSelectedCountryUC
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
     initialState = SignUpContract.SignUpState.initial()
 ) {
     private val _countries = MutableStateFlow<List<Country>>(emptyList())
     val countries: StateFlow<List<Country>> get() = _countries
 
+    private val _selectedCountry = MutableStateFlow<Country?>(null)
+    val selectedCountry: StateFlow<Country?> get() = _selectedCountry
+
     init {
         fetchCountries()
+        fetchSelectedCountry()
     }
 
     override fun onActionTrigger(action: ViewAction?) {
@@ -55,6 +61,13 @@ class SignupViewModel @Inject constructor(
                     is Resource.Success -> _countries.value = resource.model
                 }
             }
+        }
+    }
+
+    private fun fetchSelectedCountry() {
+        viewModelScope.launch {
+            val country = getSelectedCountryUC.execute(null)
+            _selectedCountry.value = country
         }
     }
 

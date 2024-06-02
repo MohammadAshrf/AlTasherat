@@ -8,5 +8,6 @@ enum class StorageKeyEnum(override val keyValue: String) : IStorageKeyEnum {
     UPDATED_USER("updated_user"),
     IS_USER_LOGGED_IN("is_user_logged_in"),
     ONBOARDING_SHOWN("onboardingShown"),
-    COUNTRIES("countries")
+    COUNTRIES("countries"),
+    SELECTED_COUNTRY("selectedCountry")
 }

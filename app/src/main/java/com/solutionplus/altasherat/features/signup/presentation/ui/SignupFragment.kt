@@ -51,6 +51,11 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                         setupCountrySpinner(countries)
                     }
                 }
+                launch {
+                    viewModel.selectedCountry.collect { country ->
+                        setDefaultCountry(country)
+                    }
+                }
             }
         }
     }
@@ -82,8 +87,18 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
-        if (countries.isNotEmpty()) {
-            binding.etCountruCode.setSelection(0)
+//        if (countries.isNotEmpty()) {
+//            binding.etCountruCode.setSelection(0)
+//        }
+    }
+
+    private fun setDefaultCountry(country: Country?) {
+        country?.let {
+            val adapter = binding.etCountruCode.adapter as CountryCodeSpinnerAdapter
+            val position = adapter.getPosition(country)
+            if (position >= 0) {
+                binding.etCountruCode.setSelection(position)
+            }
         }
     }
 

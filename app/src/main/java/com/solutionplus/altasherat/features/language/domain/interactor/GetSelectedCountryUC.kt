@@ -6,7 +6,7 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 
 class GetSelectedCountryUC(private val repository: ILanguageRepository) :
     BaseUseCase<Country, String?>() {
-    override suspend fun execute(params: String?): Country {
+    public override suspend fun execute(params: String?): Country {
         return repository.getSelectedCountry()
     }
 }
