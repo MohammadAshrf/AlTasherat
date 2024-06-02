@@ -8,7 +8,6 @@ import com.solutionplus.altasherat.features.personalInfo.data.repository.local.U
 import com.solutionplus.altasherat.features.personalInfo.data.repository.remote.UpdateUserRemoteDS
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromLocalUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromRemoteUC
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.HasUserUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserUC
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateUserRepository
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateUserLocalDS
@@ -28,10 +27,6 @@ internal object UpdateUserDI {
     @Provides
     fun provideGetUserInfoFromLocalUC(repository: IUpdateUserRepository): GetUserFromLocalUC =
         GetUserFromLocalUC(repository)
-
-    @Provides
-    fun provideHasUserUC(repository: IUpdateUserRepository): HasUserUC =
-        HasUserUC(repository)
 
     @Provides
     fun provideGetUserFromRemoteUC(repository: IUpdateUserRepository): GetUserFromRemoteUC =

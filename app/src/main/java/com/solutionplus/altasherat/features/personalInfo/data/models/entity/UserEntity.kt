@@ -1,20 +1,21 @@
 package com.solutionplus.altasherat.features.personalInfo.data.models.entity
 
 
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.ImageDto
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.PhoneDto
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
 
 internal data class UserEntity(
-    val image: String,
-    val firstName: String,
-    val isBlocked: Int,
+    val id: Int,
+    val username: String,
+    val firstname: String,
+    val middleName: String,
+    val lastname: String,
+    val email: String,
+    val phone: PhoneEntity,
+    val image: ImageEntity,
+    val birthdate: String,
     val emailVerified: Boolean,
     val phoneVerified: Boolean,
-    val phone: String,
-    val birthDate: String,
-    val middleName: String,
-    val id: Int,
-    val email: String,
-    val userName: String,
-    val lastName: String
+    val blocked: Int,
+    val country: CountryEntity,
+    val allPermissions: List<String>
 )

@@ -9,5 +9,4 @@ interface IUpdateUserRepository {
     suspend fun saveUpdatedUser(updatedUser: UpdateUser)
     suspend fun getUpdatedUserFromLocal(): User
     suspend fun getUpdatedUserFromRemote(): User
-    suspend fun hasUser(): Boolean
 }
