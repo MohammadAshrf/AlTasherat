@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.language.domain.worker
 
 import android.content.Context
+import android.widget.Toast
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -12,6 +13,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @HiltWorker
@@ -39,6 +41,13 @@ class LanguageWorker @AssistedInject constructor(
                         }
 
                         is Resource.Failure -> {
+                            launch(Dispatchers.Main) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Please check your internet connection!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                             val errorMessage = ERROR_MESSAGE
                             val outputData = workDataOf(KEY_ERROR to errorMessage)
                             complete(Result.failure(outputData))
@@ -62,7 +71,8 @@ class LanguageWorker @AssistedInject constructor(
         const val KEY_SUCCESS = "success"
         const val KEY_ERROR = "error"
         const val SUCCESS_MESSAGE = "Country list updated"
-        const val ERROR_MESSAGE = "Failed to update country list"
-        const val ERROR_EXCEPTION_MESSAGE = "An error occurred while updating country list"
+        const val ERROR_MESSAGE = "Failed to update country list from remote api"
+        const val ERROR_EXCEPTION_MESSAGE =
+            "An error occurred while updating country list from remote api"
     }
 }

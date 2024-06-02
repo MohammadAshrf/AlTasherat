@@ -36,5 +36,4 @@ internal class CountriesSpinnerAdapter
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
         return getView(position, convertView, parent)
     }
-
 }

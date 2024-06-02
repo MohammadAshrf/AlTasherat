@@ -1,60 +1,69 @@
 package com.solutionplus.altasherat.features.personalInfo.data.mappers
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
+import com.solutionplus.altasherat.features.personalInfo.data.models.dto.ImageDto
+import com.solutionplus.altasherat.features.personalInfo.data.models.dto.PhoneDto
 import com.solutionplus.altasherat.features.personalInfo.data.models.dto.UserDto
 import com.solutionplus.altasherat.features.personalInfo.data.models.entity.UserEntity
 import com.solutionplus.altasherat.features.personalInfo.domain.models.User
+import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
+import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
 
 internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
     override fun dtoToDomain(model: UserDto): User {
         return User(
             id = model.id ?: -1,
-            userName = model.userName.orEmpty(),
-            email = model.email.orEmpty(),
-            firstName = model.firstName.orEmpty(),
+            username = model.username.orEmpty(),
+            firstname = model.firstname.orEmpty(),
             middleName = model.middleName.orEmpty(),
-            lastName = model.lastName.orEmpty(),
-            birthDate = model.birthDate.orEmpty(),
+            lastname = model.lastname.orEmpty(),
+            email = model.email.orEmpty(),
+            phone = PhoneMapper.dtoToDomain(model.phone ?: PhoneDto()),
+            image = ImageMapper.dtoToDomain(model.image ?: ImageDto()),
+            birthdate = model.birthdate.orEmpty(),
             emailVerified = model.emailVerified ?: false,
             phoneVerified = model.phoneVerified ?: false,
-            isBlocked = model.isBlocked ?: -1,
-            phone = "${model.phone?.countryCode.orEmpty()} ${model.phone?.number.orEmpty()}",
-            image = "${model.image?.title} ${model.image?.type.orEmpty()} ${model.image?.path}"
-
+            blocked = model.blocked ?: -1,
+            country = CountryMapper.dtoToDomain(model.country ?: CountryDto()),
+            allPermissions = model.allPermissions.orEmpty()
         )
     }
 
     override fun domainToEntity(model: User): UserEntity {
         return UserEntity(
             id = model.id,
-            userName = model.userName,
-            email = model.email,
-            firstName = model.firstName,
+            username = model.username,
+            firstname = model.firstname,
             middleName = model.middleName,
-            lastName = model.lastName,
-            birthDate = model.birthDate,
+            lastname = model.lastname,
+            email = model.email,
+            phone = PhoneMapper.domainToEntity(model.phone),
+            image = ImageMapper.domainToEntity(model.image),
+            birthdate = model.birthdate,
             emailVerified = model.emailVerified,
             phoneVerified = model.phoneVerified,
-            isBlocked = model.isBlocked,
-            phone = model.phone,
-            image = model.image
+            blocked = model.blocked,
+            country = CountryMapper.domainToEntity(model.country),
+            allPermissions = model.allPermissions
         )
     }
 
     override fun entityToDomain(model: UserEntity): User {
         return User(
             id = model.id,
-            userName = model.userName,
-            email = model.email,
-            firstName = model.firstName,
+            username = model.username,
+            firstname = model.firstname,
             middleName = model.middleName,
-            lastName = model.lastName,
-            birthDate = model.birthDate,
+            lastname = model.lastname,
+            email = model.email,
+            phone = PhoneMapper.entityToDomain(model.phone),
+            image = ImageMapper.entityToDomain(model.image),
+            birthdate = model.birthdate,
             emailVerified = model.emailVerified,
             phoneVerified = model.phoneVerified,
-            isBlocked = model.isBlocked,
-            phone = model.phone,
-            image = model.image
+            blocked = model.blocked,
+            country = CountryMapper.entityToDomain(model.country),
+            allPermissions = model.allPermissions
         )
     }
 }
