@@ -32,7 +32,6 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,7 +74,10 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             val firstname = binding.firstNameEditText.text.toString()
             val middleName = binding.middleNameEditText.text.toString()
             val lastname = binding.lastNameEditText.text.toString()
-            val phone = PhoneRequest((binding.phoneEditText.text.toString()), binding.spinnerCountryCode.selectedItem.toString())
+            val phone = PhoneRequest(
+                (binding.phoneEditText.text.toString()),
+                binding.spinnerCountryCode.selectedItem.toString()
+            )
             val email = binding.emailEditText.text.toString()
             val image = binding.viewProfileSection.profilePicture.drawable.toBitmap().let {
                 ImageRequest(it.generationId, "image/jpeg", "image", "image")
@@ -163,9 +165,12 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     private fun handleLocalInfo(it: User) {
         binding.firstNameEditText.setText(it.firstname)
-        binding.middleNameEditText.setText(it.middlename)
+        binding.middleNameEditText.setText(it.middleName)
         binding.lastNameEditText.setText(it.lastname)
-        PhoneRequest((binding.phoneEditText.text.toString()), binding.spinnerCountryCode.selectedItem.toString())
+        PhoneRequest(
+            (binding.phoneEditText.text.toString()),
+            binding.spinnerCountryCode.selectedItem.toString()
+        )
         binding.phoneEditText.setText(it.phone.number)
         binding.emailEditText.setText(it.email)
         binding.birthdateEditText.setText(it.birthdate)
@@ -174,7 +179,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     private fun handleRemoteInfo(it: User) {
         binding.firstNameEditText.setText(it.firstname)
-        binding.middleNameEditText.setText(it.middlename)
+        binding.middleNameEditText.setText(it.middleName)
         binding.lastNameEditText.setText(it.lastname)
         binding.spinnerCountryCode.setSelection(it.country.phoneCode.toInt())
         binding.phoneEditText.setText(it.phone.number)

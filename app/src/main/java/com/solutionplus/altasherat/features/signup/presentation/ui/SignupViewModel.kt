@@ -5,10 +5,9 @@ import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.signup.data.model.request.Phone
+import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -90,7 +89,7 @@ class SignupViewModel @Inject constructor(
         password: String
     ) {
         viewModelScope.launch {
-            val phone = Phone(
+            val phone = PhoneRequest(
                 countryCode = countryCode,
                 number = phoneNumber
             )

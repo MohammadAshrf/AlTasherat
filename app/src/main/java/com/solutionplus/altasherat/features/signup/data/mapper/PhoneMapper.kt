@@ -1,9 +1,9 @@
 package com.solutionplus.altasherat.features.signup.data.mapper
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.PhoneDto
-import com.solutionplus.altasherat.features.personalInfo.data.models.entity.PhoneEntity
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Phone
+import com.solutionplus.altasherat.features.signup.data.model.dto.PhoneDto
+import com.solutionplus.altasherat.features.signup.data.model.entity.PhoneEntity
+import com.solutionplus.altasherat.features.signup.domain.model.Phone
 
 internal object PhoneMapper : Mapper<PhoneDto, Phone, PhoneEntity>() {
     override fun dtoToDomain(model: PhoneDto): Phone {
@@ -19,12 +19,12 @@ internal object PhoneMapper : Mapper<PhoneDto, Phone, PhoneEntity>() {
 
     override fun domainToEntity(model: Phone): PhoneEntity {
         return PhoneEntity(
-        id = model.id,
-        countryCode = model.countryCode,
-        number = model.number,
-        extension = model.extension,
-        type = model.type,
-        holderName = model.holderName
+            id = model.id,
+            countryCode = model.countryCode,
+            number = model.number,
+            extension = model.extension,
+            type = model.type,
+            holderName = model.holderName
         )
     }
 

@@ -9,5 +9,5 @@ interface ILoginRepository {
     suspend fun loginWithPhone(loginRequest: LoginRequest): Login
     suspend fun saveUser(user: User)
     suspend fun saveAccessToken(token: String)
-    suspend fun getUser(): UserEntity?
+    suspend fun getUser(): User
 }
