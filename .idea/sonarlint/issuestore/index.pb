@@ -11,3 +11,7 @@ happ/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/l
 happ/src/main/java/com/solutionplus/altasherat/features/login/domain/interactor/login/LoginWithPhoneUC.kt,6\6\66af05b1a98d2ec54da4247126199e302a50f87e
 ù
 mapp/src/main/java/com/solutionplus/altasherat/features/login/presentation/ui/fragment/login/LoginViewModel.kt,9\d\9d6e76956e2c81e89d3869173e77a0813ae33aba
+ú
+lapp/src/main/java/com/solutionplus/altasherat/features/login/presentation/ui/fragment/login/LoginFragment.kt,8\a\8aef13490e0bb734ff1ebf0f47b68f4a097fffc7
+å
+\app/src/main/java/com/solutionplus/altasherat/common/data/repository/local/StorageKeyEnum.kt,7\3\731b34db5e1e6b350df5d2a204bfc8dcd2a36095
