@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.onboarding.di
+package com.solutionplus.altasherat.onboarding.di
 
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.features.onboarding.data.repository.OnBoardingRepository
@@ -10,30 +10,25 @@ import com.solutionplus.altasherat.features.onboarding.domain.repository.local.I
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object OnBoardingDI {
-    @Singleton
     @Provides
     fun provideIsOnboardingShownUC(repository: IOnBoardingRepository): IsOnboardingShownUC =
         IsOnboardingShownUC(repository)
 
-    @Singleton
     @Provides
     fun provideSetOnboardingShownUC(repository: IOnBoardingRepository): SetOnboardingShownUC =
         SetOnboardingShownUC(repository)
 
-    @Singleton
     @Provides
     fun provideLocalDS(
         localDSProvider: IKeyValueStorageProvider
     ): IOnBoardingLocalDS =
         OnBoardingLocalDS(localDSProvider)
 
-    @Singleton
     @Provides
     fun provideRepository(
         localDS: IOnBoardingLocalDS,

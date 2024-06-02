@@ -21,12 +21,15 @@ internal class LanguageLocalDS(private val localStorageProvider: IKeyValueStorag
         return Gson().fromJson(selectedCountry, CountryEntity::class.java)
     }
 
-    override suspend fun saveSelectedLanguage(country: Country) {
-        TODO("Not yet implemented")
+    override suspend fun saveSelectedLanguage(language: String) {
+        localStorageProvider
+            .saveEntry(StorageKeyEnum.SELECTED_LANGUAGE,"", String::class.java)
     }
 
-    override suspend fun getSelectedLanguage(): CountryEntity {
-        TODO("Not yet implemented")
+    override suspend fun getSelectedLanguage(): String {
+        val selectedLanguage =
+            localStorageProvider.getEntry(StorageKeyEnum.SELECTED_LANGUAGE, "", String::class.java)
+        return selectedLanguage
     }
 
     //    override suspend fun getCountriesFromLocal(): List<CountryEntity> {
