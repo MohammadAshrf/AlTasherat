@@ -10,5 +10,5 @@ data class UpdateUserRequest(
     @field:SerializedName("phone") val phone: PhoneRequest? = null,
     @field:SerializedName("image") val image: ImageRequest? = null,
     @field:SerializedName("birthdate") val birthdate: String? = null,
-    @field:SerializedName("country") val country: CountryRequest? = null,
+    @field:SerializedName("country") val country: Int? = null,
 )

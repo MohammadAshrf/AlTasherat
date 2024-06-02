@@ -13,7 +13,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -22,8 +21,6 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetCountriesFromLocal
@@ -54,7 +51,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         personalInfoVM.processIntent(GetCountriesFromLocal)
-         personalInfoVM.processIntent(GetUpdatedUserFromLocal)
         binding.swipeRefreshLayout.setOnRefreshListener {
             personalInfoVM.processIntent(GetUpdatedUserFromRemote)
             binding.swipeRefreshLayout.isRefreshing = false
@@ -73,24 +69,24 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.GONE
 
-
         binding.moreButton.setOnClickListener {
+            findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
         }
 
         binding.btnSave.setOnClickListener {
-            val firstname = binding.firstNameEditText.text.toString()
-            val middleName = binding.middleNameEditText.text.toString()
-            val lastname = binding.lastNameEditText.text.toString()
+            val firstname = binding.firstNameEditText.text.toString().trim()
+            val middleName = binding.middleNameEditText.text.toString().trim()
+            val lastname = binding.lastNameEditText.text.toString().trim()
             val phone = PhoneRequest(
-                (binding.phoneEditText.text.toString()),
-                binding.spinnerCountryCode.selectedItem.toString()
+                countryCode = countriesList[binding.spinnerCountryCode.selectedItemPosition].phoneCode,
+                binding.phoneEditText.text.toString()
             )
-            val email = binding.emailEditText.text.toString()
-            val image = binding.viewProfileSection.profilePicture.drawable.toBitmap().let {
-                ImageRequest(it.generationId, "image/jpeg", "image", "image")
-            }
+            val email = binding.emailEditText.text.toString().trim()
+//            val image = binding.viewProfileSection.profilePicture.drawable.toBitmap().let {
+//                ImageRequest(it.generationId, "", "", "")
+//            }
             val birthdate = binding.birthdateEditText.text.toString()
-            val country = binding.stateSpinner.adapter.getItem(0) as CountryRequest
+            val country = countriesList[binding.stateSpinner.selectedItemPosition].id
 
             personalInfoVM.processIntent(
                 UpdateUser(
@@ -99,7 +95,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     lastname,
                     email,
                     phone,
-                    image,
+//                    image,
                     birthdate,
                     country
                 )
@@ -122,14 +118,14 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                         Glide.with(this)
                             .load(uri)
                             .centerCrop()
-                            .placeholder(R.drawable.image_plane) // Optional placeholder image
-                            .error(R.drawable.ic_verefication) // Optional error image
+                            .placeholder(R.drawable.splash_logo) // Optional placeholder image
+                            .error(R.drawable.btn_cancellation_background) // Optional error image
                             .into(binding.viewProfileSection.profilePicture)
                     }
                 }
             }
 
-        binding.viewProfileSection.profilePicture.setOnClickListener {
+        binding.viewProfileSection.penEditor.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -151,11 +147,11 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     true
                 )
 
-                is PersonalInfoEvent.GetUpdatedUserFromRemote -> handleRemoteInfo(it.user)
+                is PersonalInfoEvent.GetUpdatedUserFromRemote -> handleUserInfo(it.user)
 
                 is PersonalInfoEvent.GetCountriesFromLocal -> {
                     countriesList = it.countries
-                    logger.info("countries: ${it.countries}")
+                    personalInfoVM.processIntent(GetUpdatedUserFromLocal)
                     val spinnerAdapter = CountriesSpinnerAdapter(requireContext(), it.countries)
                     binding.stateSpinner.adapter = spinnerAdapter
 
@@ -183,28 +179,17 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
                 }
 
-                is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleLocalInfo(it.user)
+                is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleUserInfo(it.user)
             }
         }
     }
 
-    private fun handleLocalInfo(it: User) {
+    private fun handleUserInfo(it: User) {
         binding.firstNameEditText.setText(it.firstname)
         binding.middleNameEditText.setText(it.middleName)
         binding.lastNameEditText.setText(it.lastname)
         binding.phoneEditText.setText(it.phone.number)
         binding.spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
-        binding.emailEditText.setText(it.email)
-        binding.birthdateEditText.setText(it.birthdate)
-        binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
-    }
-
-    private fun handleRemoteInfo(it: User) {
-        binding.firstNameEditText.setText(it.firstname)
-        binding.middleNameEditText.setText(it.middleName)
-        binding.lastNameEditText.setText(it.lastname)
-        binding.spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
-        binding.phoneEditText.setText(it.phone.number)
         binding.emailEditText.setText(it.email)
         binding.birthdateEditText.setText(it.birthdate)
         binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
@@ -237,7 +222,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
             datePickerDialog.setOnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 val selectedDate =
-                    String.format("%02d-%02d-%d", dayOfMonth, monthOfYear + 1, year)
+                    String.format("%02d-%02d-%d", year, monthOfYear + 1, dayOfMonth)
                 binding.birthdateEditText.setText(selectedDate)
                 calendar.set(year, monthOfYear, dayOfMonth)
                 // To ignore time
@@ -248,7 +233,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             }
 
             val displayDateFormatter =
-                SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH) // Set format and locale
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH) // Set format and locale
             datePickerDialog.updateDate(currentYear, currentMonth, currentDay)
 
             // Override the DatePicker's onDateChanged listener for custom formatting

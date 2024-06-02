@@ -4,8 +4,6 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
@@ -19,9 +17,9 @@ interface PersonalInfoContract {
             val lastname: String,
             val email: String,
             val phone: PhoneRequest,
-            val image: ImageRequest,
+//            val image: ImageRequest,
             val birthdate: String,
-            val country: CountryRequest,
+            val country: Int,
         ) : PersonalInfoAction()
 
         data object GetCountriesFromLocal : PersonalInfoAction()

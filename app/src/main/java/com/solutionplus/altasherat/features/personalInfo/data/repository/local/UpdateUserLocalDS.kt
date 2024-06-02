@@ -7,10 +7,8 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
-import com.solutionplus.altasherat.features.personalInfo.data.models.entity.UpdateUserEntity
 import com.solutionplus.altasherat.features.personalInfo.data.models.entity.UserEntity
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateUserLocalDS
-import com.solutionplus.altasherat.features.services.country.data.repository.local.CountriesLocalDS
 import java.util.Base64
 
 internal class UpdateUserLocalDS(
@@ -18,7 +16,7 @@ internal class UpdateUserLocalDS(
     private val encryptionProvider: IEncryptionProvider
 ) : IUpdateUserLocalDS {
     @RequiresApi(Build.VERSION_CODES.O)
-    override suspend fun savePersonalInfo(updateUserEntity: UpdateUserEntity) {
+    override suspend fun savePersonalInfo(updateUserEntity: UserEntity) {
         val updatedUserJson = Gson().toJson(updateUserEntity)
         val bytesUser = updatedUserJson.toByteArray()
         val encryptedUserData = encryptionProvider.encryptData(bytesUser)

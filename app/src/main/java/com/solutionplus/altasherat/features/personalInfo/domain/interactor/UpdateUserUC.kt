@@ -9,7 +9,7 @@ class UpdateUserUC(private val repository: IUpdateUserRepository) :
     BaseUseCase<UpdateUser, UpdateUserRequest>() {
     override suspend fun execute(params: UpdateUserRequest?): UpdateUser {
         val result = repository.updateUser(params ?: UpdateUserRequest())
-        repository.saveUpdatedUser(result)
+        repository.saveUpdatedUser(result.user)
         return result
     }
 }

@@ -5,8 +5,6 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromLocalUC
@@ -45,7 +43,7 @@ class PersonalInfoViewModel @Inject constructor(
                 action.lastname,
                 action.email,
                 action.phone,
-                action.image,
+//                action.image,
                 action.birthdate,
                 action.country,
             )
@@ -98,21 +96,21 @@ class PersonalInfoViewModel @Inject constructor(
         lastname: String,
         email: String,
         phone: PhoneRequest,
-        image: ImageRequest,
+//        image: ImageRequest,
         birthdate: String,
-        country: CountryRequest,
+        country: Int,
     ) {
 
         viewModelScope.launch {
-            val phone = PhoneRequest(country.phoneCode, phone.number)
-            val image = ImageRequest(image.id, image.type, image.path, image.title)
+            val phone = PhoneRequest(phone.countryCode, phone.number)
+//            val image = ImageRequest(image.id, image.type, image.path, image.title)
             val updateUserRequest = UpdateUserRequest(
                 firstname,
                 middleName,
                 lastname,
                 email,
                 phone,
-                image,
+                image = null,
                 birthdate,
                 country,
             )
@@ -144,13 +142,14 @@ class PersonalInfoViewModel @Inject constructor(
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> {sendEvent(
-                        PersonalInfoEvent.GetCountriesFromLocal(
-                            countries = it.model
+                    is Resource.Success -> {
+                        sendEvent(
+                            PersonalInfoEvent.GetCountriesFromLocal(
+                                countries = it.model
 
+                            )
                         )
-                    )
-                    getClassLogger().info("viewModel: ${it.model}")
+                        getClassLogger().info("viewModel: ${it.model}")
                     }
                 }
             }

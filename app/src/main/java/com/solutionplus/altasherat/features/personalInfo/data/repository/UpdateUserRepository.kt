@@ -19,8 +19,8 @@ internal class UpdateUserRepository(
         return UpdateUserMapper.dtoToDomain(user)
     }
 
-    override suspend fun saveUpdatedUser(updatedUser: UpdateUser) {
-        val request = UpdateUserMapper.domainToEntity(updatedUser)
+    override suspend fun saveUpdatedUser(updatedUser: User) {
+        val request = UserMapper.domainToEntity(updatedUser)
         localDS.savePersonalInfo(request)
     }
 

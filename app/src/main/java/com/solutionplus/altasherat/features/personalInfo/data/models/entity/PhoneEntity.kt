@@ -7,10 +7,10 @@ import com.solutionplus.altasherat.features.services.country.data.models.entity.
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 internal data class PhoneEntity(
+    val id: Int,
     val countryCode: String,
     val number: String,
     val extension: String,
-    val id: Int,
     val type: String,
     val holderName: String
 )

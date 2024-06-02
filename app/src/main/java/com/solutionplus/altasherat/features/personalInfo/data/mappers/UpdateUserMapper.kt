@@ -13,18 +13,4 @@ internal object UpdateUserMapper : Mapper<UpdateUserDto, UpdateUser, UpdateUserE
             user = UserMapper.dtoToDomain(model.user ?: UserDto())
         )
     }
-
-    override fun domainToEntity(model: UpdateUser): UpdateUserEntity {
-        return UpdateUserEntity(
-            message = model.message,
-            user = UserMapper.domainToEntity(model.user)
-        )
-    }
-
-    override fun entityToDomain(model: UpdateUserEntity): UpdateUser {
-        return UpdateUser(
-            message = model.message,
-            user = UserMapper.entityToDomain(model.user)
-        )
-    }
 }
