@@ -1,9 +1,8 @@
-package com.solutionplus.altasherat.features.login.data.model.dto
-
+package com.solutionplus.altasherat.features.login.data.model.request
 
 import com.google.gson.annotations.SerializedName
 
-data class PhoneDto(
+data class PhoneRequest(
     @SerializedName("country_code")
     val countryCode: String? = null,
     @SerializedName("extension")
@@ -16,4 +15,8 @@ data class PhoneDto(
     val number: String? = null,
     @SerializedName("type")
     val type: String? = null
-)
+){
+    fun validatePhone():Boolean {
+        return !(number!!.any(){!it.isDigit()} || number.isBlank() || number.length < 9 || number.length > 15 )
+    }
+}

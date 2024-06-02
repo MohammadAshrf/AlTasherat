@@ -27,7 +27,7 @@ import kotlinx.coroutines.test.runBlockingTest
 /*
 - validation
  */
- class SignupWithPhoneUCTest {
+ class SignupWithPhoneUCTestRequest {
 
     private lateinit var repository: ISignupRepository
     private lateinit var signupUC: SignupUC
@@ -196,7 +196,7 @@ import kotlinx.coroutines.test.runBlockingTest
             signupUC.execute(signupRequest)
         } catch (e: LeonException.Local.RequestValidation) {
             exceptionThrown = true
-            assertEquals("Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
         }
         assertTrue(exceptionThrown)
     }
@@ -216,7 +216,7 @@ import kotlinx.coroutines.test.runBlockingTest
             signupUC.execute(signupRequest)
         } catch (e: LeonException.Local.RequestValidation) {
             exceptionThrown = true
-            assertEquals("Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
         }
         assertTrue(exceptionThrown)
     }

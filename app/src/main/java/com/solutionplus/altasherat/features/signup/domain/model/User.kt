@@ -1,16 +1,22 @@
 package com.solutionplus.altasherat.features.signup.domain.model
 
+import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
+import com.solutionplus.altasherat.features.personalInfo.domain.models.Phone
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+
 data class User(
-    val id: Int? = null,
-    val userName: String? = null,
-    val fullName: String? = null,
-    val email: String? = null,
-    val password: String? = null,
-    val firstName: String? = null,
-    val middleName: String? = null,
-    val lastName: String? = null,
-    val phone: String? = null,
-    val birthDate: String? = null,
-    val imageUrl: String? = null,
-    val emailVerified: Boolean?= null,
+    val id: Int,
+    val username: String,
+    val firstname: String,
+    val middleName: String,
+    val lastname: String,
+    val email: String,
+    val phone: Phone,
+    val image: Image,
+    val birthdate: String,
+    val emailVerified: Boolean,
+    val phoneVerified: Boolean,
+    val blocked: Int,
+    val country: Country,
+    val allPermissions: List<String>
     )

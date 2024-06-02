@@ -38,4 +38,8 @@ internal class CountryCodeSpinnerAdapter
         return getView(position, convertView, parent)
     }
 
+    fun getPosition(country: Country): Int {
+        return countries.indexOfFirst { it.id == country.id }
+    }
+
 }

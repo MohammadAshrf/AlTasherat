@@ -13,7 +13,7 @@ data class SignupRequest(
     val lastName: String?= null,
     @SerializedName("email")
     val email: String?= null,
-    @SerializedName("phone")
+    @SerializedName("phoneRequest")
     val phone : Phone?= null,
     @SerializedName("password")
     val password : String?= null,

@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.onboarding.di
+package com.solutionplus.altasherat.onboarding.di
 
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.features.onboarding.data.repository.OnBoardingRepository

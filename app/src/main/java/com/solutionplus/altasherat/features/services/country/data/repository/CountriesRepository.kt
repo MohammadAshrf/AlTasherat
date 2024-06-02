@@ -14,12 +14,12 @@ class CountriesRepository(
         return CountryMapper.dtoToDomain(result)
     }
 
-    override suspend fun saveCountries(countries: List<Country>) {
-        localDS.saveCountriesToLocal(countries)
-    }
-
     override suspend fun getCountriesFromLocal(): List<Country> {
         return CountryMapper.entityToDomain(localDS.getCountriesFromLocal())
+    }
+
+    override suspend fun saveCountries(countries: List<Country>) {
+        localDS.saveCountriesToLocal(countries)
     }
 
     override suspend fun hasCountries(): Boolean {

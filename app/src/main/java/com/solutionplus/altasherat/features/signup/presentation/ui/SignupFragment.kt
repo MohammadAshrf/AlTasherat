@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,6 +15,7 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentSignupBinding
+import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
@@ -51,6 +54,11 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                         setupCountrySpinner(countries)
                     }
                 }
+                launch {
+                    viewModel.selectedCountry.collect { country ->
+                        setDefaultCountry(country)
+                    }
+                }
             }
         }
     }
@@ -76,14 +84,33 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                 showSnackBar(resources.getString(R.string.login_success), false)
                 requireActivity().finish()
             }
+
+            is SignUpContract.SignupEvent.GetSelectedCountry ->{
+                setDefaultCountry(event.country)
+            }
         }
     }
 
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
-        if (countries.isNotEmpty()) {
-            binding.etCountruCode.setSelection(0)
+        binding.etCountruCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedCountry = binding.etCountruCode.adapter.getItem(position) as Country
+                viewModel.onActionTrigger(LanguageContract.LanguageAction.SaveSelectedCountry(selectedCountry))
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
+    private fun setDefaultCountry(country: Country?) {
+        country?.let {
+            val adapter = binding.etCountruCode.adapter as CountryCodeSpinnerAdapter
+            val position = adapter.getPosition(country)
+            if (position >= 0) {
+                binding.etCountruCode.setSelection(position)
+            }
         }
     }
 

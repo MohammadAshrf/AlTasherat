@@ -4,12 +4,9 @@ package com.solutionplus.altasherat.features.login.data.repository.remote
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.dto.LoginDto
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
-import com.solutionplus.altasherat.features.login.data.model.request.Phone
+import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.repository.remote.FakeRestApiNetworkProvider
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertNull
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -21,7 +18,7 @@ import org.junit.jupiter.api.fail
 
 /*
 test cases
-1. login with valid phone returns expected result
+1. login with valid phoneRequest returns expected result
 2. test login with network error
 3. loginWithPhoneReturnsNullWhenProviderReturnsNull
 * */
@@ -38,7 +35,7 @@ class RemoteDataSourceTest {
 
     @Test
     fun `when login with phone given valid request then expected result`() = runTest {
-        val loginRequest = LoginRequest(Phone("002", "100100100"), "123456789")
+        val loginRequest = LoginRequest(PhoneRequest("002", "100100100"), "123456789")
         val expectedResponse = LoginDto("hi","testToken", null)
 
         provider.postResponse = expectedResponse
@@ -52,8 +49,8 @@ class RemoteDataSourceTest {
     fun `when login and get server error`() = runBlocking {
         // Arrange
         val exception = LeonException.Server.InternalServerError(404, "internal server error")
-        val phone = Phone(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phone = phone, password = "password")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
 
         provider.shouldThrowException = true
         provider.exceptionToThrow = exception

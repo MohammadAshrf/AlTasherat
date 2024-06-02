@@ -4,7 +4,7 @@ package com.solutionplus.altasherat.features.login.domain.interactor.login
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
-import com.solutionplus.altasherat.features.login.data.model.request.Phone
+import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.login.domain.model.Login
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
@@ -13,7 +13,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
-import io.mockk.runs
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -22,7 +21,7 @@ import org.junit.Test
 /*
 - validation
  */
-class LoginWithPhoneUCTest {
+class LoginWithPhoneUCTestRequest {
 
     private lateinit var repository: ILoginRepository
     private lateinit var loginWithPhoneUC: LoginWithPhoneUC
@@ -36,8 +35,8 @@ class LoginWithPhoneUCTest {
     @Test
     fun `when login is successful_given phone country code and password then user details are returned`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phone = phone, password = "password")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
         val userInfo = User(
             id = 1,
             userName = "fakeUser",
@@ -46,7 +45,7 @@ class LoginWithPhoneUCTest {
             firstName = "Fake",
             middleName = "User",
             lastName = "Example",
-            phone = phone.toString(),
+            phone = phoneRequest.toString(),
             birthDate = "2000-01-01",
             imageUrl = "http://example.com/image.jpg",
             emailVerified = true
@@ -76,8 +75,8 @@ class LoginWithPhoneUCTest {
     @Test
     fun `when login is Failed then throw exception`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phone = phone, password = "password")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
         val exception = LeonException.Server.InternalServerError(404, "internal server error")
 
         coEvery { repository.loginWithPhone(loginRequest) } throws exception
@@ -100,11 +99,11 @@ class LoginWithPhoneUCTest {
     @Test
     fun `test invalid phone number`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "123") // Invalid phone number
-        val loginRequest = LoginRequest(phone = phone, password = "password")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "123") // Invalid phoneRequest number
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
 
         // Define behavior for loginWithPhone method
-        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(LoginRequest::class, "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.")
+        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(LoginRequest::class, "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.")
 
         // Act & Assert
         var exceptionThrown = false
@@ -112,7 +111,7 @@ class LoginWithPhoneUCTest {
             loginWithPhoneUC.execute(loginRequest)
         } catch (e: LeonException.Local.RequestValidation) {
             exceptionThrown = true
-            assertEquals("Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
         }
         assertTrue(exceptionThrown)
     }
@@ -120,11 +119,11 @@ class LoginWithPhoneUCTest {
     @Test
     fun `test invalid phone number is empty`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "")
-        val loginRequest = LoginRequest(phone = phone, password = "password")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
 
         // Define behavior for loginWithPhone method
-        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(LoginRequest::class, "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.")
+        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(LoginRequest::class, "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.")
 
         // Act & Assert
         var exceptionThrown = false
@@ -132,7 +131,7 @@ class LoginWithPhoneUCTest {
             loginWithPhoneUC.execute(loginRequest)
         } catch (e: LeonException.Local.RequestValidation) {
             exceptionThrown = true
-            assertEquals("Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
         }
         assertTrue(exceptionThrown)
     }
@@ -140,8 +139,8 @@ class LoginWithPhoneUCTest {
     @Test
     fun `test invalid password`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phone = phone, password = "12345")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "12345")
         // Define behavior for loginWithPhone method
         coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(LoginRequest::class, "Password is invalid. It must be between 8 and 50 characters.")
 
@@ -159,8 +158,8 @@ class LoginWithPhoneUCTest {
     @Test
     fun `test invalid password is empty`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phone = phone, password = "")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "")
 
         coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(LoginRequest::class, "Password is invalid. It must be between 8 and 50 characters.")
 
