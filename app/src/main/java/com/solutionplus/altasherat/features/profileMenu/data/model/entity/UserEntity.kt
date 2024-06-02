@@ -1,15 +1,20 @@
 package com.solutionplus.altasherat.features.profileMenu.data.model.entity
 
-data class UserEntity(
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
+
+internal data class UserEntity(
     val id: Int,
-    val userName: String,
-    val firsName: String,
+    val username: String,
+    val firstname: String,
     val middleName: String,
-    val lastName: String,
-    val fullName: String,
+    val lastname: String,
     val email: String,
-    val phone: String,
-    val birthDate: String,
+    val phone: PhoneEntity,
+    val image: ImageEntity,
+    val birthdate: String,
     val emailVerified: Boolean,
-    val imageUrl: String,
+    val phoneVerified: Boolean,
+    val blocked: Int,
+    val country: CountryEntity,
+    val allPermissions: List<String>
 )

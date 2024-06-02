@@ -90,13 +90,13 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         if (!user.emailVerified && user.id != -1) {
             showCustomSnackbar()
         }
-        if (user.imageUrl != "") {
+        if (user.image.path != "") {
             Glide.with(this)
-                .load(user.imageUrl)
+                .load(user.image.path)
                 .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
 
         }
-        binding.viewProfileSection.nameTextView.text = user.fullName
+        binding.viewProfileSection.nameTextView.text = "${user.firstname + " " + user.lastname}"
     }
     @SuppressLint("SetTextI18n")
     private fun getAppVersion() {

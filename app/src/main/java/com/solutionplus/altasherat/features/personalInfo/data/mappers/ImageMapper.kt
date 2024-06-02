@@ -1,8 +1,10 @@
 package com.solutionplus.altasherat.features.personalInfo.data.mappers
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.ImageDto
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
+
+
+import com.solutionplus.altasherat.features.profileMenu.data.model.entity.ImageEntity
+/*
 
 internal object ImageMapper : Mapper<ImageDto, Image, Unit>() {
     override fun dtoToDomain(model: ImageDto): Image {
@@ -18,4 +20,32 @@ internal object ImageMapper : Mapper<ImageDto, Image, Unit>() {
             priority = model.priority ?: -1
         )
     }
-}
+
+    override fun domainToEntity(model: Image): ImageEntity {
+        return ImageEntity(
+            id = model.id,
+            type = model.type,
+            createdAt = model.createdAt,
+            description = model.description,
+            updatedAt = model.updatedAt,
+            main = model.main,
+            title = model.title,
+            path = model.path,
+            priority = model.priority
+        )
+    }
+
+    override fun entityToDomain(model: ImageEntity): Image {
+        return Image(
+            id = model.id,
+            type = model.type,
+            createdAt = model.createdAt,
+            description = model.description,
+            updatedAt = model.updatedAt,
+            main = model.main,
+            title = model.title,
+            path = model.path,
+            priority = model.priority
+        )
+    }
+}*/
