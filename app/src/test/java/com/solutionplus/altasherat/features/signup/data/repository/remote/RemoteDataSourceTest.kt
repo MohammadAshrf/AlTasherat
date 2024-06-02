@@ -20,7 +20,7 @@ import org.junit.jupiter.api.fail
 
 /*
 test cases
-1. login with valid phone returns expected result
+1. login with valid phoneRequest returns expected result
 2. test login with network error
 3. loginWithPhoneReturnsNullWhenProviderReturnsNull
 * */

@@ -1,17 +1,14 @@
 package com.solutionplus.altasherat.features.personalInfo.data.models.request
 
 import com.google.gson.annotations.SerializedName
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.ImageDto
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Phone
 
 data class UpdateUserRequest(
-    @SerializedName("firstname") val firstName: String? = null,
-    @SerializedName("middlename") val middleName: String? = null,
-    @SerializedName("lastname") val lastName: String? = null,
-    @SerializedName("email") val email: String? = null,
-    @SerializedName("birth_date") val birthDate: String? = null,
-    @SerializedName("phone") val phone: PhoneRequest? = null,
-//    @SerializedName("image") val image: ImageRequest? = null,
-    @SerializedName("country") val countryId: Int? = null
+    @field:SerializedName("firstname") val firstname: String? = null,
+    @field:SerializedName("middlename") val middleName: String? = null,
+    @field:SerializedName("lastname") val lastname: String? = null,
+    @field:SerializedName("email") val email: String? = null,
+    @field:SerializedName("phoneRequest") val phone: PhoneRequest? = null,
+    @field:SerializedName("image") val image: ImageRequest? = null,
+    @field:SerializedName("birthdate") val birthdate: String? = null,
+    @field:SerializedName("country") val country: CountryRequest? = null,
 )

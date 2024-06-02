@@ -25,8 +25,8 @@ internal data class UserDto(
     @SerializedName("lastname")
     val lastname: String? = null,
     @SerializedName("middlename")
-    val middlename: String? = null,
-    @SerializedName("phone")
+    val middleName: String? = null,
+    @SerializedName("phoneRequest")
     val phone: PhoneDto? = null,
     @SerializedName("phone_verified")
     val phoneVerified: Boolean? = null,

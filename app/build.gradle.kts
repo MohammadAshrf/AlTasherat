@@ -156,6 +156,10 @@ dependencies {
     implementation(libs.dotsindicator)
     implementation(kotlin("test"))
 
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    // SwipeRefreshLayout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // CircleImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 }

@@ -1,16 +1,20 @@
 package com.solutionplus.altasherat.features.login.data.model.entity
 
 
-data class UserEntity(
+
+ data class UserEntity(
     val id: Int,
-    val userName: String,
-    val firsName: String,
+    val username: String,
+    val firstname: String,
     val middleName: String,
-    val lastName: String,
-    val fullName: String,
+    val lastname: String,
     val email: String,
-    val phone: String,
-    val birthDate: String,
-    val imageUrl: String,
+    val phone: PhoneEntity,
+    val image: ImageEntity,
+    val birthdate: String,
     val emailVerified: Boolean,
+    val phoneVerified: Boolean,
+    val blocked: Int,
+    val country: CountryEntity,
+    val allPermissions: List<String>
 )
