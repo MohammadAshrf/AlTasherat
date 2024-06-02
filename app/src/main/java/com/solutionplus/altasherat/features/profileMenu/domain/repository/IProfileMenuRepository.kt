@@ -1,6 +1,5 @@
 package com.solutionplus.altasherat.features.profileMenu.domain.repository
 
-import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.profileMenu.domain.model.Logout
 import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 

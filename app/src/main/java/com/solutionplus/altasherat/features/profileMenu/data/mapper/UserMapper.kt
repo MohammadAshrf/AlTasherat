@@ -1,11 +1,6 @@
 package com.solutionplus.altasherat.features.profileMenu.data.mapper
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
-
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Phone
-import com.solutionplus.altasherat.features.profileMenu.data.model.entity.ImageEntity
-import com.solutionplus.altasherat.features.profileMenu.data.model.entity.PhoneEntity
 import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
@@ -21,8 +16,8 @@ internal object UserMapper : Mapper<Unit, User, UserEntity>() {
             middleName = model.middleName,
             lastname = model.lastname,
             email = model.email,
-            phone = PhoneEntity("","","",-1,"",""),
-            image = ImageEntity(-1 , "", "", "", "", "","",false, -1),
+            phone = PhoneMapper.domainToEntity(model.phone),
+            image = ImageMapper.domainToEntity(model.image),
             birthdate = model.birthdate,
             emailVerified = model.emailVerified,
             phoneVerified = model.phoneVerified,
@@ -40,8 +35,8 @@ internal object UserMapper : Mapper<Unit, User, UserEntity>() {
             middleName = model.middleName,
             lastname = model.lastname,
             email = model.email,
-            phone = Phone("","","",-1,"",""),
-            image = Image(-1 , "", "", "", "", "","",false, -1),
+            phone = PhoneMapper.entityToDomain(model.phone),
+            image = ImageMapper.entityToDomain(model.image),
             birthdate = model.birthdate,
             emailVerified = model.emailVerified,
             phoneVerified = model.phoneVerified,
@@ -59,13 +54,20 @@ internal object UserMapper : Mapper<Unit, User, UserEntity>() {
             middleName = "",
             lastname = "",
             email = "",
-            phone = Phone("" , "", "", -1, "",""),
-            image = Image(-1 , "", "", "", "", "","",false, -1),
+            phone = PhoneMapper.dtoToDomain(Unit),
+            image = ImageMapper.dtoToDomain(Unit),
             birthdate = "",
             emailVerified = false,
             phoneVerified = false,
             blocked = -1,
-            country = Country(-1, "", "", "", "", ""),
+            country = Country(
+                id = -1,
+                name = "",
+                code = "",
+                currency = "",
+                phoneCode = "",
+                flag = "",
+            ),
             allPermissions = emptyList()
         )
     }

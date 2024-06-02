@@ -1,8 +1,6 @@
 package com.solutionplus.altasherat.features.profileMenu.domain.model
 
 import android.os.Parcelable
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Phone
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import kotlinx.parcelize.Parcelize
 
