@@ -6,16 +6,17 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewM
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageAction.GetCountriesFromLocal
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromLocalUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromRemoteUC
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.HasUserUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserUC
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetSelectedCountryLocal
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
@@ -26,9 +27,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PersonalInfoViewModel @Inject constructor(
-    private val getSelectedCountryUC: GetSelectedCountryUC,
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
-    private val hasUserUC: HasUserUC,
     private val getUserFromRemoteUC: GetUserFromRemoteUC,
     private val getUserFromLocalUC: GetUserFromLocalUC,
     private val updateUserUC: UpdateUserUC
@@ -39,46 +38,19 @@ class PersonalInfoViewModel @Inject constructor(
         setState(oldViewState.copy(action = action))
         when (action) {
             is GetCountriesFromLocal -> getCountriesFromLocal()
-            is GetSelectedCountryLocal -> getSelectedCountryFromLocal()
             is GetUpdatedUserFromRemote -> getUpdatedUserFromRemote()
             is GetUpdatedUserFromLocal -> getUpdatedUserFromLocal()
 
             is UpdateUser -> updateUser(
-                action.firstName,
+                action.firstname,
                 action.middleName,
-                action.lastName,
+                action.lastname,
                 action.email,
-                action.birthDate,
-                action.phoneNumber,
-                action.countryCode,
-                action.countryId,
-//                action.imageId,
-//                action.imageType,
-//                action.imagePath,
-//                action.imageTitle
+                action.phone,
+                action.image,
+                action.birthdate,
+                action.country,
             )
-        }
-    }
-
-    private fun getUpdatedUser() {
-        viewModelScope.launch {
-            hasUserUC.invoke().collect {
-                when (it) {
-                    is Resource.Failure -> setState(
-                        oldViewState.copy(
-                            exception = it.exception
-                        )
-                    )
-
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> {
-                        setState(oldViewState.copy(isLoading = false, exception = null))
-                        if (it.model) {
-//                            sendEvent(PersonalInfoEvent.GetUpdatedUserFromRemote("Profile data from local is up to date"))
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -123,33 +95,28 @@ class PersonalInfoViewModel @Inject constructor(
     }
 
     private fun updateUser(
-        firstName: String,
+        firstname: String,
         middleName: String,
-        lastName: String,
+        lastname: String,
         email: String,
-        birthDate: String,
-        phoneNumber: String,
-        countryCode: String,
-        countryId: Int,
-//        imageId: Int,
-//        imageType: String,
-//        imagePath: String,
-//        imageTitle: String
-
+        phone: PhoneRequest,
+        image: ImageRequest,
+        birthdate: String,
+        country: CountryRequest,
     ) {
 
         viewModelScope.launch {
-            val phone = PhoneRequest(countryCode, phoneNumber)
-//            val image = ImageRequest(imageId, imageType, imagePath, imageTitle)
+            val phone = PhoneRequest(country.phoneCode, phone.number)
+            val image = ImageRequest(image.id, image.type, image.path, image.title)
             val updateUserRequest = UpdateUserRequest(
-                firstName,
+                firstname,
                 middleName,
-                lastName,
+                lastname,
                 email,
-                birthDate,
                 phone,
-//                image,
-                countryId
+                image,
+                birthdate,
+                country,
             )
 
             setState(oldViewState.copy(isLoading = true))
@@ -168,22 +135,6 @@ class PersonalInfoViewModel @Inject constructor(
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.UpdateDoneSuccessfully("Data updated successfully"))
                     }
-                }
-            }
-        }
-    }
-
-    private fun getSelectedCountryFromLocal() {
-        viewModelScope.launch {
-            getSelectedCountryUC.invoke().collect {
-                when (it) {
-                    is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(
-                        PersonalInfoEvent.GetSelectedCountryFromLocal(
-                            country = it.model
-                        )
-                    )
                 }
             }
         }

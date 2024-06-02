@@ -1,9 +1,8 @@
 package com.solutionplus.altasherat.features.personalInfo.data.repository.remote
 
-import com.solutionplus.altasherat.common.data.constants.Constants.NO_AUTHENTICATION
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
+import com.solutionplus.altasherat.features.personalInfo.data.models.dto.AccountResponseDto
 import com.solutionplus.altasherat.features.personalInfo.data.models.dto.UpdateUserDto
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.UserDto
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.remote.IUpdateUserRemoteDS
 
@@ -16,9 +15,9 @@ internal class UpdateUserRemoteDS(private val networkProvider: INetworkProvider)
         )
     }
 
-    override suspend fun getUpdateUser(): UserDto {
+    override suspend fun getUpdateUser(): AccountResponseDto {
         return networkProvider.get(
-            responseWrappedModel = UserDto::class.java, pathUrl = "show-account"
+            responseWrappedModel = AccountResponseDto::class.java, pathUrl = "show-account"
         )
     }
 }
