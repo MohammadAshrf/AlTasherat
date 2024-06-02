@@ -19,6 +19,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun viewInit() {
         val host = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         setupWithNavController(binding.bottomNav, host.navController)
+        binding.bottomNav.itemIconTintList = null
         customizeBottomNavigationView(binding.bottomNav)
     }
     override fun onActivityReady(savedInstanceState: Bundle?) {
