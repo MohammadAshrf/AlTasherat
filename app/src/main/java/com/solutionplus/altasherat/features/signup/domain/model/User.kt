@@ -1,7 +1,5 @@
 package com.solutionplus.altasherat.features.signup.domain.model
 
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Phone
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 data class User(
@@ -19,4 +17,4 @@ data class User(
     val blocked: Int,
     val country: Country,
     val allPermissions: List<String>
-    )
+)

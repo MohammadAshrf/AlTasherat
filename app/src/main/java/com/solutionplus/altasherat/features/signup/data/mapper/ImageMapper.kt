@@ -1,9 +1,9 @@
 package com.solutionplus.altasherat.features.signup.data.mapper
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.ImageDto
-import com.solutionplus.altasherat.features.personalInfo.data.models.entity.ImageEntity
-import com.solutionplus.altasherat.features.personalInfo.domain.models.Image
+import com.solutionplus.altasherat.features.signup.data.model.dto.ImageDto
+import com.solutionplus.altasherat.features.signup.data.model.entity.ImageEntity
+import com.solutionplus.altasherat.features.signup.domain.model.Image
 
 internal object ImageMapper : Mapper<ImageDto, Image, ImageEntity>() {
     override fun dtoToDomain(model: ImageDto): Image {

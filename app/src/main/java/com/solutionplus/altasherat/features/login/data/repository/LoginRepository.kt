@@ -31,9 +31,6 @@ internal class LoginRepository  (
         localDs.saveAccessToken(token)
 
 
-    override suspend fun getUser(): UserEntity =
-        localDs.getUser()
-
-
-
+    override suspend fun getUser(): User =
+        UserMapper.entityToDomain(localDs.getUser())
 }

@@ -1,8 +1,9 @@
 package com.solutionplus.altasherat.features.signup.data.model.entity
 
+import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
 
 
- data class UserEntity(
+data class UserEntity(
     val id: Int,
     val username: String,
     val firstname: String,

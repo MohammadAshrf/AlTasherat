@@ -2,27 +2,17 @@ package com.solutionplus.altasherat.features.signup.domain.interactor.login
 
 import io.mockk.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
-import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
-import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper.domainToEntity
-import com.solutionplus.altasherat.features.signup.data.model.request.Phone
+import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.model.Signup
 import com.solutionplus.altasherat.features.signup.domain.model.User
 import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepository
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
-import kotlinx.coroutines.test.runBlockingTest
 
 /*
 - validation
@@ -41,7 +31,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `when signup is successful_ then user details are returned`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "100100100"
         )
@@ -78,7 +68,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `when signup is Failed then throw exception`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "100100100"
         )
@@ -105,7 +95,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid first name`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "12345678"
         )
@@ -125,7 +115,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid first name is empty`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = ""
         )
@@ -145,7 +135,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid last name`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "12345678"
         )
@@ -165,7 +155,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid last name is empty`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = ""
         )
@@ -184,7 +174,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid phone number`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "12345678"
         )
@@ -204,7 +194,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid phone number is empty`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = ""
         )
@@ -224,7 +214,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid password`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "100100100"
         )
@@ -244,7 +234,7 @@ import kotlinx.coroutines.test.runBlockingTest
     @Test
     fun `test invalid password is empty`() = runBlocking {
         // Arrange
-        val phone = Phone(
+        val phone = PhoneRequest(
             countryCode = "0020",
             number = "100100100"
         )

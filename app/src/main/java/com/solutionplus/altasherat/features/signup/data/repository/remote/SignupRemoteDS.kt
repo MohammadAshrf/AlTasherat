@@ -4,7 +4,6 @@ import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.common.data.constants.Constants.NO_AUTHENTICATION
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
 import com.solutionplus.altasherat.features.signup.data.model.dto.SignupDto
-import com.solutionplus.altasherat.features.signup.data.model.dto.CountryDto
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
 
