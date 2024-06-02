@@ -29,7 +29,6 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
             allPermissions = model.allPermissions.orEmpty()
         )
     }
-
     override fun domainToEntity(model: User): UserEntity {
         return UserEntity(
             id = model.id,
