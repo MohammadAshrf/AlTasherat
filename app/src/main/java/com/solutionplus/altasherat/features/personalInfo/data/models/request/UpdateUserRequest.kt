@@ -7,7 +7,7 @@ data class UpdateUserRequest(
     @field:SerializedName("middlename") val middleName: String? = null,
     @field:SerializedName("lastname") val lastname: String? = null,
     @field:SerializedName("email") val email: String? = null,
-    @field:SerializedName("phoneRequest") val phone: PhoneRequest? = null,
+    @field:SerializedName("phone") val phone: PhoneRequest? = null,
     @field:SerializedName("image") val image: ImageRequest? = null,
     @field:SerializedName("birthdate") val birthdate: String? = null,
     @field:SerializedName("country") val country: CountryRequest? = null,

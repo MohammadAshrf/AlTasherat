@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.services.country.data.repository.local
 
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
@@ -11,9 +12,13 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.l
 internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStorageProvider) :
     ICountriesLocalDS {
     override suspend fun getCountriesFromLocal(): List<CountryEntity> {
+        logger.info("start")
         val countries =
             localStorageProvider.getEntry(StorageKeyEnum.COUNTRIES, "", String::class.java)
-        return Gson().fromJson(countries, Array<CountryEntity>::class.java).toList()
+        val itemType = object : TypeToken<List<CountryEntity>>() {}.type
+        val result =Gson().fromJson<List<CountryEntity>>(countries, itemType)?: emptyList()
+        logger.info("done $result")
+        return result
     }
 
     override suspend fun saveCountriesToLocal(countries: List<Country>) {

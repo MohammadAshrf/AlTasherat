@@ -40,8 +40,5 @@ internal object CountryMapper : Mapper<CountryDto, Country, CountryEntity>() {
         )
     }
 
-    fun mapDtoListToDomain(dtoList: List<CountryDto?>?): List<Country?> {
-        val countries = dtoList?.map { it?.let { it1 -> dtoToDomain(it1) } } ?: emptyList()
-        return countries
-    }
+
 }

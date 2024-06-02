@@ -8,6 +8,7 @@ import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,6 +34,7 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +54,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         personalInfoVM.processIntent(GetCountriesFromLocal)
-        personalInfoVM.processIntent(GetUpdatedUserFromLocal)
+         personalInfoVM.processIntent(GetUpdatedUserFromLocal)
         binding.swipeRefreshLayout.setOnRefreshListener {
             personalInfoVM.processIntent(GetUpdatedUserFromRemote)
             binding.swipeRefreshLayout.isRefreshing = false
@@ -70,6 +72,10 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private fun handleViews() {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.GONE
+
+
+        binding.moreButton.setOnClickListener {
+        }
 
         binding.btnSave.setOnClickListener {
             val firstname = binding.firstNameEditText.text.toString()
@@ -149,13 +155,32 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
                 is PersonalInfoEvent.GetCountriesFromLocal -> {
                     countriesList = it.countries
-                    binding.stateSpinner.adapter =
-                        CountriesSpinnerAdapter(requireContext(), it.countries)
-                    binding.spinnerCountryCode.adapter =
-                        CountryCodeSpinnerAdapter(requireContext(), it.countries)
-                    binding.stateSpinner.setSelection(0)
-                    binding.spinnerCountryCode.setSelection(0)
-                    logger.info(countriesList.toString())
+                    logger.info("countries: ${it.countries}")
+                    val spinnerAdapter = CountriesSpinnerAdapter(requireContext(), it.countries)
+                    binding.stateSpinner.adapter = spinnerAdapter
+
+                    binding.spinnerCountryCode.adapter = CountryCodeSpinnerAdapter(
+                        requireContext(),
+                        it.countries
+                    )
+                    binding.stateSpinner.onItemSelectedListener =
+                        object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                parent: AdapterView<*>,
+                                view: View,
+                                position: Int,
+                                id: Long
+                            ) {
+                                binding.stateSpinner.adapter.getItem(position) as Country
+                                binding.spinnerCountryCode.adapter.getItem(position) as Country
+                            }
+
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                            }
+                        }
+
+
                 }
 
                 is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleLocalInfo(it.user)
@@ -167,14 +192,11 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         binding.firstNameEditText.setText(it.firstname)
         binding.middleNameEditText.setText(it.middleName)
         binding.lastNameEditText.setText(it.lastname)
-        PhoneRequest(
-            (binding.phoneEditText.text.toString()),
-            binding.spinnerCountryCode.selectedItem.toString()
-        )
         binding.phoneEditText.setText(it.phone.number)
+        binding.spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
         binding.emailEditText.setText(it.email)
         binding.birthdateEditText.setText(it.birthdate)
-        binding.stateSpinner.setSelection(it.country.id)
+        binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
     }
 
     private fun handleRemoteInfo(it: User) {
@@ -214,7 +236,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
             datePickerDialog.setOnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                val selectedDate = String.format("%02d-%02d-%d", dayOfMonth, monthOfYear + 1, year)
+                val selectedDate =
+                    String.format("%02d-%02d-%d", dayOfMonth, monthOfYear + 1, year)
                 binding.birthdateEditText.setText(selectedDate)
                 calendar.set(year, monthOfYear, dayOfMonth)
                 // To ignore time

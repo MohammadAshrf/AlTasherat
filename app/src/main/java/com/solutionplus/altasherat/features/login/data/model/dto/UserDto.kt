@@ -11,7 +11,7 @@ internal data class UserDto(
     @field:SerializedName("middlename") val middleName: String? = null,
     @field:SerializedName("lastname") val lastname: String? = null,
     @field:SerializedName("email") val email: String? = null,
-    @field:SerializedName("phoneRequest") val phone: PhoneDto? = null,
+    @field:SerializedName("phone") val phone: PhoneDto? = null,
     @field:SerializedName("image") val image: ImageDto? = null,
     @field:SerializedName("birthdate") val birthdate: String? = null,
     @field:SerializedName("email_verified") val emailVerified: Boolean? = null,

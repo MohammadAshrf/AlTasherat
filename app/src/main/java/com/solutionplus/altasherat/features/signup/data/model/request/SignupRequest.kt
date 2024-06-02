@@ -6,7 +6,7 @@ data class SignupRequest(
     @SerializedName("firstname") val firstName: String?= null,
     @SerializedName("lastname") val lastName: String?= null,
     @SerializedName("email") val email: String?= null,
-    @SerializedName("phoneRequest") val phone : PhoneRequest?= null,
+    @SerializedName("phone") val phone : PhoneRequest?= null,
     @SerializedName("password") val password : String?= null,
     @SerializedName("password_confirmation") val passwordConfirmation : String?= null,
     @SerializedName("country") val countryId : Int?= null,

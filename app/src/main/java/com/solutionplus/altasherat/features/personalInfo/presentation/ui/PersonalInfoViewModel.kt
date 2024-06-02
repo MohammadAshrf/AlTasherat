@@ -1,10 +1,10 @@
 package com.solutionplus.altasherat.features.personalInfo.presentation.ui
 
 import androidx.lifecycle.viewModelScope
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageAction.GetCountriesFromLocal
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
@@ -35,7 +35,7 @@ class PersonalInfoViewModel @Inject constructor(
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
-            is GetCountriesFromLocal -> getCountriesFromLocal()
+            is PersonalInfoAction.GetCountriesFromLocal -> getCountriesFromLocal()
             is GetUpdatedUserFromRemote -> getUpdatedUserFromRemote()
             is GetUpdatedUserFromLocal -> getUpdatedUserFromLocal()
 
@@ -144,11 +144,14 @@ class PersonalInfoViewModel @Inject constructor(
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(
+                    is Resource.Success -> {sendEvent(
                         PersonalInfoEvent.GetCountriesFromLocal(
                             countries = it.model
+
                         )
                     )
+                    getClassLogger().info("viewModel: ${it.model}")
+                    }
                 }
             }
         }

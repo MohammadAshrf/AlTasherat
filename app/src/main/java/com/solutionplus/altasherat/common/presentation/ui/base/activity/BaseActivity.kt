@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.common.presentation.ui.base.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +23,14 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
         get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
+
         enableEdgeToEdge()
         _binding = bindView()
+
+        binding.root.layoutDirection= View.LAYOUT_DIRECTION_LOCALE
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

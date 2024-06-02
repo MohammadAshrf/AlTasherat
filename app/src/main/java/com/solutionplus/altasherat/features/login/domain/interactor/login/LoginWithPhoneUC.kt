@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
+import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.model.User
@@ -7,16 +8,26 @@ import com.solutionplus.altasherat.features.login.domain.repository.ILoginReposi
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import javax.inject.Inject
 
-class LoginWithPhoneUC  (
+class LoginWithPhoneUC(
     private val repository: ILoginRepository,
-) : BaseUseCase<User, LoginRequest>(){
+) : BaseUseCase<User, LoginRequest>() {
     public override suspend fun execute(params: LoginRequest?): User {
-        validateRequest(params!!)?.let { message ->
+        getClassLogger().info("LoginWithPhoneUC: start")
+
+        requireNotNull(params) {
+            throw LeonException.Local.RequestValidation(
+                clazz = LoginRequest::class,
+                message = "Request is null"
+            )
+        }
+        validateRequest(params)?.let { message ->
             throw LeonException.Local.RequestValidation(
                 clazz = LoginRequest::class,
                 message = message
             )
         }
+
+        getClassLogger().info("LoginWithPhoneUC: execute")
         val result = repository.loginWithPhone(params)
         repository.saveUser(result.userInfo)
         repository.saveAccessToken(result.accessToken)
