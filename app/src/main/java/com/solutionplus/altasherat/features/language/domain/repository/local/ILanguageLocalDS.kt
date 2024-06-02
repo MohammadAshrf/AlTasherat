@@ -6,6 +6,6 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 interface ILanguageLocalDS {
     suspend fun getSelectedCountry(): CountryEntity
     suspend fun saveSelectedCountry(country: Country)
-    suspend fun getSelectedLanguage(): CountryEntity
-    suspend fun saveSelectedLanguage(country: Country)
+    suspend fun getSelectedLanguage(): String
+    suspend fun saveSelectedLanguage(language: String)
 }

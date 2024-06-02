@@ -21,6 +21,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
+//        splashVM.processIntent(SplashContract.SplashAction.StartAppWithArabicLocale("ar"))
     }
 
     override fun subscribeToObservables() {
@@ -30,7 +31,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(splashVM.singleEvent) {
             when (it) {
-                is SplashContract.SplashEvent.FetchCountriesAndNavigateToLanguage -> navigateToLanguage()
+                is SplashContract.SplashEvent.FetchCountriesFromLocalAndNavigateToLanguage -> navigateToLanguage()
                 is SplashContract.SplashEvent.NavigateToHome -> startHomeActivity()
                 is SplashContract.SplashEvent.FetchCountriesFromRemote -> navigateToLanguage()
             }

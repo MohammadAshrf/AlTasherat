@@ -10,5 +10,3 @@ class HasCountriesUC(
         return countriesRepository.hasCountries()
     }
 }
-
-/**In case we refactor the app*/

@@ -8,6 +8,6 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 class SaveSelectedCountryUC(private val repository: ILanguageRepository) :
     BaseUseCase<Unit, Country?>() {
     override suspend fun execute(params: Country?) {
-        repository.saveSelectedCountry((params ?: CountryEntity(0, "", "", "", "", "")) as Country)
+        repository.saveSelectedCountry((params!!))
     }
 }

@@ -124,14 +124,14 @@ dependencies {
     kapt(libs.hilt.compiler)
     kapt(libs.google.hilt.android.compiler)
 
-    //workManager
+    // WorkManager
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.hilt.work)
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-    //Mockito
+    // Mockito
     androidTestImplementation("org.mockito:mockito-core:3.11.2")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation("io.mockk:mockk:1.12.0")
@@ -156,6 +156,10 @@ dependencies {
     implementation(libs.dotsindicator)
     implementation(kotlin("test"))
 
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    // SwipeRefreshLayout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // CircleImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 }
