@@ -4,33 +4,39 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.CountryRequest
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.ImageRequest
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
+import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
 interface PersonalInfoContract {
 
     sealed class PersonalInfoAction : ViewAction {
         data class UpdateUser(
-            val firstName: String,
+            val firstname: String,
             val middleName: String,
-            val lastName: String,
+            val lastname: String,
             val email: String,
-            val birthDate: String,
-            val phoneNumber: String,
-            val countryCode: String,
-            val countryId: Int,
-//            val imageId: Int?= null,
-//            val imageType: String?= null,
-//            val imagePath: String?= null,
-//            val imageTitle: String?= null,
+            val phone: PhoneRequest,
+            val image: ImageRequest,
+            val birthdate: String,
+            val country: CountryRequest,
         ) : PersonalInfoAction()
 
+        data object GetSelectedCountryLocal : PersonalInfoAction()
         data object GetCountriesFromLocal : PersonalInfoAction()
+        data object GetUpdatedUserFromRemote : PersonalInfoAction()
+        data object GetUpdatedUserFromLocal : PersonalInfoAction()
     }
 
     sealed class PersonalInfoEvent : ViewEvent {
-        data class CountriesIndex(val countries: List<Country>) : PersonalInfoEvent()
+        data class GetSelectedCountryFromLocal(val country: Country) : PersonalInfoEvent()
+        data class GetCountriesFromLocal(val countries: List<Country>) : PersonalInfoEvent()
         data class UpdateDoneSuccessfully(val message: String) : PersonalInfoEvent()
         data class UpdateFailed(val message: String) : PersonalInfoEvent()
+        data class GetUpdatedUserFromRemote(val user: User) : PersonalInfoEvent()
+        data class GetUpdatedUserFromLocal(val user: User) : PersonalInfoEvent()
     }
 
     data class PersonalInfoState(
