@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_viewPagerFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_resetPasswordByPhoneFragment"
+            app:destination="@id/resetPasswordByPhoneFragment" />
 
 
     </fragment>
@@ -23,12 +26,7 @@
         android:id="@+id/loginFragment"
         android:name="com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment"
         tools:layout="@layout/fragment_login"
-        android:label="fragment_login">
-
-        <action
-            android:id="@+id/action_loginFragment_to_resetPasswordByPhoneFragment"
-            app:destination="@id/resetPasswordByPhoneFragment" />
-    </fragment>
+        android:label="fragment_login"/>
     <fragment
         android:id="@+id/otpFragment"
         android:name="com.solutionplus.altasherat.features.resetPassword.presentation.OtpFragment"

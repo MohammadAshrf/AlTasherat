@@ -68,8 +68,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun viewInit() {
         binding.tvForgotPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_resetPasswordByPhoneFragment)
-
+            findNavController().navigate(R.id.action_viewPagerFragment_to_resetPasswordByPhoneFragment)
         }
     }
 

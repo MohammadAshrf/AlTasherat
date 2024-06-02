@@ -82,7 +82,6 @@
         android:background="@drawable/button_background"
         android:drawableLeft="@drawable/svgexport620220821t132423"
         android:drawableTint="#FFFFFF"
-
         android:text="@string/send"
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold"

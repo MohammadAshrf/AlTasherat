@@ -16,7 +16,6 @@ class ResetPasswordByPhoneFragment : BaseFragment<FragmentResetPasswordByPhoneBi
     }
 
     override fun subscribeToObservables() {
-        // Implement this method if you have any observables to subscribe to
     }
 
     override fun viewInit() {
@@ -25,7 +24,4 @@ class ResetPasswordByPhoneFragment : BaseFragment<FragmentResetPasswordByPhoneBi
         }
     }
 
-    companion object {
-        private val logger = getClassLogger()
-    }
 }
