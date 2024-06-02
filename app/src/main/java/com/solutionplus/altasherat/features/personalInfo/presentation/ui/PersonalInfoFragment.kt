@@ -19,9 +19,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
+import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetCountriesFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetSelectedCountryLocal
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUser
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
@@ -50,7 +51,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         personalInfoVM.processIntent(GetCountriesFromLocal)
         personalInfoVM.processIntent(GetUpdatedUserFromLocal)
         binding.swipeRefreshLayout.setOnRefreshListener {
-            personalInfoVM.processIntent(GetUpdatedUser)
+            personalInfoVM.processIntent(GetUpdatedUserFromRemote)
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }
@@ -152,9 +153,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     true
                 )
 
-                is PersonalInfoEvent.GetUpdatedUserSuccessfully -> {
-                    handleRemoteInfo(it)
-                }
+                is PersonalInfoEvent.GetUpdatedUserFromRemote -> handleRemoteInfo(it.user)
 
                 is PersonalInfoEvent.GetCountriesFromLocal -> {
                     binding.stateSpinner.adapter =
@@ -163,29 +162,27 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                         CountryCodeSpinnerAdapter(requireContext(), it.countries)
                 }
 
-                is PersonalInfoEvent.GetUpdatedUserFromLocal -> {
-                    handleLocalInfo(it)
-                }
+                is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleLocalInfo(it.user)
             }
         }
     }
 
-    private fun handleLocalInfo(it: PersonalInfoEvent.GetUpdatedUserFromLocal) {
-        binding.firstNameEditText.setText(it.user.firstName)
-        binding.middleNameEditText.setText(it.user.middleName)
-        binding.lastNameEditText.setText(it.user.lastName)
-        binding.emailEditText.setText(it.user.email)
-        binding.birthdateEditText.setText(it.user.birthDate)
-        binding.phoneEditText.setText(it.user.phone)
+    private fun handleLocalInfo(it: User) {
+        binding.firstNameEditText.setText(it.firstName)
+        binding.middleNameEditText.setText(it.middleName)
+        binding.lastNameEditText.setText(it.lastName)
+        binding.emailEditText.setText(it.email)
+        binding.birthdateEditText.setText(it.birthDate)
+        binding.phoneEditText.setText(it.phone)
     }
 
-    private fun handleRemoteInfo(it: PersonalInfoEvent.GetUpdatedUserSuccessfully) {
-        binding.firstNameEditText.setText(it.user.firstName)
-        binding.middleNameEditText.setText(it.user.middleName)
-        binding.lastNameEditText.setText(it.user.lastName)
-        binding.emailEditText.setText(it.user.email)
-        binding.birthdateEditText.setText(it.user.birthDate)
-        binding.phoneEditText.setText(it.user.phone)
+    private fun handleRemoteInfo(it: User) {
+        binding.firstNameEditText.setText(it.firstName)
+        binding.middleNameEditText.setText(it.middleName)
+        binding.lastNameEditText.setText(it.lastName)
+        binding.emailEditText.setText(it.email)
+        binding.birthdateEditText.setText(it.birthDate)
+        binding.phoneEditText.setText(it.phone)
     }
 
     private fun renderState(state: PersonalInfoState) {

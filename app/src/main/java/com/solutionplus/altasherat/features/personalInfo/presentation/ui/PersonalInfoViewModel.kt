@@ -14,7 +14,7 @@ import com.solutionplus.altasherat.features.personalInfo.domain.interactor.HasUs
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserUC
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetSelectedCountryLocal
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUser
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
@@ -40,7 +40,7 @@ class PersonalInfoViewModel @Inject constructor(
         when (action) {
             is GetCountriesFromLocal -> getCountriesFromLocal()
             is GetSelectedCountryLocal -> getSelectedCountryFromLocal()
-            is GetUpdatedUser -> getUpdatedUserFromRemote()
+            is GetUpdatedUserFromRemote -> getUpdatedUserFromRemote()
             is GetUpdatedUserFromLocal -> getUpdatedUserFromLocal()
 
             is UpdateUser -> updateUser(
@@ -62,13 +62,10 @@ class PersonalInfoViewModel @Inject constructor(
 
     private fun getUpdatedUser() {
         viewModelScope.launch {
-            setState(oldViewState.copy(isLoading = true))
-
             hasUserUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(
                         oldViewState.copy(
-                            isLoading = false,
                             exception = it.exception
                         )
                     )
@@ -77,7 +74,7 @@ class PersonalInfoViewModel @Inject constructor(
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         if (it.model) {
-//                            sendEvent(PersonalInfoEvent.GetUpdatedUserSuccessfully("Profile data from local is up to date"))
+//                            sendEvent(PersonalInfoEvent.GetUpdatedUserFromRemote("Profile data from local is up to date"))
                         }
                     }
                 }
@@ -87,12 +84,10 @@ class PersonalInfoViewModel @Inject constructor(
 
     private fun getUpdatedUserFromLocal() {
         viewModelScope.launch {
-            setState(oldViewState.copy(isLoading = true))
             getUserFromLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(
                         oldViewState.copy(
-                            isLoading = false,
                             exception = it.exception
                         )
                     )
@@ -109,12 +104,10 @@ class PersonalInfoViewModel @Inject constructor(
 
     private fun getUpdatedUserFromRemote() {
         viewModelScope.launch {
-            setState(oldViewState.copy(isLoading = true))
             getUserFromRemoteUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(
                         oldViewState.copy(
-                            isLoading = false,
                             exception = it.exception
                         )
                     )
@@ -122,7 +115,7 @@ class PersonalInfoViewModel @Inject constructor(
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
-                        sendEvent(PersonalInfoEvent.GetUpdatedUserSuccessfully(it.model))
+                        sendEvent(PersonalInfoEvent.GetUpdatedUserFromRemote(it.model))
                     }
                 }
             }

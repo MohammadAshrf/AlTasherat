@@ -27,7 +27,7 @@ interface PersonalInfoContract {
 
         data object GetSelectedCountryLocal : PersonalInfoAction()
         data object GetCountriesFromLocal : PersonalInfoAction()
-        data object GetUpdatedUser : PersonalInfoAction()
+        data object GetUpdatedUserFromRemote : PersonalInfoAction()
         data object GetUpdatedUserFromLocal : PersonalInfoAction()
     }
 
@@ -36,7 +36,7 @@ interface PersonalInfoContract {
         data class GetCountriesFromLocal(val countries: List<Country>) : PersonalInfoEvent()
         data class UpdateDoneSuccessfully(val message: String) : PersonalInfoEvent()
         data class UpdateFailed(val message: String) : PersonalInfoEvent()
-        data class GetUpdatedUserSuccessfully(val user: User) : PersonalInfoEvent()
+        data class GetUpdatedUserFromRemote(val user: User) : PersonalInfoEvent()
         data class GetUpdatedUserFromLocal(val user: User) : PersonalInfoEvent()
     }
 
