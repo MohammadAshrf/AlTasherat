@@ -2,22 +2,27 @@ package com.solutionplus.altasherat.features.signup.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentSignupBinding
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.EMAIL
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.FIRST_NAME
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.LAST_NAME
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.PASSWORD
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.PHONE
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnSignupActionListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,6 +88,20 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
             is SignUpContract.SignupEvent.GetCountries -> {
                 setupCountrySpinner(event.country)
             }
+            is SignUpContract.SignupEvent.SignupFailure -> {
+                if (event.exception is LeonException.Local.RequestValidation) {
+                    val type = object : TypeToken<Map<String, String>>() {}.type
+                    val errorMessages = event.exception.message?.let { Gson().fromJson<Map<String, String>>(it, type) } ?: mapOf()
+                    errorMessages[FIRST_NAME]?.let { binding.etFirstname.error = it }
+                    errorMessages[LAST_NAME]?.let { binding.etLastName.error = it }
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = it }
+                    errorMessages[EMAIL]?.let { binding.etEmail.error = it }
+                }
+            }
         }
     }
 
@@ -130,6 +149,10 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
         val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
         val countryId = (binding.etCountruCode.selectedItem as Country).id
         val password = binding.etPassword.text.toString()
+
+        binding.etPassword.error = null
+        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+
         viewModel.onActionTrigger(
             SignUpContract.SignupActions.Signup(
                 firstName, lastName, email, phoneNumber, countryCode, countryId, password

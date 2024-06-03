@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.features.login.presentation.ui.fragment.logi
 
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
@@ -81,7 +82,12 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             loginWithPhoneUC.invoke(viewModelScope, loginRequest) { resource ->
                 when (resource) {
-                    is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
+                    is Resource.Failure -> {
+                        setState(oldViewState.copy(exception = resource.exception))
+                        if (resource.exception is LeonException.Local.RequestValidation) {
+                            sendEvent(LoginContract.LoginEvents.LoginFailure(resource.exception))
+                        }
+                    }
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> sendEvent(LoginContract.LoginEvents.LoginSuccess(resource.model))
                 }

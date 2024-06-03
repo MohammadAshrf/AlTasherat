@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.features.signup.presentation.ui
 
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
@@ -103,12 +104,17 @@ class SignupViewModel @Inject constructor(
 
             signupUC.invoke(viewModelScope, signupRequest) { resource ->
                 when (resource) {
-                    is Resource.Failure -> setState(
-                        oldViewState.copy(
-                            isLoading = false,
-                            exception = resource.exception
+                    is Resource.Failure -> {
+                        setState(
+                            oldViewState.copy(
+                                isLoading = false,
+                                exception = resource.exception
+                            )
                         )
-                    )
+                        if (resource.exception is LeonException.Local.RequestValidation) {
+                            sendEvent(SignUpContract.SignupEvent.SignupFailure(resource.exception))
+                        }
+                    }
 
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> {

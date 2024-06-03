@@ -24,6 +24,8 @@ interface LoginContract {
 
         data class GetCountries(val country: List<Country>): LoginEvents()
         data class GetSelectedCountry(val country: Country): LoginEvents()
+
+        data class LoginFailure(val exception: LeonException) : LoginEvents()
     }
 
     data class LoginState(

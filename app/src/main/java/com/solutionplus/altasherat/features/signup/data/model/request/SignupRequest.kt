@@ -28,4 +28,10 @@ data class SignupRequest(
     fun validatePhone(): Boolean {
         return phone?.validatePhone() ?: false
     }
+
+    fun validateEmail(): Boolean {
+        return !email.isNullOrBlank() && email.length < 50
+    }
+
+
 }

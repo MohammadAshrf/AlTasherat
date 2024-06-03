@@ -1,34 +1,28 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
+import com.google.gson.Gson
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import javax.inject.Inject
+import com.solutionplus.altasherat.common.presentation.ui.extentions.validateRequest
+import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
 
 class LoginWithPhoneUC(
     private val repository: ILoginRepository,
 ) : BaseUseCase<User, LoginRequest>() {
     public override suspend fun execute(params: LoginRequest?): User {
-        getClassLogger().info("LoginWithPhoneUC: start")
-
-        requireNotNull(params) {
-            throw LeonException.Local.RequestValidation(
-                clazz = LoginRequest::class,
-                message = "Request is null"
-            )
-        }
-        validateRequest(params)?.let { message ->
+        val errorMessages = params?.validateRequest()
+        if (!errorMessages.isNullOrEmpty()) {
+            val message = Gson().toJson(errorMessages)
             throw LeonException.Local.RequestValidation(
                 clazz = LoginRequest::class,
                 message = message
             )
         }
-
-        getClassLogger().info("LoginWithPhoneUC: execute")
-        val result = repository.loginWithPhone(params)
+        val result = repository.loginWithPhone(params!!)
         repository.saveUser(result.userInfo)
         repository.saveAccessToken(result.accessToken)
         repository.getUser()
@@ -36,13 +30,4 @@ class LoginWithPhoneUC(
     }
 
 
-    private fun validateRequest(request: LoginRequest): String? {
-        return request.run {
-            when {
-                !validatePhone() -> "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long."
-                !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
-                else -> null
-            }
-        }
-    }
 }

@@ -10,18 +10,21 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.PASSWORD
+import com.solutionplus.altasherat.common.presentation.ui.extentions.Constants.PHONE
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -80,6 +83,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             is LoginContract.LoginEvents.GetCountries -> {
                 setupCountrySpinner(event.country)
             }
+            is LoginContract.LoginEvents.LoginFailure -> {
+                if (event.exception is LeonException.Local.RequestValidation) {
+                    val type = object : TypeToken<Map<String, String>>() {}.type
+                    val errorMessages = event.exception.message?.let { Gson().fromJson<Map<String, String>>(it, type) } ?: mapOf()
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = it }
+                }
+            }
         }
     }
 
@@ -121,6 +135,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     }
 
     override fun onLoginAction() {
+        binding.etPassword.error = null
+        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+
+
         val phoneNumber = binding.etPhoneClient.text.toString()
         val password = binding.etPassword.text.toString()
         val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
