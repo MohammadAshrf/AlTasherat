@@ -11,11 +11,27 @@
         style="@style/TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/name"
         android:textColor="@color/text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/et_firstname"
         app:layout_constraintStart_toStartOf="@+id/et_firstname" />
+
+
+    <TextView
+        android:id="@+id/textLastName"
+        style="@style/TextView.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:text="@string/last_name"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/et_lastName"
+        app:layout_constraintStart_toStartOf="@+id/et_lastName" />
+
+
 
     <com.google.android.material.textfield.TextInputEditText
 
@@ -23,7 +39,7 @@
         style="@style/EditText"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="83dp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_13sdp"
         android:background="@drawable/rounded_button_background"
@@ -52,7 +68,7 @@
         style="@style/EditText"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_28sdp"
         android:background="@drawable/rounded_button_background"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -67,7 +83,7 @@
         style="@style/EditText"
         android:layout_width="220dp"
         android:layout_height="46dp"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_28sdp"
         android:background="@drawable/phone_background"
         android:inputType="phone"
         app:layout_constraintStart_toStartOf="@+id/et_firstname"
@@ -90,13 +106,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_28sdp"
         app:boxBackgroundColor="@color/wight"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        android:layout_marginTop="@dimen/_25sdp"
         app:boxStrokeColor="@color/icon"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_lastName"
         app:layout_constraintStart_toStartOf="@+id/et_firstname"
         app:layout_constraintTop_toBottomOf="@+id/et_CountruCode"
@@ -124,6 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Email"
+        android:layout_marginBottom="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:textColor="@color/text"
         android:textStyle="bold"
@@ -137,6 +157,7 @@
         style="@style/TextView.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Phone"
         android:layout_marginTop="@dimen/_12sdp"
         android:textColor="@color/text"

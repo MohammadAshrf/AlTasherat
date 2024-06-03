@@ -44,7 +44,7 @@ class SignupRepositoryTest {
     @Test
     fun `when saving user given null fields then user saved`() = runBlocking {
         //Arrange
-        val user = User(id = null, userName = null, email = null, phone = null)
+        val user = User(id = null, username = null, email = null, phone = null)
         val userEntity = UserMapper.domainToEntity(user)
         coEvery { localDs.saveUser(userEntity) } returns Unit
         // Act
@@ -84,9 +84,9 @@ class SignupRepositoryTest {
 
     @Test
     fun `when getting user then return user entity `() = runBlocking {
-        val userEntity = UserEntity()
+        val userEntity = User()
 
-        coEvery { localDs.getUser() } returns  userEntity
+        coEvery { localDs.getUser() } returns  UserMapper.domainToEntity(userEntity)
 
         val result = repository.getUser()
 

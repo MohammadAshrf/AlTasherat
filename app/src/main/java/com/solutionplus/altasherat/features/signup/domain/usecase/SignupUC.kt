@@ -33,7 +33,7 @@ class SignupUC(
                 !validateFirstName() -> "First name is invalid. It must be between 3 and 15 characters."
                 !validateLastName() -> "Last name is invalid. It must be between 3 and 15 characters."
                 !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
-                !validatePhone() -> "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long."
+                !validatePhone() -> "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long."
                 else -> null
             }
         }

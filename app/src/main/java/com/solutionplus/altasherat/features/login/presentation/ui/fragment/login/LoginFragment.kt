@@ -2,6 +2,8 @@ package com.solutionplus.altasherat.features.login.presentation.ui.fragment.logi
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,6 +14,7 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
+import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
@@ -33,39 +36,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.viewState.collect { state ->
-                        getClassLogger().info(state.exception.toString())
-
-                        state.exception?.let {
-                            handleHttpExceptions(it)
-                        }
-                        if (state.isLoading) {
-                            showLoading()
-                        } else {
-                            hideLoading()
-                        }
-                    }
-                }
-                launch {
-                    viewModel.singleEvent.collect { event ->
-                        handleEvent(event)
-                    }
-                }
-                launch {
-                    viewModel.countries.collect { countries ->
-                        setupCountrySpinner(countries)
-                    }
-                }
+                launch { viewStateObserver() }
+                launch { eventObserver() }
             }
         }
     }
 
-    private fun setupCountrySpinner(countries: List<Country>) {
-        val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
-        binding.etCountruCode.adapter = adapter
+    private suspend fun viewStateObserver() {
+        viewModel.viewState.collect { state ->
+            getClassLogger().info(state.exception.toString())
+            state.exception?.let {
+                handleHttpExceptions(it)
+            }
+            if (state.isLoading) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        }
+
     }
 
+    private suspend fun eventObserver() {
+        viewModel.singleEvent.collect { event ->
+            handleEvent(event)
+        }
+    }
     override fun viewInit() {
         binding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_resetPasswordByPhoneFragment)
@@ -75,10 +71,51 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     private fun handleEvent(event: LoginContract.LoginEvents) {
         when (event) {
             is LoginContract.LoginEvents.LoginSuccess -> {
-                val intent = Intent(requireActivity(), HomeActivity::class.java)
-                startActivity(intent)
-                showSnackBar(resources.getString(R.string.login_success), false)
-                requireActivity().finish()
+                gotoHomeActivity()
+                showSnackBar()
+            }
+            is LoginContract.LoginEvents.GetSelectedCountry -> {
+                setDefaultCountry(event.country)
+            }
+            is LoginContract.LoginEvents.GetCountries -> {
+                setupCountrySpinner(event.country)
+            }
+        }
+    }
+
+    private fun gotoHomeActivity() {
+        val intent = Intent(requireActivity(), HomeActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showSnackBar() {
+        showSnackBar(resources.getString(R.string.login_success), false)
+        requireActivity().finish()
+    }
+
+
+    private fun setupCountrySpinner(countries: List<Country>) {
+        val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
+        binding.etCountruCode.adapter = adapter
+        binding.etCountruCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                binding.etCountruCode.adapter.getItem(position) as Country
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
+    private fun setDefaultCountry(country: Country?) {
+        country?.let {
+            val adapter = binding.etCountruCode.adapter as CountryCodeSpinnerAdapter
+            val position = adapter.getPosition(country)
+            if (position >= 0) {
+                binding.etCountruCode.setSelection(position)
             }
         }
     }
@@ -91,6 +128,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
         )
     }
-
 
 }

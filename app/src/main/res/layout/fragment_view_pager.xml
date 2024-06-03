@@ -66,7 +66,7 @@
         android:id="@+id/image_above_tab"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="-40dp"
+        android:layout_marginBottom="-20dp"
         android:src="@drawable/splash_logo"
         android:translationZ="10dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
@@ -139,11 +139,11 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:visibility="gone"
         android:layout_marginStart="45dp"
         android:src="@drawable/ic_plane_right"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
 
@@ -151,11 +151,11 @@
 
     <ImageView
         android:id="@+id/imageViewp2"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:visibility="gone"
         android:layout_marginEnd="45dp"
         android:src="@drawable/ic_plane_left"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         />

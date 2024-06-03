@@ -12,7 +12,10 @@ import androidx.annotation.RequiresApi
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
+import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.entity.UserEntity
+import com.solutionplus.altasherat.features.login.domain.model.Phone
+import com.solutionplus.altasherat.features.login.domain.model.User
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -48,20 +51,19 @@ class LoginLocalDSTest {
     @Test
     fun `test save user info after encryptData`() = runBlocking {
         // Arrange
-        val user = UserEntity(
+        val phoneRequest = Phone(countryCode = "0020", number = "100100100")
+        val user = User(
             id = 1,
-            userName = "testUser",
-            firsName = "John",
-            middleName = "Doe",
-            lastName = "Smith",
-            fullName = "John Doe Smith",
-            email = "testUser@example.com",
-            phone = "1234567890",
-            birthDate = "1990-01-01",
-            imageUrl = "http://example.com/image.jpg",
+            username = "userName",
+            email = "email",
+            firstname = "firstName",
+            middleName = "middleName",
+            lastname = "lastName",
+            phone = phoneRequest,
+            birthdate = null,
             emailVerified = true
         )
-        val userJson = Gson().toJson(user)
+        val userJson = Gson().toJson(UserMapper.domainToEntity(user))
         val bytesUser = userJson.toByteArray()
         val encryptedUserData = "encryptedUserData".toByteArray()
         val encryptUserDataBase64 = Base64.getEncoder().encodeToString(encryptedUserData)
@@ -83,7 +85,7 @@ class LoginLocalDSTest {
         } just Runs
 
         // Act
-        loginLocalDS.saveUser(user)
+        loginLocalDS.saveUser(UserMapper.domainToEntity(user))
 
         // Assert
         coVerify {
@@ -136,20 +138,19 @@ class LoginLocalDSTest {
 
     @Test
     fun `when getting user expect user returned from storage`() = runBlocking {
-        val user = UserEntity(
+        val phoneRequest = Phone(countryCode = "0020", number = "100100100")
+        val user = User(
             id = 1,
-            userName = "testUser",
-            firsName = "John",
-            middleName = "Doe",
-            lastName = "Smith",
-            fullName = "John Doe Smith",
-            email = "testUser@example.com",
-            phone = "1234567890",
-            birthDate = "1990-01-01",
-            imageUrl = "http://example.com/image.jpg",
+            username = "userName",
+            email = "email",
+            firstname = "firstName",
+            middleName = "middleName",
+            lastname = "lastName",
+            phone = phoneRequest,
+            birthdate = null,
             emailVerified = true
         )
-        val userJson = Gson().toJson(user)
+        val userJson = Gson().toJson(UserMapper.domainToEntity(user))
         val encryptedUserData = Base64.getEncoder().encodeToString(userJson.toByteArray())
 
         coEvery {
@@ -167,7 +168,7 @@ class LoginLocalDSTest {
 
         val result = loginLocalDS.getUser()
 
-        assertEquals(user, result)
+        assertEquals(UserMapper.domainToEntity(user), result)
     }
 
 }

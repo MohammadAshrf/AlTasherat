@@ -3,6 +3,9 @@ package com.solutionplus.altasherat.features.login.data.repository
 
 import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.entity.UserEntity
+import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
+import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
+import com.solutionplus.altasherat.features.login.domain.model.Phone
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.local.ILoginLocalDS
 import com.solutionplus.altasherat.features.login.domain.repository.remote.ILoginRemoteDS
@@ -30,17 +33,16 @@ class LoginRepositoryTest {
     @Test
     fun `when saving user given valid user then user saved`() = runBlocking {
         // Arrange
+        val phoneRequest = Phone(countryCode = "0020", number = "100100100")
         val user = User(
             id = 1,
-            userName = "userName",
-            fullName = "fullName",
+            username = "userName",
             email = "email",
-            firstName = "firstName",
+            firstname = "firstName",
             middleName = "middleName",
-            lastName = "lastName",
-            phone = "phoneRequest",
-            birthDate = null,
-            imageUrl = "imageUrl",
+            lastname = "lastName",
+            phone = phoneRequest,
+            birthdate = null,
             emailVerified = true
         )
 
@@ -83,26 +85,26 @@ class LoginRepositoryTest {
 
     @Test
     fun `when getting user then return user entity `() = runBlocking {
-        val userEntity = UserEntity(
-        id = 1,
-        userName = "testUser",
-        firsName = "John",
-        middleName = "Doe",
-        lastName = "Smith",
-        fullName = "John Doe Smith",
-        email = "testUser@example.com",
-        phone = "1234567890",
-        birthDate = "1990-01-01",
-        imageUrl = "http://example.com/image.jpg",
-        emailVerified = true
-    )
+        val phoneRequest = Phone(countryCode = "0020", number = "100100100")
+        val user = User(
+            id = 1,
+            username = "testUser",
+            firstname = "John",
+            middleName = "Doe",
+            lastname = "Smith",
+            email = "testUser@example.com",
+            phone = phoneRequest,
+            birthdate = "1990-01-01",
+            emailVerified = true
+        )
 
-        coEvery { localDs.getUser() } returns userEntity
+
+        coEvery { localDs.getUser() } returns UserMapper.domainToEntity(user)
 
         val result = repository.getUser()
 
         coVerify { localDs.getUser() }
-        assertEquals(userEntity, result)
+        assertEquals(user, result)
     }
 
 

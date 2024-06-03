@@ -6,6 +6,7 @@ import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.login.domain.model.Login
+import com.solutionplus.altasherat.features.login.domain.model.Phone
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import io.mockk.Runs
@@ -35,19 +36,18 @@ class LoginWithPhoneUCTestRequest {
     @Test
     fun `when login is successful_given phone country code and password then user details are returned`() = runBlocking {
         // Arrange
+        val phone = Phone(countryCode = "0020", number = "100100100")
         val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
         val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
         val userInfo = User(
             id = 1,
-            userName = "fakeUser",
-            fullName = "Fake User",
+            username = "fakeUser",
             email = "fake.user@example.com",
-            firstName = "Fake",
+            firstname = "Fake",
             middleName = "User",
-            lastName = "Example",
-            phone = phoneRequest.toString(),
-            birthDate = "2000-01-01",
-            imageUrl = "http://example.com/image.jpg",
+            lastname = "Example",
+            phone = phone,
+            birthdate = "2000-01-01",
             emailVerified = true
         )
         val accessToken = "token123"
@@ -56,7 +56,7 @@ class LoginWithPhoneUCTestRequest {
         coEvery { repository.loginWithPhone(loginRequest) } returns loginResponse
         coEvery { repository.saveUser(userInfo) } just Runs
         coEvery { repository.saveAccessToken(accessToken) } just Runs
-        coEvery { repository.getUser() } returns UserMapper.domainToEntity(userInfo)
+        coEvery { repository.getUser() } returns userInfo
 
         // Act
         val result = loginWithPhoneUC.execute(loginRequest)

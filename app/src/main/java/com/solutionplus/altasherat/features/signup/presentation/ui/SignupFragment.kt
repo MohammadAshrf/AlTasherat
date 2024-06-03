@@ -39,37 +39,32 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.viewState.collect { state ->
-                        renderState(state)
-                    }
-                }
-                launch {
-                    viewModel.singleEvent.collect { event ->
-                        handleEvent(event)
-                    }
-                }
-                launch {
-                    viewModel.countries.collect { countries ->
-                        setupCountrySpinner(countries)
-                    }
-                }
-                launch {
-                    viewModel.selectedCountry.collect { country ->
-                        setDefaultCountry(country)
-                    }
-                }
+                launch { viewStateObserver() }
+                launch { eventObserver() }
             }
+        }
+    }
+
+    private suspend fun viewStateObserver() {
+        viewModel.viewState.collect { state ->
+            renderState(state)
+        }
+
+    }
+
+    private suspend fun eventObserver() {
+        viewModel.singleEvent.collect { event ->
+            handleEvent(event)
         }
     }
 
     private fun renderState(state: SignUpContract.SignUpState) {
         CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading) {
+            if (state.isLoading)
                 showLoading(resources.getString(R.string.please_wait))
-            } else {
+            else
                 hideLoading()
-            }
+
             state.exception?.let {
                 handleHttpExceptions(it)
             }
@@ -79,27 +74,40 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     private fun handleEvent(event: SignUpContract.SignupEvent) {
         when (event) {
             is SignUpContract.SignupEvent.SignupSuccess -> {
-                val intent = Intent(requireActivity(), HomeActivity::class.java)
-                startActivity(intent)
-                showSnackBar(resources.getString(R.string.login_success), false)
-                requireActivity().finish()
+                gotoHomeActivity()
+                showSnackBar()
             }
-
-            is SignUpContract.SignupEvent.GetSelectedCountry ->{
+            is SignUpContract.SignupEvent.GetSelectedCountry -> {
                 setDefaultCountry(event.country)
             }
+            is SignUpContract.SignupEvent.GetCountries -> {
+                setupCountrySpinner(event.country)
+            }
         }
+    }
+
+    private fun gotoHomeActivity() {
+        val intent = Intent(requireActivity(), HomeActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showSnackBar() {
+        showSnackBar(resources.getString(R.string.login_success), false)
+        requireActivity().finish()
     }
 
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountruCode.adapter = adapter
         binding.etCountruCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val selectedCountry = binding.etCountruCode.adapter.getItem(position) as Country
-                viewModel.onActionTrigger(LanguageContract.LanguageAction.SaveSelectedCountry(selectedCountry))
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                binding.etCountruCode.adapter.getItem(position) as Country
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
@@ -115,19 +123,18 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     }
 
     override fun onSignupAction() {
-            val firstName = binding.etFirstname.text.toString()
-            val lastName = binding.etLastName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val phoneNumber = binding.etPhoneClient.text.toString()
-            val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
-            val countryId = (binding.etCountruCode.selectedItem as Country).id
-            val password = binding.etPassword.text.toString()
-            viewModel.onActionTrigger(
-                SignUpContract.SignupActions.Signup(
-                    firstName, lastName, email, phoneNumber, countryCode, countryId, password
-                )
+        val firstName = binding.etFirstname.text.toString()
+        val lastName = binding.etLastName.text.toString()
+        val email = binding.etEmail.text.toString()
+        val phoneNumber = binding.etPhoneClient.text.toString()
+        val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
+        val countryId = (binding.etCountruCode.selectedItem as Country).id
+        val password = binding.etPassword.text.toString()
+        viewModel.onActionTrigger(
+            SignUpContract.SignupActions.Signup(
+                firstName, lastName, email, phoneNumber, countryCode, countryId, password
             )
-
+        )
     }
 
     companion object {
