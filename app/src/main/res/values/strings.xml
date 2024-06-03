@@ -36,9 +36,9 @@
     <string name="enter_otp_text">ادخل الكود المرسل لجوالك للمتابعة</string>
     <string name="enter_password_text">ادخل كلمة المرور</string>
     <string name="enter_password_again_text">اعادة ادخال كلمة المرور مره اخرى</string>
-    <string name="enter_password">  &#160;&#160;&#160;ادخل كلمه المرور الجديده </string>
-    <string name="enter_old_password">&#160;&#160;&#160;ادخل كلمه المرور القديمه</string>
-    <string name="repete_new_password">&#160;&#160;&#160;اعد كتابه كلمه المرور</string>
+    <string name="enter_password">  &#160;&#160;&#160;&#160;&#160;ادخل كلمه المرور الجديده </string>
+    <string name="enter_old_password">&#160;&#160;&#160;&#160;&#160;ادخل كلمه المرور القديمه</string>
+    <string name="repete_new_password">&#160;&#160;&#160;&#160;&#160;اعد كتابه كلمه المرور</string>
     <string name="save">حفظ</string>
     <string name="old_password_txt">كلمة المرور القديمة</string>
     <string name="new_password_text">كلمة المرور الحديدة</string>

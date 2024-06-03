@@ -139,3 +139,7 @@ eapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpage
 qapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/adapter/OnLoginActionListener.kt,e\e\ee9d420c6afd6b80551560083a7f264780f20d4b
 œ
 lapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/adapter/ViewPagerAdapter.kt,8\4\847f3834ca5f7721ba904b7835e2f95a688aaf0e
+“
+capp/src/main/java/com/solutionplus/altasherat/features/contactUs/presentation/ContactUsViewModel.kt,e\f\ef873e090ffb297d0649e1c3e90ff60809129c10
+’
+bapp/src/main/java/com/solutionplus/altasherat/features/contactUs/presentation/ContactUsFragment.kt,a\9\a9d03af8a889edbf5556c0a962a351fd6ff59b06

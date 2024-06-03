@@ -41,7 +41,6 @@
         android:layout_marginBottom="@dimen/_26sdp"
         android:text="@string/current_version"
         android:textColor="@color/text"
-
         android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

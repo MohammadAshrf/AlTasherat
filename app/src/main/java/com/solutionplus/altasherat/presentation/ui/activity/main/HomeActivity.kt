@@ -22,9 +22,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         binding.bottomNav.itemIconTintList = null
         customizeBottomNavigationView(binding.bottomNav)
     }
-    override fun onActivityReady(savedInstanceState: Bundle?) {
-        
-    }
+    override fun onActivityReady(savedInstanceState: Bundle?) { }
 
     private fun customizeBottomNavigationView(bottomNavigationView: BottomNavigationView) {
         val menu = bottomNavigationView.menu
