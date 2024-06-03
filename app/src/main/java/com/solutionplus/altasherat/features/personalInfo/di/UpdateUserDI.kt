@@ -6,9 +6,9 @@ import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvi
 import com.solutionplus.altasherat.features.personalInfo.data.repository.UpdateUserRepository
 import com.solutionplus.altasherat.features.personalInfo.data.repository.local.UpdateUserLocalDS
 import com.solutionplus.altasherat.features.personalInfo.data.repository.remote.UpdateUserRemoteDS
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromLocalUC
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromRemoteUC
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserUC
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromLocalUC
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromRemoteUC
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserInfoUC
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateUserRepository
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateUserLocalDS
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.remote.IUpdateUserRemoteDS
@@ -21,16 +21,16 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 internal object UpdateUserDI {
     @Provides
-    fun provideUpdateUserUC(repository: IUpdateUserRepository): UpdateUserUC =
-        UpdateUserUC(repository)
+    fun provideUpdateUserUC(repository: IUpdateUserRepository): UpdateUserInfoUC =
+        UpdateUserInfoUC(repository)
 
     @Provides
-    fun provideGetUserInfoFromLocalUC(repository: IUpdateUserRepository): GetUserFromLocalUC =
-        GetUserFromLocalUC(repository)
+    fun provideGetUserInfoFromLocalUC(repository: IUpdateUserRepository): GetUserInfoFromLocalUC =
+        GetUserInfoFromLocalUC(repository)
 
     @Provides
-    fun provideGetUserFromRemoteUC(repository: IUpdateUserRepository): GetUserFromRemoteUC =
-        GetUserFromRemoteUC(repository)
+    fun provideGetUserFromRemoteUC(repository: IUpdateUserRepository): GetUserInfoFromRemoteUC =
+        GetUserInfoFromRemoteUC(repository)
 
     @Provides
     fun provideRemoteDS(networkProvider: INetworkProvider): IUpdateUserRemoteDS =
