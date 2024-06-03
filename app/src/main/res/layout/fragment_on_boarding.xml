@@ -44,7 +44,7 @@
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_140sdp"
+        android:layout_marginBottom="@dimen/_130sdp"
         app:dotsColor="@color/Secondary"
         app:dotsCornerRadius="8dp"
         app:dotsSize="12dp"
@@ -59,22 +59,18 @@
         app:selectedDotColor="@color/Accent" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/next_button"
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:drawableEnd="@drawable/ic_left"
-        android:drawableTint="#FFFFFF"
+        android:layout_marginTop="@dimen/_4sdp"
         android:text="@string/next"
-        android:textSize="@dimen/_12ssp"
-        android:textAppearance="@style/Font.Bold"
         app:backgroundTint="@null"
-        app:iconTint="#FFFFFF"
+        app:icon="@drawable/ic_left"
+        app:iconGravity="textEnd"
         app:layout_constraintEnd_toEndOf="@id/dots_indicator"
         app:layout_constraintStart_toStartOf="@id/dots_indicator"
-        app:layout_constraintTop_toBottomOf="@id/dots_indicator"
-        tools:ignore="RtlHardcoded" />
+        app:layout_constraintTop_toBottomOf="@id/dots_indicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
