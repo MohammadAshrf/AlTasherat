@@ -52,7 +52,7 @@
     <string name="firstname">&#160;&#160;&#160;الاسم الاول</string>
     <string name="LastName">&#160;&#160;&#160;الاسم الاخير</string>
     <string name="email">&#160;&#160;&#160;ادخل البريد الالكتروني</string>
-    <string name="WritePassword">&#160;&#160;&#160;ادخل كلمه المرور</string>
+    <string name="WritePassword">&#160;&#160;&#160;&#160;&#160;&#160;ادخل كلمه المرور</string>
     <string name="Password"> كلمه المرور</string>
     <string name="Email">البريد الالكتروني</string>
     <string name="network_unavailable">يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</string>

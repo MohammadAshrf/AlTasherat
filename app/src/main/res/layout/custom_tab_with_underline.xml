@@ -6,10 +6,9 @@
     android:gravity="center">
 
     <View
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="4dp"
         android:background="@color/Accent"
-        android:visibility="gone"
         android:layout_marginBottom="@dimen/_15sdp"
         android:id="@+id/underline_view"/>
 

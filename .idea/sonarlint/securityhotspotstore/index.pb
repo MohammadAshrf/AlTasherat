@@ -133,3 +133,9 @@ eapp/src/test/java/com/solutionplus/altasherat/features/signup/data/repository/S
 uapp/src/test/java/com/solutionplus/altasherat/features/signup/domain/interactor/login/SignupWithPhoneUCTestRequest.kt,6\8\68d8f9180d22444ff357dbe21be12e20db5c285a
 ˆ
 Xapp/src/main/java/com/solutionplus/altasherat/features/signup/data/mapper/PhoneMapper.kt,6\9\69020c86afa8671cf4999323047e7ab9c10476a6
+•
+eapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/ViewPagerFragment.kt,8\7\8717cb553940d0f6185da21fddc23044c850b329
+¡
+qapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/adapter/OnLoginActionListener.kt,e\e\ee9d420c6afd6b80551560083a7f264780f20d4b
+œ
+lapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/adapter/ViewPagerAdapter.kt,8\4\847f3834ca5f7721ba904b7835e2f95a688aaf0e

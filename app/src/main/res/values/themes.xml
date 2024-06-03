@@ -215,5 +215,11 @@
         <item name="android:textAppearance">@style/Font.Bold</item>
     </style>
 
+
+    <style name="SmallTextAppearance" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textAppearance">@style/Font.Bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/Primary</item>
+    </style>
 </resources>
 
