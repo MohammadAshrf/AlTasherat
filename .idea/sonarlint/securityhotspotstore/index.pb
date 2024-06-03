@@ -143,3 +143,11 @@ lapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpage
 capp/src/main/java/com/solutionplus/altasherat/features/contactUs/presentation/ContactUsViewModel.kt,e\f\ef873e090ffb297d0649e1c3e90ff60809129c10
 ’
 bapp/src/main/java/com/solutionplus/altasherat/features/contactUs/presentation/ContactUsFragment.kt,a\9\a9d03af8a889edbf5556c0a962a351fd6ff59b06
+—
+gapp/src/main/java/com/solutionplus/altasherat/features/deleteaccount/presentation/ui/DeleteAccountVM.kt,6\9\69f7e17482f2aee43d71f89df747ba28007470d9
+¡
+qapp/src/main/java/com/solutionplus/altasherat/features/deleteaccount/presentation/ui/GotoDeleteAccountFragment.kt,c\c\cce4b5c0ba43cc79785023ba92d6cd521b64758c
+©
+yapp/src/main/java/com/solutionplus/altasherat/features/changepassword/presentation/ui/fragment/ChangePasswordViewModel.kt,7\c\7cf12e86d911eb320fbb7b0f271995dffd5957cd
+¨
+xapp/src/main/java/com/solutionplus/altasherat/features/changepassword/presentation/ui/fragment/ChangePasswordFragment.kt,d\2\d2630c710acbdcfec0a4bd3162e3bc5c089644ca

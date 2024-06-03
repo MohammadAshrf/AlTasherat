@@ -33,61 +33,71 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.viewState.collect { state ->
-                        getClassLogger().info(state.exception.toString())
-                        state.exception?.let {
-                            handleHttpExceptions(it)
-                        }
-                        if (state.isLoading) {
-                            showLoading()
-                        } else {
-                            hideLoading()
-                        }
-                    }
-                }
-                launch {
-                    viewModel.singleEvent.collect { event ->
-                        handleEvent(event)
-                    }
-                }
+                launch { viewStateObserver() }
+                launch { eventObserver() }
             }
+        }
+    }
+
+    private suspend fun viewStateObserver() {
+        viewModel.viewState.collect { state ->
+            getClassLogger().info(state.exception.toString())
+            state.exception?.let {
+                handleHttpExceptions(it)
+            }
+            if (state.isLoading) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        }
+    }
+
+    private suspend fun eventObserver() {
+        viewModel.singleEvent.collect { event ->
+            handleEvent(event)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun viewInit() {
         binding.btnSave.setOnClickListener {
-            val oldPassword = binding.etOldPassword.text.toString()
-            val newPassword = binding.etNewPassword.text.toString()
-            val newPasswordConfirmation = binding.etReTypeNewPassword.text.toString()
-
-            viewModel.onActionTrigger(
-                ChangePasswordContract.ChangePasswordActions.ChangePassword(
-                    oldPassword,
-                    newPassword,
-                    newPasswordConfirmation
-                )
-            )
-
+            handleChangePassword()
         }
         binding.imgback.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
+    private fun handleChangePassword() {
+        val oldPassword = binding.etOldPassword.text.toString()
+        val newPassword = binding.etNewPassword.text.toString()
+        val newPasswordConfirmation = binding.etReTypeNewPassword.text.toString()
+        viewModel.onActionTrigger(
+            ChangePasswordContract.ChangePasswordActions.ChangePassword(
+                oldPassword,
+                newPassword,
+                newPasswordConfirmation
+            )
+        )
+    }
+
     private fun handleEvent(event: ChangePasswordContract.ChangePasswordEvents) {
         when (event) {
             is ChangePasswordContract.ChangePasswordEvents.ChangePasswordSuccess -> {
-                showSnackBar(resources.getString(R.string.login_success), false)
-                requireActivity().finish()
-                Toast.makeText(
-                    requireContext(),
-                    "Your Password Changed successfully",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showSnackBar()
+                showSuccessfulToast()
             }
         }
+    }
+
+    private fun showSnackBar(){
+        showSnackBar(resources.getString(R.string.login_success), false)
+        requireActivity().finish()
+    }
+
+    private fun showSuccessfulToast(){
+        Toast.makeText(requireContext(), "Your Password Changed successfully", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
