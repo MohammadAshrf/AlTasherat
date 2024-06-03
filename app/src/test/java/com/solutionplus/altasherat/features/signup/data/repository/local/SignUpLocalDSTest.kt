@@ -8,7 +8,9 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.assertEquals
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
+import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.signup.data.model.entity.UserEntity
+import com.solutionplus.altasherat.features.signup.domain.model.User
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -41,7 +43,7 @@ class SignUpLocalDSTest{
     @Test
     fun `test save user info after encryptData`() = runBlocking {
         // Arrange
-        val user =UserEntity(
+        val user =User(
             1,
             "username",
             "email@example.com"
@@ -55,7 +57,7 @@ class SignUpLocalDSTest{
         coEvery { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) } just Runs
         coEvery{ storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java)} just  Runs
         // Act
-        loginLocalDS.saveUser(user)
+        loginLocalDS.saveUser(UserMapper.domainToEntity(user))
 
         // Assert
         coVerify { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) }
@@ -84,7 +86,7 @@ class SignUpLocalDSTest{
 
     @Test
     fun `when getting user expect user returned from storage`() = runBlocking {
-        val user = UserEntity(id = 1, userName = "testUser", firsName = "Test", lastName = "User")
+        val user = User(id = 1, username = "testUser", firstname = "Test", lastname = "User")
         val userJson = Gson().toJson(user)
         val encryptedUserData = Base64.getEncoder().encodeToString(userJson.toByteArray())
 
@@ -93,7 +95,7 @@ class SignUpLocalDSTest{
 
         val result = loginLocalDS.getUser()
 
-        assertEquals(user, result)
+        assertEquals(UserMapper.domainToEntity(user), result)
     }
 
     // Test case 4: Get access token with no access token stored then return exception

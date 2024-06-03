@@ -19,12 +19,12 @@ internal object PhoneMapper : Mapper<PhoneDto, Phone, PhoneEntity>() {
 
     override fun domainToEntity(model: Phone): PhoneEntity {
         return PhoneEntity(
-            id = model.id,
-            countryCode = model.countryCode,
-            number = model.number,
-            extension = model.extension,
-            type = model.type,
-            holderName = model.holderName
+            id = model.id ?: -1,
+            countryCode = model.countryCode.orEmpty(),
+            number = model.number.orEmpty(),
+            extension = model.extension.orEmpty(),
+            type = model.type.orEmpty(),
+            holderName = model.holderName.orEmpty(),
         )
     }
 

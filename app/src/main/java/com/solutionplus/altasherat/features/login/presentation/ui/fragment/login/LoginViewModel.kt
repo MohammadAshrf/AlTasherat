@@ -4,11 +4,13 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
+import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.login.domain.interactor.login.LoginWithPhoneUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,16 +20,15 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginWithPhoneUC: LoginWithPhoneUC,
-    private val getCountriesUC: GetCountriesFromLocalUC
+    private val getCountriesUC: GetCountriesFromLocalUC,
+    private val getSelectedCountryUC: GetSelectedCountryUC
 ) : AlTasheratViewModel<LoginContract.LoginActions, LoginContract.LoginEvents, LoginContract.LoginState>(
     initialState = LoginContract.LoginState.initial()
 ) {
 
-    private val _countries = MutableStateFlow<List<Country>>(emptyList())
-    val countries: StateFlow<List<Country>> get() = _countries
-
     init {
         fetchCountries()
+        fetchSelectedCountry()
     }
 
     override fun onActionTrigger(action: ViewAction?) {
@@ -39,7 +40,7 @@ class LoginViewModel @Inject constructor(
                 action.password
             )
 
-            is LoginContract.LoginActions.FetchCountries -> fetchCountries()
+            is LoginContract.LoginActions.GetSelectedCountry ->  fetchSelectedCountry()
         }
     }
 
@@ -49,7 +50,23 @@ class LoginViewModel @Inject constructor(
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
-                    is Resource.Success -> _countries.value = resource.model
+                    is Resource.Success -> {
+                        sendEvent(LoginContract.LoginEvents.GetCountries(resource.model))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchSelectedCountry() {
+        viewModelScope.launch {
+            getSelectedCountryUC.invoke().collect {
+                when (it) {
+                    is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Success -> {
+                        sendEvent(LoginContract.LoginEvents.GetSelectedCountry(it.model))
+                    }
                 }
             }
         }

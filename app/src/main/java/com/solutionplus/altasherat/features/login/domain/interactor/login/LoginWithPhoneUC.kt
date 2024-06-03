@@ -39,7 +39,7 @@ class LoginWithPhoneUC(
     private fun validateRequest(request: LoginRequest): String? {
         return request.run {
             when {
-                !validatePhone() -> "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long."
+                !validatePhone() -> "Phone number is invalid. It must contain only digits and be between 9 and 15 characters long."
                 !validatePassword() -> "Password is invalid. It must be between 8 and 50 characters."
                 else -> null
             }

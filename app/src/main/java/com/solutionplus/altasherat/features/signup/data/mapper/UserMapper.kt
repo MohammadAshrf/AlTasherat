@@ -31,20 +31,20 @@ internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
     }
     override fun domainToEntity(model: User): UserEntity {
         return UserEntity(
-            id = model.id,
-            username = model.username,
-            firstname = model.firstname,
-            middleName = model.middleName,
-            lastname = model.lastname,
-            email = model.email,
-            phone = PhoneMapper.domainToEntity(model.phone),
-            image = ImageMapper.domainToEntity(model.image),
-            birthdate = model.birthdate,
-            emailVerified = model.emailVerified,
-            phoneVerified = model.phoneVerified,
-            blocked = model.blocked,
-            country = CountryMapper.domainToEntity(model.country),
-            allPermissions = model.allPermissions
+            id = model.id ?: -1,
+            username = model.username.orEmpty(),
+            firstname = model.firstname.orEmpty(),
+            middleName = model.middleName.orEmpty(),
+            lastname = model.lastname.orEmpty(),
+            email = model.email.orEmpty(),
+            phone = PhoneMapper.domainToEntity(model.phone!!),
+            image = ImageMapper.domainToEntity(model.image!!),
+            birthdate = model.birthdate.orEmpty(),
+            emailVerified = model.emailVerified!!,
+            phoneVerified = model.phoneVerified!!,
+            blocked = model.blocked!!,
+            country = CountryMapper.domainToEntity(model.country!!),
+            allPermissions = model.allPermissions.orEmpty(),
         )
     }
 

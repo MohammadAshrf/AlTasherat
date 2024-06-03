@@ -9,6 +9,7 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper.domainToEntity
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
+import com.solutionplus.altasherat.features.signup.domain.model.Phone
 import com.solutionplus.altasherat.features.signup.domain.model.Signup
 import com.solutionplus.altasherat.features.signup.domain.model.User
 import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepository
@@ -31,17 +32,20 @@ import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
     @Test
     fun `when signup is successful_ then user details are returned`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
+        val phone = Phone(
             countryCode = "0020",
             number = "100100100"
         )
-        val signupRequest = SignupRequest(phone = phone, password = "123456789", countryCode = "0020", countryId = 1,  firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
+        val phoneRequest = PhoneRequest(
+            countryCode = "0020",
+            number = "100100100"
+        )
+        val signupRequest = SignupRequest(phone = phoneRequest, password = "123456789", countryCode = "0020", countryId = 1,  firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
         val userInfo = User(
             id = 1,
-            userName = "jdoe",
-            fullName = "John Doe",
+            username = "jdoe",
             email = "jdoe@example.com",
-            phone = phone.number
+            phone = phone
         )
         val accessToken = "token123"
         val signup = Signup(message = "Success", token = "token123", user = userInfo)
