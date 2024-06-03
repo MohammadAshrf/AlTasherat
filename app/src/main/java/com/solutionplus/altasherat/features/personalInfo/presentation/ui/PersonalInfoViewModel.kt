@@ -6,10 +6,10 @@ import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserRequest
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromLocalUC
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserFromRemoteUC
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserUC
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserInfoRequest
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromLocalUC
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromRemoteUC
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserInfoUC
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
@@ -24,9 +24,9 @@ import javax.inject.Inject
 @HiltViewModel
 class PersonalInfoViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
-    private val getUserFromRemoteUC: GetUserFromRemoteUC,
-    private val getUserFromLocalUC: GetUserFromLocalUC,
-    private val updateUserUC: UpdateUserUC
+    private val getUserFromRemoteUC: GetUserInfoFromRemoteUC,
+    private val getUserFromLocalUC: GetUserInfoFromLocalUC,
+    private val updateUserUC: UpdateUserInfoUC
 ) :
     AlTasheratViewModel<PersonalInfoAction, PersonalInfoEvent, PersonalInfoState>(PersonalInfoState.initial()) {
 
@@ -104,7 +104,7 @@ class PersonalInfoViewModel @Inject constructor(
         viewModelScope.launch {
             val phone = PhoneRequest(phone.countryCode, phone.number)
 //            val image = ImageRequest(image.id, image.type, image.path, image.title)
-            val updateUserRequest = UpdateUserRequest(
+            val updateUserRequest = UpdateUserInfoRequest(
                 firstname,
                 middleName,
                 lastname,

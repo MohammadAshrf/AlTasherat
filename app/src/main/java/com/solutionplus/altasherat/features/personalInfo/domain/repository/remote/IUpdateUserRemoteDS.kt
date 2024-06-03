@@ -2,11 +2,9 @@ package com.solutionplus.altasherat.features.personalInfo.domain.repository.remo
 
 import com.solutionplus.altasherat.features.personalInfo.data.models.dto.AccountResponseDto
 import com.solutionplus.altasherat.features.personalInfo.data.models.dto.UpdateUserDto
-import com.solutionplus.altasherat.features.personalInfo.data.models.dto.UserDto
-import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserRequest
-import com.solutionplus.altasherat.features.personalInfo.domain.models.User
+import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserInfoRequest
 
 internal interface IUpdateUserRemoteDS {
-    suspend fun updateUser(updateUserRequest: UpdateUserRequest): UpdateUserDto
+    suspend fun updateUser(updateUserRequest: UpdateUserInfoRequest): UpdateUserDto
     suspend fun getUpdateUser(): AccountResponseDto
 }
