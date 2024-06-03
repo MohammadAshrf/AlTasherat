@@ -1,7 +1,5 @@
 package com.solutionplus.altasherat.features.changeLanguage.presentation.ui
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,12 +12,10 @@ import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragm
 import com.solutionplus.altasherat.databinding.FragmentChangeLanguageBinding
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageViewModel
-import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 @AndroidEntryPoint
-class ChangeLanguage : BaseFragment<FragmentChangeLanguageBinding>() {
+class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>() {
 
     private val languageVM: LanguageViewModel by viewModels()
 
@@ -37,12 +33,26 @@ class ChangeLanguage : BaseFragment<FragmentChangeLanguageBinding>() {
         super.onDestroyView()
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.VISIBLE
+
+
     }
 
 
     override fun viewInit() {
         binding.btnSave.setOnClickListener {
             handleViews()
+        }
+
+        if (AppCompatDelegate.getApplicationLocales().get(0)?.language.equals("ar")) {
+            binding.arabicRadioBtn.isChecked = true
+            binding.englishRadioBtn.isChecked = false
+            binding.englishRadioBtn.isEnabled = true
+            binding.arabicRadioBtn.isEnabled = false
+        } else {
+            binding.englishRadioBtn.isChecked = true
+            binding.arabicRadioBtn.isChecked = false
+            binding.englishRadioBtn.isEnabled = false
+            binding.arabicRadioBtn.isEnabled = true
         }
     }
 

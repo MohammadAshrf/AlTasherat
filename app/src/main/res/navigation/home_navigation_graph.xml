@@ -76,7 +76,7 @@
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/changeLanguage"
-        android:name="com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguage"
+        android:name="com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguageFragment"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
     <fragment
