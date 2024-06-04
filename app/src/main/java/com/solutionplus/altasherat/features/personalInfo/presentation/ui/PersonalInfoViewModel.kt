@@ -19,6 +19,7 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,7 +44,7 @@ class PersonalInfoViewModel @Inject constructor(
                 action.lastname,
                 action.email,
                 action.phone,
-//                action.image,
+                action.image,
                 action.birthdate,
                 action.country,
             )
@@ -95,22 +96,21 @@ class PersonalInfoViewModel @Inject constructor(
         middleName: String,
         lastname: String,
         email: String,
-        phone: PhoneRequest,
-//        image: ImageRequest,
+        phoneRequest: PhoneRequest,
+        image: File,
         birthdate: String,
         country: Int,
     ) {
 
         viewModelScope.launch {
-            val phone = PhoneRequest(phone.countryCode, phone.number)
-//            val image = ImageRequest(image.id, image.type, image.path, image.title)
+            val phone = PhoneRequest(phoneRequest.countryCode, phoneRequest.number)
             val updateUserRequest = UpdateUserInfoRequest(
                 firstname,
                 middleName,
                 lastname,
                 email,
                 phone,
-                image = null,
+                image,
                 birthdate,
                 country,
             )

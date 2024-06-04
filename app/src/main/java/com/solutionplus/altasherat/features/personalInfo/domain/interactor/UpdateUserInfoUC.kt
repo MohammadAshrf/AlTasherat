@@ -10,10 +10,7 @@ class UpdateUserInfoUC(private val repository: IUpdateUserRepository) :
     BaseUseCase<UpdateUser, UpdateUserInfoRequest>() {
     override suspend fun execute(params: UpdateUserInfoRequest?): UpdateUser {
         requireNotNull(params) {
-            throw LeonException.Local.RequestValidation(
-                clazz = UpdateUserInfoRequest::class,
-                message = "Request is null"
-            )
+            throw LeonException.Local.RequestValidation(clazz = UpdateUserInfoRequest::class)
         }
 
         validateRequest(params)?.let { message ->
@@ -23,7 +20,7 @@ class UpdateUserInfoUC(private val repository: IUpdateUserRepository) :
             )
         }
 
-        val result = repository.updateUserInfo(params)
+        val result = repository.updateUserInfo(params.remoteMap)
         repository.saveUpdatedUser(result.user)
         return result
     }
@@ -35,7 +32,7 @@ class UpdateUserInfoUC(private val repository: IUpdateUserRepository) :
                 !isMiddleNameValid() -> "Middle name is not valid"
                 !isLastNameValid() -> "Last name is not valid"
                 !isEmailValid() -> "Email is not valid"
-                !isBirthdateValid() -> "Birthdate is not valid"
+                !isPhoneValid() -> "Phone number is not valid"
                 !isCountryValid() -> "Country is not valid"
                 else -> null
             }

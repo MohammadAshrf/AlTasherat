@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.personalInfo.data.repository
 
+import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
 import com.solutionplus.altasherat.features.personalInfo.data.mappers.UpdateUserMapper
 import com.solutionplus.altasherat.features.personalInfo.data.mappers.UserMapper
 import com.solutionplus.altasherat.features.personalInfo.data.models.dto.UserDto
@@ -14,8 +15,8 @@ internal class UpdateUserRepository(
     private val localDS: IUpdateUserLocalDS,
     private val remoteDS: IUpdateUserRemoteDS
 ) : IUpdateUserRepository {
-    override suspend fun updateUserInfo(updateUserRequest: UpdateUserInfoRequest): UpdateUser {
-        val user = remoteDS.updateUser(updateUserRequest)
+    override suspend fun updateUserInfo(remoteRequest: RemoteRequest): UpdateUser {
+        val user = remoteDS.updateUser(remoteRequest)
         return UpdateUserMapper.dtoToDomain(user)
     }
 

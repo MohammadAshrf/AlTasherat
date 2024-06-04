@@ -7,7 +7,7 @@ data class PhoneRequest(
     @field:SerializedName("number") val number: String? = null,
 ){
     fun validatePhone():Boolean {
-        return !(number!!.any(){!it.isDigit()} || number.isBlank() || number.length < 9 || number.length > 15 )
+        return !(number!!.any {!it.isDigit()} || number.isBlank() || number.length < 9 || number.length > 15 )
     }
 }
 

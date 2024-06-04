@@ -8,6 +8,7 @@ import com.solutionplus.altasherat.features.personalInfo.data.models.entity.User
 import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
 import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
+import java.io.File
 
 internal object UserMapper : Mapper<UserDto, User, UserEntity>() {
     override fun dtoToDomain(model: UserDto): User {

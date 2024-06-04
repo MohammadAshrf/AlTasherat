@@ -3,6 +3,7 @@ package com.solutionplus.altasherat.features.personalInfo.domain.models
 import android.os.Parcelable
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import kotlinx.parcelize.Parcelize
+import java.io.File
 
 @Parcelize
 data class User(

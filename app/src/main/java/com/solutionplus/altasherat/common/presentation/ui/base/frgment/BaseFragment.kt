@@ -17,7 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.android.extentions.bindView
+import com.solutionplus.altasherat.android.helpers.extentions.bindView
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorHandling
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegate

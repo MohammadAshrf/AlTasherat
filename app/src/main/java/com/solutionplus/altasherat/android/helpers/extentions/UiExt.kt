@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.android.extentions
+package com.solutionplus.altasherat.android.helpers.extentions
 
 import android.app.Activity
 import android.view.LayoutInflater

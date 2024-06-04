@@ -1,16 +1,15 @@
 package com.solutionplus.altasherat.features.personalInfo.presentation.ui
 
-import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
-import android.content.Intent
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
@@ -36,12 +35,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 import java.util.Locale
 
 @AndroidEntryPoint
 class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
-    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var countriesList: List<Country>
+    private lateinit var imageUri: Uri
+    private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
+            imageUri = uri
+            binding.viewProfileSection.profilePicture.setImageURI(uri)
+        }
+    }
     private val personalInfoVM: PersonalInfoViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -55,6 +63,17 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             personalInfoVM.processIntent(GetUpdatedUserFromRemote)
             binding.swipeRefreshLayout.isRefreshing = false
         }
+    }
+
+    private fun uriToFile(uri: Uri, context: Context): File {
+        logger.info("uriToFile: $uri")
+        val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
+        val tempFile = File(context.cacheDir, "temp_image")
+        val outputStream = FileOutputStream(tempFile)
+        inputStream?.copyTo(outputStream)
+        inputStream?.close()
+        outputStream.close()
+        return tempFile
     }
 
     override fun subscribeToObservables() {
@@ -79,15 +98,14 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             val lastname = binding.lastNameEditText.text.toString().trim()
             val phone = PhoneRequest(
                 countryCode = countriesList[binding.spinnerCountryCode.selectedItemPosition].phoneCode,
-                binding.phoneEditText.text.toString()
+                number = binding.phoneEditText.text.toString()
             )
             val email = binding.emailEditText.text.toString().trim()
-//            val image = binding.viewProfileSection.profilePicture.drawable.toBitmap().let {
-//                ImageRequest(it.generationId, "", "", "")
-//            }
+
+            val image = uriToFile(imageUri, requireContext())
+
             val birthdate = binding.birthdateEditText.text.toString()
             val country = countriesList[binding.stateSpinner.selectedItemPosition].id
-
             personalInfoVM.processIntent(
                 UpdateUser(
                     firstname,
@@ -95,7 +113,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     lastname,
                     email,
                     phone,
-//                    image,
+                    image,
                     birthdate,
                     country
                 )
@@ -109,28 +127,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             showDatePickerDialog(Calendar.getInstance())
         }
 
-        // Register the activity result launcher
-        galleryLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK) {
-                    val uri = result.data?.data
-                    if (uri != null) {
-                        Glide.with(this)
-                            .load(uri)
-                            .centerCrop()
-                            .placeholder(R.drawable.splash_logo) // Optional placeholder image
-                            .error(R.drawable.btn_cancellation_background) // Optional error image
-                            .into(binding.viewProfileSection.profilePicture)
-                    }
-                }
-            }
-
         binding.viewProfileSection.penEditor.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            )
-            galleryLauncher.launch(intent)
+            contract.launch("image/*")
         }
     }
 
@@ -191,6 +189,14 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         binding.phoneEditText.setText(it.phone.number)
         binding.spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
         binding.emailEditText.setText(it.email)
+        it.image.let { image ->
+            Glide.with(this)
+                .load(image.path)
+                .centerCrop()
+                .placeholder(R.drawable.ic_profile_holder)
+                .error(R.drawable.ic_verefication)
+                .into(binding.viewProfileSection.profilePicture)
+        }
         binding.birthdateEditText.setText(it.birthdate)
         binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
     }
@@ -251,46 +257,4 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     companion object {
         val logger = getClassLogger()
     }
-
-//    private fun validatePersonalInfo(): Boolean {
-//        return when {
-//            binding.firstNameEditText.text?.trim()?.length !in 3..15 -> {
-//                showSnackBar(
-//                    resources.getString(R.string.err_msg_enter_valid_first_name), true
-//                )
-//                false
-//            }
-//
-//            (binding.middleNameEditText.text?.trim()?.length ?: 0) > 15 -> {
-//                showSnackBar(
-//                    resources.getString(R.string.err_msg_enter_valid_middle_name), true
-//                )
-//                false
-//            }
-//
-//            binding.lastNameEditText.text?.trim()?.length !in 3..15 -> {
-//                showSnackBar(
-//                    resources.getString(R.string.err_msg_enter_valid_last_name), true
-//                )
-//                false
-//            }
-//
-//            binding.emailEditText.text?.trim()?.length !in 0..50 || !Patterns.EMAIL_ADDRESS.matcher(
-//                binding.emailEditText.text.toString()
-//            ).matches() -> {
-//                showSnackBar(resources.getString(R.string.err_msg_enter_valid_email), true)
-//                false
-//            }
-//
-//            binding.phoneEditText.text?.trim()?.length !in 9..15 || !TextUtils.isDigitsOnly(binding.phoneEditText.text.toString()) -> {
-//                showSnackBar(resources.getString(R.string.err_msg_enter_valid_phone), true)
-//                false
-//            }
-//
-//
-//            else -> {
-//                true
-//            }
-//        }
-//    }
 }
