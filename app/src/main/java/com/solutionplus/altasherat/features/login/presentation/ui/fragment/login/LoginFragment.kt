@@ -90,10 +90,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
             is LoginContract.LoginEvents.LoginFailure -> {
                 if (event.exception is LeonException.Local.RequestValidation) {
-                    val type = object : TypeToken<Map<String, Int>>() {}.type
-                    val errorMessages =
-                        event.exception.message?.let { Gson().fromJson<Map<String, Int>>(it, type) }
-                            ?: mapOf()
+                    val errorMessages = event.exception.errors
                     errorMessages[PASSWORD]?.let {
                         binding.etPassword.error = getString(it)
                         binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE

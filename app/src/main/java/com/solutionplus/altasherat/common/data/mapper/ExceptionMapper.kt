@@ -19,7 +19,8 @@ object ExceptionMapper {
                         val errorBody = exception.response()?.errorBody()?.string()
                         val type = object : TypeToken<Map<String, Any>>() {}.type
                         val errorMap: Map<String, Any> = Gson().fromJson(errorBody, type)
-                        val rawErrors = errorMap["errors"] as? Map<String, ArrayList<String>> ?: emptyMap()
+                        val rawErrors =
+                            errorMap["errors"] as? Map<String, ArrayList<String>> ?: emptyMap()
                         val errors = rawErrors.mapValues { it.value.joinToString() }
                         val message = errorMap["message"] as? String ?: "Unknown validation error"
                         LeonException.Client.ResponseValidation(errors, message)
@@ -58,7 +59,11 @@ object ExceptionMapper {
             }
 
             is LeonException.Local.RequestValidation -> {
-                LeonException.Local.RequestValidation(exception.clazz, exception.message)
+                LeonException.Local.RequestValidation(
+                    exception.clazz,
+                    exception.message,
+                     exception.errors
+                )
             }
 
             else -> LeonException.Unknown("An unknown error occurred: ${exception.message}")

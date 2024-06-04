@@ -16,10 +16,10 @@ class LoginWithPhoneUC(
     public override suspend fun execute(params: LoginRequest?): User {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
-            val message = Gson().toJson(errorMessages)
             throw LeonException.Local.RequestValidation(
                 clazz = LoginRequest::class,
-                message = message
+                message = "message",
+                errors = errorMessages
             )
         }
         val result = repository.loginWithPhone(params!!)

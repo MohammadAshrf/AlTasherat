@@ -93,10 +93,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
 
             is SignUpContract.SignupEvent.SignupFailure -> {
                 if (event.exception is LeonException.Local.RequestValidation) {
-                    val type = object : TypeToken<Map<String, Int>>() {}.type
-                    val errorMessages =
-                        event.exception.message?.let { Gson().fromJson<Map<String, Int>>(it, type) }
-                            ?: mapOf()
+                    val errorMessages =event.exception.errors
                     errorMessages[FIRST_NAME]?.let { binding.etFirstname.error = getString(it) }
                     errorMessages[LAST_NAME]?.let { binding.etLastName.error = getString(it) }
                     errorMessages[PASSWORD]?.let {

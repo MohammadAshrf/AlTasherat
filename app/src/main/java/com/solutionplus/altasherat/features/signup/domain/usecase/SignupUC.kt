@@ -15,10 +15,9 @@ class SignupUC(
     public override suspend fun execute(params: SignupRequest?): User {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
-            val message = Gson().toJson(errorMessages)
             throw LeonException.Local.RequestValidation(
                 clazz = SignupRequest::class,
-                message = message
+                errors = errorMessages
             )
         }
         val result = repository.signupWithPhone(params!!)
