@@ -9,13 +9,18 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/wight"
-        app:labelVisibilityMode="labeled"
+        android:backgroundTint="@color/background"
+        android:clipChildren="false"
+        app:compatShadowEnabled="true"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemBackground="@android:color/transparent"
+        app:itemTextAppearanceActive="@style/Font.Bold"
+        app:itemTextAppearanceInactive="@style/Font.Bold"
+        app:itemTextColor="@drawable/selector_bottom_nav_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
     <androidx.fragment.app.FragmentContainerView
