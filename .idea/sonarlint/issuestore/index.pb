@@ -165,3 +165,7 @@ bapp/src/main/java/com/solutionplus/altasherat/features/login/domain/repository/
 aapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/frgment/BaseFragment.kt,2\b\2bd6a7f3f94eb0c7f439e066d55a924d01cec011
 í
 bapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/activity/BaseActivity.kt,3\7\37dd4c2e1ada7f6696dfaa3b3c12ff10b1481de3
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+ù
+mapp/src/main/java/com/solutionplus/altasherat/features/deleteaccount/presentation/ui/DeleteAccountFragment.kt,e\8\e80f0d8de7e2b042d715b57681c6bc5059b04e6a

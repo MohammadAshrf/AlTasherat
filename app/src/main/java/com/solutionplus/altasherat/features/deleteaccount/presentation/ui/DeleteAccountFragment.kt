@@ -42,14 +42,8 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.GONE
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-    }
 
-
+    }
 
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -129,5 +123,10 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetDialog.show()
 
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.VISIBLE
     }
 }

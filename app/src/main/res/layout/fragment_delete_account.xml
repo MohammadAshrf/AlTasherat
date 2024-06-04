@@ -68,12 +68,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/Deactivate_the_account_permanently"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:text="@string/Deactivate_the_account_permanently"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -81,12 +81,12 @@
         style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_13sdp"
         android:text="@string/manage_account_delete"
-        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-        app:layout_constraintStart_toEndOf="@+id/btn_back"
+        app:layout_constraintEnd_toStartOf="@+id/btn_back"
         app:layout_constraintTop_toTopOf="@+id/btn_back" />
 
     <ImageView
@@ -94,8 +94,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginStart="28dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/ic_back_right"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

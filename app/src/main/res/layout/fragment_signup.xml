@@ -8,28 +8,26 @@
 
     <TextView
         android:id="@+id/textView4"
-        style="@style/TextView.Medium"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/name"
         android:textColor="@color/text"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/first_name_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/first_name_text_input_layout" />
 
 
     <TextView
         android:id="@+id/textLastName"
-        style="@style/TextView.Medium"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/last_name"
         android:textColor="@color/text"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/last_name_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout" />
 
@@ -37,7 +35,7 @@
         android:id="@+id/first_name_text_input_layout"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="83dp"
+        android:layout_marginTop="88dp"
         app:hintEnabled="false"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
@@ -170,14 +168,13 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/TextView.Medium"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:textSize="16sp"
         android:text="@string/Email"
         android:textColor="@color/text"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/email_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/email_text_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/last_name_text_input_layout"
@@ -185,14 +182,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        style="@style/TextView.Medium"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Phone"
         android:textSize="16sp"
         android:textColor="@color/text"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/phone_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/phone_text_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/email_text_input_layout"
@@ -200,7 +196,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/TextView.Medium"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
@@ -208,7 +204,6 @@
         android:text="@string/Password"
         android:textSize="16sp"
         android:textColor="@color/text"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/phone_text_input_layout"

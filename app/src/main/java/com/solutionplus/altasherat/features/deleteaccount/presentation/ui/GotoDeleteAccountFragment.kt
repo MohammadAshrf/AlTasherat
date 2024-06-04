@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.deleteaccount.presentation.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,4 +30,9 @@ class GotoDeleteAccountFragment : BaseFragment<FragmentGotoDeleteAccountBinding>
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.VISIBLE
+    }
 }
