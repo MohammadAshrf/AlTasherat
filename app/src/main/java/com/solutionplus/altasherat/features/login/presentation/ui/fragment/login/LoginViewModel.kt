@@ -87,6 +87,9 @@ class LoginViewModel @Inject constructor(
                         if (resource.exception is LeonException.Local.RequestValidation) {
                             sendEvent(LoginContract.LoginEvents.LoginFailure(resource.exception))
                         }
+                        if (resource.exception is LeonException.Client.ResponseValidation) {
+                            sendEvent(LoginContract.LoginEvents.LoginFailure(resource.exception))
+                        }
                     }
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> sendEvent(LoginContract.LoginEvents.LoginSuccess(resource.model))

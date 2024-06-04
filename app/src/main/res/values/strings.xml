@@ -148,4 +148,9 @@
     <string name="conferm_password">كلمه المرور للتاكيد</string>
     <string name="enter_your_state">أدخل دولتك</string>
     <string name="binding_phone_code">(%1$s)</string>
+    <string name="invalid_first_name">الاسم الأول غير صالح. يجب أن يكون ما بين 3 و 15 حرفًا.</string>
+    <string name="invalid_last_name">الاسم الأخير غير صالح. يجب أن يكون ما بين 3 و 15 حرفًا.</string>
+    <string name="invalid_password">كلمة المرور غير صالحة. يجب أن يتراوح عدد أحرفه بين 8 و50 حرفًا.</string>
+    <string name="invalid_phone">رقم الهاتف غير صالح. يجب أن تحتوي على أرقام فقط وتتراوح طولها بين 9 و 15 حرفًا.</string>
+    <string name="invalid_email">البريد الإلكتروني غير صالح. يجب أن يكون أقل من 50 حرفًا.</string>
 </resources>

@@ -1,14 +1,14 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 import com.google.gson.Gson
+import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
+import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.common.presentation.ui.extentions.validateRequest
-import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
 
 class LoginWithPhoneUC(
     private val repository: ILoginRepository,
@@ -28,6 +28,18 @@ class LoginWithPhoneUC(
         repository.getUser()
         return result.userInfo
     }
+    private fun LoginRequest.validateRequest(): Map<String, Int> {
+        val errorKeys = mutableMapOf<String, Int>()
 
+
+        if (!validatePassword()) {
+            errorKeys[Validation.PASSWORD] = R.string.invalid_password
+        }
+        if (!validatePhone()) {
+            errorKeys[Validation.PHONE] = R.string.invalid_phone
+        }
+
+        return errorKeys
+    }
 
 }

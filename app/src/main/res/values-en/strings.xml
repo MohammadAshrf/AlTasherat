@@ -50,7 +50,7 @@
     <string name="change_password">Change Password</string>
     <string name="visa_platform">Visa Platform</string>
     <string name="visa_applications">Visa Applications</string>
-    <string name="profile_personly">Profile Personally</string>
+    <string name="profile_personly">Personal Profile </string>
     <string name="next">Next</string>
     <string name="hello_onboarding">Welcom to AlTasherat App</string>
     <string name="third_onboarding">Whether you are looking for work or you are a company owner looking for workers, a team of experts at the highest level will be at your service. Just fill out your application in easy steps without complications.</string>
@@ -140,4 +140,9 @@
     <string name="manage_account_delete">Account management</string>
     <string name="delete_account">delete account</string>
     <string name="conferm_password">Password to confirm</string>
+    <string name="invalid_first_name">First name is invalid. It must be between 3 and 15 characters.</string>
+    <string name="invalid_last_name">Last name is invalid. It must be between 3 and 15 characters.</string>
+    <string name="invalid_password">Password is invalid. It must be between 8 and 50 characters.</string>
+    <string name="invalid_phone">Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.</string>
+    <string name="invalid_email">Email is invalid. It must be less than 50 characters.</string>
 </resources>
