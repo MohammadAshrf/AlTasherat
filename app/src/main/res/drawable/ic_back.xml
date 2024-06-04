@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Circle background -->
+
     <item>
         <shape android:shape="oval">
             <solid android:color="#F0F0F0"/>
@@ -9,7 +9,6 @@
                 android:height="32dp"/>
         </shape>
     </item>
-    <!-- Arrow drawable -->
     <item
         android:drawable="@drawable/ic_arrow_left"
         android:gravity="center" />

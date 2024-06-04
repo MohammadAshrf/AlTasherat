@@ -110,7 +110,7 @@
         <item name="android:layout_marginEnd">@dimen/_8sdp</item>
         <item name="android:text">@string/app_name</item>
         <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="android:textAppearance">@style/Font.Bold</item>
+        <item name="android:textAppearance">@style/Font.Medium</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
