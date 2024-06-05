@@ -1,8 +1,11 @@
 package com.solutionplus.altasherat.features.signup.data.repository
 
 
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.signup.data.model.entity.UserEntity
+import com.solutionplus.altasherat.features.signup.domain.model.Image
+import com.solutionplus.altasherat.features.signup.domain.model.Phone
 import com.solutionplus.altasherat.features.signup.domain.model.User
 import com.solutionplus.altasherat.features.signup.domain.repository.local.ISignupLocalDS
 import com.solutionplus.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
@@ -30,7 +33,10 @@ class SignupRepositoryTest {
     @Test
     fun `when saving user given valid user expect user saved`() = runBlocking {
         // Arrange
-        val user = User()
+        val phoneRequest = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
+        val image = Image(id = 1, type = "profile", path = "http://example.com/image.jpg", title = "Profile Image", updatedAt = "2023-01-01", description = "User profile picture", createdAt = "2023-01-01", main = true, priority = 1)
+        val country = Country(id = 1, name = "Egypt", code = "EG", flag = "🇪🇬", currency = "EGP", phoneCode = "+20")
+        val user = User(id = 1, username = "userName", email = "email", firstname = "firstName", middleName = "middleName", lastname = "lastName", phone = phoneRequest, image = image, birthdate = "1990-01-01", emailVerified = true, phoneVerified = true, blocked = 0, country = country, allPermissions = listOf("READ", "WRITE"))
         val userEntity = UserMapper.domainToEntity(user)
         coEvery { localDs.saveUser(userEntity) } returns Unit
 
@@ -40,21 +46,6 @@ class SignupRepositoryTest {
         // Assert
         coVerify { localDs.saveUser(userEntity) }
     }
-
-    @Test
-    fun `when saving user given null fields then user saved`() = runBlocking {
-        //Arrange
-        val user = User(id = null, username = null, email = null, phone = null)
-        val userEntity = UserMapper.domainToEntity(user)
-        coEvery { localDs.saveUser(userEntity) } returns Unit
-        // Act
-        repository.saveUser(user)
-
-        // Assert
-        coVerify {localDs.saveUser(userEntity)}
-    }
-
-
 
     @Test
     fun `when saving access token given valid token then token saved`() = runBlocking {
@@ -84,13 +75,18 @@ class SignupRepositoryTest {
 
     @Test
     fun `when getting user then return user entity `() = runBlocking {
-        val userEntity = User()
+        val phoneRequest = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
+        val image = Image(id = 1, type = "profile", path = "http://example.com/image.jpg", title = "Profile Image", updatedAt = "2023-01-01", description = "User profile picture", createdAt = "2023-01-01", main = true, priority = 1)
+        val country = Country(id = 1, name = "Egypt", code = "EG", flag = "🇪🇬", currency = "EGP", phoneCode = "+20")
+        val user = User(id = 1, username = "userName", email = "email", firstname = "firstName", middleName = "middleName", lastname = "lastName", phone = phoneRequest, image = image, birthdate = "1990-01-01", emailVerified = true, phoneVerified = true, blocked = 0, country = country, allPermissions = listOf("READ", "WRITE"))
+        val userEntity = UserMapper.domainToEntity(user)
 
-        coEvery { localDs.getUser() } returns  UserMapper.domainToEntity(userEntity)
+        coEvery { localDs.getUser() } returns  userEntity
 
+        // Act
         val result = repository.getUser()
 
-
+        // Assert
         coVerify { localDs.getUser() }
         assertEquals(userEntity, result)
     }

@@ -82,6 +82,8 @@
     <string name="visa_hedder_text">لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل</string>
     <string name="SignIn">تسجيل الدخول</string>
     <string name="Already_have_an_account">لديك حساب بالفعل؟</string>
+    <string name="GOTOSignUp">تسجيل حساب جديد</string>
+    <string name="Dont_have_an_account">ليس لديك حساب؟</string>
     <string name="forgot_password">نسيت كلمه المرور؟</string>
     <string name="email_not_verified">البريد الإلكتروني غير مؤكد</string>
     <string name="confirm">تأكيد</string>

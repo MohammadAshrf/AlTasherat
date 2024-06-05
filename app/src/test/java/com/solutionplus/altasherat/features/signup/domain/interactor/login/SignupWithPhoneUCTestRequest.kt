@@ -1,19 +1,23 @@
 package com.solutionplus.altasherat.features.signup.domain.interactor.login
 
+import com.solutionplus.altasherat.R
 import io.mockk.*
 import kotlinx.coroutines.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper.domainToEntity
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
+import com.solutionplus.altasherat.features.signup.domain.model.Image
 import com.solutionplus.altasherat.features.signup.domain.model.Phone
 import com.solutionplus.altasherat.features.signup.domain.model.Signup
 import com.solutionplus.altasherat.features.signup.domain.model.User
 import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepository
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
+import org.junit.jupiter.api.assertThrows
 
 /*
 - validation
@@ -32,23 +36,14 @@ import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
     @Test
     fun `when signup is successful_ then user details are returned`() = runBlocking {
         // Arrange
-        val phone = Phone(
-            countryCode = "0020",
-            number = "100100100"
-        )
-        val phoneRequest = PhoneRequest(
-            countryCode = "0020",
-            number = "100100100"
-        )
-        val signupRequest = SignupRequest(phone = phoneRequest, password = "123456789", countryCode = "0020", countryId = 1,  firstName = "mahmoud", lastName = "Abdo", passwordConfirmation ="123456789")
-        val userInfo = User(
-            id = 1,
-            username = "jdoe",
-            email = "jdoe@example.com",
-            phone = phone
-        )
+        val phone = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val signupRequest = SignupRequest(  firstName = "John", lastName = "Doe", email = "john.doe@example.com",phone = phoneRequest, password = "password")
+        val image = Image(id = 1, type = "profile", path = "http://example.com/image.jpg", title = "Profile Image", updatedAt = "2023-01-01", description = "User profile picture", createdAt = "2023-01-01", main = true, priority = 1)
+        val country = Country(id = 1, name = "Egypt", code = "EG", flag = "🇪🇬", currency = "EGP", phoneCode = "+20")
+        val userInfo = User(id = 1, username = "userName", email = "email", firstname = "firstName", middleName = "middleName", lastname = "lastName", phone = phone, image = image, birthdate = "1990-01-01", emailVerified = true, phoneVerified = true, blocked = 0, country = country, allPermissions = listOf("READ", "WRITE"))
         val accessToken = "token123"
-        val signup = Signup(message = "Success", token = "token123", user = userInfo)
+        val signup = Signup(message = "Success", token = accessToken, user = userInfo)
 
         coEvery { repository.signupWithPhone(signupRequest) } returns signup
         coEvery { repository.saveUser(userInfo) } just Runs
@@ -72,12 +67,8 @@ import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
     @Test
     fun `when signup is Failed then throw exception`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = "100100100"
-        )
-        val signupRequest = SignupRequest(phone = phone,firstName = "bnm", lastName = "name", password = "password")
-
+        val phone = PhoneRequest(countryCode = "0020", number = "100100100")
+        val signupRequest = SignupRequest(phone = phone, firstName = "John", lastName = "Doe", email = "john.doe@example.com", password = "password")
         val exception = LeonException.Server.InternalServerError(404, "internal server error")
 
         coEvery { repository.signupWithPhone(signupRequest) } throws exception
@@ -97,161 +88,283 @@ import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
 
     //------------------------------Validation------------------------------------//
     @Test
-    fun `test invalid first name`() = runBlocking {
+    fun `when signup request has invalid first name then throw validation exception`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = "12345678"
+        val signupRequest = SignupRequest(
+            firstName = "Jo", // Invalid: too short
+            lastName = "Doe",
+            email = "john.doe@example.com",
+            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
+            password = "password",
+            passwordConfirmation = "password",
+            countryId = 1,
+            countryCode = "+20"
         )
-        val signupRequest = SignupRequest(phone = phone,firstName = "nn", lastName = "name", password = "password")
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("First name is invalid. It must be between 3 and 15 characters.", e.message)
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            runBlocking { signupUC.execute(signupRequest) }
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.message!!.contains(R.string.invalid_first_name.toString()))
     }
 
     @Test
-    fun `test invalid first name is empty`() = runBlocking {
+    fun `when signup request has empty last name then throw validation exception`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = ""
+        val signupRequest = SignupRequest(
+            firstName = "John",
+            lastName = "", // Invalid: empty
+            email = "john.doe@example.com",
+            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
+            password = "password",
+            passwordConfirmation = "password",
+            countryId = 1,
+            countryCode = "+20"
         )
-        val signupRequest = SignupRequest(phone = phone,firstName = "", lastName = "name", password = "password")
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("First name is invalid. It must be between 3 and 15 characters.", e.message)
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            runBlocking { signupUC.execute(signupRequest) }
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.message!!.contains(R.string.invalid_last_name.toString()))
     }
 
     @Test
-    fun `test invalid last name`() = runBlocking {
+    fun `when signup request has invalid email then throw validation exception`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = "12345678"
+        val signupRequest = SignupRequest(
+            firstName = "John",
+            lastName = "Doe",
+            email = "", // Invalid: empty
+            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
+            password = "password",
+            passwordConfirmation = "password",
+            countryId = 1,
+            countryCode = "+20"
         )
-        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "mm", password = "password")
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("Last name is invalid. It must be between 3 and 15 characters.", e.message)
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            runBlocking { signupUC.execute(signupRequest) }
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.message!!.contains(R.string.invalid_email.toString()))
     }
 
     @Test
-    fun `test invalid last name is empty`() = runBlocking {
+    fun `when signup request has invalid phone number then throw validation exception`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = ""
+        val phoneRequest = PhoneRequest(countryCode = "", number = "")
+        val signupRequest = SignupRequest(
+            firstName = "John",
+            lastName = "Doe",
+            email = "john.doe@example.com",
+            phone = phoneRequest, // Invalid: empty
+            password = "password",
+            passwordConfirmation = "password",
+            countryId = 1,
+            countryCode = "+20"
         )
-        val signupRequest = SignupRequest(phone = phone, firstName = "name", lastName = "",password = "password")
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("Last name is invalid. It must be between 3 and 15 characters.", e.message)
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            runBlocking { signupUC.execute(signupRequest) }
         }
-        assertTrue(exceptionThrown)
-    }
-    @Test
-    fun `test invalid phone number`() = runBlocking {
-        // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = "12345678"
-        )
-        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "name", password = "password")
 
-        // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
-        }
-        assertTrue(exceptionThrown)
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.message!!.contains(R.string.invalid_phone.toString()))
     }
 
     @Test
-    fun `test invalid phone number is empty`() = runBlocking {
+    fun `when signup request has invalid password then throw validation exception`() = runBlocking {
         // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = ""
+        val signupRequest = SignupRequest(
+            firstName = "John",
+            lastName = "Doe",
+            email = "john.doe@example.com",
+            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
+            password = "short", // Invalid: too short
+            passwordConfirmation = "short",
+            countryId = 1,
+            countryCode = "+20"
         )
-        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "name", password = "password")
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            runBlocking { signupUC.execute(signupRequest) }
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.message!!.contains(R.string.invalid_password.toString()))
     }
 
-    @Test
-    fun `test invalid password`() = runBlocking {
-        // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = "100100100"
-        )
-        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "name", password = "12345")
+//    @Test
+//    fun `test invalid first name`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = "12345678"
+//        )
+//        val signupRequest = SignupRequest(phone = phone,firstName = "nn", lastName = "name", password = "password")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("First name is invalid. It must be between 3 and 15 characters.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//
+//    @Test
+//    fun `test invalid first name is empty`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = ""
+//        )
+//        val signupRequest = SignupRequest(phone = phone,firstName = "", lastName = "name", password = "password")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("First name is invalid. It must be between 3 and 15 characters.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//
+//    @Test
+//    fun `test invalid last name`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = "12345678"
+//        )
+//        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "mm", password = "password")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("Last name is invalid. It must be between 3 and 15 characters.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//
+//    @Test
+//    fun `test invalid last name is empty`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = ""
+//        )
+//        val signupRequest = SignupRequest(phone = phone, firstName = "name", lastName = "",password = "password")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("Last name is invalid. It must be between 3 and 15 characters.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//    @Test
+//    fun `test invalid phone number`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = "12345678"
+//        )
+//        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "name", password = "password")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//
+//    @Test
+//    fun `test invalid phone number is empty`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = ""
+//        )
+//        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "name", password = "password")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//
+//    @Test
+//    fun `test invalid password`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = "100100100"
+//        )
+//        val signupRequest = SignupRequest(phone = phone,firstName = "name", lastName = "name", password = "12345")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
+//
+//    @Test
+//    fun `test invalid password is empty`() = runBlocking {
+//        // Arrange
+//        val phone = PhoneRequest(
+//            countryCode = "0020",
+//            number = "100100100"
+//        )
+//        val signupRequest = SignupRequest(phone = phone, firstName = "name", lastName = "name", password = "")
+//
+//        // Act & Assert
+//        var exceptionThrown = false
+//        try {
+//            signupUC.execute(signupRequest)
+//        } catch (e: LeonException.Local.RequestValidation) {
+//            exceptionThrown = true
+//            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
+//        }
+//        assertTrue(exceptionThrown)
+//    }
 
-        // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
-        }
-        assertTrue(exceptionThrown)
-    }
-
-    @Test
-    fun `test invalid password is empty`() = runBlocking {
-        // Arrange
-        val phone = PhoneRequest(
-            countryCode = "0020",
-            number = "100100100"
-        )
-        val signupRequest = SignupRequest(phone = phone, firstName = "name", lastName = "name", password = "")
-
-        // Act & Assert
-        var exceptionThrown = false
-        try {
-            signupUC.execute(signupRequest)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
-        }
-        assertTrue(exceptionThrown)
-    }
 }

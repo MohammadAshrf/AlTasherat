@@ -147,4 +147,6 @@
     <string name="invalid_email">Email is invalid. It must be less than 50 characters.</string>
     <string name="Delete">Confirm deletion</string>
     <string name="cancellation">cancellation</string>
+    <string name="GOTOSignUp">Register a new account</string>
+    <string name="Dont_have_an_account">Don\'t have an account?</string>
 </resources>
