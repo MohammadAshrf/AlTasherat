@@ -102,7 +102,9 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             )
             val email = binding.emailEditText.text.toString().trim()
 
-            val image = imageUri?.let { uriToFile(it, requireContext()) } // Convert Uri to File only if imageUri is not null
+            val image = imageUri?.let {
+                uriToFile(it, requireContext())  // Convert Uri to File only if imageUri is not null
+            }
 
             val birthdate = binding.birthdateEditText.text.toString()
             val country = countriesList[binding.stateSpinner.selectedItemPosition].id
@@ -135,11 +137,12 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(personalInfoVM.singleEvent) {
             when (it) {
-                is PersonalInfoEvent.UpdateDoneSuccessfully ->{ showSnackBar(
-                    "Your Profile Updated Successfully!",
-                    false
-                )
-                findNavController().popBackStack()
+                is PersonalInfoEvent.UpdateDoneSuccessfully -> {
+                    showSnackBar(
+                        "Your Profile Updated Successfully!",
+                        false
+                    )
+                    findNavController().popBackStack()
                 }
 
                 is PersonalInfoEvent.UpdateFailed -> showSnackBar(
@@ -255,11 +258,13 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             datePickerDialog.show()
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.VISIBLE
     }
+
     companion object {
         val logger = getClassLogger()
     }
