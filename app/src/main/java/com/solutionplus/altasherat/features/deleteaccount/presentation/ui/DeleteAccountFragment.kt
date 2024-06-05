@@ -1,17 +1,9 @@
 package com.solutionplus.altasherat.features.deleteaccount.presentation.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -25,12 +17,8 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.DeleteAccountButtomSheetBinding
 import com.solutionplus.altasherat.databinding.FragmentDeleteAccountBinding
-import com.solutionplus.altasherat.databinding.FragmentProfileMenuBinding
-import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -43,13 +31,12 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.GONE
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.VISIBLE
     }
-
-
 
     override fun subscribeToObservables() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -94,9 +81,10 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
             is DeleteAccountContract.DeleteAccountEvents.DeleteAccountSuccess -> {
                 showSnackBar("Your Account is deleted successfully", false)
                 requireActivity().finish()
-                val intent = Intent(requireActivity() , HomeActivity::class.java)
+                val intent = Intent(requireActivity(), HomeActivity::class.java)
                 startActivity(intent)
             }
+
             is DeleteAccountContract.DeleteAccountEvents.DeleteAccountError -> {
                 Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
             }
