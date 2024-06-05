@@ -7,28 +7,35 @@
     android:layout_height="match_parent"
     tools:context=".features.deleteaccount.presentation.ui.GotoDeleteAccountFragment">
 
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:src="@drawable/ic_back_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtDelete_account"
         style="@style/TextView.Bold"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginTop="30dp"
         android:text="@string/account_settings"
-        android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_back"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
     <ImageView
         android:id="@+id/img_deleteAccount"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:src="@drawable/ic_arrow_f"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/ic_arrow_left"
         app:layout_constraintBottom_toBottomOf="@+id/txtDelete_account"
-        app:layout_constraintStart_toEndOf="@+id/txtDelete_account"
+        app:layout_constraintEnd_toStartOf="@+id/txtDelete_account"
         app:layout_constraintTop_toTopOf="@+id/txtDelete_account" />
 
     <TextView
@@ -36,21 +43,11 @@
         style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:text="@string/account_settings_goto"
-        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-        app:layout_constraintStart_toEndOf="@+id/btn_back"
+        app:layout_constraintEnd_toStartOf="@+id/btn_back"
         app:layout_constraintTop_toTopOf="@+id/btn_back" />
-
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginStart="26dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,10 +48,10 @@
     <string name="visa_applications">طلبات التأشيرات</string>
     <string name="profile_personly">الملف الشخصي</string>
     <string name="Phone">&#160;&#160;&#160;الجوال</string>
-    <string name="name">&#160;&#160;&#160; الإسم</string>
-    <string name="firstname">&#160;&#160;&#160;الاسم الاول</string>
-    <string name="LastName">&#160;&#160;&#160;الاسم الاخير</string>
-    <string name="email">&#160;&#160;&#160;ادخل البريد الالكتروني</string>
+    <string name="name">&#160;&#160;&#160;الإسم الأول</string>
+    <string name="firstname">&#160;&#160;&#160;الإسم الأول</string>
+    <string name="LastName">&#160;&#160;&#160;الإسم الأخير</string>
+    <string name="email">&#160;&#160;&#160;أدخل البريد الإلكتروني</string>
     <string name="WritePassword">&#160;&#160;&#160;&#160;&#160;&#160;ادخل كلمه المرور</string>
     <string name="Password"> كلمه المرور</string>
     <string name="Email">البريد الالكتروني</string>
@@ -153,5 +153,4 @@
     <string name="invalid_password">كلمة المرور غير صالحة. يجب أن يتراوح عدد أحرفه بين 8 و50 حرفًا.</string>
     <string name="invalid_phone">رقم الهاتف غير صالح. يجب أن تحتوي على أرقام فقط وتتراوح طولها بين 9 و 15 حرفًا.</string>
     <string name="invalid_email">البريد الإلكتروني غير صالح. يجب أن يكون أقل من 50 حرفًا.</string>
-    <string name="email_text">البريد الإلكتروني\n</string>
 </resources>

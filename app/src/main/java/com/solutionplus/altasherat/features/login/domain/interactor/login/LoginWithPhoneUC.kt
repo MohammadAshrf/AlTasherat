@@ -31,7 +31,6 @@ class LoginWithPhoneUC(
     private fun LoginRequest.validateRequest(): Map<String, Int> {
         val errorKeys = mutableMapOf<String, Int>()
 
-
         if (!validatePassword()) {
             errorKeys[Validation.PASSWORD] = R.string.invalid_password
         }

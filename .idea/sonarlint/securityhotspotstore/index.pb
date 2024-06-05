@@ -151,3 +151,21 @@ qapp/src/main/java/com/solutionplus/altasherat/features/deleteaccount/presentati
 yapp/src/main/java/com/solutionplus/altasherat/features/changepassword/presentation/ui/fragment/ChangePasswordViewModel.kt,7\c\7cf12e86d911eb320fbb7b0f271995dffd5957cd
 ®
 xapp/src/main/java/com/solutionplus/altasherat/features/changepassword/presentation/ui/fragment/ChangePasswordFragment.kt,d\2\d2630c710acbdcfec0a4bd3162e3bc5c089644ca
+è
+_app/src/main/java/com/solutionplus/altasherat/features/login/data/repository/LoginRepository.kt,d\4\d401e912bc1803b9ccea8f5fe8b36dc81710b94d
+Ç
+Rapp/src/main/java/com/solutionplus/altasherat/features/login/domain/model/Image.kt,d\3\d35aa4210e7e446e7333efd446c3b3a1f2c8b465
+ê
+`app/src/main/java/com/solutionplus/altasherat/features/services/country/domain/models/Country.kt,4\c\4ca86cb386b38cf6f2e228acd01fda457efb17bf
+Ä
+Papp/src/main/java/com/solutionplus/altasherat/common/data/constants/Constants.kt,7\0\70c8ca52212738c05a005d44f4a6670ce1c9c049
+í
+bapp/src/main/java/com/solutionplus/altasherat/features/login/domain/repository/ILoginRepository.kt,9\0\901a4b7444b0dc4f16be7507782d10a9ed9b416b
+ë
+aapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/frgment/BaseFragment.kt,2\b\2bd6a7f3f94eb0c7f439e066d55a924d01cec011
+í
+bapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/activity/BaseActivity.kt,3\7\37dd4c2e1ada7f6696dfaa3b3c12ff10b1481de3
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+ù
+mapp/src/main/java/com/solutionplus/altasherat/features/deleteaccount/presentation/ui/DeleteAccountFragment.kt,e\8\e80f0d8de7e2b042d715b57681c6bc5059b04e6a

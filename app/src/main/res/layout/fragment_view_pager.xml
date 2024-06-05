@@ -76,14 +76,15 @@
     <Button
         android:id="@+id/btnLoginAndSignup"
         style="@style/Button"
-        android:layout_width="@dimen/_180sdp"
+        android:layout_width="@dimen/_170sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="-24dp"
         android:background="@drawable/button_background"
         android:drawableLeft="@drawable/svgexport620220821t132423"
         android:drawableTint="#FFFFFF"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
         android:text="@string/send"
-        android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
@@ -101,16 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLoginAndSignup">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_don_t_have_an_account"
-            style="@style/TextView.Bold"
-            android:padding="5dp"
-            android:text="@string/Already_have_an_account"
-            android:textColor="@color/Bg"
-            android:textSize="@dimen/_14sdp"
-            android:textStyle="bold" />
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_register"
             style="@style/TextView.Bold"
@@ -118,7 +109,13 @@
             android:padding="5dp"
             android:text="@string/SignIn"
             android:textColor="@color/Secondary"
-            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_don_t_have_an_account"
+            style="@style/TextView.Bold"
+            android:padding="5dp"
+            android:text="@string/Already_have_an_account"
+            android:textColor="@color/Bg"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -132,32 +129,29 @@
         android:layout_marginEnd="28dp"
         android:text="@string/skip"
         android:textColor="@color/text"
-        android:textSize="@dimen/_16sdp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:visibility="gone"
-        android:layout_marginStart="45dp"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="45dp"
         android:src="@drawable/ic_plane_right"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
        />
 
     <ImageView
         android:id="@+id/imageViewp2"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:visibility="gone"
-        android:layout_marginEnd="45dp"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="45dp"
         android:src="@drawable/ic_plane_left"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

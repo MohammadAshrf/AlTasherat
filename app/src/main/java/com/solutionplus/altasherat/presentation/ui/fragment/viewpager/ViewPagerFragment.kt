@@ -1,12 +1,14 @@
 package com.solutionplus.altasherat.presentation.ui.fragment.viewpager
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -41,7 +43,6 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         updateButtonText(binding.viewPager.currentItem)
         updateImageViewVisibility(binding.viewPager.currentItem)
         updateTabUnderline(binding.viewPager.currentItem)
-        updateFontStyle(binding.viewPager.currentItem)
     }
 
     private val signupFragment = SignupFragment()
@@ -74,7 +75,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
                 updateImageViewVisibility(position)
                 updateTabUnderline(position)
                 updateCardViewSize(position)
-                updateFontStyle(position)
+                updateTabTextColor(position)
             }
         })
     }
@@ -97,6 +98,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 binding.viewPager.setCurrentItem(tab.position, true)
+                updateTabTextColor(tab.position)
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
@@ -126,12 +128,12 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
     private fun updateImageViewVisibility(position: Int) {
         when (position) {
             0 -> {
-                binding.imageView5.visibility = View.VISIBLE
-                binding.imageViewp2.visibility = View.GONE
-            }
-            1 -> {
                 binding.imageView5.visibility = View.GONE
                 binding.imageViewp2.visibility = View.VISIBLE
+            }
+            1 -> {
+                binding.imageView5.visibility = View.VISIBLE
+                binding.imageViewp2.visibility = View.GONE
             }
         }
     }
@@ -140,17 +142,19 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         for (i in 0 until binding.tabLayout.tabCount) {
             val tab = binding.tabLayout.getTabAt(i)
             val underlineView = tab?.customView?.findViewById<View>(R.id.underline_view)
-            underlineView?.visibility = if (i == position) View.VISIBLE else View.INVISIBLE
+            underlineView?.visibility = if (i == position) View.VISIBLE else View.GONE
         }
     }
 
-    private fun updateFontStyle(position: Int) {
+    private fun updateTabTextColor(selectedPosition: Int) {
         for (i in 0 until binding.tabLayout.tabCount) {
             val tab = binding.tabLayout.getTabAt(i)
-            val tabText = tab?.customView?.findViewById<TextView>(R.id.tab_text)
-            tabText?.setTextAppearance(if (i == position) R.style.TextView_Heavy else R.style.TextView_Regular)
-            tabText?.setTextColor(if (i == position) resources.getColor(R.color.text) else resources.getColor(R.color.txt_not_selected))
-
+            val tabTextView = tab?.customView?.findViewById<TextView>(R.id.tab_text)
+            if (i == selectedPosition) {
+                tabTextView?.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
+            } else {
+                tabTextView?.setTextColor(ContextCompat.getColor(requireContext(), R.color.textInputIcon))
+            }
         }
     }
 }

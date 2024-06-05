@@ -1,14 +1,18 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 
+import com.google.gson.Gson
+import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
+import com.solutionplus.altasherat.features.login.domain.model.Image
 import com.solutionplus.altasherat.features.login.domain.model.Login
 import com.solutionplus.altasherat.features.login.domain.model.Phone
 import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -36,19 +40,43 @@ class LoginWithPhoneUCTestRequest {
     @Test
     fun `when login is successful_given phone country code and password then user details are returned`() = runBlocking {
         // Arrange
-        val phone = Phone(countryCode = "0020", number = "100100100")
+        val phone = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
         val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
         val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
+        val image = Image(
+            id = 1,
+            type = "profile",
+            path = "http://example.com/image.jpg",
+            title = "Profile Image",
+            updatedAt = "2023-01-01",
+            description = "User profile picture",
+            createdAt = "2023-01-01",
+            main = true,
+            priority = 1
+        )
+        val country = Country(
+            id = 1,
+            name = "Egypt",
+            code = "EG",
+            flag = "🇪🇬",
+            currency = "EGP",
+            phoneCode = "+20"
+        )
         val userInfo = User(
             id = 1,
-            username = "fakeUser",
-            email = "fake.user@example.com",
-            firstname = "Fake",
-            middleName = "User",
-            lastname = "Example",
+            username = "userName",
+            email = "email",
+            firstname = "firstName",
+            middleName = "middleName",
+            lastname = "lastName",
             phone = phone,
-            birthdate = "2000-01-01",
-            emailVerified = true
+            image = image,
+            birthdate = "1990-01-01",
+            emailVerified = true,
+            phoneVerified = true,
+            blocked = 0,
+            country = country,
+            allPermissions = listOf("READ", "WRITE")
         )
         val accessToken = "token123"
         val loginResponse = Login(message = "Success", accessToken = accessToken, userInfo = userInfo)
@@ -169,7 +197,7 @@ class LoginWithPhoneUCTestRequest {
             loginWithPhoneUC.execute(loginRequest)
         } catch (e: LeonException.Local.RequestValidation) {
             exceptionThrown = true
-            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
+            assertEquals(R.string.invalid_password, e.message)
         }
         assertTrue(exceptionThrown)
     }

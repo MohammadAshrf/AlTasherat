@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Phone(
-    val countryCode: String ?= null,
-    val number: String?= null,
-    val extension: String?= null,
-    val id: Int?= null,
-    val type: String?= null,
-    val holderName: String?= null,
+    val countryCode: String ,
+    val number: String,
+    val extension: String,
+    val id: Int,
+    val type: String,
+    val holderName: String,
 ) : Parcelable

@@ -18,14 +18,12 @@
 
     <TextView
         android:id="@+id/choosetxt"
+        style="@style/TextView.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        style="@style/Font.Regular"
         android:text="@string/sign_in"
-        android:textColor="@color/Bg"
         android:layout_marginTop="5dp"
-        android:textSize="25sp"
         android:textStyle="bold"/>
 
     <ImageView
@@ -38,28 +36,28 @@
     <TextView
         android:id="@+id/textView9"
         style="@style/TextView.Bold"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/Bg"
         android:text="@string/you_have_to_sign_in" />
 
     <Button
         android:id="@+id/btnLoginAndSignup"
         style="@style/Button"
-        android:layout_width="@dimen/_250sdp"
+        android:layout_width="@dimen/_260sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
         android:drawableLeft="@drawable/svgexport620220821t132423"
         android:layout_marginTop="@dimen/_13sdp"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_gravity="center"
+        android:paddingStart="@dimen/_50sdp"
+        android:paddingEnd="@dimen/_50sdp"
         android:drawableTint="#FFFFFF"
         android:elevation="12dp"
         android:text="@string/SignIn"
-        android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
