@@ -1,12 +1,9 @@
 package com.solutionplus.altasherat.features.personalInfo.data.models.request
 
 import android.util.Patterns
-import com.google.gson.Gson
-import com.google.gson.JsonSerializer
 import com.google.gson.annotations.SerializedName
 import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
 import java.io.File
-import java.util.Base64
 
 data class UpdateUserInfoRequest(
     @field:SerializedName("firstname") val firstname: String,
@@ -25,7 +22,7 @@ data class UpdateUserInfoRequest(
                 put("middlename", middleName)
                 put("lastname", lastname)
                 put("email", email)
-                put("phone", phone)
+                put("phone", phone.toMap())
                 put("birthdate", birthdate)
                 put("country", country)
             },
