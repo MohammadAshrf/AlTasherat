@@ -28,6 +28,9 @@ class GotoDeleteAccountFragment : BaseFragment<FragmentGotoDeleteAccountBinding>
         binding.imgDeleteAccount.setOnClickListener {
             findNavController().navigate(R.id.action_gotoDeleteAccountFragment_to_deleteAccountFragment)
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {

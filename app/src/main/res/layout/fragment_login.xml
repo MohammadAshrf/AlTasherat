@@ -13,21 +13,23 @@
         android:layout_height="50dp"
         android:background="@drawable/shape_spinner_background"
         android:popupBackground="#4426F5"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="@+id/phone_text_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/phone_text_input_layout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/phone_text_input_layout"
         app:layout_constraintTop_toTopOf="@+id/phone_text_input_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_text_input_layout"
-        android:layout_width="220dp"
+        android:layout_width="210dp"
         android:layout_height="50dp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="100dp"
         app:hintEnabled="false"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_13sdp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -37,8 +39,8 @@
             android:layout_height="wrap_content"
             android:autofillHints="name"
             android:background="@drawable/phone_background"
-            android:drawableEnd="@drawable/ic_phone"
-            android:hint="@string/email"
+            android:drawableStart="@drawable/ic_phone"
+            android:hint="@string/enter_mobile"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,9 +56,9 @@
         app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeColor="@color/icon"
         app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/phone_text_input_layout"
-        app:layout_constraintStart_toStartOf="@+id/et_CountruCode"
-        app:layout_constraintTop_toBottomOf="@+id/et_CountruCode"
+        app:layout_constraintEnd_toEndOf="@+id/et_CountruCode"
+        app:layout_constraintStart_toStartOf="@+id/phone_text_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/phone_text_input_layout"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/icon"
         app:startIconDrawable="@drawable/ic_lock">
@@ -79,8 +81,9 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/forgot_password"
         android:textColor="@color/text"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
     <TextView
@@ -90,9 +93,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Phone"
+        android:textSize="16sp"
         android:textColor="@color/text"
-        app:layout_constraintBottom_toTopOf="@+id/et_CountruCode"
-        app:layout_constraintEnd_toEndOf="@+id/phone_text_input_layout" />
+        app:layout_constraintBottom_toTopOf="@+id/phone_text_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/phone_text_input_layout" />
 
     <TextView
         android:id="@+id/textView3"
@@ -102,9 +106,10 @@
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Password"
         android:textColor="@color/text"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/phone_text_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/et_CountruCode"
         app:layout_constraintVertical_bias="1.0" />
 
 
