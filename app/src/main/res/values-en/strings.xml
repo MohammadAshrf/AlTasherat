@@ -6,8 +6,8 @@
     <string name="name">&#160;&#160;&#160;Name</string>
     <string name="firstname">&#160;&#160;&#160;First name</string>
     <string name="LastName">&#160;&#160;&#160;Last name</string>
-    <string name="email">&#160;Enter your email</string>
-    <string name="WritePassword">&#160;&#160;&#160;Enter the password</string>
+    <string name="email">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Enter your email</string>
+    <string name="WritePassword">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Enter the password</string>
     <string name="Password">Password</string>
     <string name="Email">E-mail</string>
     <string name="network_unavailable">Please check your internet!</string>
@@ -109,7 +109,7 @@
     <string name="last_name">Last Name</string>
     <string name="enter_last_name">Enter Last Name</string>
     <string name="phone_number">Phone</string>
-    <string name="enter_mobile">Enter Phone Number</string>
+    <string name="enter_mobile">&#160;&#160;&#160;&#160;Enter Phone Number</string>
     <string name="enter_email">Enter E-mail</string>
     <string name="email_address">E-mail</string>
     <string name="birthdate">Birthdate</string>
