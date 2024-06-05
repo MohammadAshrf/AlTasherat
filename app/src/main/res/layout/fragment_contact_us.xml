@@ -191,11 +191,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_name"
                     style="@style/TextInputLayout"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageView22">
@@ -215,7 +216,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/name"
-                    android:layout_marginBottom="4dp"
                     app:layout_constraintBottom_toTopOf="@+id/et_name"
                     app:layout_constraintStart_toStartOf="@+id/et_name" />
 
@@ -223,17 +223,17 @@
                     android:id="@+id/textView29"
                     style="@style/TextView.Bold"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="@dimen/_13sdp"
                     android:text="@string/email_text"
                     app:layout_constraintStart_toStartOf="@+id/et_email"
                     app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_email"
                     style="@style/TextInputLayout"
-                    android:layout_marginTop="16dp"
+                    android:layout_margin="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView29">
@@ -284,7 +284,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_subject"
                     style="@style/TextInputLayout"
-                    android:layout_marginTop="16dp"
+                    android:layout_margin="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView27" >
@@ -316,9 +316,7 @@
                     style="@style/TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_margin="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView28">

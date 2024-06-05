@@ -64,7 +64,7 @@
         style="@style/Button"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginTop="16dp"
         android:text="@string/next"
         app:backgroundTint="@null"
         app:icon="@drawable/ic_left"
