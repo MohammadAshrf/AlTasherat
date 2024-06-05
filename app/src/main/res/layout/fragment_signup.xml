@@ -117,7 +117,7 @@
             android:autofillHints="name"
             android:background="@drawable/phone_background"
             android:drawableEnd="@drawable/ic_phone"
-            android:hint="@string/email"
+            android:hint="@string/enter_mobile"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
