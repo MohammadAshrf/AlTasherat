@@ -196,7 +196,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 .load(image.path)
                 .centerCrop()
                 .placeholder(R.drawable.ic_profile_holder)
-                .error(R.drawable.ic_verefication)
+                .error(R.drawable.ic_profile_holder)
                 .into(binding.viewProfileSection.profilePicture)
         }
         binding.birthdateEditText.setText(it.birthdate)
