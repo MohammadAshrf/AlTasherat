@@ -52,13 +52,13 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_18sdp"
             android:text="تعديل كلمة المرور"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_13sdp" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_right"
+            android:src="@drawable/ic_arrow"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="16dp" />

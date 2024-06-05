@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text"
         android:textSize="@dimen/_12sdp"
+        android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3"

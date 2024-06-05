@@ -26,7 +26,7 @@
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="@dimen/_25sdp"
-        android:src="@drawable/ic_arrow_left"
+        android:src="@drawable/ic_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/txtDelete_account"
         app:layout_constraintStart_toEndOf="@+id/txtDelete_account"
         app:layout_constraintTop_toTopOf="@+id/txtDelete_account" />
