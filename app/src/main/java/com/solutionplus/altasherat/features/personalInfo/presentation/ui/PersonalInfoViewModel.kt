@@ -97,7 +97,7 @@ class PersonalInfoViewModel @Inject constructor(
         lastname: String,
         email: String,
         phoneRequest: PhoneRequest,
-        image: File,
+        image: File?,
         birthdate: String,
         country: Int,
     ) {

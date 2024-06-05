@@ -43,7 +43,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private lateinit var countriesList: List<Country>
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
     private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             imageUri = uri
@@ -102,7 +102,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             )
             val email = binding.emailEditText.text.toString().trim()
 
-            val image = uriToFile(imageUri, requireContext())
+            val image = imageUri?.let { uriToFile(it, requireContext()) } // Convert Uri to File only if imageUri is not null
 
             val birthdate = binding.birthdateEditText.text.toString()
             val country = countriesList[binding.stateSpinner.selectedItemPosition].id
