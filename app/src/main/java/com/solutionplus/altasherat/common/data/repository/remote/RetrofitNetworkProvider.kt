@@ -8,6 +8,7 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import java.io.File
 import java.lang.reflect.Type
 
@@ -41,7 +42,12 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
         }
         val bodyMap = hashMapOf<String, RequestBody>().apply {
             requestBody?.forEach { (key, body) ->
-                put(key, body.toString().toRequestBody())
+                if (body is Map<*, *>) {
+                    val jsonObject = JSONObject(body)
+                    put(key, jsonObject.toString().toRequestBody())
+                } else {
+                    put(key, body.toString().toRequestBody())
+                }
             }
         }
 
