@@ -7,6 +7,7 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import java.io.File
 
 interface PersonalInfoContract {
 
@@ -17,7 +18,7 @@ interface PersonalInfoContract {
             val lastname: String,
             val email: String,
             val phone: PhoneRequest,
-//            val image: ImageRequest,
+            val image: File?,
             val birthdate: String,
             val country: Int,
         ) : PersonalInfoAction()

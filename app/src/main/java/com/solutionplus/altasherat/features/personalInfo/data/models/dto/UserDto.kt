@@ -2,6 +2,8 @@ package com.solutionplus.altasherat.features.personalInfo.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 import com.solutionplus.altasherat.features.services.country.data.models.dto.CountryDto
+import okhttp3.MultipartBody
+import java.io.File
 
 internal data class UserDto(
     @field:SerializedName("id") val id: Int? = null,

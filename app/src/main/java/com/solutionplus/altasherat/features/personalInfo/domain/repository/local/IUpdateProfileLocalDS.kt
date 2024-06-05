@@ -2,7 +2,7 @@ package com.solutionplus.altasherat.features.personalInfo.domain.repository.loca
 
 import com.solutionplus.altasherat.features.personalInfo.data.models.entity.UserEntity
 
-internal interface IUpdateUserLocalDS {
+internal interface IUpdateProfileLocalDS {
     suspend fun savePersonalInfo(updateUserEntity: UserEntity)
     suspend fun getPersonalInfo() : UserEntity
     suspend fun hasUserInfo(): Boolean

@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.features.personalInfo.data.models.entity
 
 
 import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
+import java.io.File
 
 internal data class UserEntity(
     val id: Int,

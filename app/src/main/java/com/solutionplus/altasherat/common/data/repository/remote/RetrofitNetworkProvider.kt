@@ -1,8 +1,15 @@
 package com.solutionplus.altasherat.common.data.repository.remote
 
 import com.google.gson.Gson
+import com.solutionplus.altasherat.android.helpers.extentions.getFileMediaAsPart
+import com.solutionplus.altasherat.android.helpers.extentions.getFileMediaListAsPart
+import com.solutionplus.altasherat.android.helpers.extentions.toRequestBody
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONObject
+import java.io.File
 import java.lang.reflect.Type
 
 class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : INetworkProvider {
@@ -13,6 +20,40 @@ class RetrofitNetworkProvider(private val apiServices: AlTasheratApiServices) : 
         val response = apiServices.post(
             pathUrl = pathUrl, headers = headers ?: hashMapOf(),
             queryParams = queryParams ?: hashMapOf(), requestBody = requestBody ?: Unit
+        )
+        return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
+    }
+
+    override suspend fun <ResponseBody> postWithFiles(
+        responseWrappedModel: Type, pathUrl: String, headers: Map<String, Any>?,
+        queryParams: Map<String, Any>?, requestBody: Map<String, Any>?,
+        filesMap: Map<String, List<File>>?
+    ): ResponseBody {
+        val list = mutableListOf<MultipartBody.Part>().apply {
+            if (filesMap.isNullOrEmpty())
+                return@apply
+
+            filesMap.forEach {
+                if (it.value.count() == 1)
+                    add(it.value.first().getFileMediaAsPart(it.key))
+                else
+                    addAll(it.value.getFileMediaListAsPart(it.key))
+            }
+        }
+        val bodyMap = hashMapOf<String, RequestBody>().apply {
+            requestBody?.forEach { (key, body) ->
+                if (body is Map<*, *>) {
+                    val jsonObject = JSONObject(body)
+                    put(key, jsonObject.toString().toRequestBody())
+                } else {
+                    put(key, body.toString().toRequestBody())
+                }
+            }
+        }
+
+        val response = apiServices.postWithFiles(
+            pathUrl = pathUrl, headers = headers ?: hashMapOf(),
+            queryParams = queryParams ?: hashMapOf(), bodyMap = bodyMap, files = list
         )
         return Gson().fromJson(response.string(), responseWrappedModel) as ResponseBody
     }

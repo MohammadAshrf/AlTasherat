@@ -8,13 +8,13 @@ import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.personalInfo.data.models.entity.UserEntity
-import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateUserLocalDS
+import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateProfileLocalDS
 import java.util.Base64
 
-internal class UpdateUserLocalDS(
+internal class UpdateProfileLocalDS(
     private val storageKV: IKeyValueStorageProvider,
     private val encryptionProvider: IEncryptionProvider
-) : IUpdateUserLocalDS {
+) : IUpdateProfileLocalDS {
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun savePersonalInfo(updateUserEntity: UserEntity) {
         val updatedUserJson = Gson().toJson(updateUserEntity)
@@ -36,6 +36,7 @@ internal class UpdateUserLocalDS(
         return result
     }
 
+    // In case we need to check if the user info is exist or not
     override suspend fun hasUserInfo(): Boolean {
         val key = storageKV.hasKey(StorageKeyEnum.USER, false)
         logger.info(key.toString())
