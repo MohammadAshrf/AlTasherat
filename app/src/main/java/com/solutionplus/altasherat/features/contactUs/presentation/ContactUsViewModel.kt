@@ -5,14 +5,11 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsAction
-import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsState
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsEvent
-import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
-import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromLocalUC
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract
+import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsState
+import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetProfileInfoLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,10 +18,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ContactUsViewModel @Inject constructor(
     private val getCountriesUC: GetCountriesFromLocalUC,
-    private val getSelectedCountryUC: GetSelectedCountryUC,
-    private val getUserFromLocalUC: GetUserInfoFromLocalUC,
+    private val getUserFromLocalUC: GetProfileInfoLocalUC,
 
-    ) : AlTasheratViewModel<ContactUsAction,ContactUsEvent,ContactUsState>(ContactUsState.initial()) {
+    ) :
+    AlTasheratViewModel<ContactUsAction, ContactUsEvent, ContactUsState>(ContactUsState.initial()) {
 
     init {
         getCountries()
@@ -39,6 +36,7 @@ class ContactUsViewModel @Inject constructor(
 
         }
     }
+
     private fun getCountries() {
         viewModelScope.launch {
             getCountriesUC.invoke().collect {
@@ -81,8 +79,8 @@ class ContactUsViewModel @Inject constructor(
 
     }
 
-    companion object{
-       val logger =getClassLogger()
+    companion object {
+        val logger = getClassLogger()
     }
 
 }
