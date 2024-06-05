@@ -18,7 +18,7 @@ interface PersonalInfoContract {
             val lastname: String,
             val email: String,
             val phone: PhoneRequest,
-            val image: File,
+            val image: File?,
             val birthdate: String,
             val country: Int,
         ) : PersonalInfoAction()

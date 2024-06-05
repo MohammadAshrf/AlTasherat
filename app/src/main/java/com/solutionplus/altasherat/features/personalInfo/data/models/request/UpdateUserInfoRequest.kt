@@ -11,7 +11,7 @@ data class UpdateUserInfoRequest(
     @field:SerializedName("lastname") val lastname: String,
     @field:SerializedName("email") val email: String,
     @field:SerializedName("phone") val phone: PhoneRequest,
-    @field:SerializedName("image") val image: File,
+    @field:SerializedName("image") val image: File ?= null,
     @field:SerializedName("birthdate") val birthdate: String,
     @field:SerializedName("country") val country: Int,
 ) {
@@ -27,7 +27,9 @@ data class UpdateUserInfoRequest(
                 put("country", country)
             },
             requestBodyFiles = hashMapOf<String, List<File>>().apply {
-                put("image", listOf(image))
+                image?.let {
+                    put("image", listOf(it))
+                }
             }
         )
 

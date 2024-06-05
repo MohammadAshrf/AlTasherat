@@ -43,7 +43,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private lateinit var countriesList: List<Country>
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
     private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             imageUri = uri
@@ -102,7 +102,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             )
             val email = binding.emailEditText.text.toString().trim()
 
-            val image = uriToFile(imageUri, requireContext())
+            val image = imageUri?.let { uriToFile(it, requireContext()) }
 
             val birthdate = binding.birthdateEditText.text.toString()
             val country = countriesList[binding.stateSpinner.selectedItemPosition].id
@@ -135,10 +135,12 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(personalInfoVM.singleEvent) {
             when (it) {
-                is PersonalInfoEvent.UpdateDoneSuccessfully -> showSnackBar(
+                is PersonalInfoEvent.UpdateDoneSuccessfully ->{ showSnackBar(
                     "Your Profile Updated Successfully!",
                     false
                 )
+                findNavController().popBackStack()
+                }
 
                 is PersonalInfoEvent.UpdateFailed -> showSnackBar(
                     "${it.message} fetching info",
@@ -253,7 +255,11 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             datePickerDialog.show()
         }
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.VISIBLE
+    }
     companion object {
         val logger = getClassLogger()
     }
