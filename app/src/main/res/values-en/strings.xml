@@ -6,7 +6,7 @@
     <string name="name">&#160;&#160;&#160;Name</string>
     <string name="firstname">&#160;&#160;&#160;First name</string>
     <string name="LastName">&#160;&#160;&#160;Last name</string>
-    <string name="email">&#160;&#160;&#160;Enter your email</string>
+    <string name="email">&#160;Enter your email</string>
     <string name="WritePassword">&#160;&#160;&#160;Enter the password</string>
     <string name="Password">Password</string>
     <string name="Email">E-mail</string>
