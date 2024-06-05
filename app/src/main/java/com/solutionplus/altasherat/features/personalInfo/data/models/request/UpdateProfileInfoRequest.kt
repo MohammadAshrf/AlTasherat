@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
 import java.io.File
 
-data class UpdateUserInfoRequest(
+data class UpdateProfileInfoRequest(
     @field:SerializedName("firstname") val firstname: String,
     @field:SerializedName("middlename") val middleName: String,
     @field:SerializedName("lastname") val lastname: String,

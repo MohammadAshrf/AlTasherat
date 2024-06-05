@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.personalInfo.presentation.ui
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.icu.text.SimpleDateFormat
@@ -17,7 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
@@ -27,7 +27,6 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
@@ -59,39 +58,22 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         personalInfoVM.processIntent(GetCountriesFromLocal)
+    }
+
+    override fun subscribeToObservables() {
+        listeners()
+        renderState()
+        handleEvents()
+    }
+
+    private fun listeners() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             personalInfoVM.processIntent(GetUpdatedUserFromRemote)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-    }
-
-    private fun uriToFile(uri: Uri, context: Context): File {
-        logger.info("uriToFile: $uri")
-        val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
-        val tempFile = File(context.cacheDir, "temp_image")
-        val outputStream = FileOutputStream(tempFile)
-        inputStream?.copyTo(outputStream)
-        inputStream?.close()
-        outputStream.close()
-        return tempFile
-    }
-
-    override fun subscribeToObservables() {
-        collectFlowWithLifecycle(personalInfoVM.viewState) {
-            renderState(it)
-        }
-        handleEvents()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun handleViews() {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
-
         binding.moreButton.setOnClickListener {
             findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
         }
-
         binding.btnSave.setOnClickListener {
             val firstname = binding.firstNameEditText.text.toString().trim()
             val middleName = binding.middleNameEditText.text.toString().trim()
@@ -124,14 +106,17 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-
         binding.birthdateEditText.setOnClickListener {
             showDatePickerDialog(Calendar.getInstance())
         }
-
         binding.viewProfileSection.penEditor.setOnClickListener {
             contract.launch("image/*")
         }
+    }
+
+    private fun handleViews() {
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.GONE
     }
 
     private fun handleEvents() {
@@ -146,7 +131,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 }
 
                 is PersonalInfoEvent.UpdateFailed -> showSnackBar(
-                    "${it.message} fetching info",
+                    it.message,
                     true
                 )
 
@@ -174,12 +159,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                                 binding.spinnerCountryCode.adapter.getItem(position) as Country
                             }
 
-                            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {}
                         }
-
-
                 }
 
                 is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleUserInfo(it.user)
@@ -206,24 +187,37 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
     }
 
-    private fun renderState(state: PersonalInfoState) {
-        CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading) {
-                showLoading(resources.getString(R.string.please_wait))
-            } else {
-                hideLoading()
-            }
-            state.exception?.let {
-                Toast.makeText(
-                    requireContext(),
-                    it.message ?: "Unexpected Error",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+    private fun renderState() {
+        collectFlowWithLifecycle(personalInfoVM.viewState) {
+            CoroutineScope(Dispatchers.Main).launch {
+                if (it.isLoading) {
+                    showLoading(resources.getString(R.string.please_wait))
+                } else {
+                    hideLoading()
+                }
+                it.exception?.let {
+                    Toast.makeText(
+                        requireContext(),
+                        it.message ?: "Unexpected Error",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             }
         }
     }
 
+    private fun uriToFile(uri: Uri, context: Context): File {
+        val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
+        val tempFile = File(context.cacheDir, "temp_image")
+        val outputStream = FileOutputStream(tempFile)
+        inputStream?.copyTo(outputStream)
+        inputStream?.close()
+        outputStream.close()
+        return tempFile
+    }
+
+    @SuppressLint("DefaultLocale")
     private fun showDatePickerDialog(calendar: Calendar) {
         context?.let { context ->
             val datePickerDialog = DatePickerDialog(context)
@@ -263,9 +257,5 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         super.onDestroyView()
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.VISIBLE
-    }
-
-    companion object {
-        val logger = getClassLogger()
     }
 }
