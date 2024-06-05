@@ -43,6 +43,12 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView?.visibility = View.GONE
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView?.visibility = View.VISIBLE
+    }
+
 
 
     override fun subscribeToObservables() {
