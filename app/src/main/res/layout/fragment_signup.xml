@@ -14,7 +14,6 @@
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/name"
         android:textColor="@color/text"
-        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/first_name_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/first_name_text_input_layout" />
 
@@ -27,7 +26,6 @@
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/last_name"
         android:textColor="@color/text"
-        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/last_name_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout" />
 
@@ -51,7 +49,7 @@
             android:background="@drawable/rounded_button_background"
             android:autofillHints="name"
             android:hint="@string/firstname"
-            android:drawableStart="@drawable/username"
+            android:drawableEnd="@drawable/username"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +72,7 @@
             android:background="@drawable/rounded_button_background"
             android:autofillHints="name"
             android:hint="@string/LastName"
-            android:drawableStart="@drawable/username"
+            android:drawableEnd="@drawable/username"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +94,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="name"
             android:background="@drawable/rounded_button_background"
-            android:drawableStart="@drawable/ic_email"
+            android:drawableEnd="@drawable/ic_email"
             android:hint="@string/email"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +116,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="name"
             android:background="@drawable/phone_background"
-            android:drawableStart="@drawable/ic_phone"
+            android:drawableEnd="@drawable/ic_phone"
             android:hint="@string/email"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -172,7 +170,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
-        android:textSize="16sp"
         android:text="@string/Email"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/email_text_input_layout"
@@ -187,7 +184,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Phone"
-        android:textSize="16sp"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/phone_text_input_layout"
         app:layout_constraintEnd_toEndOf="@+id/phone_text_input_layout"
@@ -202,7 +198,6 @@
         android:layout_marginBottom="@dimen/_3sdp"
         android:layout_marginStart="4dp"
         android:text="@string/Password"
-        android:textSize="16sp"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"

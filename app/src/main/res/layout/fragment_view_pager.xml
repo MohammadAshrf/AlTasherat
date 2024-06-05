@@ -85,7 +85,6 @@
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:text="@string/send"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"
@@ -103,16 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLoginAndSignup">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_don_t_have_an_account"
-            style="@style/TextView.Bold"
-            android:padding="5dp"
-            android:text="@string/Already_have_an_account"
-            android:textColor="@color/Bg"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_register"
             style="@style/TextView.Bold"
@@ -120,7 +109,13 @@
             android:padding="5dp"
             android:text="@string/SignIn"
             android:textColor="@color/Secondary"
-            android:textSize="16sp"
+            android:textStyle="bold" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_don_t_have_an_account"
+            style="@style/TextView.Bold"
+            android:padding="5dp"
+            android:text="@string/Already_have_an_account"
+            android:textColor="@color/Bg"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -136,7 +131,7 @@
         android:textColor="@color/text"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

@@ -24,7 +24,6 @@
         android:textAlignment="center"
         android:text="@string/sign_in"
         android:layout_marginTop="5dp"
-        android:textSize="16sp"
         android:textStyle="bold"/>
 
     <ImageView
@@ -59,7 +58,6 @@
         android:drawableTint="#FFFFFF"
         android:elevation="12dp"
         android:text="@string/SignIn"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:iconTint="#FFFFFF"

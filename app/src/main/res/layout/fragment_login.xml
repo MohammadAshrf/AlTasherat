@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="name"
             android:background="@drawable/phone_background"
-            android:drawableStart="@drawable/ic_phone"
+            android:drawableEnd="@drawable/ic_phone"
             android:hint="@string/email"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,7 +79,6 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/forgot_password"
         android:textColor="@color/text"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
@@ -91,7 +90,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Phone"
-        android:textSize="16sp"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/et_CountruCode"
         app:layout_constraintEnd_toEndOf="@+id/phone_text_input_layout" />
@@ -104,7 +102,6 @@
         android:layout_marginBottom="@dimen/_3sdp"
         android:text="@string/Password"
         android:textColor="@color/text"
-        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/phone_text_input_layout"
