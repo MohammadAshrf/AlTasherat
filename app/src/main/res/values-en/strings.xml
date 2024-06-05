@@ -68,7 +68,7 @@
     <string name="cairo_location">Cairo - Garden City</string>
     <string name="edit_text_name">Enter the name to contact</string>
     <string name="subject">the topic</string>
-    <string name="phone">الجوال</string>
+    <string name="phone">phone</string>
     <string name="subject_text">Choose a communication topic</string>
     <string name="msg_text">the message</string>
     <string name="changing_language">The language is changed</string>
@@ -145,4 +145,5 @@
     <string name="invalid_password">Password is invalid. It must be between 8 and 50 characters.</string>
     <string name="invalid_phone">Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.</string>
     <string name="invalid_email">Email is invalid. It must be less than 50 characters.</string>
+    <string name="email_text">Email</string>
 </resources>

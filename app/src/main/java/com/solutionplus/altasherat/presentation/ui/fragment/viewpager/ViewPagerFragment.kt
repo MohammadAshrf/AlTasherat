@@ -41,6 +41,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         updateButtonText(binding.viewPager.currentItem)
         updateImageViewVisibility(binding.viewPager.currentItem)
         updateTabUnderline(binding.viewPager.currentItem)
+        updateFontStyle(binding.viewPager.currentItem)
     }
 
     private val signupFragment = SignupFragment()
@@ -73,6 +74,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
                 updateImageViewVisibility(position)
                 updateTabUnderline(position)
                 updateCardViewSize(position)
+                updateFontStyle(position)
             }
         })
     }
@@ -138,7 +140,17 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         for (i in 0 until binding.tabLayout.tabCount) {
             val tab = binding.tabLayout.getTabAt(i)
             val underlineView = tab?.customView?.findViewById<View>(R.id.underline_view)
-            underlineView?.visibility = if (i == position) View.VISIBLE else View.GONE
+            underlineView?.visibility = if (i == position) View.VISIBLE else View.INVISIBLE
+        }
+    }
+
+    private fun updateFontStyle(position: Int) {
+        for (i in 0 until binding.tabLayout.tabCount) {
+            val tab = binding.tabLayout.getTabAt(i)
+            val tabText = tab?.customView?.findViewById<TextView>(R.id.tab_text)
+            tabText?.setTextAppearance(if (i == position) R.style.TextView_Heavy else R.style.TextView_Regular)
+            tabText?.setTextColor(if (i == position) resources.getColor(R.color.text) else resources.getColor(R.color.txt_not_selected))
+
         }
     }
 }

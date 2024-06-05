@@ -16,7 +16,7 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginStart="13dp"
             android:layout_marginTop="@dimen/_20sdp"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,9 +27,9 @@
             style="@style/TextView.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:text="@string/contact_us"
-
+            android:layout_marginStart="12dp"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintBottom_toBottomOf="@+id/back_button"
             app:layout_constraintStart_toEndOf="@+id/back_button"
@@ -83,7 +83,7 @@
             style="@style/TextView.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="13sp"
             android:layout_marginStart="4dp"
             android:text="@string/_20_1011777751_966_550440787"
             android:textStyle="bold"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="13sp"
             android:text="@string/travel_altaherat_com_info_altasherat_com"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView20"
@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="13sp"
             android:text="@string/saudi_Riad"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView21"
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="13sp"
             android:text="@string/cairo_location"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView22"
@@ -191,22 +191,24 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_email"
-                    style="@style/EditText"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_name"
+                    style="@style/TextInputLayout"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:background="@drawable/rounded_button_background"
-                    android:drawableStart="@drawable/ic_profile_padded"
-                    android:hint="@string/edit_text_name"
-                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+                    app:layout_constraintTop_toBottomOf="@id/imageView22">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/first_name_edit_text"
+                        style="@style/TextInputEditText"
+                        android:autofillHints="name"
+                        android:drawableStart="@drawable/username"
+                        android:hint="@string/name"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView25"
@@ -214,8 +216,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/name"
-                    app:layout_constraintBottom_toTopOf="@+id/et_email"
-                    app:layout_constraintStart_toStartOf="@+id/et_email" />
+                    app:layout_constraintBottom_toTopOf="@+id/et_name"
+                    app:layout_constraintStart_toStartOf="@+id/et_name" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    style="@style/TextView.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:text="@string/email_text"
+                    app:layout_constraintStart_toStartOf="@+id/et_email"
+                    app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_email"
+                    style="@style/TextInputLayout"
+                    android:layout_margin="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView29">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_edit_text"
+                        style="@style/TextInputEditText"
+                        android:autofillHints="emailAddress"
+                        android:drawableStart="@drawable/ic_email"
+                        android:hint="@string/enter_email"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView26"
@@ -224,6 +254,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_13sdp"
                     android:text="@string/phone"
+                    android:layout_marginBottom="4dp"
+
                     app:layout_constraintStart_toStartOf="@+id/et_email"
                     app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
@@ -231,8 +263,9 @@
                     android:id="@+id/phone_number_picker"
                     layout="@layout/view_phone_number_picker"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="4dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/textView26"
+                    app:layout_constraintStart_toStartOf="@+id/et_email"
                     app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
                 <TextView
@@ -240,25 +273,30 @@
                     style="@style/TextView.Bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginBottom="4dp"
                     android:text="@string/subject"
                     app:layout_constraintStart_toStartOf="@+id/textView26"
-                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                    app:layout_constraintTop_toBottomOf="@+id/phone_number_picker" />
 
-                <com.google.android.material.textfield.TextInputEditText
+
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_subject"
-                    style="@style/EditText"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/rounded_button_background"
-                    android:drawableStart="@drawable/ic_profile_padded"
-                    android:hint="@string/subject_text"
-                    android:inputType="textEmailAddress"
+                    style="@style/TextInputLayout"
+                    android:layout_margin="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView27" >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/subject_edit_text"
+                        style="@style/TextInputEditText"
+                        android:autofillHints="emailAddress"
+                        android:drawableStart="@drawable/ic_topic"
+                        android:hint="@string/subject_text"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView28"
@@ -267,24 +305,31 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_13sdp"
                     android:text="@string/msg_text"
+                    android:layout_marginBottom="4dp"
+
                     app:layout_constraintStart_toStartOf="@+id/et_subject"
                     app:layout_constraintTop_toBottomOf="@+id/et_subject" />
 
-                <com.google.android.material.textfield.TextInputEditText
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_msg"
-                    style="@style/EditText"
+                    style="@style/TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/rounded_button_background_lower_radius"
-                    android:drawableStart="@drawable/ic_profile_padded"
-                    android:hint="@string/subject_text"
-                    android:inputType="textEmailAddress"
+                    android:layout_margin="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView28">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/msg_edit_text"
+                        style="@style/TextInputEditText"
+                        android:layout_height="90dp"
+                        android:autofillHints="emailAddress"
+                        android:drawableStart="@drawable/ic_email"
+                        android:hint="@string/enter_email"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                     android:id="@+id/continue_button"
                     style="@style/Button"
@@ -305,6 +350,8 @@
                     app:layout_constraintStart_toStartOf="@id/et_msg"
                     app:layout_constraintTop_toBottomOf="@id/et_msg"
                     tools:ignore="RtlHardcoded" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
