@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.language.presentation.ui
+package com.solutionplus.altasherat.features.changeLanguage.presentation.ui
 
 import androidx.lifecycle.viewModelScope
 import androidx.work.WorkInfo
@@ -9,9 +9,9 @@ import com.solutionplus.altasherat.features.services.language.domain.interactor.
 import com.solutionplus.altasherat.features.services.language.domain.interactor.SaveSelectedCountryUC
 import com.solutionplus.altasherat.features.services.language.domain.worker.LanguageWorker
 import com.solutionplus.altasherat.features.services.language.domain.worker.LanguageWorkerImpl
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageAction
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageEvent
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageState
+import com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguageContract.ChangeLanguageAction
+import com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguageContract.ChangeLanguageEvent
+import com.solutionplus.altasherat.features.changeLanguage.presentation.ui.ChangeLanguageContract.ChangeLanguageState
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,22 +19,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LanguageViewModel @Inject constructor(
+class ChangeLanguageViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val getSelectedCountryUC: GetSelectedCountryUC,
     private val saveSelectedCountryUC: SaveSelectedCountryUC,
     private val languageWorkerImpl: LanguageWorkerImpl
 
 ) :
-    AlTasheratViewModel<LanguageAction, LanguageEvent, LanguageState>(LanguageState.initial()) {
+    AlTasheratViewModel<ChangeLanguageAction, ChangeLanguageEvent, ChangeLanguageState>(ChangeLanguageState.initial()) {
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
-            is LanguageAction.GetCountriesFromLocal -> getCountriesFromLocal()
-            is LanguageAction.SaveSelectedCountry -> saveSelectedCountry(action.country)
-            is LanguageAction.GetSelectedCountry -> getSelectedCountry()
-            is LanguageAction.StartLanguageWorker -> invokeLanguageWorker(action.language)
-            is LanguageAction.ContinueToOnBoarding -> navigateToOnBoarding()
+            is ChangeLanguageAction.GetCountriesFromLocal -> getCountriesFromLocal()
+            is ChangeLanguageAction.SaveSelectedCountry -> saveSelectedCountry(action.country)
+            is ChangeLanguageAction.GetSelectedCountry -> getSelectedCountry()
+            is ChangeLanguageAction.StartLanguageWorker -> invokeLanguageWorker(action.language)
+            is ChangeLanguageAction.ContinueToOnBoarding -> navigateToOnBoarding()
         }
     }
 
@@ -44,7 +44,7 @@ class LanguageViewModel @Inject constructor(
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(LanguageEvent.SaveSelectedCountry(country))
+                    is Resource.Success -> sendEvent(ChangeLanguageEvent.SaveSelectedCountry(country))
                 }
             }
         }
@@ -56,7 +56,7 @@ class LanguageViewModel @Inject constructor(
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(LanguageEvent.GetSelectedCountry(it.model))
+                    is Resource.Success -> sendEvent(ChangeLanguageEvent.GetSelectedCountry(it.model))
                 }
             }
         }
@@ -68,14 +68,14 @@ class LanguageViewModel @Inject constructor(
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
-                    is Resource.Success -> sendEvent(LanguageEvent.CountriesIndex(countries = it.model))
+                    is Resource.Success -> sendEvent(ChangeLanguageEvent.CountriesIndex(countries = it.model))
                 }
             }
         }
     }
 
     private fun navigateToOnBoarding() {
-        sendEvent(LanguageEvent.NavigateToOnBoarding)
+        sendEvent(ChangeLanguageEvent.NavigateToOnBoarding)
     }
 
     private fun invokeLanguageWorker(language: String) {
@@ -86,7 +86,7 @@ class LanguageViewModel @Inject constructor(
                     WorkInfo.State.RUNNING -> {}
                     WorkInfo.State.SUCCEEDED -> {
                         val succeededMessage = it.outputData.getString(LanguageWorker.KEY_SUCCESS)
-                        sendEvent(LanguageEvent.LanguageWorkerStarted(language))
+                        sendEvent(ChangeLanguageEvent.LanguageWorkerStarted(language))
                         succeededMessage ?: return@collect
                     }
 
@@ -103,6 +103,6 @@ class LanguageViewModel @Inject constructor(
     }
 
     override fun clearState() {
-        setState(LanguageState.initial())
+        setState(ChangeLanguageState.initial())
     }
 }

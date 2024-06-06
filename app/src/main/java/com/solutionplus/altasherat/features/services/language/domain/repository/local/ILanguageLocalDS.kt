@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.language.domain.repository.local
+package com.solutionplus.altasherat.features.services.language.domain.repository.local
 
 import com.solutionplus.altasherat.features.services.country.data.models.entity.CountryEntity
 import com.solutionplus.altasherat.features.services.country.domain.models.Country

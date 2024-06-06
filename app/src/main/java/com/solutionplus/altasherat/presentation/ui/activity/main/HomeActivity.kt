@@ -1,8 +1,12 @@
 package com.solutionplus.altasherat.presentation.ui.activity.main
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -19,22 +23,35 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun viewInit() {
         val host = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         setupWithNavController(binding.bottomNav, host.navController)
-        binding.bottomNav.itemIconTintList = null
-        customizeBottomNavigationView(binding.bottomNav)
+
+
+        setupBottomNavigation(host)
     }
-    override fun onActivityReady(savedInstanceState: Bundle?) { }
 
-    private fun customizeBottomNavigationView(bottomNavigationView: BottomNavigationView) {
-        val menu = bottomNavigationView.menu
-        for (i in 0 until menu.size()) {
-            val menuItem = menu.getItem(i)
-            val actionView = menuItem.actionView
+    private fun setupBottomNavigation(host: NavHostFragment) {
+        // Get the NavController
+        val navController = host.navController
 
-            val title = actionView?.findViewById<TextView>(R.id.custom_title)
-            val icon = actionView?.findViewById<ImageView>(R.id.custom_icon)
+        // Add an OnDestinationChangedListener
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.visaPlatformFragment, R.id.visaApplicationsFragment, R.id.profileMenuFragment -> {
+                    binding.bottomNav.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+            }
+        }
 
-            title?.text = menuItem.title
-            icon?.setImageDrawable(menuItem.icon)
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav)
+        ViewCompat.setOnApplyWindowInsetsListener(bottomNavigationView) { view, insets ->
+            insets
         }
     }
+
+    override fun onActivityReady(savedInstanceState: Bundle?) {
+
+    }
+
 }
