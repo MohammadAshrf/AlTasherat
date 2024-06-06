@@ -7,7 +7,7 @@
     tools:context=".presentation.ui.fragment.dashboard.VisaPlatformFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
+        android:id="@+id/container_visa_platform"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -54,9 +54,9 @@
             app:layout_constraintStart_toStartOf="@+id/imageView7"
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
-        <ImageView
+        <View
             android:id="@+id/imageView10"
-            android:layout_width="@dimen/_210sdp"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="@dimen/_80sdp"
             android:background="@color/surface"
             app:layout_constraintBottom_toTopOf="@+id/imageView11"
@@ -119,16 +119,15 @@
             style="@style/TextView.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_32sdp"
             android:background="@drawable/button_background_3"
-            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
             android:paddingVertical="@dimen/_1sdp"
             android:text="@string/visit_visa"
             android:textColor="@color/wight"
-            android:textSize="@dimen/_11ssp"
+            android:textSize="@dimen/_12ssp"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-            app:layout_constraintEnd_toStartOf="@+id/button4"
             app:layout_constraintStart_toStartOf="@id/imageView8"
             app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
@@ -137,16 +136,15 @@
             style="@style/TextView.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_32sdp"
             android:background="@drawable/button_background_3"
-            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
             android:paddingVertical="@dimen/_1sdp"
             android:text="@string/jobs_visa"
             android:textColor="@color/wight"
-            android:textSize="@dimen/_11ssp"
+            android:textSize="@dimen/_12ssp"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintEnd_toStartOf="@+id/button5"
             app:layout_constraintStart_toStartOf="@id/imageView7"
             app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
@@ -155,16 +153,15 @@
             style="@style/TextView.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_32sdp"
             android:background="@drawable/button_background_3"
-            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
             android:paddingVertical="@dimen/_1sdp"
             android:text="@string/visa_offers"
             android:textColor="@color/wight"
-            android:textSize="@dimen/_11ssp"
+            android:textSize="@dimen/_12ssp"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-            app:layout_constraintEnd_toStartOf="@+id/button6"
             app:layout_constraintStart_toStartOf="@id/imageView9"
             app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
