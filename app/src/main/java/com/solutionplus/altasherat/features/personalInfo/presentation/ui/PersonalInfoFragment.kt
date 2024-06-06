@@ -53,7 +53,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun viewInit() {
-        handleViews()
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
@@ -114,10 +113,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         }
     }
 
-    private fun handleViews() {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
-    }
+
 
     private fun handleEvents() {
         collectFlowWithLifecycle(personalInfoVM.singleEvent) {
@@ -253,9 +249,5 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-    }
+
 }

@@ -18,10 +18,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
     override fun onActivityReady(savedInstanceState: Bundle?) {
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
-        val navController = navHostFragment.findNavController()
-
     }
 
 }
