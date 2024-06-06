@@ -12,9 +12,9 @@
         android:id="@+id/cardView"
         android:layout_width="@dimen/_270sdp"
         android:layout_height="@dimen/_350sdp"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/_13sdp"
         android:background="@drawable/custom_edittext"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="@dimen/_13sdp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,8 +48,8 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 style="@style/CustomTabLayout"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/_270sdp"
+                android:layout_height="@dimen/_46sdp"
                 android:background="@drawable/tab_bkg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,11 +64,11 @@
 
     <ImageView
         android:id="@+id/image_above_tab"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/_63sdp"
+        android:layout_height="@dimen/_63sdp"
         android:layout_marginBottom="-20dp"
         android:src="@drawable/splash_logo"
-        android:translationZ="10dp"
+        android:translationZ="@dimen/_6sdp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView" />
@@ -105,7 +105,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_don_t_have_an_account"
             style="@style/TextView.Bold"
-            android:padding="5dp"
+            android:padding="@dimen/_3sdp"
             android:text="@string/Already_have_an_account"
             android:textColor="@color/Bg"
             android:textStyle="bold" />
@@ -113,7 +113,7 @@
             android:id="@+id/tv_register"
             style="@style/TextView.Bold"
             android:foreground="?attr/selectableItemBackground"
-            android:padding="5dp"
+            android:padding="@dimen/_3sdp"
             android:text="@string/SignIn"
             android:textColor="@color/Secondary"
             android:textStyle="bold" />
@@ -125,21 +125,20 @@
         style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_52sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
         android:text="@string/skip"
         android:textColor="@color/text"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="53dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="45dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="@dimen/_43sdp"
         android:src="@drawable/ic_plane_right"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -147,9 +146,9 @@
 
     <ImageView
         android:id="@+id/imageViewp2"
-        android:layout_width="53dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="45dp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginEnd="@dimen/_43sdp"
         android:src="@drawable/ic_plane_left"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"

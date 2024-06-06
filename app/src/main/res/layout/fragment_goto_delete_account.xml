@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
         android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,9 +21,9 @@
     <TextView
         android:id="@+id/txtDelete_account"
         style="@style/TextView.Bold"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/_231sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/_23sdp"
         android:text="@string/account_settings"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@+id/btn_back"
@@ -30,8 +31,8 @@
 
     <ImageView
         android:id="@+id/img_deleteAccount"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:src="@drawable/ic_arrow_right"
         app:layout_constraintBottom_toBottomOf="@+id/txtDelete_account"
