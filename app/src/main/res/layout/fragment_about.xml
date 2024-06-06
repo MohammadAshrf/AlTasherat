@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:text="طلب الحصول على تأشيرة سياحية"
+                android:text="@string/about_first"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="@id/first_check"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:text="طلب الحصول على تأشيرة وظيفية"
+                android:text="@string/about_second"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="@id/second_check"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
                 style="@style/TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="خدمـــات السفارات"
+                android:text="@string/about_third"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="@id/third_check"
                 app:layout_constraintStart_toStartOf="@+id/second_about_text"
@@ -176,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
-                android:text="خدمات القنصـــليات"
+                android:text="@string/about_fourth"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="@id/fourth_check"
                 app:layout_constraintStart_toStartOf="@id/second_about_text"
@@ -198,7 +198,7 @@
                     style="@style/TextView.Heavy"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:text="ماذا تقدم؟" />
+                    android:text="@string/what_we_offer" />
 
                 <TextView
                     android:id="@+id/about_platform_text"

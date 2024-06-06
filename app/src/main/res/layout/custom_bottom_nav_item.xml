@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="@dimen/_4sdp">
 
     <ImageView
         android:id="@+id/custom_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:srcCompat="@drawable/ic_profile" />
+        tools:srcCompat="@drawable/ic_stamp" />
 
     <TextView
         android:id="@+id/custom_title"
         style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
