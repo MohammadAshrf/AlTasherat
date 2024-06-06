@@ -17,25 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>() {
 
-    private val languageVM: LanguageViewModel by viewModels()
+    private val languageVM: ChangeLanguageViewModel by viewModels()
 
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
+
     }
 
     override fun subscribeToObservables() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-
-
-    }
 
 
     override fun viewInit() {
@@ -59,11 +51,11 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>() {
     private fun handleViews() {
         if (binding.arabicRadioBtn.isChecked) {
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("ar"))
-            languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("ar"))
+            languageVM.processIntent(ChangeLanguageContract.ChangeLanguageAction.StartLanguageWorker("ar"))
 
         } else {
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"))
-            languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("en"))
+            languageVM.processIntent(ChangeLanguageContract.ChangeLanguageAction.StartLanguageWorker("en"))
         }
         findNavController().popBackStack()
 

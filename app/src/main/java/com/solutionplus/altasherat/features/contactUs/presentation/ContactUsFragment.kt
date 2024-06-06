@@ -35,8 +35,7 @@ class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
+
         viewModel.processIntent(ContactUsContract.ContactUsAction.GetCountries)
         subscribeToObservables()
    }
@@ -87,10 +86,5 @@ class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-    }
 
 }

@@ -26,8 +26,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     private val viewModel: ChangePasswordViewModel by viewModels()
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
+
     }
 
     override fun subscribeToObservables() {
@@ -100,9 +99,5 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         Toast.makeText(requireContext(), "Your Password Changed successfully", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-    }
+
 }

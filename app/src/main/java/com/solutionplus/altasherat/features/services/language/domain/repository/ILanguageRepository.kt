@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.language.domain.repository
+package com.solutionplus.altasherat.features.services.language.domain.repository
 
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 

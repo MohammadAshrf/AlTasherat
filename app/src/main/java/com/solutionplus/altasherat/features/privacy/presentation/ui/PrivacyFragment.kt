@@ -12,8 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>() {
     override fun viewInit() {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
         binding.backArrow.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -23,9 +21,5 @@ class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>() {
 
     override fun subscribeToObservables() {}
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-    }
+
 }

@@ -15,8 +15,7 @@ import com.solutionplus.altasherat.databinding.FragmentGotoDeleteAccountBinding
 
 class GotoDeleteAccountFragment : BaseFragment<FragmentGotoDeleteAccountBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.GONE
+
     }
 
     override fun subscribeToObservables() { }
@@ -33,9 +32,5 @@ class GotoDeleteAccountFragment : BaseFragment<FragmentGotoDeleteAccountBinding>
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        bottomNavigationView?.visibility = View.VISIBLE
-    }
+
 }

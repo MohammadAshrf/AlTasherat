@@ -5,7 +5,7 @@ import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.language.domain.interactor.GetSelectedCountryUC
+import com.solutionplus.altasherat.features.services.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.login.domain.interactor.login.LoginWithPhoneUC

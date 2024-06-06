@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.language.domain.worker
+package com.solutionplus.altasherat.features.services.language.domain.worker
 
 import android.content.Context
 import androidx.work.ExistingWorkPolicy

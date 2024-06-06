@@ -1,7 +1,7 @@
-package com.solutionplus.altasherat.features.language.data.repository
+package com.solutionplus.altasherat.features.services.language.data.repository
 
-import com.solutionplus.altasherat.features.language.domain.repository.ILanguageRepository
-import com.solutionplus.altasherat.features.language.domain.repository.local.ILanguageLocalDS
+import com.solutionplus.altasherat.features.services.language.domain.repository.ILanguageRepository
+import com.solutionplus.altasherat.features.services.language.domain.repository.local.ILanguageLocalDS
 import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 
