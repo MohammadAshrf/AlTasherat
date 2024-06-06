@@ -21,8 +21,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (AppCompatDelegate.getApplicationLocales().isEmpty) {
             val localeList = LocaleListCompat.forLanguageTags("ar")
             AppCompatDelegate.setApplicationLocales(localeList)
-            finish()
-            startActivity(intent)
+//            finish()
+//            startActivity(intent)
         }
     }
 }

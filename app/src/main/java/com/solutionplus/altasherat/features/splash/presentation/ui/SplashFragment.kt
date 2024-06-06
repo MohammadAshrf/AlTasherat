@@ -21,7 +21,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
-//        splashVM.processIntent(SplashContract.SplashAction.StartAppWithArabicLocale("ar"))
     }
 
     override fun subscribeToObservables() {

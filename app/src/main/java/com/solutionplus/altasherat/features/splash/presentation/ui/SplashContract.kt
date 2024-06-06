@@ -9,7 +9,6 @@ interface SplashContract {
 
     sealed class SplashAction : ViewAction {
         data object IsOnBoardingShown : SplashAction()
-        data class StartAppWithArabicLocale(val language: String) : SplashAction()
     }
 
     sealed class SplashEvent : ViewEvent {
