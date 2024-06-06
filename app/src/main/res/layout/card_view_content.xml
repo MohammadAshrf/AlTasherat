@@ -6,11 +6,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_200sdp"
-        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_190sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         app:cardBackgroundColor="#50FFFFFF"
         app:cardCornerRadius="18dp"
         app:cardElevation="0dp"
@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:textSize="@dimen/_14sdp"
+                android:text="@string/hello_onboarding"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle"
                 app:layout_constraintStart_toStartOf="@id/rectangle"
                 app:layout_constraintTop_toTopOf="@id/rectangle" />
