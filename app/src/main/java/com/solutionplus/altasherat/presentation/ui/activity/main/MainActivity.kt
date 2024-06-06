@@ -11,8 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    override fun viewInit() {
-    }
+    override fun viewInit() {}
 
     override fun onActivityReady(savedInstanceState: Bundle?) {
         val navHostFragment =
@@ -21,8 +20,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (AppCompatDelegate.getApplicationLocales().isEmpty) {
             val localeList = LocaleListCompat.forLanguageTags("ar")
             AppCompatDelegate.setApplicationLocales(localeList)
-//            finish()
-//            startActivity(intent)
+            finish()
+            startActivity(intent)
         }
     }
 }
