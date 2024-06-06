@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
