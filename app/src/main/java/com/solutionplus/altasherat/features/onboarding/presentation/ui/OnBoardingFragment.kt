@@ -1,9 +1,9 @@
 package com.solutionplus.altasherat.features.onboarding.presentation.ui
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.solutionplus.altasherat.R
@@ -11,10 +11,9 @@ import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragm
 import com.solutionplus.altasherat.databinding.FragmentOnBoardingBinding
 import com.solutionplus.altasherat.features.onboarding.presentation.adapters.OnBoardingAdapter
 import com.solutionplus.altasherat.features.onboarding.presentation.adapters.OnBoardingItem
-
-
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     private val onBoardingVM: OnBoardingViewModel by viewModels()
@@ -31,11 +30,18 @@ class OnBoardingFragment : BaseFragment<FragmentOnBoardingBinding>() {
     }
 
     private fun handleViews() {
-        val pages = listOf(
-            OnBoardingItem(R.drawable.image_first_onboarding, getString(R.string.first_onboarding)),
-            OnBoardingItem(R.drawable.image_second_onboarding, getString(R.string.second_onboarding)),
-            OnBoardingItem(R.drawable.image_third_onboarding, getString(R.string.third_onboarding))
-        )
+        val pages =
+            mutableListOf(
+                OnBoardingItem(
+                    R.drawable.image_first_onboarding, getString(R.string.first_onboarding)
+                ),
+                OnBoardingItem(
+                    R.drawable.image_second_onboarding, getString(R.string.second_onboarding)
+                ),
+                OnBoardingItem(
+                    R.drawable.image_third_onboarding, getString(R.string.third_onboarding)
+                )
+            )
         val adapter = OnBoardingAdapter(pages)
         binding.viewPager.adapter = adapter
 
