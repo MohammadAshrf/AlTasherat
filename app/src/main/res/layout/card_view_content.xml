@@ -11,14 +11,13 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_190sdp"
         android:layout_marginEnd="@dimen/_4sdp"
-        app:cardBackgroundColor="#50FFFFFF"
-        app:cardCornerRadius="18dp"
+        app:cardBackgroundColor="@color/onboarding_card_bg"
+        app:cardCornerRadius="@dimen/_16sdp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,9 +27,9 @@
             <View
                 android:id="@+id/rectangle"
                 android:layout_width="@dimen/_3sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:background="@color/Primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +51,7 @@
                 style="@style/TextView.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lineSpacingMultiplier="1.2"
+                android:lineSpacingMultiplier="1.3"
                 android:padding="@dimen/_8sdp"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"

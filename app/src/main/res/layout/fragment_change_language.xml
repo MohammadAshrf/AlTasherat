@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.changeLanguage.presentation.ui.ChangeLanguageFragment">
 
     <View
@@ -78,20 +78,21 @@
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextView.Bold" />
     </RadioGroup>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_30sdp"
         android:background="@drawable/button_background"
+        app:icon="@drawable/ic_save"
+        app:iconGravity="textEnd"
         android:drawableTint="#FFFFFF"
         android:text="@string/save"
-        android:drawableEnd="@drawable/ic_save"
-        android:gravity="center"
-        android:drawablePadding="10dp"
         app:backgroundTint="@null"
-        app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
