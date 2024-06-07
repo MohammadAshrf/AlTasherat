@@ -8,12 +8,14 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.services.user.domain.interactor.UserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 class LoginWithPhoneUC(
     private val repository: ILoginRepository,
-    private val userUC: UserUC
+    private val saveUserUC: SaveUserUC,
+    private val getUserUC : GetUserUC
 ) : BaseUseCase<User, LoginRequest>() {
     public override suspend fun execute(params: LoginRequest?): User {
         val errorMessages = params?.validateRequest()
@@ -26,8 +28,8 @@ class LoginWithPhoneUC(
         }
         val result = repository.loginWithPhone(params!!)
         repository.saveAccessToken(result.accessToken)
-        userUC.execute(result.userInfo)
-        return result.userInfo
+        saveUserUC.execute(result.userInfo)
+        return  getUserUC.execute(Unit)
     }
     private fun LoginRequest.validateRequest(): Map<String, Int> {
         val errorKeys = mutableMapOf<String, Int>()

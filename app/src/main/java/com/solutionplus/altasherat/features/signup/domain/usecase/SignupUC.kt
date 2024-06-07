@@ -5,13 +5,15 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.services.user.domain.interactor.UserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepository
 class SignupUC(
     private val repository: ISignupRepository,
-    private val userUC: UserUC,
+    private val saveUserUC: SaveUserUC,
+    private val getUserUC : GetUserUC
     ) : BaseUseCase<User, SignupRequest>() {
 
     public override suspend fun execute(params: SignupRequest?): User {
@@ -25,8 +27,8 @@ class SignupUC(
         }
         val result = repository.signupWithPhone(params!!)
         repository.saveAccessToken(result.token)
-        userUC.execute(result.user)
-        return result.user
+        saveUserUC.execute(result.user)
+        return  getUserUC.execute(Unit)
     }
 
     private fun SignupRequest.validateRequest(): Map<String, Int> {

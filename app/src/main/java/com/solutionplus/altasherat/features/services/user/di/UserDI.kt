@@ -6,7 +6,8 @@ import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStora
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.services.user.data.repository.UserRepository
 import com.solutionplus.altasherat.features.services.user.data.repository.local.UserLocalDS
-import com.solutionplus.altasherat.features.services.user.domain.interactor.UserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.services.user.domain.repository.IUserRepository
 import com.solutionplus.altasherat.features.services.user.domain.repository.Local.IUserLocalDS
 import dagger.Module
@@ -20,8 +21,13 @@ import javax.inject.Singleton
 internal object UserDI {
     @Provides
     @Singleton
-    fun provideUserUC(repository: IUserRepository): UserUC =
-        UserUC(repository)
+    fun provideSaveUserUC(repository: IUserRepository): SaveUserUC =
+        SaveUserUC(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetUserUC(repository: IUserRepository): GetUserUC =
+        GetUserUC(repository)
 
 
 

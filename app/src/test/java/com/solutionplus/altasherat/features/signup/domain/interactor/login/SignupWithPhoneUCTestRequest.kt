@@ -9,6 +9,8 @@ import org.junit.Test
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper.domainToEntity
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.services.user.domain.models.Image
@@ -25,12 +27,16 @@ import org.junit.jupiter.api.assertThrows
  class SignupWithPhoneUCTestRequest {
 
     private lateinit var repository: ISignupRepository
+    private lateinit var saveUserUC: SaveUserUC
+    private lateinit var getUserUC: GetUserUC
     private lateinit var signupUC: SignupUC
 
     @Before
     fun setUp() {
         repository = mockk()
-        signupUC = SignupUC(repository)
+        saveUserUC = mockk()
+        getUserUC = mockk()
+        signupUC = SignupUC(repository, saveUserUC, getUserUC)
     }
 
     @Test
@@ -46,9 +52,9 @@ import org.junit.jupiter.api.assertThrows
         val signup = Signup(message = "Success", token = accessToken, user = userInfo)
 
         coEvery { repository.signupWithPhone(signupRequest) } returns signup
-        coEvery { repository.saveUser(userInfo) } just Runs
+        coEvery { saveUserUC.execute(userInfo) } just Runs
         coEvery { repository.saveAccessToken(accessToken) } just Runs
-        coEvery { repository.getUser() } returns domainToEntity(userInfo)
+        coEvery { getUserUC.execute(Unit) } returns userInfo
 
         // Act
         val result = signupUC.execute(signupRequest)
@@ -58,9 +64,9 @@ import org.junit.jupiter.api.assertThrows
         assertNotNull(result)
         coVerify {
             repository.signupWithPhone(signupRequest)
-            repository.saveUser(userInfo)
+            saveUserUC.execute(userInfo)
             repository.saveAccessToken(accessToken)
-            repository.getUser()
+            getUserUC.execute(Unit)
         }
     }
 

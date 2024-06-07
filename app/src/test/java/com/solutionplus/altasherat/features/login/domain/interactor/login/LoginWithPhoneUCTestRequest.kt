@@ -4,20 +4,22 @@ package com.solutionplus.altasherat.features.login.domain.interactor.login
 import com.google.gson.Gson
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
-import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
-import com.solutionplus.altasherat.features.login.domain.model.Image
 import com.solutionplus.altasherat.features.login.domain.model.Login
-import com.solutionplus.altasherat.features.login.domain.model.Phone
-import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
+import com.solutionplus.altasherat.features.services.user.domain.models.Image
+import com.solutionplus.altasherat.features.services.user.domain.models.Phone
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.runs
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -30,12 +32,16 @@ import org.junit.jupiter.api.assertThrows
 class LoginWithPhoneUCTestRequest {
 
     private lateinit var repository: ILoginRepository
+    private lateinit var saveUserUC: SaveUserUC
+    private lateinit var getUserUC: GetUserUC
     private lateinit var loginWithPhoneUC: LoginWithPhoneUC
 
     @Before
     fun setUp() {
         repository = mockk()
-        loginWithPhoneUC = LoginWithPhoneUC(repository)
+        saveUserUC = mockk()
+        getUserUC = mockk()
+        loginWithPhoneUC = LoginWithPhoneUC(repository, saveUserUC, getUserUC)
 
     }
 
@@ -53,9 +59,10 @@ class LoginWithPhoneUCTestRequest {
             val loginResponse = Login(message = "Success", accessToken = accessToken, userInfo = userInfo)
 
             coEvery { repository.loginWithPhone(loginRequest) } returns loginResponse
-            coEvery { repository.saveUser(userInfo) } just Runs
-            coEvery { repository.saveAccessToken(accessToken) } just Runs
-            coEvery { repository.getUser() } returns userInfo
+            coEvery { repository.saveAccessToken(accessToken) } just runs
+            coEvery { saveUserUC.execute(userInfo) } just runs
+            coEvery { getUserUC.execute(Unit) } returns userInfo
+
 
             // Act
             val result = loginWithPhoneUC.execute(loginRequest)
@@ -65,9 +72,9 @@ class LoginWithPhoneUCTestRequest {
             assertNotNull(result)
             coVerify {
                 repository.loginWithPhone(loginRequest)
-                repository.saveUser(userInfo)
                 repository.saveAccessToken(accessToken)
-                repository.getUser()
+                saveUserUC.execute(userInfo)
+                getUserUC.execute(Unit)
             }
         }
 

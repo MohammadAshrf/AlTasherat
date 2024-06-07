@@ -5,5 +5,5 @@ import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 interface IUserRepository {
     suspend fun saveUser(user: User)
-    suspend fun getUser(): UserEntity
+    suspend fun getUser(): User
 }
