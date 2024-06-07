@@ -1,13 +1,8 @@
 package com.solutionplus.altasherat.features.login.data.repository
 
 
-import com.solutionplus.altasherat.features.login.data.mapper.UserMapper
-import com.solutionplus.altasherat.features.login.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
-import com.solutionplus.altasherat.features.login.domain.model.Image
-import com.solutionplus.altasherat.features.login.domain.model.Phone
-import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.login.domain.repository.local.ILoginLocalDS
 import com.solutionplus.altasherat.features.login.domain.repository.remote.ILoginRemoteDS
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
