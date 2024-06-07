@@ -6,7 +6,7 @@
     android:gravity="center">
 
     <View
-        android:layout_width="@dimen/_85sdp"
+        android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_3sdp"
         android:background="@color/Accent"
         android:layout_marginBottom="@dimen/_15sdp"

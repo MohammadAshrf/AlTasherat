@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.signup.data.mapper
 
 import com.solutionplus.altasherat.common.data.mapper.Mapper
+import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper
 import com.solutionplus.altasherat.features.signup.data.model.dto.SignupDto
 import com.solutionplus.altasherat.features.signup.data.model.entity.SignupEntity
 import com.solutionplus.altasherat.features.signup.domain.model.Signup

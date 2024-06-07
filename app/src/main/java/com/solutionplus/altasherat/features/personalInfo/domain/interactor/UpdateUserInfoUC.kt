@@ -5,8 +5,9 @@ import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserInfoRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.models.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateUserRepository
+import com.solutionplus.altasherat.features.services.user.domain.interactor.UserUC
 
-class UpdateUserInfoUC(private val repository: IUpdateUserRepository) :
+class UpdateUserInfoUC(private val repository: IUpdateUserRepository, private val userUC: UserUC) :
     BaseUseCase<UpdateUser, UpdateUserInfoRequest>() {
     override suspend fun execute(params: UpdateUserInfoRequest?): UpdateUser {
         requireNotNull(params) {
@@ -24,7 +25,8 @@ class UpdateUserInfoUC(private val repository: IUpdateUserRepository) :
         }
 
         val result = repository.updateUserInfo(params)
-        repository.saveUpdatedUser(result.user)
+        userUC.execute(result.user)
+//        repository.saveUpdatedUser(result.user)
         return result
     }
 

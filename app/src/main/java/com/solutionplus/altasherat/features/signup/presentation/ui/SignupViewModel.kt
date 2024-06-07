@@ -9,6 +9,7 @@ import com.solutionplus.altasherat.features.language.domain.interactor.GetSelect
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.user.domain.interactor.UserUC
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
     private val getCountriesUC: GetCountriesFromLocalUC,
-    private val getSelectedCountryUC: GetSelectedCountryUC
+    private val getSelectedCountryUC: GetSelectedCountryUC,
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
     initialState = SignUpContract.SignUpState.initial()
 ) {

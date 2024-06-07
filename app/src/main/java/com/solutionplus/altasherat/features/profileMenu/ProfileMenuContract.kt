@@ -5,7 +5,7 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
-import com.solutionplus.altasherat.features.profileMenu.domain.model.User
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 interface ProfileMenuContract {
     sealed class ProfileMenuAction : ViewAction {

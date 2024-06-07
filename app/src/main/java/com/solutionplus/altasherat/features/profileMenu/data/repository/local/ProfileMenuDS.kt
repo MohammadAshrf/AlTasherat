@@ -8,8 +8,8 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
-import com.solutionplus.altasherat.features.profileMenu.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.profileMenu.domain.repository.local.IProfileMenuDS
+import com.solutionplus.altasherat.features.services.user.data.models.entity.UserEntity
 import java.util.Base64.getDecoder
 
 

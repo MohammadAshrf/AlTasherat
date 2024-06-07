@@ -18,15 +18,4 @@ internal class SignupRemoteDS(private val provider: INetworkProvider) : ISignupR
         )
     }
 
-//    override suspend fun getCountries(): List<Country> {
-//        val type = object : TypeToken<List<Country>>() {}.type
-//        return provider.get(
-//            responseWrappedModel = type,
-//            pathUrl = "countries",
-//            headers = hashMapOf("accept" to "application/json"),
-//            queryParams = null,
-//        )
-//    }
-
-
 }

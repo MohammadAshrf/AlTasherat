@@ -18,7 +18,7 @@ import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenu
 import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
 import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
-import com.solutionplus.altasherat.features.profileMenu.domain.model.User
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
 

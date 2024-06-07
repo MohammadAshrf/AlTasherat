@@ -22,7 +22,6 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
-import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetCountriesFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
@@ -32,6 +31,7 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

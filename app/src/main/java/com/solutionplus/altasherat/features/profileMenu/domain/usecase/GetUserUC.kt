@@ -1,9 +1,9 @@
 package com.solutionplus.altasherat.features.profileMenu.domain.usecase
 
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.profileMenu.data.mapper.UserMapper
-import com.solutionplus.altasherat.features.profileMenu.domain.model.User
 import com.solutionplus.altasherat.features.profileMenu.domain.repository.IProfileMenuRepository
+import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 class GetUserUC(
     private val repository: IProfileMenuRepository
@@ -12,7 +12,7 @@ class GetUserUC(
         if (repository.getIsUserLoggedIn()) {
             return repository.getUser()
         } else {
-            return UserMapper.dtoToDomain(Unit)
+            throw IllegalStateException("User is not logged in")
         }
     }
 

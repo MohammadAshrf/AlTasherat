@@ -9,11 +9,10 @@ import org.junit.Test
 import org.junit.Assert.assertEquals
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper
-import com.solutionplus.altasherat.features.signup.data.model.entity.UserEntity
-import com.solutionplus.altasherat.features.signup.domain.model.Image
-import com.solutionplus.altasherat.features.signup.domain.model.Phone
-import com.solutionplus.altasherat.features.signup.domain.model.User
+import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper
+import com.solutionplus.altasherat.features.services.user.domain.models.Image
+import com.solutionplus.altasherat.features.services.user.domain.models.Phone
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify

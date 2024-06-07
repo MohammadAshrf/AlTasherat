@@ -11,6 +11,7 @@ import com.solutionplus.altasherat.common.data.repository.local.DataStoreKeyValu
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
+import com.solutionplus.altasherat.features.services.user.domain.interactor.UserUC
 import com.solutionplus.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
 import dagger.Module
@@ -35,7 +36,7 @@ internal object SignUpDI {
 
 
     @Provides
-    fun provideLoginWithPhoneUC(repository: ISignupRepository): SignupUC =
-        SignupUC(repository)
+    fun provideLoginWithPhoneUC(repository: ISignupRepository,userUC: UserUC): SignupUC =
+        SignupUC(repository,userUC)
 
 }

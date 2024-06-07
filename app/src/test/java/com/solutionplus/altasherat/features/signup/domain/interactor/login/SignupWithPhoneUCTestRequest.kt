@@ -8,13 +8,13 @@ import org.junit.Before
 import org.junit.Test
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.signup.data.mapper.UserMapper.domainToEntity
+import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper.domainToEntity
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
-import com.solutionplus.altasherat.features.signup.domain.model.Image
-import com.solutionplus.altasherat.features.signup.domain.model.Phone
+import com.solutionplus.altasherat.features.services.user.domain.models.Image
+import com.solutionplus.altasherat.features.services.user.domain.models.Phone
 import com.solutionplus.altasherat.features.signup.domain.model.Signup
-import com.solutionplus.altasherat.features.signup.domain.model.User
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepository
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
 import org.junit.jupiter.api.assertThrows
