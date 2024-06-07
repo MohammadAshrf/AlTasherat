@@ -42,30 +42,6 @@ class SignUpLocalDSTest{
         loginLocalDS = SignupLocalDS(storageKV, encryptionProvider)
     }
 
-//    @Test
-//    fun `test save user info after encryptData`() = runBlocking {
-//        // Arrange
-//        val phoneRequest = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
-//        val image = Image(id = 1, type = "profile", path = "http://example.com/image.jpg", title = "Profile Image", updatedAt = "2023-01-01", description = "User profile picture", createdAt = "2023-01-01", main = true, priority = 1)
-//        val country = Country(id = 1, name = "Egypt", code = "EG", flag = "🇪🇬", currency = "EGP", phoneCode = "+20")
-//        val user = User(id = 1, username = "userName", email = "email", firstname = "firstName", middleName = "middleName", lastname = "lastName", phone = phoneRequest, image = image, birthdate = "1990-01-01", emailVerified = true, phoneVerified = true, blocked = 0, country = country, allPermissions = listOf("READ", "WRITE"))
-//
-//        val userJson = Gson().toJson(user)
-//        val bytesUser = userJson.toByteArray()
-//        val encryptedUserData = "encryptedUserData".toByteArray()
-//        val encryptUserDataBase64 = Base64.getEncoder().encodeToString(encryptedUserData)
-//
-//        every { encryptionProvider.encryptData(bytesUser) } returns encryptedUserData
-//        coEvery { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) } just Runs
-//        coEvery{ storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java)} just  Runs
-//        // Act
-//        loginLocalDS.saveUser(UserMapper.domainToEntity(user))
-//
-//        // Assert
-//        coVerify { storageKV.saveEntry(StorageKeyEnum.USER, encryptUserDataBase64, String::class.java) }
-//        coVerify { storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java) }
-//        verify { encryptionProvider.encryptData(bytesUser) }
-//    }
 
     @Test
     fun `test save token after encryptData`() = runBlocking {
@@ -86,23 +62,7 @@ class SignUpLocalDSTest{
         verify { encryptionProvider.encryptData(bytes) }
     }
 
-//    @Test
-//    fun `when getting user expect user returned from storage`() = runBlocking {
-//        val phoneRequest = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
-//        val image = Image(id = 1, type = "profile", path = "http://example.com/image.jpg", title = "Profile Image", updatedAt = "2023-01-01", description = "User profile picture", createdAt = "2023-01-01", main = true, priority = 1)
-//        val country = Country(id = 1, name = "Egypt", code = "EG", flag = "🇪🇬", currency = "EGP", phoneCode = "+20")
-//        val user = User(id = 1, username = "userName", email = "email", firstname = "firstName", middleName = "middleName", lastname = "lastName", phone = phoneRequest, image = image, birthdate = "1990-01-01", emailVerified = true, phoneVerified = true, blocked = 0, country = country, allPermissions = listOf("READ", "WRITE"))
-//
-//        val userJson = Gson().toJson(user)
-//        val encryptedUserData = Base64.getEncoder().encodeToString(userJson.toByteArray())
-//
-//        coEvery { storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java) } returns encryptedUserData
-//        coEvery { encryptionProvider.decryptData(Base64.getDecoder().decode(encryptedUserData)) } returns userJson.toByteArray()
-//
-//        val result = loginLocalDS.getUser()
-//
-//        assertEquals(UserMapper.domainToEntity(user), result)
-//    }
+
 
     // Test case 4: Get access token with no access token stored then return exception
 //    @Test

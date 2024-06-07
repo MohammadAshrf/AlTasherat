@@ -297,3 +297,11 @@ japp/src/test/java/com/solutionplus/altasherat/features/deleteaccount/domain/use
 xapp/src/test/java/com/solutionplus/altasherat/features/changepassword/data/repository/local/ChangePasswordLocalDSTest.kt,9\2\92c9fa36ccaaadbcbfca4685b21bf5284fbc9700
 ú
 lapp/src/test/java/com/solutionplus/altasherat/features/changepassword/domain/usecase/ChangePasswordUCTest.kt,0\2\0209f806b4a24768836757616173c39ecdec97ff
+ù
+mapp/src/test/java/com/solutionplus/altasherat/features/services/user/data/repository/local/UserLocalDSTest.kt,e\3\e3ddeedf16cfcac3a264b4c8756af97a998ff56f
+ö
+japp/src/test/java/com/solutionplus/altasherat/features/services/user/data/repository/UserRepositoryTest.kt,2\e\2e3acde8ae563079a43d6c2fa0362a31824931c7
+ó
+gapp/src/test/java/com/solutionplus/altasherat/features/services/user/domain/interactor/GetUserUCTest.kt,3\f\3f25d877fe2f7e13588b01b0d801625defcf34ef
+ò
+happ/src/test/java/com/solutionplus/altasherat/features/services/user/domain/interactor/SaveUserUCTest.kt,7\7\7791da4d0c959bda8ba2d266bd5eec0a03cbb40e
