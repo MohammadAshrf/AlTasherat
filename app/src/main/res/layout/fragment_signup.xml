@@ -106,7 +106,7 @@
         android:layout_marginTop="40dp"
         android:inputType="phone"
         app:hintEnabled="false"
-        app:layout_constraintStart_toStartOf="@+id/first_name_text_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/email_text_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/email_text_input_layout" >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +127,7 @@
         android:layout_height="50dp"
         android:background="@drawable/shape_spinner_background"
         android:popupBackground="#4426F5"
-        app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout"
+        app:layout_constraintEnd_toEndOf="@+id/email_text_input_layout"
         app:layout_constraintStart_toEndOf="@+id/phone_text_input_layout"
         app:layout_constraintTop_toTopOf="@+id/phone_text_input_layout" />
 
