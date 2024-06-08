@@ -32,7 +32,7 @@ class UserRepositoryTest{
     }
 
         @Test
-    fun `when saving user given valid user expect user saved`() = runBlocking {
+    fun ` when saving user given valid user expect user saved `() = runBlocking {
         // Arrange
         val phoneRequest = Phone(countryCode = "0020", number = "100100100", extension = "", id = -1, type = "", holderName = "")
         val image = Image(id = 1, type = "profile", path = "http://example.com/image.jpg", title = "Profile Image", updatedAt = "2023-01-01", description = "User profile picture", createdAt = "2023-01-01", main = true, priority = 1)
