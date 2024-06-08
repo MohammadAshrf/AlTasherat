@@ -1,16 +1,12 @@
 package com.solutionplus.altasherat.features.login.data.repository
 
 
-import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
-import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.login.domain.repository.local.ILoginLocalDS
 import com.solutionplus.altasherat.features.login.domain.repository.remote.ILoginRemoteDS
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 

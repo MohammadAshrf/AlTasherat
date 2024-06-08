@@ -8,7 +8,6 @@ import org.junit.Before
 import org.junit.Test
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper.domainToEntity
 import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest

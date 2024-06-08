@@ -1,7 +1,6 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 
-import com.google.gson.Gson
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
@@ -14,7 +13,6 @@ import com.solutionplus.altasherat.features.services.user.domain.interactor.Save
 import com.solutionplus.altasherat.features.services.user.domain.models.Image
 import com.solutionplus.altasherat.features.services.user.domain.models.Phone
 import com.solutionplus.altasherat.features.services.user.domain.models.User
-import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just

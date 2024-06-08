@@ -8,14 +8,11 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
-import org.mockito.Mockito.`when`
 
 import io.mockk.coEvery
 import io.mockk.coVerify

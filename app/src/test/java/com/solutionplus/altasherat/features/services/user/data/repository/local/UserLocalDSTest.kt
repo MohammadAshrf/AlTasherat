@@ -9,8 +9,6 @@ import com.solutionplus.altasherat.features.services.user.data.mappers.UserMappe
 import com.solutionplus.altasherat.features.services.user.domain.models.Image
 import com.solutionplus.altasherat.features.services.user.domain.models.Phone
 import com.solutionplus.altasherat.features.services.user.domain.models.User
-import org.junit.Assert.*
-
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -22,7 +20,6 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.Runs
-import io.mockk.runs
 import java.util.Base64
 
 /* test cases
