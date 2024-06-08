@@ -37,10 +37,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 }
             }
         }
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav)
-        ViewCompat.setOnApplyWindowInsetsListener(bottomNavigationView) { view, insets ->
-            insets
-        }
+
     }
 
     override fun onActivityReady(savedInstanceState: Bundle?) {}

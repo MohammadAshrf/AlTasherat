@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="text">#FFFFFF</color>
+
+    <color name="radio_button_not_selected">#B3282D6E</color>
+    <color name="radio_button_selector">#F1ECEC</color>
+    <color name="layout_background">#010533</color>
+    <color name="arrow">#FFFFFF</color>
+    <color name="background">#EBE9FA</color>
+
+
 </resources>

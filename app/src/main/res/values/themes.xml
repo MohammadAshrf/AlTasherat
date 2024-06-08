@@ -184,10 +184,13 @@
         <item name="boxStrokeColor">@color/icon</item>
         <item name="boxBackgroundMode">outline</item>
         <item name="boxCornerRadiusTopEnd">@dimen/_16sdp</item>
-        <item name="android:textColorHint">@color/textInputIcon</item>
         <item name="boxCornerRadiusTopStart">@dimen/_16sdp</item>
         <item name="startIconTint">@color/icon</item>
+        <item name="hintTextColor">@color/hint_color</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+
     </style>
+
 
 
     //--------------------------------------- TextInputEditText -----------------------------//
@@ -196,11 +199,15 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ems">10</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="hintTextColor">@color/text_color</item>
+        <item name="android:textColorHint">@color/hint_color</item>
         <item name="android:background">@drawable/rounded_button_background</item>
         <item name="android:padding">@dimen/_14sdp</item>
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:drawablePadding">@dimen/_6sdp</item>
         <item name="android:ellipsize">end</item>
+
         <item name="android:textAppearance">@style/Font.Regular</item>
     </style>
 
