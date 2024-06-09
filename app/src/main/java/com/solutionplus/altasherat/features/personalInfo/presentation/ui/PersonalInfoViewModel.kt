@@ -62,7 +62,7 @@ class PersonalInfoViewModel @Inject constructor(
                         )
                     )
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.GetUpdatedUserFromLocal(it.model))
@@ -82,7 +82,7 @@ class PersonalInfoViewModel @Inject constructor(
                         )
                     )
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.GetUpdatedUserFromRemote(it.model))
@@ -128,7 +128,7 @@ class PersonalInfoViewModel @Inject constructor(
                     )
                     }
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.UpdateDoneSuccessfully("Data updated successfully"))
@@ -143,7 +143,7 @@ class PersonalInfoViewModel @Inject constructor(
             getCountriesFromLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(
                             PersonalInfoEvent.GetCountriesFromLocal(

@@ -71,6 +71,10 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             personalInfoVM.processIntent(GetUpdatedUserFromRemote)
             binding.swipeRefreshLayout.isRefreshing = false
+            binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_circle.let
+            {
+                ResourcesCompat.getDrawable(resources, it, null)
+            } )
         }
         binding.moreButton.setOnClickListener {
             findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
