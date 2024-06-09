@@ -8,15 +8,17 @@ import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
@@ -74,7 +76,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_circle.let
             {
                 ResourcesCompat.getDrawable(resources, it, null)
-            } )
+            })
         }
         binding.moreButton.setOnClickListener {
             findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
@@ -118,7 +120,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             contract.launch("image/*")
         }
     }
-
 
 
     private fun handleEvents() {
@@ -200,34 +201,84 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 it.exception?.let {
                     if (it is LeonException.Local.RequestValidation) {
                         val errorMessages = it.errors
-                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getString(it) }
-                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = getString(it) }
-                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getString(it) }
-                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
-                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
-                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                        errorMessages[Validation.FIRST_NAME]?.let {
+                            binding.firstNameEditText.error = getString(it)
+                        }
+                        errorMessages[Validation.MIDDLE_NAME]?.let {
+                            binding.middleNameEditText.error = getString(it)
+                        }
+                        errorMessages[Validation.LAST_NAME]?.let {
+                            binding.lastNameEditText.error = getString(it)
+                        }
+                        errorMessages[Validation.EMAIL]?.let {
+                            binding.emailEditText.error = getString(it)
+                        }
+                        errorMessages[Validation.PHONE]?.let {
+                            binding.phoneEditText.error = getString(it)
+                        }
+                        errorMessages[Validation.COUNTRY]?.let {
+                            binding.country.error = getString(it)
+                        }
                         errorMessages[Validation.IMAGE]?.let {
                             binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_red_circle.let
                             {
                                 ResourcesCompat.getDrawable(resources, it, null)
-                            } )
-                          showSnackBar(getString(R.string.invalid_image), true) }
-                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
-                        errorMessages[Validation.BIRTH_DATE]?.let { binding.birthdateEditText.error = getString(it)
+                            })
+                            showSnackBar(getString(R.string.invalid_image), true)
+                        }
+                        errorMessages[Validation.COUNTRY]?.let {
+                            binding.country.error = getString(it)
+                        }
+                        errorMessages[Validation.BIRTH_DATE]?.let {
+                            binding.birthdateEditText.error = getString(it)
+                            binding.birthdateEditText.addTextChangedListener(object : TextWatcher {
+                                override fun afterTextChanged(s: Editable?) {
+                                    binding.birthdateInputLayout.endIconMode =
+                                        TextInputLayout.END_ICON_NONE
+                                    binding.birthdateEditText.error = null
+                                }
+
+                                override fun beforeTextChanged(
+                                    s: CharSequence?,
+                                    start: Int,
+                                    count: Int,
+                                    after: Int
+                                ) {
+                                }
+
+                                override fun onTextChanged(
+                                    s: CharSequence?,
+                                    start: Int,
+                                    before: Int,
+                                    count: Int
+                                ) {
+                                }
+                            })
                             showSnackBar(getString(R.string.invalid_birth_date), true)
                         }
                     }
 
                     if (it is LeonException.Client.ResponseValidation) {
                         val errorMessages = it.errors
-                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = it }
-                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = it
-                            errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = it }
-                            errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
-                            errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
-                            errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
+                        errorMessages[Validation.FIRST_NAME]?.let {
+                            binding.firstNameEditText.error = it
+                        }
+                        errorMessages[Validation.MIDDLE_NAME]?.let {
+                            binding.middleNameEditText.error = it
+                            errorMessages[Validation.LAST_NAME]?.let {
+                                binding.lastNameEditText.error = it
+                            }
+                            errorMessages[Validation.EMAIL]?.let {
+                                binding.emailEditText.error = it
+                            }
+                            errorMessages[Validation.PHONE]?.let {
+                                binding.phoneEditText.error = it
+                            }
                             errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
-                            errorMessages[Validation.BIRTH_DATE]?.let { binding.birthdateEditText.error = it }
+                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
+                            errorMessages[Validation.BIRTH_DATE]?.let {
+                                binding.birthdateEditText.error = it
+                            }
                         }
                     }
                 }
