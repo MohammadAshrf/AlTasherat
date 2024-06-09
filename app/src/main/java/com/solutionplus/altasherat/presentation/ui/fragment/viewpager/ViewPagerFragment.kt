@@ -120,7 +120,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         when (position) {
             0 -> {
                 binding.btnLoginAndSignup.text = getString(R.string.sigin_in)
-                binding.tvDonTHaveAnAccount.text = getString(R.string.Dont_have_an_account)
+                binding.tvDonTHaveAnAccount.text = getString(R.string.Do_not_have_an_account)
                 binding.tvRegister.text = getString(R.string.GOTOSignUp)
             }
             1 -> {

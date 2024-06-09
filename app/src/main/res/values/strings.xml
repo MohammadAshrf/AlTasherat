@@ -10,13 +10,13 @@
     <string name="password_reset">Reset Password</string>
     <string name="enter_phone_number">For recover enter your number</string>
     <string name="enter_phone_text">Enter your phone</string>
-    <string name="err_msg_enter_countrycode">Please Enter Country Code</string>
-    <string name="err_msg_enter_valid_first_name">First name must be between 3 and 15 characters.</string>
-    <string name="err_msg_enter_valid_middle_name">Middle name must be less than 15 characters.</string>
-    <string name="err_msg_enter_valid_last_name">Last name must be between 3 and 15 characters.</string>
-    <string name="err_msg_enter_valid_email">Please enter a valid email address with maximum 15 characters.</string>
-    <string name="err_msg_enter_valid_phone">Phone number must be numeric and between 9 and 15 characters.</string>
-    <string name="err_msg_enter_valid_password">Password must be between 8 and 50 characters.</string>
+    <string name="err_msg_enter_country_code">Please Enter Country Code</string>
+    <string name="err_msg_enter_valid_first_name">First name must be between 3 and 15 characters</string>
+    <string name="err_msg_enter_valid_middle_name">Middle name must be less than 15 characters</string>
+    <string name="err_msg_enter_valid_last_name">Last name must be between 3 and 15 characters</string>
+    <string name="err_msg_enter_valid_email">Please enter a valid email address with maximum 15 characters</string>
+    <string name="err_msg_enter_valid_phone">Phone number must be numeric and between 9 and 15 characters</string>
+    <string name="err_msg_enter_valid_password">Password must be between 8 and 50 characters</string>
     <string name="please_wait">Please Wait…</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
@@ -28,12 +28,12 @@
     <string name="language">Language</string>
     <string name="sign_out">Sign out</string>
     <string name="login">"Sign In"</string>
-    <string name="conferm_email_txt">"Verify your E-mail"</string>
+    <string name="confirm_email_txt">"Verify your E-mail"</string>
     <string name="we_send_msg_txt">"We sent a confirmation E-mail to you"</string>
     <string name="check_email_txt">"Check your email and click the confirmation link to continue"</string>
     <string name="skip_txt">Skip</string>
     <string name="enter_otp_text">"Enter the code sent to your mobile phone to continue"</string>
-    <string name="enter_password_text">"Enter the password "</string>
+    <string name="enter_password_text">"Enter the password"</string>
     <string name="enter_password_again_text">"Re-enter the password again"</string>
     <string name="enter_new_password">"Enter the new password"</string>
     <string name="enter_old_password">"Enter the old password"</string>
@@ -48,7 +48,7 @@
     <string name="change_password">Change Password</string>
     <string name="visa_platform">Visa Platform</string>
     <string name="visa_applications">Visa Applications</string>
-    <string name="profile_personly">Personal Profile </string>
+    <string name="personal_profile">Personal Profile</string>
     <string name="next">Next</string>
     <string name="hello_onboarding">Welcome to AlTasherat App</string>
     <string name="third_onboarding">Whether you are looking for work or you are a company owner looking for workers, a team of experts at the highest level will be at your service. Just fill out your application in easy steps without complications.</string>
@@ -117,7 +117,7 @@
     <string name="state">State</string>
     <string name="FillOut_the_form_now">Fill the\n form now</string>
     <string name="contact_info">Communication data</string>
-    <string name="_20_1011777751_966_550440787">( +20) 1011777751 - (+966) 550440787</string>
+    <string name="_20_1011777751_966_550440787">(+20) 1011777751 - (+966) 550440787</string>
     <string name="travel_altaherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
     <string name="enter_your_state">Enter Your State</string>
     <string name="binding_phone_code">(+%1$s)</string>
@@ -137,26 +137,27 @@
     <string name="account_settings_goto">Account management</string>
     <string name="conerm_delete">Confirm deletion</string>
     <string name="cancel">Cancellation</string>
-    <string name="timeout_error" translatable="false">The operation timed out. Please try again later.</string>
+    <string name="timeout_error" translatable="false">The operation timed out. Please try again later</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="Deactivate_the_account_permanently">Deactivate the account permanently</string>
     <string name="manage_account_delete">Account management</string>
     <string name="delete_account">delete account</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="invalid_first_name">First name is invalid. It must be between 3 and 15 characters.</string>
-    <string name="invalid_last_name">Last name is invalid. It must be between 3 and 15 characters.</string>
-    <string name="invalid_password">Password is invalid. It must be between 8 and 50 characters.</string>
-    <string name="invalid_phone">Phone number is invalid. It must contain only digits and be between 9 and 15 characters long.</string>
-    <string name="invalid_email">Email is invalid. It must be less than 50 characters.</string>
+    <string name="invalid_first_name">First name is invalid. It must be between 3 and 15 characters</string>
+    <string name="invalid_last_name">Last name is invalid. It must be between 3 and 15 characters</string>
+    <string name="invalid_password">Password is invalid. It must be between 8 and 50 characters</string>
+    <string name="invalid_phone">Phone number is invalid. It must contain only digits and be between 9 and 15 characters long</string>
+    <string name="invalid_email">Email is invalid. It must be less than 50 characters</string>
     <string name="email_text">Email</string>
     <string name="Delete">Confirm deletion</string>
     <string name="cancellation">Cancellation</string>
-    <string name="Dont_have_an_account">don\'t have account?</string>
+    <string name="Do_not_have_an_account">Don\'t have account?</string>
     <string name="GOTOSignUp">Sign Up</string>
     <string name="invalid_middle_name">Middle name is not valid</string>
     <string name="invalid_country">Country is not valid</string>
-    <string name="invalid_old_password">Old password is invalid. It must be between 8 and 50 characters.</string>
-    <string name="invalid_new_password">New password is invalid. It must be between 8 and 50 characters.</string>
-    <string name="invalid_new_password_confirmation">New password confirmation is invalid. It must be between 8 and 50 characters.</string>
-    <string name="new_password_and_confirmation_do_not_match">New password and confirmation do not match.</string>
+    <string name="invalid_old_password">Old password is invalid. It must be between 8 and 50 characters</string>
+    <string name="invalid_new_password">New password is invalid. It must be between 8 and 50 characters</string>
+    <string name="invalid_new_password_confirmation">New password confirmation is invalid. It must be between 8 and 50 characters</string>
+    <string name="new_password_and_confirmation_do_not_match">New password and confirmation do not match</string>
+    <string name="you_re_already_logged_in">You\'re already logged in!</string>
 </resources>
