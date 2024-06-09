@@ -1,7 +1,7 @@
 package com.solutionplus.altasherat.features.profileMenu.domain.repository
 
 import com.solutionplus.altasherat.features.profileMenu.domain.model.Logout
-import com.solutionplus.altasherat.features.profileMenu.domain.model.User
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 interface IProfileMenuRepository {
     suspend fun getUser(): User

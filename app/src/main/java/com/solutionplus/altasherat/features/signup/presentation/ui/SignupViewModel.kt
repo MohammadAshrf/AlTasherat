@@ -22,7 +22,7 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
     private val getCountriesUC: GetCountriesFromLocalUC,
-    private val getSelectedCountryUC: GetSelectedCountryUC
+    private val getSelectedCountryUC: GetSelectedCountryUC,
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
     initialState = SignUpContract.SignUpState.initial()
 ) {

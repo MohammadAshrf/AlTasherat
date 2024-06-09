@@ -5,8 +5,8 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
-import com.solutionplus.altasherat.features.login.domain.model.User
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract
 
 interface LoginContract {

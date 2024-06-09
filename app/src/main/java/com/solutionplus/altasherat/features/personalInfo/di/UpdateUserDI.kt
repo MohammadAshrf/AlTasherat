@@ -12,6 +12,7 @@ import com.solutionplus.altasherat.features.personalInfo.domain.interactor.Updat
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateProfileRepository
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateProfileLocalDS
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.remote.IUpdateProfileRemoteDS
+import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,12 +22,8 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 internal object UpdateUserDI {
     @Provides
-    fun provideUpdateUserUC(repository: IUpdateProfileRepository): UpdateProfileInfoUC =
-        UpdateProfileInfoUC(repository)
-
-    @Provides
-    fun provideGetUserInfoFromLocalUC(repository: IUpdateProfileRepository): GetProfileInfoLocalUC =
-        GetProfileInfoLocalUC(repository)
+    fun provideUpdateUserUC(repository: IUpdateProfileRepository, saveUserUC: SaveUserUC): UpdateProfileInfoUC =
+        UpdateProfileInfoUC(repository, saveUserUC)
 
     @Provides
     fun provideGetUserFromRemoteUC(repository: IUpdateProfileRepository): GetProfileInfoRemoteUC =

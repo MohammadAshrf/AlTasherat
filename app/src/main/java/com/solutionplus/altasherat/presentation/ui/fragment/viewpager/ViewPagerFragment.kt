@@ -118,8 +118,16 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
 
     private fun updateButtonText(position: Int) {
         when (position) {
-            0 -> binding.btnLoginAndSignup.text = getString(R.string.sigin_in)
-            1 -> binding.btnLoginAndSignup.text = getString(R.string.new_account)
+            0 -> {
+                binding.btnLoginAndSignup.text = getString(R.string.sigin_in)
+                binding.tvDonTHaveAnAccount.text = getString(R.string.Dont_have_an_account)
+                binding.tvRegister.text = getString(R.string.GOTOSignUp)
+            }
+            1 -> {
+                binding.btnLoginAndSignup.text = getString(R.string.new_account)
+                binding.tvDonTHaveAnAccount.text = getString(R.string.Already_have_an_account)
+                binding.tvRegister.text = getString(R.string.SignIn)
+            }
         }
     }
 

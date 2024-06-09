@@ -30,6 +30,7 @@ runner = "1.5.2"
 firebaseFirestoreKtx = "25.0.0"
 lifecycleViewmodelKtx = "2.7.0"
 activityVersion = "1.9.0"
+mediationTestSuite = "3.0.0"
 
 
 [libraries]
@@ -69,6 +70,7 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+mediation-test-suite = { group = "com.google.android.ads", name = "mediation-test-suite", version.ref = "mediationTestSuite" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
