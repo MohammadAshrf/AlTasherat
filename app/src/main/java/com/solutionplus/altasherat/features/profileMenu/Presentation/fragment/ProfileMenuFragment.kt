@@ -30,7 +30,6 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
-        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.GetUser)
     }
 
     override fun viewInit() {
@@ -57,6 +56,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     if (it.isUserLoggedIn) {
                         binding.viewProfileSection.fullView.visibility = View.VISIBLE
                         binding.btnLogOut.visibility = View.VISIBLE
+                        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.GetUser)
                     } else {
                         binding.viewProfileSection.fullView.visibility = View.GONE
                     }
@@ -88,7 +88,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         emailBundle = Bundle().apply {
             putString(EMAIL_KEY_BUNDLE, user.email)
         }
-        if (!user.emailVerified && user.id != -1) {
+        if (!user.emailVerified) {
             showCustomSnackbar()
         }
         if (user.image.path != "") {
@@ -97,7 +97,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
 
         }
-        binding.viewProfileSection.nameTextView.text = "${user.firstname + " " + user.lastname}"
+        binding.viewProfileSection.nameTextView.text = user.firstname + " " + user.lastname
     }
     @SuppressLint("SetTextI18n")
     private fun getAppVersion() {

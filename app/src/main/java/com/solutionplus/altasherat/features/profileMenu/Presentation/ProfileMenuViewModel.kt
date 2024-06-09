@@ -61,7 +61,7 @@ class ProfileMenuViewModel @Inject constructor(
             getUserUC.invoke(viewModelScope, null) {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> {}
                     is Resource.Success -> {
                         sendEvent(ProfileMenuContract.ProfileMenuEvent.GetUser(it.model))
                     }
