@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_picture_menu"
-        tools:text="ناديــن محمد السيد  "
+        tools:text="@string/profile_name"
         tools:visibility="visible" />
 
     <Button
