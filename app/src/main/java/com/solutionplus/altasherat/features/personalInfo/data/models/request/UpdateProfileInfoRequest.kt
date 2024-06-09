@@ -6,9 +6,8 @@ import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
 import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
 import java.io.File
-import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
-
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 data class UpdateProfileInfoRequest(
@@ -62,6 +61,7 @@ data class UpdateProfileInfoRequest(
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun isBirthDateValid(): Boolean {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val birthDate = LocalDate.parse(birthdate, formatter)
@@ -74,11 +74,7 @@ data class UpdateProfileInfoRequest(
             val maxSizeInKB = 512 // 10 MB
             // Check if the file size is less than or equal to 10MB
             val sizeInKB = it.length() / 1024
-            if (sizeInKB > maxSizeInKB) {
-                return false
-            }
-
-            return true
+            return sizeInKB <= maxSizeInKB
         } ?: return true // If the image is null, return false
     }
 }
