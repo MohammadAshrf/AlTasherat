@@ -66,6 +66,28 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
 
             state.exception?.let {
                 handleHttpExceptions(it)
+                if (it is LeonException.Local.RequestValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[FIRST_NAME]?.let { binding.etFirstname.error = getString(it) }
+                    errorMessages[LAST_NAME]?.let { binding.etLastName.error = getString(it) }
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = getString(it)
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
+                    errorMessages[EMAIL]?.let { binding.etEmail.error = getString(it) }
+                }
+                if (it is LeonException.Client.ResponseValidation) {
+                    val errors = it.errors
+                    errors[PASSWORD]?.let {
+                        binding.etPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errors[PHONE]?.let { binding.etPhoneClient.error = it }
+                    errors[EMAIL]?.let { binding.etEmail.error = it }
+                    errors[FIRST_NAME]?.let { binding.etFirstname.error = it }
+                    errors[LAST_NAME]?.let { binding.etLastName.error = it }
+                }
             }
         }
     }
@@ -85,30 +107,6 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                 setupCountrySpinner(event.country)
             }
 
-            is SignUpContract.SignupEvent.SignupFailure -> {
-                if (event.exception is LeonException.Local.RequestValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[FIRST_NAME]?.let { binding.etFirstname.error = getString(it) }
-                    errorMessages[LAST_NAME]?.let { binding.etLastName.error = getString(it) }
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = getString(it)
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
-                    errorMessages[EMAIL]?.let { binding.etEmail.error = getString(it) }
-                }
-                if (event.exception is LeonException.Client.ResponseValidation) {
-                    val errors = event.exception.errors
-                    errors[PASSWORD]?.let {
-                        binding.etPassword.error = it
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errors[PHONE]?.let { binding.etPhoneClient.error = it }
-                    errors[EMAIL]?.let { binding.etEmail.error = it }
-                    errors[FIRST_NAME]?.let { binding.etFirstname.error = it }
-                    errors[LAST_NAME]?.let { binding.etLastName.error = it }
-                }
-            }
         }
     }
 

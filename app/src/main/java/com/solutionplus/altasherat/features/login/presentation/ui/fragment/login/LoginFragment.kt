@@ -42,6 +42,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             getClassLogger().info(it.exception.toString())
             it.exception?.let {
                 handleHttpExceptions(it)
+
+                if (it is LeonException.Local.RequestValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = getString(it)
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
+                }
+
+                if (it is LeonException.Client.ResponseValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let {
+                        binding.etPhoneClient.error = it
+                        getClassLogger().debug("Phone error: $it")
+                    }
+                }
             }
             if (it.isLoading) {
                 showLoading()
@@ -78,29 +99,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 setupCountrySpinner(event.country)
             }
 
-            is LoginContract.LoginEvents.LoginFailure -> {
-                if (event.exception is LeonException.Local.RequestValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = getString(it)
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
-                }
-
-                if (event.exception is LeonException.Client.ResponseValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = it
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[PHONE]?.let {
-                        binding.etPhoneClient.error = it
-                        getClassLogger().debug("Phone error: $it") // Add this line
-                    }
-                }
-
-            }
         }
     }
 

@@ -34,6 +34,7 @@ interface PersonalInfoContract {
         data class UpdateFailed(val message: String) : PersonalInfoEvent()
         data class GetUpdatedUserFromRemote(val user: User) : PersonalInfoEvent()
         data class GetUpdatedUserFromLocal(val user: User) : PersonalInfoEvent()
+
     }
 
     data class PersonalInfoState(

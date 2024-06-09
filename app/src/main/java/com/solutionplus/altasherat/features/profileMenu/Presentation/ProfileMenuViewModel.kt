@@ -5,9 +5,9 @@ import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract.ProfileMenuAction
-import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract.ProfileMenuState
-import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract.ProfileMenuEvent
+import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuContract.ProfileMenuAction
+import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuContract.ProfileMenuState
+import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuContract.ProfileMenuEvent
 import com.solutionplus.altasherat.features.profileMenu.domain.usecase.CheckUserStateUC
 import com.solutionplus.altasherat.features.profileMenu.domain.usecase.GetUserUC
 import com.solutionplus.altasherat.features.profileMenu.domain.usecase.LogoutUC

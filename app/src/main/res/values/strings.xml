@@ -153,4 +153,10 @@
     <string name="cancellation">Cancellation</string>
     <string name="Dont_have_an_account">don\'t have account?</string>
     <string name="GOTOSignUp">Sign Up</string>
+    <string name="invalid_middle_name">Middle name is not valid</string>
+    <string name="invalid_country">Country is not valid</string>
+    <string name="invalid_old_password">Old password is invalid. It must be between 8 and 50 characters.</string>
+    <string name="invalid_new_password">New password is invalid. It must be between 8 and 50 characters.</string>
+    <string name="invalid_new_password_confirmation">New password confirmation is invalid. It must be between 8 and 50 characters.</string>
+    <string name="new_password_and_confirmation_do_not_match">New password and confirmation do not match.</string>
 </resources>

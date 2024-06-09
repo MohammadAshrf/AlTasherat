@@ -1,5 +1,7 @@
 package com.solutionplus.altasherat.features.deleteaccount.domain.usecase
 
+import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
@@ -13,10 +15,11 @@ class DeleteAccountUC (
 ) :BaseUseCase<Unit, DeleteAccountRequest>(){
     public override suspend fun execute(params: DeleteAccountRequest?) {
         params?.let {
-            validateRequest(it)?.let { message ->
+            val errorMessages = it.validateRequest()
+            if (errorMessages.isNotEmpty()) {
                 throw LeonException.Local.RequestValidation(
-                    clazz = ChangePasswordRequest::class,
-                    message = message
+                    clazz = DeleteAccountRequest::class,
+                    errors = errorMessages
                 )
             }
 
@@ -24,16 +27,16 @@ class DeleteAccountUC (
             repository.deleteUser()
             repository.deleteAccessToken()
             repository.changeUserLoginState(false)
-
         }
     }
 
-    private fun validateRequest(request: DeleteAccountRequest): String? {
-        return request.run {
-            when {
-                !validatePassword() -> "password cannot be empty"
-                else -> null
-            }
+    private fun DeleteAccountRequest.validateRequest(): Map<String, Int> {
+        val errorKeys = mutableMapOf<String, Int>()
+
+        if (!validatePassword()) {
+            errorKeys[Validation.PASSWORD] = R.string.invalid_password
         }
+
+        return errorKeys
     }
 }

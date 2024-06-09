@@ -154,4 +154,11 @@
     <string name="delete_info">سوف يتم فقد كل المعلومات والمعاملات والحجوزات</string>
     <string name="Dont_have_an_account">ليس لديك حساب؟</string>
     <string name="GOTOSignUp">تسجيل دخول</string>
+
+    <string name="invalid_middle_name">الاسم الأوسط غير صالح</string>
+    <string name="invalid_country">البلد غير صالحة</string>
+    <string name="invalid_old_password">كلمة المرور القديمة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
+    <string name="invalid_new_password">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
+    <string name="invalid_new_password_confirmation">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
+    <string name="new_password_and_confirmation_do_not_match">كلمة المرورغير مطابقة</string>
 </resources>

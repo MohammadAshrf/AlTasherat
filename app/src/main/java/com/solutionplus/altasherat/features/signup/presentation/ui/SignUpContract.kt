@@ -27,7 +27,6 @@ interface SignUpContract {
         data class SignupSuccess(val user: User) : SignupEvent()
         data class GetCountries(val country: List<Country>): SignupEvent()
         data class GetSelectedCountry(val country: Country): SignupEvent()
-        data class SignupFailure(val exception: LeonException) : SignupEvent()
     }
 
     data class SignUpState(
