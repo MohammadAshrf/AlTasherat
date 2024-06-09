@@ -67,14 +67,15 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
                     findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
                 }
+
             }
         }
 
-        collectFlowWithLifecycle(viewModel.viewState) { state ->
-            state.exception?.let {
+        collectFlowWithLifecycle(viewModel.viewState) {
+            it.exception?.let {
                 handleHttpExceptions(it)
             }
-            if (state.isLoading) {
+            if (it.isLoading) {
                 showLoading()
             } else {
                 hideLoading()

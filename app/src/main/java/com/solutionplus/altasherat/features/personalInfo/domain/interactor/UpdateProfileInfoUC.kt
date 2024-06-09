@@ -1,5 +1,7 @@
 package com.solutionplus.altasherat.features.personalInfo.domain.interactor
 
+import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateProfileInfoRequest
