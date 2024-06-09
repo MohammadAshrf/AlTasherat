@@ -161,28 +161,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 }
 
                 is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleUserInfo(it.user)
-                is PersonalInfoEvent.SaveFailure -> {
-                    if (it.exception is LeonException.Local.RequestValidation) {
-                        val errorMessages = it.exception.errors
-                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getString(it) }
-                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = getString(it) }
-                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getString(it) }
-                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
-                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
-                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
-                    }
-
-                    if (it.exception is LeonException.Client.ResponseValidation) {
-                        val errorMessages = it.exception.errors
-                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = it }
-                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = it
-                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = it }
-                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
-                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
-                        errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
-                        }
-                    }
-                }
             }
         }
     }
@@ -215,12 +193,26 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     hideLoading()
                 }
                 it.exception?.let {
-                    Toast.makeText(
-                        requireContext(),
-                        it.message ?: "Unexpected Error",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    if (it is LeonException.Local.RequestValidation) {
+                        val errorMessages = it.errors
+                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getString(it) }
+                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = getString(it) }
+                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getString(it) }
+                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
+                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                    }
+
+                    if (it is LeonException.Client.ResponseValidation) {
+                        val errorMessages = it.errors
+                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = it }
+                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = it
+                            errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = it }
+                            errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
+                            errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
+                            errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
+                        }
+                    }
                 }
             }
         }

@@ -46,6 +46,36 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             getClassLogger().info(state.exception.toString())
             state.exception?.let {
                 handleHttpExceptions(it)
+                if (it is LeonException.Local.RequestValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[Validation.OLD_PASSWORD]?.let {
+                        binding.etOldPassword.error = getString(it)
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+
+                    }
+                    errorMessages[Validation.NEW_PASSWORD]?.let {
+                        binding.etNewPassword.error = getString(it)
+                        binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[Validation.NEW_PASSWORD_CONFIRMATION]?.let {
+                        binding.etReTypeNewPassword.error = getString(it)
+                        binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                }
+
+                if (it is LeonException.Client.ResponseValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[Validation.OLD_PASSWORD]?.let { binding.etOldPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[Validation.NEW_PASSWORD]?.let {
+                        binding.etNewPassword.error = it
+                        binding.etReTypeNewPassword.error = it
+                        binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
+                        binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+
+                    }
+                }
             }
             if (state.isLoading) {
                 showLoading()
@@ -91,40 +121,6 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
                 showSuccessfulToast()
             }
 
-            is ChangePasswordContract.ChangePasswordEvents.ChangePasswordError -> {
-
-
-                if (event.exception is LeonException.Local.RequestValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[Validation.OLD_PASSWORD]?.let {
-                        binding.etOldPassword.error = getString(it)
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-
-                    }
-                    errorMessages[Validation.NEW_PASSWORD]?.let {
-                        binding.etNewPassword.error = getString(it)
-                        binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[Validation.NEW_PASSWORD_CONFIRMATION]?.let {
-                        binding.etReTypeNewPassword.error = getString(it)
-                        binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                }
-
-                if (event.exception is LeonException.Client.ResponseValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[Validation.OLD_PASSWORD]?.let { binding.etOldPassword.error = it
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[Validation.NEW_PASSWORD]?.let {
-                        binding.etNewPassword.error = it
-                        binding.etReTypeNewPassword.error = it
-                        binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
-                        binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-
-                    }
-                }
-            }
         }
     }
 

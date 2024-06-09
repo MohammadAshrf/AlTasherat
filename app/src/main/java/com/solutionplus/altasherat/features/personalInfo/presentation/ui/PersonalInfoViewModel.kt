@@ -126,12 +126,6 @@ class PersonalInfoViewModel @Inject constructor(
                             exception = it.exception
                         )
                     )
-                        if (it.exception is LeonException.Local.RequestValidation) {
-                            sendEvent(PersonalInfoEvent.SaveFailure(it.exception))
-                        }
-                        if (it.exception is LeonException.Client.ResponseValidation) {
-                            sendEvent(PersonalInfoEvent.SaveFailure(it.exception))
-                        }
                     }
 
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))

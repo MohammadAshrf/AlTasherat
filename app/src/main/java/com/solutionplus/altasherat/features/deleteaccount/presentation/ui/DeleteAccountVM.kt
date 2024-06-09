@@ -38,12 +38,6 @@ class DeleteAccountVM @Inject constructor(
             when (resource) {
                 is Resource.Failure -> {
                     setState(oldViewState.copy(exception = resource.exception))
-                    if (resource.exception is LeonException.Local.RequestValidation) {
-                        sendEvent(DeleteAccountContract.DeleteAccountEvents.DeleteAccountError(resource.exception))
-                    }
-                    if (resource.exception is LeonException.Client.ResponseValidation) {
-                        sendEvent(DeleteAccountContract.DeleteAccountEvents.DeleteAccountError(resource.exception))
-                    }
                 }
 
                 is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))

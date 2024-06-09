@@ -48,12 +48,6 @@ class ChangePasswordViewModel @Inject constructor(
                                 exception = resource.exception
                             )
                         )
-                        if (resource.exception is LeonException.Local.RequestValidation) {
-                            sendEvent(ChangePasswordContract.ChangePasswordEvents.ChangePasswordError(resource.exception))
-                        }
-                        if (resource.exception is LeonException.Client.ResponseValidation) {
-                            sendEvent(ChangePasswordContract.ChangePasswordEvents.ChangePasswordError(resource.exception))
-                        }
                     }
 
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))

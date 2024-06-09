@@ -55,6 +55,23 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
 
                         state.exception?.let {
                             handleHttpExceptions(it)
+
+                            if (it is LeonException.Local.RequestValidation) {
+                                val errorMessages = it.errors
+                                errorMessages[Validation.PASSWORD]?.let {
+                                    bindingBottomSheet.etReTypeNewPassword.error = getString(it)
+                                    bindingBottomSheet.textInputLayout4.endIconMode =
+                                        TextInputLayout.END_ICON_NONE
+                                }
+                            }
+
+                            if (it is LeonException.Client.ResponseValidation) {
+                                val errorMessages = it.errors
+                                errorMessages[Validation.PASSWORD]?.let {
+                                    bindingBottomSheet.etReTypeNewPassword.error = it
+                                    bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+                                }
+                            }
                         }
                         if (state.isLoading) {
                             showLoading()
@@ -93,25 +110,6 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
                 startActivity(intent)
             }
 
-            is DeleteAccountContract.DeleteAccountEvents.DeleteAccountError -> {
-
-                if (event.exception is LeonException.Local.RequestValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[Validation.PASSWORD]?.let {
-                        bindingBottomSheet.etReTypeNewPassword.error = getString(it)
-                        bindingBottomSheet.textInputLayout4.endIconMode =
-                            TextInputLayout.END_ICON_NONE
-                    }
-                }
-
-                if (event.exception is LeonException.Client.ResponseValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[Validation.PASSWORD]?.let {
-                        bindingBottomSheet.etReTypeNewPassword.error = it
-                        bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                }
-            }
         }
     }
 
