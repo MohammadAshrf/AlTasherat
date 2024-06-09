@@ -4,71 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/wight"
     tools:context=".features.login.presentation.ui.fragment.login.LoginFragment">
 
-    <Spinner
-        android:id="@+id/et_CountruCode"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@drawable/shape_spinner_background"
-        android:popupBackground="#4426F5"
-        android:layout_marginEnd="@dimen/_13sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/phone_text_input_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/phone_text_input_layout"
-        app:layout_constraintStart_toEndOf="@+id/phone_text_input_layout"
-        app:layout_constraintTop_toTopOf="@+id/phone_text_input_layout" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView2"
+        style="@style/TextView.Bold"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="@string/phone_number"
+        app:layout_constraintBottom_toTopOf="@+id/phone_text_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/phone_text_input_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_text_input_layout"
-        android:layout_width="210dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="100dp"
-        app:hintEnabled="false"
-        android:inputType="phone"
-        android:layout_marginStart="@dimen/_13sdp"
+        style="@style/TextInputLayout"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:layout_marginEnd="@dimen/_80sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_Phone_Client"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="name"
-            android:background="@drawable/phone_background"
-            android:drawableStart="@drawable/ic_phone"
+            style="@style/TextInputEditText"
+            android:autofillHints="phone"
+            android:background="@drawable/custom_phone_bg"
+            android:drawableStart="@drawable/ic_mobile"
             android:hint="@string/enter_mobile"
-            android:inputType="textPersonName" />
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/et_CountryCode"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:background="@drawable/shape_spinner_background"
+        android:popupBackground="@color/Primary"
+        app:layout_constraintBottom_toBottomOf="@+id/phone_text_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/phone_text_input_layout"
+        app:layout_constraintTop_toTopOf="@+id/phone_text_input_layout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView3"
+        style="@style/TextView.Bold"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="@string/Password"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="47dp"
-        app:boxBackgroundColor="@color/wight"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxStrokeColor="@color/icon"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/et_CountruCode"
+        style="@style/TextInputLayout"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="@id/et_CountryCode"
         app:layout_constraintStart_toStartOf="@+id/phone_text_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/phone_text_input_layout"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/icon"
-        app:startIconDrawable="@drawable/ic_lock">
+        app:passwordToggleTint="@color/icon">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_background"
+            style="@style/TextInputEditText"
+            android:autofillHints="password"
+            android:drawableStart="@drawable/ic_lock"
+            android:gravity="center"
             android:hint="@string/WritePassword"
             android:inputType="textPassword" />
 
@@ -76,41 +78,11 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_forgot_password"
-        style="@style/TextView.Medium"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/_10sdp"
+        style="@style/TextView.Bold"
+        android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/forgot_password"
-        android:textColor="@color/text"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/TextView.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_3sdp"
-        android:text="@string/Phone"
-        android:textSize="16sp"
-        android:textColor="@color/text"
-        app:layout_constraintBottom_toTopOf="@+id/phone_text_input_layout"
-        app:layout_constraintStart_toStartOf="@+id/phone_text_input_layout" />
-
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/TextView.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_3sdp"
-        android:text="@string/Password"
-        android:textColor="@color/text"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/et_CountruCode"
-        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

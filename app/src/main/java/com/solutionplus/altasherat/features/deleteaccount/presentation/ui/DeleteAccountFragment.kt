@@ -106,7 +106,7 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
         bottomSheetDialog = BottomSheetDialog(requireContext())
         bindingBottomSheet = DeleteAccountButtomSheetBinding.inflate(layoutInflater)
         bindingBottomSheet.btnDelete.setOnClickListener {
-            val password = bindingBottomSheet.etPassword.text.toString()
+            val password = bindingBottomSheet.etReTypeNewPassword.text.toString()
             viewModel.onActionTrigger(
                 DeleteAccountContract.DeleteAccountActions.DeleteAccount(
                     password,

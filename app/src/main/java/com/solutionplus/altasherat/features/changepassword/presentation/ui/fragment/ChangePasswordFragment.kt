@@ -63,7 +63,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         binding.btnSave.setOnClickListener {
             handleChangePassword()
         }
-        binding.imgback.setOnClickListener {
+        binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -96,7 +96,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     }
 
     private fun showSuccessfulToast(){
-        Toast.makeText(requireContext(), "Your Password Changed successfully", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Your Password Changed Successfully", Toast.LENGTH_SHORT).show()
     }
 
 

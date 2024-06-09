@@ -4,12 +4,16 @@
     android:autoMirrored="true"
     android:viewportWidth="26"
     android:viewportHeight="26">
-  <path
-      android:pathData="M13,13m-13,0a13,13 0,1 1,26 0a13,13 0,1 1,-26 0"
-      android:fillColor="#4426F5"
-      android:fillType="evenOdd"/>
-  <path
-      android:pathData="m14.706,8.36 l2.847,2.847 -7.208,7.209 -2.847,-2.848 7.208,-7.209zM19.714,7.672 L18.444,6.402a1.26,1.26 0,0 0,-1.78 0L15.447,7.62l2.848,2.848 1.42,-1.42a0.97,0.97 0,0 0,0 -1.375zM6.008,19.571a0.324,0.324 0,0 0,0.392 0.385l3.174,-0.769 -2.847,-2.848 -0.72,3.232z"
-      android:fillColor="#FFF"
-      android:fillType="evenOdd"/>
+    <group
+        android:pivotX="13"
+        android:scaleX="-1">
+        <path
+            android:fillColor="#4426F5"
+            android:fillType="evenOdd"
+            android:pathData="M13,13m-13,0a13,13 0,1 1,26 0a13,13 0,1 1,-26 0" />
+        <path
+            android:fillColor="#FFF"
+            android:fillType="evenOdd"
+            android:pathData="m14.706,8.36 l2.847,2.847 -7.208,7.209 -2.847,-2.848 7.208,-7.209zM19.714,7.672 L18.444,6.402a1.26,1.26 0,0 0,-1.78 0L15.447,7.62l2.848,2.848 1.42,-1.42a0.97,0.97 0,0 0,0 -1.375zM6.008,19.571a0.324,0.324 0,0 0,0.392 0.385l3.174,-0.769 -2.847,-2.848 -0.72,3.232z" />
+    </group>
 </vector>

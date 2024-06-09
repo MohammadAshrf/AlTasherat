@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_12sdp"
         app:layout_constraintBottom_toTopOf="@+id/btn_log_out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -60,14 +61,14 @@
         app:layout_constraintTop_toTopOf="@+id/textView3"
         tools:text="v 1.0" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_log_out"
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginBottom="23dp"
-        android:background="@drawable/rounded_button_background"
-        android:drawableEnd="@drawable/ic_sign_out_ar"
+        android:background="@drawable/custom_edit_text_bg"
+        android:drawableEnd="@drawable/ic_sign_out"
         android:text="@string/sign_out"
         android:textColor="#FF1C1F"
         android:visibility="gone"
@@ -79,7 +80,7 @@
 
     <include
         android:id="@+id/message_verefication"
-        layout="@layout/view_costom_snackbar"
+        layout="@layout/view_custom_snack_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
