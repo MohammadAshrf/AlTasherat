@@ -1,9 +1,15 @@
 package com.solutionplus.altasherat.features.personalInfo.data.models.request
 
+import android.os.Build
 import android.util.Patterns
+import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
 import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
 import java.io.File
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
+
+
 
 data class UpdateProfileInfoRequest(
     @field:SerializedName("firstname") val firstname: String,
@@ -53,5 +59,26 @@ data class UpdateProfileInfoRequest(
 
     fun isCountryValid(): Boolean {
         return country > 0
+    }
+
+
+    fun isBirthDateValid(): Boolean {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val birthDate = LocalDate.parse(birthdate, formatter)
+        val thirteenYearsAgo = LocalDate.now().minusYears(13)
+        return !birthDate.isAfter(thirteenYearsAgo)
+    }
+
+    fun isImageValid(): Boolean {
+        image?.let {
+            val maxSizeInKB = 512 // 10 MB
+            // Check if the file size is less than or equal to 10MB
+            val sizeInKB = it.length() / 1024
+            if (sizeInKB > maxSizeInKB) {
+                return false
+            }
+
+            return true
+        } ?: return true // If the image is null, return false
     }
 }
