@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/bgInput" />
+    <solid android:color="@color/Primary" />
     <corners
-        android:bottomLeftRadius="50dp"
+        android:bottomLeftRadius="@dimen/_16sdp"
         android:bottomRightRadius="0dp"
-        android:topLeftRadius="50dp"
+        android:topLeftRadius="@dimen/_16sdp"
         android:topRightRadius="0dp" />
-    <stroke
-        android:width="1dp"
-        android:color="#f1f4fb" />
 </shape>

@@ -1,16 +1,12 @@
 package com.solutionplus.altasherat.presentation.ui.fragment.viewpager
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.solutionplus.altasherat.R
@@ -31,10 +27,10 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
     override fun onFragmentReady(savedInstanceState: Bundle?) {}
     override fun subscribeToObservables() {}
     override fun viewInit() {
-       actions()
+        actions()
     }
 
-    private fun actions(){
+    private fun actions() {
         setupListener()
         setUpRecyclerview()
         setupViewPagerPageChangeCallback()
@@ -47,7 +43,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
 
     private val signupFragment = SignupFragment()
     private val loginFragment = LoginFragment()
-    private fun setupListener(){
+    private fun setupListener() {
         binding.btnLoginAndSignup.setOnClickListener {
             when (binding.viewPager.currentItem) {
                 0 -> loginFragment.onLoginAction()
@@ -56,12 +52,12 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
             }
         }
         binding.skip.setOnClickListener {
-          val intent = Intent(requireContext(), HomeActivity::class.java)
+            val intent = Intent(requireContext(), HomeActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun setUpRecyclerview(){
+    private fun setUpRecyclerview() {
         val fragmentManager: FragmentManager = childFragmentManager
         adapter = ViewPagerAdapter(fragmentManager, lifecycle, loginFragment, signupFragment)
         binding.viewPager.adapter = adapter
@@ -87,6 +83,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
                 params.height = resources.getDimensionPixelSize(R.dimen.height_for_position_0)
                 binding.cardView.layoutParams = params
             }
+
             1 -> {
                 params.height = resources.getDimensionPixelSize(R.dimen.height_for_position_1)
                 binding.cardView.layoutParams = params
@@ -100,6 +97,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
                 binding.viewPager.setCurrentItem(tab.position, true)
                 updateTabTextColor(tab.position)
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
@@ -108,8 +106,8 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
 
     private fun setupTabLayout() {
         val inflater = LayoutInflater.from(requireContext())
-        val tabTitles = arrayOf(getString(R.string.sigin_in), getString(R.string.new_account))
-        tabTitles.forEachIndexed { index, title ->
+        val tabTitles = mutableListOf(getString(R.string.sigin_in), getString(R.string.new_account))
+        tabTitles.forEachIndexed { _, title ->
             val tab = binding.tabLayout.newTab()
             val tabView = inflater.inflate(R.layout.custom_tab_with_underline, null)
             tab.customView = tabView
@@ -131,6 +129,7 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
                 binding.imageView5.visibility = View.VISIBLE
                 binding.imageViewp2.visibility = View.GONE
             }
+
             1 -> {
                 binding.imageView5.visibility = View.GONE
                 binding.imageViewp2.visibility = View.VISIBLE
@@ -153,7 +152,12 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
             if (i == selectedPosition) {
                 tabTextView?.setTextColor(ContextCompat.getColor(requireContext(), R.color.text))
             } else {
-                tabTextView?.setTextColor(ContextCompat.getColor(requireContext(), R.color.textInputIcon))
+                tabTextView?.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.textInputIcon
+                    )
+                )
             }
         }
     }

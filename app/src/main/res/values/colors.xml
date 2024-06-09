@@ -3,12 +3,13 @@
     <color name="black">#FF000000</color>
 
     <color name="white">#FFFFFFFF</color>
-    <color name="wight">#FFFFFFFF</color>
     <color name="Primary">#4426F5</color>
     <color name="Secondary">#65BCF9</color>
     <color name="Accent">#8EE7AD</color>
     <color name="text">#0E0063</color>
     <color name="bgInput">#F1F4FB</color>
+    <color name="bgInputStroke">#E1E1E1</color>
+    <color name="transparent">#00000000</color>
     <color name="textInputIcon">#b2aecc</color>
     <color name="Error">#CE6679</color>
     <color name="surface">#F1F4FB</color>
@@ -19,7 +20,4 @@
     <color name="icon">#B2AECC</color>
     <color name="onboarding_card_bg">#50FFFFFF</color>
     <color name="txt_not_selected">#b2aecc</color>
-    <color name="backgroundEditText">#f1f4fb</color>
-
-
 </resources>

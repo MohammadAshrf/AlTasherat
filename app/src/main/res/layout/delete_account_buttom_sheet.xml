@@ -1,114 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_bg"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <View
         android:id="@+id/rectangle_language"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_3sdp"
         android:layout_gravity="center"
-        android:background="@color/Primary"
-        />
+        android:background="@color/Primary" />
 
     <TextView
         android:id="@+id/choosetxt"
-        style="@style/TextView.Bold"
+        style="@style/TextView.Heavy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/delete_account"
-        android:textColor="@color/Bg"
         android:layout_marginTop="5dp"
-        android:textStyle="bold"/>
+        android:text="@string/delete_account"
+        android:textAlignment="center"
+        android:textColor="@color/Bg"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/TextView.Medium"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:text="@string/conferm_password"
-        android:textColor="@color/text"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Phone_Client" />
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:text="@string/confirm_password"
+        android:textColor="@color/text" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="56dp"
-        app:boxBackgroundColor="@color/wight"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxStrokeColor="@color/icon"
-        android:layout_gravity="center"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/et_CountruCode"
-        app:layout_constraintStart_toStartOf="@+id/et_Phone_Client"
-        app:layout_constraintTop_toBottomOf="@+id/et_Phone_Client"
+        android:id="@+id/textInputLayout4"
+        style="@style/TextInputLayout"
+        android:layout_width="match_parent"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/icon"
-        app:startIconDrawable="@drawable/ic_lock">
+        app:passwordToggleTint="@color/icon">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_background"
-            android:hint="@string/WritePassword"
+            android:id="@+id/etReTypeNewPassword"
+            style="@style/TextInputEditText"
+            android:autofillHints="password"
+            android:drawableStart="@drawable/ic_lock"
+            android:hint="@string/repeat_new_password"
             android:inputType="textPassword" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDelete"
         style="@style/Button"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:drawableLeft="@drawable/icondelete"
         android:layout_marginTop="@dimen/_25sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:paddingStart="@dimen/_50sdp"
-        android:paddingEnd="@dimen/_50sdp"
-        android:elevation="12dp"
         android:text="@string/Delete"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        app:backgroundTint="@null"
-        app:iconTint="#FFFFFF"
-        tools:ignore="RtlHardcoded"
-        />
+        app:icon="@drawable/ic_delete"
+        app:iconGravity="textEnd"
+        app:iconSize="@dimen/_25sdp"
+        app:iconTint="@null" />
 
     <Button
         android:id="@+id/btnCancellation"
         style="@style/Button"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_cancellation_background"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:drawableTint="#FFFFFF"
-        android:elevation="12dp"
-        android:text="@string/cancellation"
         android:layout_gravity="center"
-        android:textColor="#d71010"
-        android:textStyle="bold"
-        app:backgroundTint="@null"
-        app:iconTint="#FFFFFF"
-        tools:ignore="RtlHardcoded"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/btn_cancellation_background"
+        android:text="@string/cancellation"
+        android:textColor="@color/Error"
+
         />
 
 </LinearLayout>

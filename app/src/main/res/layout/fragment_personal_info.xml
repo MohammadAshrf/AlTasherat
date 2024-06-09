@@ -151,7 +151,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_4sdp"
-
                     android:text="@string/phone_number"
                     app:layout_constraintBottom_toTopOf="@+id/phone_input_layout"
                     app:layout_constraintStart_toStartOf="@id/phone_input_layout" />
@@ -170,7 +169,7 @@
                         android:id="@+id/phone_edit_text"
                         style="@style/TextInputEditText"
                         android:autofillHints="phone"
-                        android:background="@drawable/phone_background"
+                        android:background="@drawable/custom_phone_bg"
                         android:drawableStart="@drawable/ic_mobile"
                         android:hint="@string/enter_mobile"
                         android:inputType="phone" />
@@ -179,9 +178,10 @@
                 <Spinner
                     android:id="@+id/spinner_country_code"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="0dp"
                     android:background="@drawable/shape_spinner_background"
-                    android:popupBackground="#4426F5"
+                    android:popupBackground="@color/Primary"
+                    app:layout_constraintBottom_toBottomOf="@+id/phone_input_layout"
                     app:layout_constraintEnd_toEndOf="@+id/last_name_text_input_layout"
                     app:layout_constraintStart_toEndOf="@+id/phone_input_layout"
                     app:layout_constraintTop_toTopOf="@+id/phone_input_layout" />
@@ -193,7 +193,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_4sdp"
-
                     android:text="@string/email_address"
                     app:layout_constraintBottom_toTopOf="@+id/email_input_layout"
                     app:layout_constraintStart_toStartOf="@id/email_input_layout" />

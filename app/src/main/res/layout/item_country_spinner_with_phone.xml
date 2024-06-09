@@ -6,13 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    android:padding="8dp">
+    android:padding="@dimen/_4sdp">
 
     <TextView
         android:id="@+id/flagImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/_14ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,12 +25,12 @@
         android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginEnd="@dimen/_6sdp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/_10ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/flagImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:textColor="@color/black"
-        tools:text="966" />
+        tools:text="+966" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
