@@ -3,6 +3,7 @@ package com.solutionplus.altasherat.features.personalInfo.presentation.ui
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
@@ -119,12 +120,19 @@ class PersonalInfoViewModel @Inject constructor(
 
             updateUserUC.invoke(updateUserRequest).collect {
                 when (it) {
-                    is Resource.Failure -> setState(
+                    is Resource.Failure -> {setState(
                         oldViewState.copy(
                             isLoading = false,
                             exception = it.exception
                         )
                     )
+                        if (it.exception is LeonException.Local.RequestValidation) {
+                            sendEvent(PersonalInfoEvent.SaveFailure(it.exception))
+                        }
+                        if (it.exception is LeonException.Client.ResponseValidation) {
+                            sendEvent(PersonalInfoEvent.SaveFailure(it.exception))
+                        }
+                    }
 
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
                     is Resource.Success -> {

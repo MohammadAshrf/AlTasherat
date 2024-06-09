@@ -16,8 +16,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.constants.Validation
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
@@ -116,7 +117,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
 
     private fun handleEvents() {
-        collectFlowWithLifecycle(personalInfoVM.singleEvent) {
+        collectFlowWithLifecycle(personalInfoVM.singleEvent) { it ->
             when (it) {
                 is PersonalInfoEvent.UpdateDoneSuccessfully -> {
                     showSnackBar(
@@ -160,6 +161,28 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 }
 
                 is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleUserInfo(it.user)
+                is PersonalInfoEvent.SaveFailure -> {
+                    if (it.exception is LeonException.Local.RequestValidation) {
+                        val errorMessages = it.exception.errors
+                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getString(it) }
+                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = getString(it) }
+                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getString(it) }
+                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
+                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                    }
+
+                    if (it.exception is LeonException.Client.ResponseValidation) {
+                        val errorMessages = it.exception.errors
+                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = it }
+                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = it
+                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = it }
+                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
+                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
+                        }
+                    }
+                }
             }
         }
     }

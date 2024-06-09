@@ -13,7 +13,8 @@ interface DeleteAccountContract {
     //Event
     sealed class DeleteAccountEvents: ViewEvent {
         data class DeleteAccountSuccess(val message: String) : DeleteAccountEvents()
-        data class DeleteAccountError(val message: String) : DeleteAccountEvents()
+        data class DeleteAccountError(val exception: LeonException) : DeleteAccountEvents()
+
     }
 
     //State

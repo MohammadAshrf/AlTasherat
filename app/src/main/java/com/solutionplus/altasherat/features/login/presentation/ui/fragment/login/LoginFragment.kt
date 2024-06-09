@@ -76,6 +76,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             }
 
             is LoginContract.LoginEvents.LoginFailure -> {
+
                 if (event.exception is LeonException.Local.RequestValidation) {
                     val errorMessages = event.exception.errors
                     errorMessages[PASSWORD]?.let {
@@ -93,7 +94,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                     }
                     errorMessages[PHONE]?.let {
                         binding.etPhoneClient.error = it
-                        getClassLogger().debug("Phone error: $it") // Add this line
+                        getClassLogger().debug("Phone error: $it")
                     }
                 }
 

@@ -91,8 +91,8 @@ class LoginViewModel @Inject constructor(
                             sendEvent(LoginContract.LoginEvents.LoginFailure(resource.exception))
                         }
                     }
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
-                    is Resource.Success -> sendEvent(LoginContract.LoginEvents.LoginSuccess(resource.model))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading , exception = null))
+                    is Resource.Success -> sendEvent(LoginContract.LoginEvents.LoginSuccess(resource.model ))
                 }
             }
         }

@@ -20,8 +20,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputLayout
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
+import com.solutionplus.altasherat.common.data.constants.Validation
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.DeleteAccountButtomSheetBinding
 import com.solutionplus.altasherat.databinding.FragmentDeleteAccountBinding
@@ -91,7 +94,23 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
             }
 
             is DeleteAccountContract.DeleteAccountEvents.DeleteAccountError -> {
-                Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
+
+                if (event.exception is LeonException.Local.RequestValidation) {
+                    val errorMessages = event.exception.errors
+                    errorMessages[Validation.PASSWORD]?.let {
+                        bindingBottomSheet.etReTypeNewPassword.error = getString(it)
+                        bindingBottomSheet.textInputLayout4.endIconMode =
+                            TextInputLayout.END_ICON_NONE
+                    }
+                }
+
+                if (event.exception is LeonException.Client.ResponseValidation) {
+                    val errorMessages = event.exception.errors
+                    errorMessages[Validation.PASSWORD]?.let {
+                        bindingBottomSheet.etReTypeNewPassword.error = it
+                        bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                }
             }
         }
     }
@@ -112,7 +131,7 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
                     password,
                 )
             )
-            bottomSheetDialog.dismiss()
+
         }
         bindingBottomSheet.btnCancellation.setOnClickListener {
             bottomSheetDialog.dismiss()
