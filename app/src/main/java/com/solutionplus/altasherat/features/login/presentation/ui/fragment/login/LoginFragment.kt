@@ -21,6 +21,7 @@ import com.solutionplus.altasherat.common.data.constants.Validation.PHONE
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
+import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
@@ -35,6 +36,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         subscribeToObservables()
+        viewModel.onActionTrigger(LoginContract.LoginActions.GetCountries)
+
     }
 
     override fun subscribeToObservables() {

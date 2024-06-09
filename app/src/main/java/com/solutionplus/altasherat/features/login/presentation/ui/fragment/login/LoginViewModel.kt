@@ -27,10 +27,7 @@ class LoginViewModel @Inject constructor(
     initialState = LoginContract.LoginState.initial()
 ) {
 
-    init {
-        fetchCountries()
-        fetchSelectedCountry()
-    }
+
 
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
@@ -42,6 +39,8 @@ class LoginViewModel @Inject constructor(
             )
 
             is LoginContract.LoginActions.GetSelectedCountry ->  fetchSelectedCountry()
+
+            is LoginContract.LoginActions.GetCountries -> fetchCountries()
         }
     }
 
