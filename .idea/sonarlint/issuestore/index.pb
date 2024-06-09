@@ -19,3 +19,7 @@ aapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/frgme
 bapp/src/main/java/com/solutionplus/altasherat/common/presentation/ui/base/activity/BaseActivity.kt,3\7\37dd4c2e1ada7f6696dfaa3b3c12ff10b1481de3
 ‹
 [app/src/main/java/com/solutionplus/altasherat/presentation/ui/activity/main/HomeActivity.kt,8\d\8d6aa343efbd8c005be9c654858069d94b37d5a9
+“
+capp/src/main/java/com/solutionplus/altasherat/features/language/presentation/ui/LanguageFragment.kt,3\a\3a1ab6bf8f988e0dceaea630f8b000529f664fc0
+•
+eapp/src/main/java/com/solutionplus/altasherat/presentation/ui/fragment/viewpager/ViewPagerFragment.kt,8\7\8717cb553940d0f6185da21fddc23044c850b329
