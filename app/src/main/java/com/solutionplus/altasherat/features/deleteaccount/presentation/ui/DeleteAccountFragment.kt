@@ -3,6 +3,8 @@ package com.solutionplus.altasherat.features.deleteaccount.presentation.ui
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -60,8 +62,18 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
                                 val errorMessages = it.errors
                                 errorMessages[Validation.PASSWORD]?.let {
                                     bindingBottomSheet.etReTypeNewPassword.error = getString(it)
-                                    bindingBottomSheet.textInputLayout4.endIconMode =
-                                        TextInputLayout.END_ICON_NONE
+                                    bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+                                    bindingBottomSheet.etReTypeNewPassword.addTextChangedListener(object :
+                                        TextWatcher {
+                                        override fun afterTextChanged(s: Editable?) {
+                                            bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                                            bindingBottomSheet.etReTypeNewPassword.error = null
+                                        }
+
+                                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                                    })
                                 }
                             }
 
@@ -70,6 +82,16 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
                                 errorMessages[Validation.PASSWORD]?.let {
                                     bindingBottomSheet.etReTypeNewPassword.error = it
                                     bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+                                    bindingBottomSheet.etReTypeNewPassword.addTextChangedListener(object : TextWatcher {
+                                        override fun afterTextChanged(s: Editable?) {
+                                            bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                                            bindingBottomSheet.etReTypeNewPassword.error = null
+                                        }
+
+                                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                                    })
                                 }
                             }
                         }

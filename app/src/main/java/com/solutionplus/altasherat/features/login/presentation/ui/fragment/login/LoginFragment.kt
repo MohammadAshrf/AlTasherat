@@ -2,6 +2,8 @@ package com.solutionplus.altasherat.features.login.presentation.ui.fragment.logi
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
@@ -48,6 +50,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                     errorMessages[PASSWORD]?.let {
                         binding.etPassword.error = getString(it)
                         binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                        binding.etPassword.addTextChangedListener(object : TextWatcher {
+                            override fun afterTextChanged(s: Editable?) {
+                                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                                binding.etPassword.error = null
+                            }
+
+                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                        })
                     }
                     errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
                 }
@@ -57,6 +69,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                     errorMessages[PASSWORD]?.let {
                         binding.etPassword.error = it
                         binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                        binding.etPassword.addTextChangedListener(object : TextWatcher {
+                            override fun afterTextChanged(s: Editable?) {
+                                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                                binding.etPassword.error = null
+                            }
+
+                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                        })
                     }
                     errorMessages[PHONE]?.let {
                         binding.etPhoneClient.error = it
