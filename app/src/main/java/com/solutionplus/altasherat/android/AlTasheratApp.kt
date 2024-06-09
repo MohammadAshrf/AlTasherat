@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.solutionplus.altasherat.BuildConfig
 
 import com.solutionplus.altasherat.android.helpers.logging.LoggerProvider
@@ -27,5 +28,7 @@ class AlTasheratApp : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         LoggerProvider.provideLogger()
+        AndroidThreeTen.init(this)
+
     }
 }

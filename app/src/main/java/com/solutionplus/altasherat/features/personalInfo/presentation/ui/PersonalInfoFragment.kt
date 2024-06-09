@@ -201,6 +201,14 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                         errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
                         errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
                         errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                        errorMessages[Validation.IMAGE]?.let {
+                            Toast.makeText(
+                                requireActivity(),
+                                getString(it),
+                                Toast.LENGTH_SHORT
+                            ).show() }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                        errorMessages[Validation.BIRTH_DATE]?.let { binding.birthdateEditText.error = getString(it) }
                     }
 
                     if (it is LeonException.Client.ResponseValidation) {
@@ -211,6 +219,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                             errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
                             errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
                             errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
+                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
+                            errorMessages[Validation.BIRTH_DATE]?.let { binding.birthdateEditText.error = it }
                         }
                     }
                 }

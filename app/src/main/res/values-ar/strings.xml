@@ -161,4 +161,6 @@
     <string name="invalid_new_password">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
     <string name="invalid_new_password_confirmation">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
     <string name="new_password_and_confirmation_do_not_match">كلمة المرورغير مطابقة</string>
+    <string name="invalid_birth_date" >تاريخ الميلاد غير صالح يرجى اختيار تاريخ ميلاد صالح</string>
+    <string name="invalid_image">الصورة غير صالحة يرجى اختيار صورة اقل من 512 KB</string>
 </resources>
