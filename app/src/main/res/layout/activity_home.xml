@@ -20,6 +20,7 @@
         app:itemTextAppearanceActive="@style/Font.Bold"
         app:itemTextAppearanceInactive="@style/Font.Regular"
         app:itemTextColor="@drawable/selector_bottom_nav_text_color"
+        app:itemIconTint="@drawable/selector_bottom_nav_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.changepassword.domain.usecase
 
+import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
 import com.solutionplus.altasherat.features.changepassword.domain.repository.IchangePasswordRepository
@@ -37,15 +38,6 @@ class ChangePasswordUCTest {
         changePasswordUC = ChangePasswordUC(repository)
     }
 
-//    @Test
-//    fun `when params are null, expected then should not call changePassword `() = runTest {
-//        // Act
-//        changePasswordUC.execute(null)
-//
-//        // Assert
-//        coVerify(exactly = 0) { repository.changePassword(any()) }
-//    }
-
     @Test
     fun `when token is called and repository , then repository's returned token`() = runTest {
         // Arrange
@@ -82,14 +74,13 @@ class ChangePasswordUCTest {
         coEvery { repository.changePassword(request) } returns request
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
             changePasswordUC.execute(request)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("Old password is invalid. It must be between 8 and 50 characters.", e.message)
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.OLD_PASSWORD))
     }
 
     @Test
@@ -102,14 +93,13 @@ class ChangePasswordUCTest {
         coEvery { repository.changePassword(request) } returns request
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
             changePasswordUC.execute(request)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("Old password is invalid. It must be between 8 and 50 characters.", e.message)
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.OLD_PASSWORD))
     }
 
     @Test
@@ -124,14 +114,13 @@ class ChangePasswordUCTest {
         coEvery { repository.changePassword(request) } returns request
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
             changePasswordUC.execute(request)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("New password is invalid. It must be between 8 and 50 characters.", e.message)
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.NEW_PASSWORD))
     }
 
     @Test
@@ -146,14 +135,13 @@ class ChangePasswordUCTest {
         coEvery { repository.changePassword(request) } returns request
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
             changePasswordUC.execute(request)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("New password is invalid. It must be between 8 and 50 characters.", e.message)
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.NEW_PASSWORD))
     }
 
     @Test
@@ -168,13 +156,12 @@ class ChangePasswordUCTest {
         coEvery { repository.changePassword(request) } returns request
 
         // Act & Assert
-        var exceptionThrown = false
-        try {
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
             changePasswordUC.execute(request)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = true
-            assertEquals("New password and confirmation do not match.", e.message)
         }
-        assertTrue(exceptionThrown)
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.NEW_PASSWORD_EQUAL_CONFIRMATION))
     }
 }

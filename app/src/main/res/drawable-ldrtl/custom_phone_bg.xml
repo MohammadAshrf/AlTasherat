@@ -5,9 +5,9 @@
     </solid>
     <corners
         android:bottomLeftRadius="0dp"
-        android:bottomRightRadius="@dimen/_16sdp"
+        android:bottomRightRadius="@dimen/_20sdp"
         android:topLeftRadius="0dp"
-        android:topRightRadius="@dimen/_16sdp" />
+        android:topRightRadius="@dimen/_20sdp" />
     <stroke
         android:width=".7dp"
         android:color="@color/bgInputStroke" />
