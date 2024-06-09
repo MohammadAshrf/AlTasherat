@@ -22,7 +22,7 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
     private val getCountriesUC: GetCountriesFromLocalUC,
-    private val getSelectedCountryUC: GetSelectedCountryUC
+    private val getSelectedCountryUC: GetSelectedCountryUC,
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
     initialState = SignUpContract.SignUpState.initial()
 ) {
@@ -111,12 +111,6 @@ class SignupViewModel @Inject constructor(
                                 exception = resource.exception
                             )
                         )
-                        if (resource.exception is LeonException.Local.RequestValidation) {
-                            sendEvent(SignUpContract.SignupEvent.SignupFailure(resource.exception))
-                        }
-                        if (resource.exception is LeonException.Client.ResponseValidation) {
-                            sendEvent(SignUpContract.SignupEvent.SignupFailure(resource.exception))
-                        }
                     }
 
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))

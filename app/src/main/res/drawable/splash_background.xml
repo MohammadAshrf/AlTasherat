@@ -5,7 +5,7 @@
     android:viewportHeight="812">
   <path
       android:pathData="M0,0h375v812H0z"
-      android:fillColor="#FFF"
+      android:fillColor="@color/layout_background"
       android:fillType="evenOdd"/>
   <group>
     <clip-path

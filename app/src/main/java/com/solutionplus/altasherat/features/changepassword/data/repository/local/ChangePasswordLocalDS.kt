@@ -8,7 +8,6 @@ import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.changepassword.domain.repository.local.IChangePasswordLocalDS
-import com.solutionplus.altasherat.features.login.data.model.entity.UserEntity
 import com.solutionplus.altasherat.features.signup.data.repository.local.SignupLocalDS
 import java.util.Base64
 import javax.inject.Inject

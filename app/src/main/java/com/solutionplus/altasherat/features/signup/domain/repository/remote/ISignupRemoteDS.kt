@@ -5,5 +5,4 @@ import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequ
 
 internal interface ISignupRemoteDS {
     suspend fun signupWithPhone(signupRequest: SignupRequest): SignupDto?
-//    suspend fun getCountries(): List<Country>
 }

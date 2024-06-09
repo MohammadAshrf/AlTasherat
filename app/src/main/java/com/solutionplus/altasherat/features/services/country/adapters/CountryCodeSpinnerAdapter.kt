@@ -30,7 +30,8 @@ internal class CountryCodeSpinnerAdapter
         }
         val country = countries[position]
         binding.flagImageView.text = country.flag
-        binding.countryCode.text = context.getString(R.string.binding_phone_code, country.phoneCode)
+        val countryCodeWithoutZeroZero = country.phoneCode.replaceFirst("^00".toRegex(), "")
+        binding.countryCode.text = context.getString(R.string.binding_phone_code, countryCodeWithoutZeroZero)
         return view
     }
 

@@ -18,7 +18,7 @@ import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenu
 import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
 import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
-import com.solutionplus.altasherat.features.profileMenu.domain.model.User
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +30,6 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
-        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.GetUser)
     }
 
     override fun viewInit() {
@@ -57,6 +56,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     if (it.isUserLoggedIn) {
                         binding.viewProfileSection.fullView.visibility = View.VISIBLE
                         binding.btnLogOut.visibility = View.VISIBLE
+                        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.GetUser)
                     } else {
                         binding.viewProfileSection.fullView.visibility = View.GONE
                     }
@@ -67,14 +67,15 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
                     findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
                 }
+
             }
         }
 
-        collectFlowWithLifecycle(viewModel.viewState) { state ->
-            state.exception?.let {
+        collectFlowWithLifecycle(viewModel.viewState) {
+            it.exception?.let {
                 handleHttpExceptions(it)
             }
-            if (state.isLoading) {
+            if (it.isLoading) {
                 showLoading()
             } else {
                 hideLoading()
@@ -87,7 +88,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         emailBundle = Bundle().apply {
             putString(EMAIL_KEY_BUNDLE, user.email)
         }
-        if (!user.emailVerified && user.id != -1) {
+        if (!user.emailVerified) {
             showCustomSnackbar()
         }
         if (user.image.path != "") {
@@ -96,7 +97,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 .into(binding.viewProfileSection.profilePictureMenu.profilePicture)
 
         }
-        binding.viewProfileSection.nameTextView.text = "${user.firstname + " " + user.lastname}"
+        binding.viewProfileSection.nameTextView.text = user.firstname + " " + user.lastname
     }
     @SuppressLint("SetTextI18n")
     private fun getAppVersion() {

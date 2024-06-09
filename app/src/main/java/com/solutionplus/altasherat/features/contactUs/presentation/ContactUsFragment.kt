@@ -5,21 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentContactUsBinding
-import com.solutionplus.altasherat.features.personalInfo.domain.models.User
-import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
@@ -29,7 +21,7 @@ class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
     private lateinit var countriesList: List<Country>
 
     override fun viewInit() {
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -38,7 +30,7 @@ class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
 
         viewModel.processIntent(ContactUsContract.ContactUsAction.GetCountries)
         subscribeToObservables()
-   }
+    }
 
     override fun subscribeToObservables() {
         handleEvents()
@@ -46,45 +38,43 @@ class ContactUsFragment : BaseFragment<FragmentContactUsBinding>() {
 
 
     private fun handleEvents() {
-    collectFlowWithLifecycle(viewModel.singleEvent){
-        when(it){
-            is ContactUsContract.ContactUsEvent.GetCountries -> {
-                viewModel.processIntent(ContactUsContract.ContactUsAction.GetUpdatedUserFromLocal)
-                countriesList = it.country
-                setupCountrySpinner(countriesList)
+        collectFlowWithLifecycle(viewModel.singleEvent) {
+            when (it) {
+                is ContactUsContract.ContactUsEvent.GetCountries -> {
+                    viewModel.processIntent(ContactUsContract.ContactUsAction.GetUpdatedUserFromLocal)
+                    countriesList = it.country
+                    setupCountrySpinner(countriesList)
 
+                }
+
+                is ContactUsContract.ContactUsEvent.GetUpdatedUserFromLocal -> handleUser(it.user)
             }
-
-            is ContactUsContract.ContactUsEvent.GetUpdatedUserFromLocal -> handleUser(it.user)
         }
-    }
 
     }
 
     private fun handleUser(user: User) {
         binding.firstNameEditText.setText(user.firstname)
         binding.emailEditText.setText(user.email)
-        binding.phoneNumberPicker.editTextPhone.setText(user.phone.number)
-        binding.phoneNumberPicker.etCountruCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == user.phone.countryCode }))
+        binding.etPhoneClient.setText(user.phone.number)
+        binding.etCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == user.phone.countryCode }))
 
     }
 
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
-        binding.phoneNumberPicker.etCountruCode.adapter = adapter
-        binding.phoneNumberPicker.etCountruCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.etCountryCode.adapter = adapter
+        binding.etCountryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View,
                 position: Int,
                 id: Long
             ) {
-                binding.phoneNumberPicker.etCountruCode.adapter.getItem(position) as Country
+                binding.etCountryCode.adapter.getItem(position) as Country
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
-
-
 }

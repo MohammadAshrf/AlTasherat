@@ -4,29 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
-import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.constants.Validation.PASSWORD
 import com.solutionplus.altasherat.common.data.constants.Validation.PHONE
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
+import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnLoginActionListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListener {
@@ -35,35 +28,53 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         subscribeToObservables()
+        viewModel.onActionTrigger(LoginContract.LoginActions.GetCountries)
+
     }
 
     override fun subscribeToObservables() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { viewStateObserver() }
-                launch { eventObserver() }
-            }
-        }
+        viewStateObserver()
+        eventObserver()
     }
 
-    private suspend fun viewStateObserver() {
-        viewModel.viewState.collect { state ->
-            getClassLogger().info(state.exception.toString())
-            state.exception?.let {
+    private fun viewStateObserver() {
+        collectFlowWithLifecycle(viewModel.viewState) {
+            getClassLogger().info(it.exception.toString())
+            it.exception?.let {
                 handleHttpExceptions(it)
+
+                if (it is LeonException.Local.RequestValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = getString(it)
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
+                }
+
+                if (it is LeonException.Client.ResponseValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[PASSWORD]?.let {
+                        binding.etPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[PHONE]?.let {
+                        binding.etPhoneClient.error = it
+                        getClassLogger().debug("Phone error: $it")
+                    }
+                }
             }
-            if (state.isLoading) {
+            if (it.isLoading) {
                 showLoading()
             } else {
                 hideLoading()
             }
         }
-
     }
 
-    private suspend fun eventObserver() {
-        viewModel.singleEvent.collect { event ->
-            handleEvent(event)
+    private fun eventObserver() {
+        collectFlowWithLifecycle(viewModel.singleEvent) {
+            handleEvent(it)
         }
     }
 
@@ -81,36 +92,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
             }
 
             is LoginContract.LoginEvents.GetSelectedCountry -> {
-                setDefaultCountry(event.country)
+                binding.etCountryCode.setSelection(event.country.id - 1)
             }
 
             is LoginContract.LoginEvents.GetCountries -> {
                 setupCountrySpinner(event.country)
             }
 
-            is LoginContract.LoginEvents.LoginFailure -> {
-                if (event.exception is LeonException.Local.RequestValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = getString(it)
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
-                }
-
-                if (event.exception is LeonException.Client.ResponseValidation) {
-                    val errorMessages = event.exception.errors
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = it
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errorMessages[PHONE]?.let {
-                        binding.etPhoneClient.error = it
-                        getClassLogger().debug("Phone error: $it") // Add this line
-                    }
-                }
-
-            }
         }
     }
 
@@ -127,28 +115,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
-        binding.etCountruCode.adapter = adapter
-        binding.etCountruCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.etCountryCode.adapter = adapter
+        binding.etCountryCode.setSelection(
+            countries.indexOf(adapter.getItem(0))
+        )
+        binding.etCountryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View,
                 position: Int,
                 id: Long
             ) {
-                binding.etCountruCode.adapter.getItem(position) as Country
+                binding.etCountryCode.adapter.getItem(position) as Country
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-    }
-
-    private fun setDefaultCountry(country: Country?) {
-        country?.let {
-            val adapter = binding.etCountruCode.adapter as CountryCodeSpinnerAdapter
-            val position = adapter.getPosition(country)
-            if (position >= 0) {
-                binding.etCountruCode.setSelection(position)
-            }
         }
     }
 
@@ -159,7 +140,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
 
         val phoneNumber = binding.etPhoneClient.text.toString()
         val password = binding.etPassword.text.toString()
-        val countryCode = (binding.etCountruCode.selectedItem as Country).phoneCode
+        val countryCode = (binding.etCountryCode.selectedItem as Country).phoneCode
         viewModel.onActionTrigger(
             LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
         )

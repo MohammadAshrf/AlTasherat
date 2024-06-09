@@ -13,7 +13,6 @@ interface ChangePasswordContract {
     //Event
     sealed class ChangePasswordEvents: ViewEvent {
         data class ChangePasswordSuccess(val message: String) : ChangePasswordEvents()
-//        data class ChangePasswordError(val message: String) : ChangePasswordEvents()
     }
 
     //State

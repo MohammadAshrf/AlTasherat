@@ -11,8 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textfield.TextInputLayout
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
+import com.solutionplus.altasherat.common.data.constants.Validation
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentChangePasswordBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +46,36 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             getClassLogger().info(state.exception.toString())
             state.exception?.let {
                 handleHttpExceptions(it)
+                if (it is LeonException.Local.RequestValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[Validation.OLD_PASSWORD]?.let {
+                        binding.etOldPassword.error = getString(it)
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+
+                    }
+                    errorMessages[Validation.NEW_PASSWORD]?.let {
+                        binding.etNewPassword.error = getString(it)
+                        binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[Validation.NEW_PASSWORD_CONFIRMATION]?.let {
+                        binding.etReTypeNewPassword.error = getString(it)
+                        binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                }
+
+                if (it is LeonException.Client.ResponseValidation) {
+                    val errorMessages = it.errors
+                    errorMessages[Validation.OLD_PASSWORD]?.let { binding.etOldPassword.error = it
+                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+                    }
+                    errorMessages[Validation.NEW_PASSWORD]?.let {
+                        binding.etNewPassword.error = it
+                        binding.etReTypeNewPassword.error = it
+                        binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
+                        binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+
+                    }
+                }
             }
             if (state.isLoading) {
                 showLoading()
@@ -63,7 +96,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         binding.btnSave.setOnClickListener {
             handleChangePassword()
         }
-        binding.imgback.setOnClickListener {
+        binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -87,16 +120,18 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
                 showSnackBar()
                 showSuccessfulToast()
             }
+
         }
     }
 
-    private fun showSnackBar(){
+    private fun showSnackBar() {
         showSnackBar(resources.getString(R.string.login_success), false)
         requireActivity().finish()
     }
 
-    private fun showSuccessfulToast(){
-        Toast.makeText(requireContext(), "Your Password Changed successfully", Toast.LENGTH_SHORT).show()
+    private fun showSuccessfulToast() {
+        Toast.makeText(requireContext(), "Your Password Changed Successfully", Toast.LENGTH_SHORT)
+            .show()
     }
 
 

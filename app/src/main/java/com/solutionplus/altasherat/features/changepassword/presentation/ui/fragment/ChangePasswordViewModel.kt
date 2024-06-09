@@ -4,10 +4,12 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
 import com.solutionplus.altasherat.features.changepassword.domain.usecase.ChangePasswordUC
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,7 +41,15 @@ class ChangePasswordViewModel @Inject constructor(
 
             changePasswordUC.invoke(viewModelScope,changePasswordRequest){ resource ->
                 when (resource) {
-                    is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
+                    is Resource.Failure -> {
+                        setState(
+                            oldViewState.copy(
+                                isLoading = false,
+                                exception = resource.exception
+                            )
+                        )
+                    }
+
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
                     is Resource.Success -> {
                         sendEvent(ChangePasswordContract.ChangePasswordEvents.ChangePasswordSuccess("Password changed successfully"))

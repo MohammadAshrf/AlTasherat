@@ -1,6 +1,6 @@
 package com.solutionplus.altasherat.features.login.domain.model
 
-import com.solutionplus.altasherat.features.login.domain.model.User
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 
 data class Login(

@@ -90,7 +90,7 @@
     <style name="EditText" parent="ThemeOverlay.Material3.TextInputEditText">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:background">@drawable/rounded_edittext_register_login</item>
+        <item name="android:background">@drawable/custom_edit_text_bg</item>
         <item name="android:ems">10</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:textSize">@dimen/_12ssp</item>
@@ -109,6 +109,7 @@
         <item name="android:text">@string/app_name</item>
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textAppearance">@style/Font.Bold</item>
+        <item name="backgroundTint">@null</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -175,18 +176,27 @@
 
     <style name="TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/_45sdp</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
         <item name="android:layout_marginTop">@dimen/_6sdp</item>
         <item name="hintTextAppearance">@style/Font.Regular</item>
         <item name="hintEnabled">false</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/_16sdp</item>
         <item name="boxCornerRadiusBottomStart">@dimen/_16sdp</item>
-        <item name="boxStrokeColor">@color/icon</item>
+        <item name="boxStrokeColor">@color/bgInput</item>
+        <item name="boxBackgroundColor">@color/bgInput</item>
+        <item name="boxStrokeErrorColor">@color/Error</item>
         <item name="boxBackgroundMode">outline</item>
         <item name="boxCornerRadiusTopEnd">@dimen/_16sdp</item>
-        <item name="android:textColorHint">@color/textInputIcon</item>
         <item name="boxCornerRadiusTopStart">@dimen/_16sdp</item>
         <item name="startIconTint">@color/icon</item>
+        <item name="hintTextColor">@color/hint_color</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+
+    </style>
+
+    <style name="TextInputLayout.Phone" parent="TextInputLayout">
+        <item name="boxCornerRadiusBottomEnd">0dp</item>
+        <item name="boxCornerRadiusTopEnd">0dp</item>
     </style>
 
 
@@ -194,11 +204,15 @@
 
     <style name="TextInputEditText" parent="ThemeOverlay.Material3.TextInputEditText">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
         <item name="android:ems">10</item>
-        <item name="android:background">@drawable/rounded_button_background</item>
-        <item name="android:padding">@dimen/_14sdp</item>
-        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="hintTextColor">@color/text_color</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:background">@drawable/custom_edit_text_bg</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
         <item name="android:drawablePadding">@dimen/_6sdp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textAppearance">@style/Font.Regular</item>

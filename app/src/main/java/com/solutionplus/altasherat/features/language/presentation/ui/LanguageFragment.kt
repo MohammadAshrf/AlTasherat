@@ -57,31 +57,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
         collectFlowWithLifecycle(languageVM.singleEvent) {
             when (it) {
                 is LanguageContract.LanguageEvent.CountriesIndex -> {
-                    val spinnerAdapter = CountriesSpinnerAdapter(requireContext(), it.countries)
-                    binding.countriesSpinner.adapter = spinnerAdapter
-                    binding.countriesSpinner.setSelection(
-                        it.countries.indexOf(spinnerAdapter.getItem(0))
-                    )
-                    binding.countriesSpinner.onItemSelectedListener =
-                        object : AdapterView.OnItemSelectedListener {
-                            override fun onItemSelected(
-                                parent: AdapterView<*>,
-                                view: View,
-                                position: Int,
-                                id: Long
-                            ) {
-                                val selectedCountry =
-                                    binding.countriesSpinner.adapter.getItem(position) as Country
-                                languageVM.processIntent(
-                                    LanguageContract.LanguageAction.SaveSelectedCountry(
-                                        selectedCountry
-                                    )
-                                )
-                            }
-
-                            override fun onNothingSelected(parent: AdapterView<*>) {
-                            }
-                        }
+                    handleCountrySpinner(it)
                 }
 
                 is LanguageContract.LanguageEvent.NavigateToOnBoarding -> navigateToOnBoarding()
@@ -92,6 +68,34 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
                 }
             }
         }
+    }
+
+    private fun handleCountrySpinner(it: LanguageContract.LanguageEvent.CountriesIndex) {
+        val spinnerAdapter = CountriesSpinnerAdapter(requireContext(), it.countries)
+        binding.countriesSpinner.adapter = spinnerAdapter
+        binding.countriesSpinner.setSelection(
+            it.countries.indexOf(spinnerAdapter.getItem(0))
+        )
+        binding.countriesSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedCountry =
+                        binding.countriesSpinner.adapter.getItem(position) as Country
+                    languageVM.processIntent(
+                        LanguageContract.LanguageAction.SaveSelectedCountry(
+                            selectedCountry
+                        )
+                    )
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
+            }
     }
 
     private fun changeAppLocale(language: String) {

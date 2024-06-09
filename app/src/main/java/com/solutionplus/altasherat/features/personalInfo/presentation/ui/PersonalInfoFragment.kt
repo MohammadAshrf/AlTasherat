@@ -16,12 +16,12 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.constants.Validation
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
-import com.solutionplus.altasherat.features.personalInfo.domain.models.User
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetCountriesFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
@@ -30,6 +30,7 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.user.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -116,7 +117,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
 
     private fun handleEvents() {
-        collectFlowWithLifecycle(personalInfoVM.singleEvent) {
+        collectFlowWithLifecycle(personalInfoVM.singleEvent) { it ->
             when (it) {
                 is PersonalInfoEvent.UpdateDoneSuccessfully -> {
                     showSnackBar(
@@ -192,12 +193,26 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     hideLoading()
                 }
                 it.exception?.let {
-                    Toast.makeText(
-                        requireContext(),
-                        it.message ?: "Unexpected Error",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    if (it is LeonException.Local.RequestValidation) {
+                        val errorMessages = it.errors
+                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getString(it) }
+                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = getString(it) }
+                        errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getString(it) }
+                        errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
+                        errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                    }
+
+                    if (it is LeonException.Client.ResponseValidation) {
+                        val errorMessages = it.errors
+                        errorMessages[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = it }
+                        errorMessages[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = it
+                            errorMessages[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = it }
+                            errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
+                            errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
+                            errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
+                        }
+                    }
                 }
             }
         }

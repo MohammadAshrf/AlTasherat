@@ -3,11 +3,11 @@ package com.solutionplus.altasherat.features.personalInfo.presentation.ui
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
+import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateProfileInfoRequest
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetProfileInfoLocalUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetProfileInfoRemoteUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateProfileInfoUC
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction
@@ -17,6 +17,7 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.File
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class PersonalInfoViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val getUserFromRemoteUC: GetProfileInfoRemoteUC,
-    private val getUserFromLocalUC: GetProfileInfoLocalUC,
+    private val getUserFromLocalUC: GetUserFromLocalUC,
     private val updateUserUC: UpdateProfileInfoUC
 ) :
     AlTasheratViewModel<PersonalInfoAction, PersonalInfoEvent, PersonalInfoState>(PersonalInfoState.initial()) {
@@ -119,12 +120,13 @@ class PersonalInfoViewModel @Inject constructor(
 
             updateUserUC.invoke(updateUserRequest).collect {
                 when (it) {
-                    is Resource.Failure -> setState(
+                    is Resource.Failure -> {setState(
                         oldViewState.copy(
                             isLoading = false,
                             exception = it.exception
                         )
                     )
+                    }
 
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
                     is Resource.Success -> {
