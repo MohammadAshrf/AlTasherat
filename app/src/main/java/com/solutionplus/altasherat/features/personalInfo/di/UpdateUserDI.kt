@@ -6,13 +6,11 @@ import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvi
 import com.solutionplus.altasherat.features.personalInfo.data.repository.UpdateUserRepository
 import com.solutionplus.altasherat.features.personalInfo.data.repository.local.UpdateUserLocalDS
 import com.solutionplus.altasherat.features.personalInfo.data.repository.remote.UpdateUserRemoteDS
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromLocalUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetUserInfoFromRemoteUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateUserInfoUC
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateUserRepository
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.local.IUpdateUserLocalDS
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.remote.IUpdateUserRemoteDS
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import dagger.Module
 import dagger.Provides
@@ -25,10 +23,6 @@ internal object UpdateUserDI {
     @Provides
     fun provideUpdateUserUC(repository: IUpdateUserRepository, saveUserUC: SaveUserUC): UpdateUserInfoUC =
         UpdateUserInfoUC(repository, saveUserUC)
-
-    @Provides
-    fun provideGetUserInfoFromLocalUC( getUserUC: GetUserUC): GetUserInfoFromLocalUC =
-        GetUserInfoFromLocalUC(getUserUC)
 
     @Provides
     fun provideGetUserFromRemoteUC(repository: IUpdateUserRepository): GetUserInfoFromRemoteUC =

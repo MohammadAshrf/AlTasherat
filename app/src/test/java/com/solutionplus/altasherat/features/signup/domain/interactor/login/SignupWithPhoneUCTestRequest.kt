@@ -8,7 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
@@ -27,7 +27,7 @@ import org.junit.jupiter.api.assertThrows
 
     private lateinit var repository: ISignupRepository
     private lateinit var saveUserUC: SaveUserUC
-    private lateinit var getUserUC: GetUserUC
+    private lateinit var getUserUC: GetUserFromLocalUC
     private lateinit var signupUC: SignupUC
 
     @Before

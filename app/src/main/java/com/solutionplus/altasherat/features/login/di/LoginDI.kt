@@ -12,7 +12,7 @@ import com.solutionplus.altasherat.features.login.domain.repository.local.ILogin
 import com.solutionplus.altasherat.features.login.domain.repository.remote.ILoginRemoteDS
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import dagger.Module
 import dagger.Provides
@@ -35,7 +35,7 @@ internal object LoginDI {
         LoginRepository(remoteDS, localDS)
 
     @Provides
-    fun provideLoginWithPhoneUC(repository: ILoginRepository, saveUserUC: SaveUserUC, getUserUC : GetUserUC): LoginWithPhoneUC =
+    fun provideLoginWithPhoneUC(repository: ILoginRepository, saveUserUC: SaveUserUC, getUserUC : GetUserFromLocalUC): LoginWithPhoneUC =
         LoginWithPhoneUC(repository, saveUserUC, getUserUC)
 
 }

@@ -6,7 +6,5 @@ import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 interface IUpdateUserRepository {
     suspend fun updateUserInfo(updateUserRequest: UpdateUserInfoRequest): UpdateUser
-//    suspend fun saveUpdatedUser(updatedUser: User)
-//    suspend fun getUpdatedUserFromLocal(): User
     suspend fun getUpdatedUserFromRemote(): User
 }

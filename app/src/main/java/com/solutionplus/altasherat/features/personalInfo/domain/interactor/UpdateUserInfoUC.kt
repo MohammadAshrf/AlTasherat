@@ -5,7 +5,6 @@ import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateUserInfoRequest
 import com.solutionplus.altasherat.features.personalInfo.domain.models.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateUserRepository
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 
 class UpdateUserInfoUC(private val repository: IUpdateUserRepository, private val saveUserUC: SaveUserUC

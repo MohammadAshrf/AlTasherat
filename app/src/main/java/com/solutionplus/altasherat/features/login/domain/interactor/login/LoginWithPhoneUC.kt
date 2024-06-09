@@ -2,20 +2,19 @@ package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 import com.google.gson.Gson
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 class LoginWithPhoneUC(
     private val repository: ILoginRepository,
     private val saveUserUC: SaveUserUC,
-    private val getUserUC : GetUserUC
+    private val getUserUC : GetUserFromLocalUC
 ) : BaseUseCase<User, LoginRequest>() {
     public override suspend fun execute(params: LoginRequest?): User {
         val errorMessages = params?.validateRequest()
