@@ -10,7 +10,6 @@ import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpda
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.remote.IUpdateProfileRemoteDS
 
 internal class UpdateProfileRepository(
-    private val localDS: IUpdateProfileLocalDS,
     private val remoteDS: IUpdateProfileRemoteDS
 ) : IUpdateProfileRepository {
     override suspend fun updateProfileInfo(remoteRequest: RemoteRequest): UpdateUser {

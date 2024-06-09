@@ -152,4 +152,6 @@
     <string name="Delete">تأكيد الحذف</string>
     <string name="cancellation">إلغاء</string>
     <string name="delete_info">سوف يتم فقد كل المعلومات والمعاملات والحجوزات</string>
+    <string name="Dont_have_an_account">ليس لديك حساب؟</string>
+    <string name="GOTOSignUp">تسجيل دخول</string>
 </resources>

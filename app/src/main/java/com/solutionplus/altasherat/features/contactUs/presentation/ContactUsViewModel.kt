@@ -8,8 +8,8 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsAction
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsEvent
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsState
-import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetProfileInfoLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ContactUsViewModel @Inject constructor(
     private val getCountriesUC: GetCountriesFromLocalUC,
-    private val getUserFromLocalUC: GetProfileInfoLocalUC,
+    private val getUserFromLocalUC: GetUserFromLocalUC,
 
     ) :
     AlTasheratViewModel<ContactUsAction, ContactUsEvent, ContactUsState>(ContactUsState.initial()) {
