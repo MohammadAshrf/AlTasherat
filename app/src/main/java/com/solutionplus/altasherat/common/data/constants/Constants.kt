@@ -9,6 +9,8 @@ object Constants {
 }
 
 object Validation {
+    const val IMAGE = "image"
+    const val BIRTH_DATE = "birthdate"
     const val OLD_PASSWORD = "old_password"
     const val NEW_PASSWORD = "new_password"
     const val NEW_PASSWORD_CONFIRMATION = "new_password_confirmation"

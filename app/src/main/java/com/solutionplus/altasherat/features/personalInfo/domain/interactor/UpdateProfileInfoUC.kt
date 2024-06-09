@@ -1,5 +1,7 @@
 package com.solutionplus.altasherat.features.personalInfo.domain.interactor
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
@@ -11,6 +13,7 @@ import com.solutionplus.altasherat.features.services.user.domain.interactor.Save
 
 class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, private val saveUserUC: SaveUserUC) :
     BaseUseCase<UpdateUser, UpdateProfileInfoRequest>() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun execute(params: UpdateProfileInfoRequest?): UpdateUser {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
@@ -24,7 +27,7 @@ class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, priv
         saveUserUC.execute(result.user)
         return result
     }
-
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun UpdateProfileInfoRequest.validateRequest(): Map<String, Int> {
         val errorKeys = mutableMapOf<String, Int>()
 
@@ -45,6 +48,12 @@ class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, priv
         }
         if (!isCountryValid()) {
             errorKeys[Validation.COUNTRY] = R.string.invalid_country
+        }
+        if (!isBirthDateValid()){
+            errorKeys[Validation.BIRTH_DATE] = R.string.invalid_birth_date
+        }
+        if (!isImageValid()){
+            errorKeys[Validation.IMAGE] = R.string.invalid_image
         }
 
         return errorKeys

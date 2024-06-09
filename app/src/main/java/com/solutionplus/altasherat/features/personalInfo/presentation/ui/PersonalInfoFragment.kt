@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -201,6 +202,16 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                         errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = getString(it) }
                         errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = getString(it) }
                         errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                        errorMessages[Validation.IMAGE]?.let {
+                            binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_red_circle.let
+                            {
+                                ResourcesCompat.getDrawable(resources, it, null)
+                            } )
+                          showSnackBar(getString(R.string.invalid_image), true) }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = getString(it) }
+                        errorMessages[Validation.BIRTH_DATE]?.let { binding.birthdateEditText.error = getString(it)
+                            showSnackBar(getString(R.string.invalid_birth_date), true)
+                        }
                     }
 
                     if (it is LeonException.Client.ResponseValidation) {
@@ -211,6 +222,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                             errorMessages[Validation.EMAIL]?.let { binding.emailEditText.error = it }
                             errorMessages[Validation.PHONE]?.let { binding.phoneEditText.error = it }
                             errorMessages[Validation.COUNTRY]?.let { binding.country.error =it }
+                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
+                            errorMessages[Validation.BIRTH_DATE]?.let { binding.birthdateEditText.error = it }
                         }
                     }
                 }
@@ -259,10 +272,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 })
                 binding.birthdateEditText.setText(formattedDate)
             }
-
             datePickerDialog.show()
         }
     }
-
-
 }

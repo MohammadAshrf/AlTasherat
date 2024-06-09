@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer Circle -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FF002E" />
+            <size
+                android:width="90dp"
+                android:height="90dp" />
+        </shape>
+    </item>
+    <!-- Inner Space (margin) -->
+    <item
+        android:bottom="1.5dp"
+        android:left="1.5dp"
+        android:right="1.5dp"
+        android:top="1.5dp">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+            <size
+                android:width="84dp"
+                android:height="84dp" />
+        </shape>
+    </item>
+</layer-list>

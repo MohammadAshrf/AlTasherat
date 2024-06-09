@@ -7,7 +7,7 @@
     <string name="enter_phone_text">أدخل رقم الجوال للمتابعة</string>
 
 
-    <string name="err_msg_enter_countrycode">الرجاء إدخال كود الدولة</string>
+    <string name="err_msg_enter_country_code">الرجاء إدخال كود الدولة</string>
     <string name="err_msg_enter_valid_first_name">الإسم الأول يجب أن لا يقل عن 3 حروف ولا يزيد عن 15</string>
     <string name="err_msg_enter_valid_middle_name">الإسم الأوسط يجب أن لا يزيد عن 15</string>
     <string name="err_msg_enter_valid_last_name">الإسم الأخير يجب أن لا يقل عن 3 حروف ولا يزيد عن 15</string>
@@ -20,14 +20,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications" translatable="false">الإشعارات</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="edit_password">تعديل كلمة المرور</string>
     <string name="about_us">من نحن</string>
     <string name="terms">الشروط والاحكام</string>
     <string name="language">اللغة</string>
     <string name="sign_out">تسجيل الخروج</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="conferm_email_txt">تأكيد البريد الالكتروني</string>
+    <string name="confirm_email_txt">تأكيد البريد الالكتروني</string>
     <string name="we_send_msg_txt">أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى</string>
     <string name="check_email_txt">تحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة</string>
     <string name="skip_txt">تخطي</string>
@@ -47,7 +46,7 @@
     <string name="change_password">تغيير كلمة المرور</string>
     <string name="visa_platform">منصة التأشيرات</string>
     <string name="visa_applications">طلبات التأشيرات</string>
-    <string name="profile_personly">الملف الشخصي</string>
+    <string name="personal_profile">الملف الشخصي</string>
     <string name="WritePassword">ادخل كلمه المرور</string>
     <string name="Password"> كلمة المرور</string>
     <string name="Email">البريد الالكتروني</string>
@@ -143,23 +142,26 @@
     <string name="confirm_password">كلمة المرور للتأكيد</string>
     <string name="enter_your_state">أدخل دولتك</string>
     <string name="binding_phone_code">(+%1$s)</string>
-    <string name="invalid_first_name">الاسم الأول غير صالح. يجب أن يكون ما بين 3 إلى 15 حرفًا.</string>
-    <string name="invalid_last_name">الاسم الأخير غير صالح. يجب أن يكون ما بين 3 إلى 15 حرفًا.</string>
-    <string name="invalid_password">كلمة المرور غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
-    <string name="invalid_phone">رقم الهاتف غير صالح. يجب أن يحتوي على أرقام فقط وتتراوح بين 9 إلى 15 حرفًا.</string>
-    <string name="invalid_email">البريد الإلكتروني غير صالح. يجب أن يكون أقل من 50 حرفًا.</string>
+    <string name="invalid_first_name">الاسم الأول غير صالح. يجب أن يكون ما بين 3 إلى 15 حرفًا</string>
+    <string name="invalid_last_name">الاسم الأخير غير صالح. يجب أن يكون ما بين 3 إلى 15 حرفًا</string>
+    <string name="invalid_password">كلمة المرور غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا</string>
+    <string name="invalid_phone">رقم الهاتف غير صالح. يجب أن يحتوي على أرقام فقط وتتراوح بين 9 إلى 15 حرفًا</string>
+    <string name="invalid_email">البريد الإلكتروني غير صالح. يجب أن يكون أقل من 50 حرفًا</string>
     <string name="email_text">البريد الإلكتروني</string>
     <string name="Delete">تأكيد الحذف</string>
     <string name="cancellation">إلغاء</string>
     <string name="delete_info">سوف يتم فقد كل المعلومات والمعاملات والحجوزات</string>
-    <string name="Dont_have_an_account">ليس لديك حساب؟</string>
+    <string name="Do_not_have_an_account">ليس لديك حساب؟</string>
     <string name="GOTOSignUp">تسجيل دخول</string>
 
     <string name="invalid_middle_name">الاسم الأوسط غير صالح</string>
     <string name="invalid_country">البلد غير صالحة</string>
-    <string name="invalid_old_password">كلمة المرور القديمة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
-    <string name="invalid_new_password">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
-    <string name="invalid_new_password_confirmation">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا.</string>
-    <string name="new_password_and_confirmation_do_not_match">كلمة المرورغير مطابقة</string>
+    <string name="invalid_old_password">كلمة المرور القديمة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا</string>
+    <string name="invalid_new_password">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا</string>
+    <string name="invalid_new_password_confirmation">كلمة المرور الجديدة غير صالحة. يجب أن تتراوح طولها بين 8 إلى 50 حرفًا</string>
+    <string name="new_password_and_confirmation_do_not_match">كلمة المرور غير مطابقة</string>
+    <string name="you_re_already_logged_in">لقد سجلت الدخول بالفعل!</string>
+    <string name="invalid_birth_date" >تاريخ الميلاد يجب أن يكون قبل 13 عام من الآن</string>
+    <string name="invalid_image">الصورة يجب أن تكون (jpg ،jpeg أو png) وأقل من 10 ميجابايت</string>
     <string name="profile_name">ناديــن محمد السيد</string>
 </resources>
