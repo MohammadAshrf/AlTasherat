@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.signup.domain.interactor.login
 
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.constants.Validation
 import io.mockk.*
 import kotlinx.coroutines.*
 import org.junit.Assert.*
@@ -95,122 +96,138 @@ import org.junit.jupiter.api.assertThrows
     @Test
     fun `when signup request has invalid first name then throw validation exception`() = runBlocking {
         // Arrange
-        val signupRequest = SignupRequest(
-            firstName = "Jo", // Invalid: too short
-            lastName = "Doe",
-            email = "john.doe@example.com",
-            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
-            password = "password",
-            passwordConfirmation = "password",
-            countryId = 1,
-            countryCode = "+20"
-        )
+        val signupRequest = SignupRequest(firstName = "Jo", lastName = "Doe", email = "john.doe@example.com", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { signupUC.execute(signupRequest) }
+              signupUC.execute(signupRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_first_name.toString()))
+        assertTrue(exception.errors.containsKey(Validation.FIRST_NAME))
+    }
+
+    @Test
+    fun `when signup request has empty first name then throw validation exception`() = runBlocking {
+        // Arrange
+        val signupRequest = SignupRequest(firstName = "", lastName = "Doe", email = "john.doe@example.com", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
+
+        // Act & Assert
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            signupUC.execute(signupRequest)
+        }
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.FIRST_NAME))
+    }
+
+    @Test
+    fun `when signup request has invalid last name then throw validation exception`() = runBlocking {
+        // Arrange
+        val signupRequest = SignupRequest(firstName = "John", lastName = "bv", email = "john.doe@example.com", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
+
+        // Act & Assert
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            signupUC.execute(signupRequest)
+        }
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.LAST_NAME))
     }
 
     @Test
     fun `when signup request has empty last name then throw validation exception`() = runBlocking {
         // Arrange
-        val signupRequest = SignupRequest(
-            firstName = "John",
-            lastName = "", // Invalid: empty
-            email = "john.doe@example.com",
-            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
-            password = "password",
-            passwordConfirmation = "password",
-            countryId = 1,
-            countryCode = "+20"
-        )
+        val signupRequest = SignupRequest(firstName = "John", lastName = "", email = "john.doe@example.com", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { signupUC.execute(signupRequest) }
+            signupUC.execute(signupRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_last_name.toString()))
+        assertTrue(exception.errors.containsKey(Validation.LAST_NAME))
     }
 
     @Test
-    fun `when signup request has invalid email then throw validation exception`() = runBlocking {
+    fun `when signup request has empty email then throw validation exception`() = runBlocking {
         // Arrange
-        val signupRequest = SignupRequest(
-            firstName = "John",
-            lastName = "Doe",
-            email = "", // Invalid: empty
-            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
-            password = "password",
-            passwordConfirmation = "password",
-            countryId = 1,
-            countryCode = "+20"
-        )
+        val signupRequest = SignupRequest(firstName = "John", lastName = "Devv", email = "", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { signupUC.execute(signupRequest) }
+            signupUC.execute(signupRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_email.toString()))
+        assertTrue(exception.errors.containsKey(Validation.EMAIL))
     }
 
     @Test
     fun `when signup request has invalid phone number then throw validation exception`() = runBlocking {
         // Arrange
-        val phoneRequest = PhoneRequest(countryCode = "", number = "")
-        val signupRequest = SignupRequest(
-            firstName = "John",
-            lastName = "Doe",
-            email = "john.doe@example.com",
-            phone = phoneRequest, // Invalid: empty
-            password = "password",
-            passwordConfirmation = "password",
-            countryId = 1,
-            countryCode = "+20"
-        )
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "123")
+        val signupRequest = SignupRequest(firstName = "John", lastName = "Doe", email = "john.doe@example.com", phone = phoneRequest, password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { signupUC.execute(signupRequest) }
+           signupUC.execute(signupRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_phone.toString()))
+        assertTrue(exception.errors.containsKey(Validation.PHONE))
+    }
+
+    @Test
+    fun `when signup request has Empty phone number then throw validation exception`() = runBlocking {
+        // Arrange
+        val phoneRequest = PhoneRequest(countryCode = "", number = "")
+        val signupRequest = SignupRequest(firstName = "John", lastName = "Doe", email = "john.doe@example.com", phone = phoneRequest, password = "password", passwordConfirmation = "password", countryId = 1, countryCode = "+20")
+
+        // Act & Assert
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            signupUC.execute(signupRequest)
+        }
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.PHONE))
     }
 
     @Test
     fun `when signup request has invalid password then throw validation exception`() = runBlocking {
         // Arrange
-        val signupRequest = SignupRequest(
-            firstName = "John",
-            lastName = "Doe",
-            email = "john.doe@example.com",
-            phone = PhoneRequest(countryCode = "0020", number = "100100100"),
-            password = "short", // Invalid: too short
-            passwordConfirmation = "short",
-            countryId = 1,
-            countryCode = "+20"
-        )
+        val signupRequest = SignupRequest(firstName = "John", lastName = "Doe", email = "john.doe@example.com", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "short", passwordConfirmation = "short", countryId = 1, countryCode = "+20")
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { signupUC.execute(signupRequest) }
+             signupUC.execute(signupRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_password.toString()))
+        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
+    }
+
+    @Test
+    fun `when signup request has Empty password then throw validation exception`() = runBlocking {
+        // Arrange
+        val signupRequest = SignupRequest(firstName = "John", lastName = "Doe", email = "john.doe@example.com", phone = PhoneRequest(countryCode = "0020", number = "100100100"), password = "", passwordConfirmation = "short", countryId = 1, countryCode = "+20")
+
+        // Act & Assert
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
+            signupUC.execute(signupRequest)
+        }
+
+        // Verify
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
     }
 
 //    @Test

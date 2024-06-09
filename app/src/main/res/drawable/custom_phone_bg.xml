@@ -4,9 +4,9 @@
     <solid android:color="@color/bgInput">
     </solid>
     <corners
-        android:bottomLeftRadius="@dimen/_16sdp"
+        android:bottomLeftRadius="@dimen/_20sdp"
         android:bottomRightRadius="0dp"
-        android:topLeftRadius="@dimen/_16sdp"
+        android:topLeftRadius="@dimen/_20sdp"
         android:topRightRadius="0dp" />
     <stroke
         android:width=".7dp"

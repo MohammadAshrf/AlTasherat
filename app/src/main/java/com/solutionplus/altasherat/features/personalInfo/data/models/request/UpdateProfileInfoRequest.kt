@@ -32,19 +32,19 @@ data class UpdateProfileInfoRequest(
         )
 
     fun isFirstNameValid(): Boolean {
-        return Regex(pattern = "[a-zA-Z]{3,15}$").matches(firstname)
+        return firstname.isNotBlank() && Regex(pattern = "[a-zA-Z]{3,15}$").matches(firstname)
     }
 
     fun isMiddleNameValid(): Boolean {
-        return Regex(pattern = "[a-zA-Z]{0,15}$").matches(middleName)
+        return middleName.isNotBlank() && Regex(pattern = "[a-zA-Z]{0,15}$").matches(middleName)
     }
 
     fun isLastNameValid(): Boolean {
-        return Regex(pattern = "[a-zA-Z]{3,15}$").matches(lastname)
+        return lastname.isNotBlank() && Regex(pattern = "[a-zA-Z]{3,15}$").matches(lastname)
     }
 
     fun isEmailValid(): Boolean {
-        return email.length <= 50 && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return email.isNotBlank() && email.length <= 50 && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun isPhoneValid(): Boolean {

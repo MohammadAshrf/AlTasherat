@@ -8,10 +8,11 @@ import com.solutionplus.altasherat.features.personalInfo.data.models.request.Upd
 import com.solutionplus.altasherat.features.personalInfo.domain.models.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateProfileRepository
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
+import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 
 class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, private val saveUserUC: SaveUserUC) :
     BaseUseCase<UpdateUser, UpdateProfileInfoRequest>() {
-    override suspend fun execute(params: UpdateProfileInfoRequest?): UpdateUser {
+    public override suspend fun execute(params: UpdateProfileInfoRequest?): UpdateUser {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
             throw LeonException.Local.RequestValidation(

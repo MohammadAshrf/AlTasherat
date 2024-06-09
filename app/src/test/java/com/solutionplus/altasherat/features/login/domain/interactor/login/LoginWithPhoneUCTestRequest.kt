@@ -2,6 +2,7 @@ package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 
 import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
@@ -104,50 +105,49 @@ class LoginWithPhoneUCTestRequest {
     fun `when login request has invalid phone number then throw validation exception`() =
         runBlocking {
             // Arrange
-            val phoneRequest = PhoneRequest(countryCode = "", number = "123")
+            val phoneRequest = PhoneRequest(countryCode = "0020", number = "123")
             val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
 
             // Act & Assert
             val exception = assertThrows<LeonException.Local.RequestValidation> {
-                runBlocking { loginWithPhoneUC.execute(loginRequest) }
+               loginWithPhoneUC.execute(loginRequest)
             }
 
             // Verify
             assertNotNull(exception)
-            assertTrue(exception.message!!.contains(R.string.invalid_phone.toString()))
+            assertTrue(exception.errors.containsKey(Validation.PHONE))
         }
 
     @Test
-    fun `when login request has empty phone number then throw validation exception`() =
-        runBlocking {
+    fun `when login request has empty phone number then throw validation exception`() = runBlocking {
             // Arrange
             val phoneRequest = PhoneRequest(countryCode = "0020", number = "")
             val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
 
             // Act & Assert
             val exception = assertThrows<LeonException.Local.RequestValidation> {
-                runBlocking { loginWithPhoneUC.execute(loginRequest) }
+                  loginWithPhoneUC.execute(loginRequest)
             }
 
             // Verify
             assertNotNull(exception)
-            assertTrue(exception.message!!.contains(R.string.invalid_phone.toString()))
-        }
+        assertTrue(exception.errors.containsKey(Validation.PHONE))
+    }
 
     @Test
     fun `when login request has invalid password then throw validation exception`() = runBlocking {
         // Arrange
         val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "short")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "12345")
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { loginWithPhoneUC.execute(loginRequest) }
+             loginWithPhoneUC.execute(loginRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_password.toString()))
+        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
     }
 
     @Test
@@ -158,12 +158,12 @@ class LoginWithPhoneUCTestRequest {
 
         // Act & Assert
         val exception = assertThrows<LeonException.Local.RequestValidation> {
-            runBlocking { loginWithPhoneUC.execute(loginRequest) }
+              loginWithPhoneUC.execute(loginRequest)
         }
 
         // Verify
         assertNotNull(exception)
-        assertTrue(exception.message!!.contains(R.string.invalid_password.toString()))
+        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
     }
 
 

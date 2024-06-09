@@ -1,5 +1,6 @@
 package com.solutionplus.altasherat.features.deleteaccount.domain.usecase
 
+import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.deleteaccount.domain.model.request.DeleteAccountRequest
 import com.solutionplus.altasherat.features.deleteaccount.domain.repository.IDeleteAccountRepository
@@ -8,6 +9,7 @@ import io.mockk.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.assertThrows
 
 /*
    test validation when password is empty
@@ -29,16 +31,13 @@ class DeleteAccountUCTest{
         val request = DeleteAccountRequest(password = "")
 
         // Act
-        var exceptionThrown: Exception? = null
-        try {
+        val exception = assertThrows<LeonException.Local.RequestValidation> {
             deleteAccountUC.execute(request)
-        } catch (e: LeonException.Local.RequestValidation) {
-            exceptionThrown = e
         }
 
         // Assert
-        assertTrue(exceptionThrown is LeonException.Local.RequestValidation)
-        assertEquals("password cannot be empty", exceptionThrown?.message)
+        assertNotNull(exception)
+        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
 
         // Verify that repository methods are not called
         coVerify(exactly = 0) { repository.deleteAccount(any()) }

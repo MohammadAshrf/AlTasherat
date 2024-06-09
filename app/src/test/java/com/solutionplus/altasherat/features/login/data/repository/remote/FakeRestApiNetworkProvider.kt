@@ -1,6 +1,7 @@
 package com.solutionplus.altasherat.features.login.data.repository.remote
 
 import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvider
+import java.io.File
 import java.lang.reflect.Type
 
 class FakeRestApiNetworkProvider : INetworkProvider {
@@ -34,6 +35,17 @@ class FakeRestApiNetworkProvider : INetworkProvider {
         requestBody: RequestBody?
     ): ResponseBody {
         @Suppress("UNCHECKED_CAST")
+        return postResponse as ResponseBody
+    }
+
+    override suspend fun <ResponseBody> postWithFiles(
+        responseWrappedModel: Type,
+        pathUrl: String,
+        headers: Map<String, Any>?,
+        queryParams: Map<String, Any>?,
+        requestBody: Map<String, Any>?,
+        filesMap: Map<String, List<File>>?
+    ): ResponseBody {
         return postResponse as ResponseBody
     }
 
