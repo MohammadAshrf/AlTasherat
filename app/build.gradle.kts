@@ -129,27 +129,27 @@ dependencies {
     implementation(libs.androidx.hilt.work)
 
     //Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
 
-    //Mockito
-    androidTestImplementation("org.mockito:mockito-core:3.11.2")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    androidTestImplementation("io.mockk:mockk:1.12.0")
-    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test:runner:1.4.0")
+    //Mockito (Testing)
+    androidTestImplementation(libs.mockito.mockito.core)
+    androidTestImplementation(libs.jetbrains.kotlinx.coroutines.test)
+    androidTestImplementation(libs.mockk.mockk)
+    androidTestImplementation(libs.kotlin.mockito.kotlin)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.runner)
 
-    testImplementation("org.mockito:mockito-core:3.11.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation("io.mockk:mockk:1.12.0") // MockK
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-    testImplementation("com.google.truth:truth:1.4.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation(libs.mockito.mockito.core)
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
+    testImplementation(libs.mockk.mockk) // MockK
+    testImplementation(libs.kotlin.mockito.kotlin)
+    testImplementation(libs.truth)
+    testImplementation(libs.junit.jupiter)
 
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.test.ext:junit:1.1.3")
-    testImplementation("androidx.test:runner:1.4.0")
-    implementation("com.google.android.material:material:1.2.0")
+    testImplementation(libs.junit)
+    testImplementation(libs.junit.v113)
+    testImplementation(libs.runner.v140)
+    implementation(libs.material.v120)
 
 
     // Dots Indicator
@@ -160,7 +160,7 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
 
     // CircleImageView
-    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation(libs.circleimageview)
 
     //ThreeTenABP for the date
     implementation (libs.threetenabp)
