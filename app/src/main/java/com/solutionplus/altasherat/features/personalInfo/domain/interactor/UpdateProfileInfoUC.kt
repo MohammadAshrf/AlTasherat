@@ -6,14 +6,14 @@ import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateProfileInfoRequest
-import com.solutionplus.altasherat.features.personalInfo.domain.models.UpdateUser
+import com.solutionplus.altasherat.features.personalInfo.domain.models.UpdateProfileInfo
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateProfileRepository
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 
 class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, private val saveUserUC: SaveUserUC) :
-    BaseUseCase<UpdateUser, UpdateProfileInfoRequest>() {
+    BaseUseCase<UpdateProfileInfo, UpdateProfileInfoRequest>() {
 
-    override suspend fun execute(params: UpdateProfileInfoRequest?): UpdateUser {
+    override suspend fun execute(params: UpdateProfileInfoRequest?): UpdateProfileInfo {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
             throw LeonException.Local.RequestValidation(

@@ -8,7 +8,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesRemoteUC
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CompletableDeferred
@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 class LanguageWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParams: WorkerParameters,
-    private val getCountries: GetCountriesUC
+    private val getCountries: GetCountriesRemoteUC
 ) : CoroutineWorker(context, workerParams) {
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val deferredResult = CompletableDeferred<Result>()

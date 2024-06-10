@@ -15,16 +15,16 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal object UpdateUserDI {
+internal object UpdateProfileInfoDI {
     @Provides
-    fun provideUpdateUserUC(
+    fun provideUpdateProfileInfoUC(
         repository: IUpdateProfileRepository,
         saveUserUC: SaveUserUC
     ): UpdateProfileInfoUC =
         UpdateProfileInfoUC(repository, saveUserUC)
 
     @Provides
-    fun provideGetUserFromRemoteUC(repository: IUpdateProfileRepository): GetProfileInfoRemoteUC =
+    fun provideProfileInfoRemoteUC(repository: IUpdateProfileRepository): GetProfileInfoRemoteUC =
         GetProfileInfoRemoteUC(repository)
 
     @Provides

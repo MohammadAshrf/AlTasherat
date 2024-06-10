@@ -8,8 +8,7 @@ import com.solutionplus.altasherat.common.data.repository.local.StorageKeyEnum
 import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStorageProvider
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.services.user.data.models.entity.UserEntity
-import com.solutionplus.altasherat.features.services.user.domain.repository.Local.IUserLocalDS
-import com.solutionplus.altasherat.features.signup.data.repository.local.SignupLocalDS
+import com.solutionplus.altasherat.features.services.user.domain.repository.local.IUserLocalDS
 import java.util.Base64
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -27,7 +26,7 @@ internal class UserLocalDS(
         storageKV.saveEntry(StorageKeyEnum.IS_USER_LOGGED_IN, true, Boolean::class.java)
     }
 
-    override suspend fun getUser(): UserEntity {
+    override suspend fun getUserLocal(): UserEntity {
         val userJsonBase64 = storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java)
         val encryptedBytes = Base64.getDecoder().decode(userJsonBase64)
         val decryptedBytes = encryptionProvider.decryptData(encryptedBytes)

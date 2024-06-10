@@ -11,14 +11,14 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.r
 class CountriesRepository(
     private val localDS: ICountriesLocalDS, private val remoteDS: ICountriesRemoteDS
 ) : ICountriesRepository {
-    override suspend fun getCountriesFromRemote(params: String): List<Country> {
-        val result = remoteDS.getCountiesFromRemote(params).data
+    override suspend fun getCountriesRemote(params: String): List<Country> {
+        val result = remoteDS.getCountriesRemote(params).data
         return CountryMapper.dtoToDomain(result)
     }
 
-    override suspend fun getCountriesFromLocal(): List<Country> {
+    override suspend fun getCountriesLocal(): List<Country> {
         getClassLogger().info("start repo")
-        return CountryMapper.entityToDomain(localDS.getCountriesFromLocal())
+        return CountryMapper.entityToDomain(localDS.getCountriesLocal())
     }
     override suspend fun saveCountries(countries: List<Country>) {
         localDS.saveCountriesToLocal(countries)

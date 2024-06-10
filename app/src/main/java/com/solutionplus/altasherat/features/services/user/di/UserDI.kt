@@ -6,10 +6,10 @@ import com.solutionplus.altasherat.common.domain.repository.local.IKeyValueStora
 import com.solutionplus.altasherat.common.domain.repository.local.encryption.IEncryptionProvider
 import com.solutionplus.altasherat.features.services.user.data.repository.UserRepository
 import com.solutionplus.altasherat.features.services.user.data.repository.local.UserLocalDS
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserLocalUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.services.user.domain.repository.IUserRepository
-import com.solutionplus.altasherat.features.services.user.domain.repository.Local.IUserLocalDS
+import com.solutionplus.altasherat.features.services.user.domain.repository.local.IUserLocalDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +26,8 @@ internal object UserDI {
 
     @Provides
     @Singleton
-    fun provideGetUserUC(repository: IUserRepository): GetUserFromLocalUC =
-        GetUserFromLocalUC(repository)
+    fun provideGetUserUC(repository: IUserRepository): GetUserLocalUC =
+        GetUserLocalUC(repository)
 
 
 

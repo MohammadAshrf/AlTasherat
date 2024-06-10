@@ -77,7 +77,7 @@ class UserLocalDSTest{
         coEvery { storageKV.getEntry(StorageKeyEnum.USER, "", String::class.java) } returns encryptedUserData
         coEvery { encryptionProvider.decryptData(Base64.getDecoder().decode(encryptedUserData)) } returns userJson.toByteArray()
 
-        val result = userLocalDS.getUser()
+        val result = userLocalDS.getUserLocal()
 
         assertEquals(UserMapper.domainToEntity(user), result)
     }

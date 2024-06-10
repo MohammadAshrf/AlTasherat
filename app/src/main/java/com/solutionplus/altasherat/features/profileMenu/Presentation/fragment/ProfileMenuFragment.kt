@@ -68,6 +68,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                     findNavController().navigate(R.id.action_profileMenuFragment_to_visaPlatformFragment)
                 }
 
+                else -> {}
             }
         }
 

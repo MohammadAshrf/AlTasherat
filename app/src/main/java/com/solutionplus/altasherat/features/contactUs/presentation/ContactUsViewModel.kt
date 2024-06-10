@@ -8,8 +8,8 @@ import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsAction
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsEvent
 import com.solutionplus.altasherat.features.contactUs.presentation.ContactUsContract.ContactUsState
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContactUsViewModel @Inject constructor(
-    private val getCountriesUC: GetCountriesFromLocalUC,
-    private val getUserFromLocalUC: GetUserFromLocalUC,
+    private val getCountriesUC: GetCountriesLocalUC,
+    private val getUserLocalUC: GetUserLocalUC,
 
     ) :
     AlTasheratViewModel<ContactUsAction, ContactUsEvent, ContactUsState>(ContactUsState.initial()) {
@@ -54,7 +54,7 @@ class ContactUsViewModel @Inject constructor(
 
     private fun getUpdatedUserFromLocal() {
         viewModelScope.launch {
-            getUserFromLocalUC.invoke().collect {
+            getUserLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(
                         oldViewState.copy(

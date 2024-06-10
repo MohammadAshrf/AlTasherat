@@ -3,7 +3,7 @@ package com.solutionplus.altasherat.features.services.user.data.repository
 import com.solutionplus.altasherat.features.services.user.data.mappers.UserMapper
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.features.services.user.domain.repository.IUserRepository
-import com.solutionplus.altasherat.features.services.user.domain.repository.Local.IUserLocalDS
+import com.solutionplus.altasherat.features.services.user.domain.repository.local.IUserLocalDS
 
 
 internal class UserRepository (private val localDs: IUserLocalDS): IUserRepository {
@@ -12,8 +12,8 @@ internal class UserRepository (private val localDs: IUserLocalDS): IUserReposito
         localDs.saveUser(result)
     }
 
-    override suspend fun getUser(): User {
-        val result = localDs.getUser()
+    override suspend fun getUserLocal(): User {
+        val result = localDs.getUserLocal()
       return  UserMapper.entityToDomain(result)
     }
 

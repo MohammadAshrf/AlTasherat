@@ -8,7 +8,6 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.io.File
 
 
-
 data class UpdateProfileInfoRequest(
     @field:SerializedName("firstname") val firstname: String,
     @field:SerializedName("middlename") val middleName: String,
@@ -69,10 +68,10 @@ data class UpdateProfileInfoRequest(
 
     fun isImageValid(): Boolean {
         image?.let {
-            val maxSizeInKB = 1024 // 1 MB
-            // Check if the file size is less than or equal to 1 MB
+            val maxSizeInKB = 512 // 512 KB
+            // Check if the file size is less than or equal to 512 KB
             val sizeInKB = it.length() / 1024
             return sizeInKB <= maxSizeInKB
-        } ?: return true // If the image is null, return false
+        } ?: return false
     }
 }

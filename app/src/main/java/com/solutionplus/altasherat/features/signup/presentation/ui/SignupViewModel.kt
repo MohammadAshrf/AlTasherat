@@ -2,26 +2,21 @@ package com.solutionplus.altasherat.features.signup.presentation.ui
 
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
-import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.services.language.domain.interactor.GetSelectedCountryUC
-import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
-    private val getCountriesUC: GetCountriesFromLocalUC,
+    private val getCountriesUC: GetCountriesLocalUC,
     private val getSelectedCountryUC: GetSelectedCountryUC,
 ) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
     initialState = SignUpContract.SignUpState.initial()

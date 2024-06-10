@@ -5,8 +5,8 @@ import com.solutionplus.altasherat.common.domain.repository.remote.INetworkProvi
 import com.solutionplus.altasherat.features.services.country.data.repository.CountriesRepository
 import com.solutionplus.altasherat.features.services.country.data.repository.local.CountriesLocalDS
 import com.solutionplus.altasherat.features.services.country.data.repository.remote.CountriesRemoteDS
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesRemoteUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.HasCountriesUC
 import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
 import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
@@ -22,13 +22,13 @@ import javax.inject.Singleton
 internal object CountriesDI {
     @Provides
     @Singleton
-    fun provideCountriesUC(repository: ICountriesRepository): GetCountriesUC =
-        GetCountriesUC(repository)
+    fun provideCountriesUC(repository: ICountriesRepository): GetCountriesRemoteUC =
+        GetCountriesRemoteUC(repository)
 
     @Singleton
     @Provides
-    fun provideGetCountriesFromLocalUC(repository: ICountriesRepository): GetCountriesFromLocalUC =
-        GetCountriesFromLocalUC(repository)
+    fun provideGetCountriesFromLocalUC(repository: ICountriesRepository): GetCountriesLocalUC =
+        GetCountriesLocalUC(repository)
 
     @Singleton
     @Provides

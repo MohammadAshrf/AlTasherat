@@ -3,5 +3,5 @@ package com.solutionplus.altasherat.features.services.country.domain.repository.
 import com.solutionplus.altasherat.features.services.country.data.models.dto.CountriesResponse
 
 interface ICountriesRemoteDS {
-    suspend fun getCountiesFromRemote(locale: String): CountriesResponse
+    suspend fun getCountriesRemote(locale: String): CountriesResponse
 }

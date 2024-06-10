@@ -1,11 +1,10 @@
 package com.solutionplus.altasherat.features.signup.domain.usecase
 
-import com.google.gson.Gson
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserLocalUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.services.user.domain.models.User
@@ -13,7 +12,7 @@ import com.solutionplus.altasherat.features.signup.domain.repository.ISignupRepo
 class SignupUC(
     private val repository: ISignupRepository,
     private val saveUserUC: SaveUserUC,
-    private val getUserUC : GetUserFromLocalUC
+    private val getUserUC : GetUserLocalUC
     ) : BaseUseCase<User, SignupRequest>() {
 
     public override suspend fun execute(params: SignupRequest?): User {

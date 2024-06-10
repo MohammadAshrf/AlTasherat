@@ -12,7 +12,7 @@ import com.solutionplus.altasherat.features.services.language.domain.worker.Lang
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageAction
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageEvent
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageState
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LanguageViewModel @Inject constructor(
-    private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
+    private val getCountriesLocalUC: GetCountriesLocalUC,
     private val getSelectedCountryUC: GetSelectedCountryUC,
     private val saveSelectedCountryUC: SaveSelectedCountryUC,
     private val languageWorkerImpl: LanguageWorkerImpl
@@ -64,7 +64,7 @@ class LanguageViewModel @Inject constructor(
 
     private fun getCountriesFromLocal() {
         viewModelScope.launch {
-            getCountriesFromLocalUC.invoke().collect {
+            getCountriesLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
                     is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))

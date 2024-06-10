@@ -5,7 +5,7 @@ import com.solutionplus.altasherat.features.services.user.data.mappers.UserMappe
 import com.solutionplus.altasherat.features.services.user.domain.models.Image
 import com.solutionplus.altasherat.features.services.user.domain.models.Phone
 import com.solutionplus.altasherat.features.services.user.domain.models.User
-import com.solutionplus.altasherat.features.services.user.domain.repository.Local.IUserLocalDS
+import com.solutionplus.altasherat.features.services.user.domain.repository.local.IUserLocalDS
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

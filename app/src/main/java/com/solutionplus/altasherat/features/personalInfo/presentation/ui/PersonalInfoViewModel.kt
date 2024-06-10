@@ -3,7 +3,6 @@ package com.solutionplus.altasherat.features.personalInfo.presentation.ui
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
-import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
@@ -16,8 +15,8 @@ import com.solutionplus.altasherat.features.personalInfo.presentation.ui.Persona
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.File
@@ -25,9 +24,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PersonalInfoViewModel @Inject constructor(
-    private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
-    private val getUserFromRemoteUC: GetProfileInfoRemoteUC,
-    private val getUserFromLocalUC: GetUserFromLocalUC,
+    private val getCountriesLocalUC: GetCountriesLocalUC,
+    private val getProfileInfoRemoteUC: GetProfileInfoRemoteUC,
+    private val getProfileInfoLocalUC: GetUserLocalUC,
     private val updateUserUC: UpdateProfileInfoUC
 ) :
     AlTasheratViewModel<PersonalInfoAction, PersonalInfoEvent, PersonalInfoState>(PersonalInfoState.initial()) {
@@ -54,7 +53,7 @@ class PersonalInfoViewModel @Inject constructor(
 
     private fun getUpdatedUserFromLocal() {
         viewModelScope.launch {
-            getUserFromLocalUC.invoke().collect {
+            getProfileInfoLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(
                         oldViewState.copy(
@@ -62,7 +61,13 @@ class PersonalInfoViewModel @Inject constructor(
                         )
                     )
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.GetUpdatedUserFromLocal(it.model))
@@ -74,7 +79,7 @@ class PersonalInfoViewModel @Inject constructor(
 
     private fun getUpdatedUserFromRemote() {
         viewModelScope.launch {
-            getUserFromRemoteUC.invoke().collect {
+            getProfileInfoRemoteUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(
                         oldViewState.copy(
@@ -82,7 +87,13 @@ class PersonalInfoViewModel @Inject constructor(
                         )
                     )
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.GetUpdatedUserFromRemote(it.model))
@@ -120,15 +131,22 @@ class PersonalInfoViewModel @Inject constructor(
 
             updateUserUC.invoke(updateUserRequest).collect {
                 when (it) {
-                    is Resource.Failure -> {setState(
-                        oldViewState.copy(
-                            isLoading = false,
-                            exception = it.exception
+                    is Resource.Failure -> {
+                        setState(
+                            oldViewState.copy(
+                                isLoading = false,
+                                exception = it.exception
+                            )
                         )
-                    )
                     }
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(PersonalInfoEvent.UpdateDoneSuccessfully("Data updated successfully"))
@@ -140,10 +158,16 @@ class PersonalInfoViewModel @Inject constructor(
 
     private fun getCountriesFromLocal() {
         viewModelScope.launch {
-            getCountriesFromLocalUC.invoke().collect {
+            getCountriesLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         sendEvent(
                             PersonalInfoEvent.GetCountriesFromLocal(

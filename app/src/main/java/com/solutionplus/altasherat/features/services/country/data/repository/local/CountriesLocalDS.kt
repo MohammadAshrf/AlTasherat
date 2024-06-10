@@ -11,7 +11,7 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.l
 
 internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStorageProvider) :
     ICountriesLocalDS {
-    override suspend fun getCountriesFromLocal(): List<CountryEntity> {
+    override suspend fun getCountriesLocal(): List<CountryEntity> {
         logger.info("start")
         val countries =
             localStorageProvider.getEntry(StorageKeyEnum.COUNTRIES, "", String::class.java)

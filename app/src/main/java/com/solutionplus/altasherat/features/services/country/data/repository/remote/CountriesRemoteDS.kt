@@ -7,7 +7,7 @@ import com.solutionplus.altasherat.features.services.country.domain.repository.r
 
 internal class CountriesRemoteDS(private val networkProvider: INetworkProvider) :
     ICountriesRemoteDS {
-    override suspend fun getCountiesFromRemote(locale: String): CountriesResponse {
+    override suspend fun getCountriesRemote(locale: String): CountriesResponse {
         return networkProvider.get(
             responseWrappedModel = CountriesResponse::class.java,
             "countries",

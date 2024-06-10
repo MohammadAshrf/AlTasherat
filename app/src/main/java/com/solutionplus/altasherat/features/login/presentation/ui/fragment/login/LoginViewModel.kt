@@ -2,26 +2,21 @@ package com.solutionplus.altasherat.features.login.presentation.ui.fragment.logi
 
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
-import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.services.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.login.domain.interactor.login.LoginWithPhoneUC
-import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesFromLocalUC
-import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginWithPhoneUC: LoginWithPhoneUC,
-    private val getCountriesUC: GetCountriesFromLocalUC,
+    private val getCountriesUC: GetCountriesLocalUC,
     private val getSelectedCountryUC: GetSelectedCountryUC
 ) : AlTasheratViewModel<LoginContract.LoginActions, LoginContract.LoginEvents, LoginContract.LoginState>(
     initialState = LoginContract.LoginState.initial()

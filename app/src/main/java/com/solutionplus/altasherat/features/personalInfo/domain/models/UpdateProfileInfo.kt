@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 @Parcelize
-data class UpdateUser(
+data class UpdateProfileInfo(
 	val message: String,
 	val user: User
 ) : Parcelable

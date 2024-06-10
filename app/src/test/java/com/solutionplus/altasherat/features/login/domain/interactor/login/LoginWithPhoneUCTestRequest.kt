@@ -1,7 +1,6 @@
 package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 
-import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
@@ -9,7 +8,7 @@ import com.solutionplus.altasherat.features.login.data.model.request.PhoneReques
 import com.solutionplus.altasherat.features.login.domain.model.Login
 import com.solutionplus.altasherat.features.login.domain.repository.ILoginRepository
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
-import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserFromLocalUC
+import com.solutionplus.altasherat.features.services.user.domain.interactor.GetUserLocalUC
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 import com.solutionplus.altasherat.features.services.user.domain.models.Image
 import com.solutionplus.altasherat.features.services.user.domain.models.Phone
@@ -32,7 +31,7 @@ class LoginWithPhoneUCTestRequest {
 
     private lateinit var repository: ILoginRepository
     private lateinit var saveUserUC: SaveUserUC
-    private lateinit var getUserUC: GetUserFromLocalUC
+    private lateinit var getUserUC: GetUserLocalUC
     private lateinit var loginWithPhoneUC: LoginWithPhoneUC
 
     @Before
