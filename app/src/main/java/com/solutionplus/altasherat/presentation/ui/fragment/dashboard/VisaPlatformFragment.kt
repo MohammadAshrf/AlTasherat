@@ -41,11 +41,6 @@ class VisaPlatformFragment : BaseFragment<FragmentVisaPlatformBinding>() {
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
-    }
-
     override fun subscribeToObservables() {
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
