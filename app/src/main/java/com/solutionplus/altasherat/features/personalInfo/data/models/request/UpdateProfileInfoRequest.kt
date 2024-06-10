@@ -73,6 +73,6 @@ data class UpdateProfileInfoRequest(
             // Check if the file size is less than or equal to 1 MB
             val sizeInKB = it.length() / 1024
             return sizeInKB <= maxSizeInKB
-        } ?: return true // If the image is null, return false
+        } ?: return true
     }
 }
