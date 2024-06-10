@@ -41,31 +41,21 @@ class VisaPlatformFragment : BaseFragment<FragmentVisaPlatformBinding>() {
         viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onActionTrigger(ProfileMenuContract.ProfileMenuAction.IsUserLoggedIn)
+    }
+
     override fun subscribeToObservables() {
         collectFlowWithLifecycle(viewModel.singleEvent) {
             when (it) {
                 is VisaPlatformContract.VisaPlatformEvent.IsUserLoggedIn -> {
                     if (it.isUserLoggedIn) {
-                        binding.apply {
-                            button.setOnClickListener { showToast() }
-                            button2.setOnClickListener { showToast() }
-                            button3.setOnClickListener { showToast() }
-                            button4.setOnClickListener { showToast() }
-                            button5.setOnClickListener { showToast() }
-                            button6.setOnClickListener { showToast() }
-                        }
+                        setupButtonsForLoggedInUser()
                     } else {
-                        binding.apply {
-                            button.setOnClickListener { handleButtonClick() }
-                            button2.setOnClickListener { handleButtonClick() }
-                            button3.setOnClickListener { handleButtonClick() }
-                            button4.setOnClickListener { handleButtonClick() }
-                            button5.setOnClickListener { handleButtonClick() }
-                            button6.setOnClickListener { handleButtonClick() }
-                        }
+                        setupButtonsForLoggedOutUser()
                     }
                 }
-
             }
         }
 
@@ -81,19 +71,33 @@ class VisaPlatformFragment : BaseFragment<FragmentVisaPlatformBinding>() {
         }
     }
 
+    private fun setupButtonsForLoggedInUser() {
+        binding.apply {
+            button.setOnClickListener { showToast() }
+            button2.setOnClickListener { showToast() }
+            button3.setOnClickListener { showToast() }
+            button4.setOnClickListener { showToast() }
+            button5.setOnClickListener { showToast() }
+            button6.setOnClickListener { showToast() }
+        }
+    }
+
+    private fun setupButtonsForLoggedOutUser() {
+        binding.apply {
+            button.setOnClickListener { handleButtonClick() }
+            button2.setOnClickListener { handleButtonClick() }
+            button3.setOnClickListener { handleButtonClick() }
+            button4.setOnClickListener { handleButtonClick() }
+            button5.setOnClickListener { handleButtonClick() }
+            button6.setOnClickListener { handleButtonClick() }
+        }
+    }
+
     private fun showToast(){
         Toast.makeText(requireContext(), "the user is logged in go to the next", Toast.LENGTH_SHORT).show()
 
     }
-    override fun viewInit() {
-
-        binding.button.setOnClickListener { handleButtonClick() }
-        binding.button2.setOnClickListener { handleButtonClick() }
-        binding.button3.setOnClickListener { handleButtonClick() }
-        binding.button4.setOnClickListener { handleButtonClick() }
-        binding.button5.setOnClickListener { handleButtonClick() }
-        binding.button6.setOnClickListener { handleButtonClick() }
-    }
+    override fun viewInit() { }
 
     private fun handleButtonClick() {
         viewLifecycleOwner.lifecycleScope.launch {

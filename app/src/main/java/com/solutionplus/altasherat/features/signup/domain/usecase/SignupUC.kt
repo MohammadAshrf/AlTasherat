@@ -16,7 +16,7 @@ class SignupUC(
     private val getUserUC : GetUserFromLocalUC
     ) : BaseUseCase<User, SignupRequest>() {
 
-    public override suspend fun execute(params: SignupRequest?): User {
+     override suspend fun execute(params: SignupRequest?): User {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
             throw LeonException.Local.RequestValidation(

@@ -5,7 +5,7 @@ import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.features.services.user.domain.repository.IUserRepository
 
 class GetUserFromLocalUC(private val repository: IUserRepository) : BaseUseCase<User, Unit>() {
-    public override suspend fun execute(params: Unit?): User {
+     public override suspend fun execute(params: Unit?): User {
         return repository.getUser()
     }
 }

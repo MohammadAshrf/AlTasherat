@@ -3,6 +3,7 @@ package com.solutionplus.altasherat.features.login.domain.interactor.login
 
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.constants.Validation
+import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.login.data.model.request.LoginRequest
 import com.solutionplus.altasherat.features.login.data.model.request.PhoneRequest
@@ -19,6 +20,8 @@ import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -26,7 +29,13 @@ import org.junit.Test
 import org.junit.jupiter.api.assertThrows
 
 /*
-- validation
+- when login is successful_ then user details are returned
+- when login request has empty phone number then throw validation exception
+- when login request has invalid phone number then throw validation exception
+- when login request  has max length character greater than 15 in phone number then throw validation exception
+- when login request has max length character greater than 50 in password then throw validation exception
+- when login request has empty password then throw validation exception
+- when login request has invalid password then throw validation exception
  */
 class LoginWithPhoneUCTestRequest {
 
@@ -64,90 +73,70 @@ class LoginWithPhoneUCTestRequest {
 
 
             // Act
-            val result = loginWithPhoneUC.execute(loginRequest)
+            val result= loginWithPhoneUC(loginRequest)
+            var resultUser: User? = null
+            var thrownException: LeonException.Server.InternalServerError? = null
+            result.collect { resource ->
+                when (resource) {
+                    is Resource.Loading -> { }
+                    is Resource.Success -> resultUser = resource.model
+                    is Resource.Failure -> thrownException = resource.exception as? LeonException.Server.InternalServerError
+                }
+            }
 
             // Assert
-            assertEquals(userInfo, result)
-            assertNotNull(result)
+            assertEquals(userInfo, resultUser)
             coVerify {
                 repository.loginWithPhone(loginRequest)
-                repository.saveAccessToken(accessToken)
                 saveUserUC.execute(userInfo)
+                repository.saveAccessToken(accessToken)
                 getUserUC.execute(Unit)
             }
         }
 
-    @Test
-    fun `when login is Failed then throw exception`() = runBlocking {
-        // Arrange
-        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
-        val exception = LeonException.Server.InternalServerError(404, "internal server error")
-
-        coEvery { repository.loginWithPhone(loginRequest) } throws exception
-
-        // Act
-        var thrownException: LeonException.Server.InternalServerError? = null
-        try {
-            loginWithPhoneUC.execute(loginRequest)
-        } catch (e: LeonException.Server.InternalServerError) {
-            thrownException = e
-        }
-
-        // Assert
-        assertTrue(thrownException is LeonException.Server.InternalServerError)
-        assertEquals(exception.message, thrownException?.message)
-    }
-
 //-------------------------Validation Tests-----------------------------------------//
-
-    @Test
-    fun `when login request has invalid phone number then throw validation exception`() =
-        runBlocking {
-            // Arrange
-            val phoneRequest = PhoneRequest(countryCode = "0020", number = "123")
-            val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
-
-            // Act & Assert
-            val exception = assertThrows<LeonException.Local.RequestValidation> {
-               loginWithPhoneUC.execute(loginRequest)
-            }
-
-            // Verify
-            assertNotNull(exception)
-            assertTrue(exception.errors.containsKey(Validation.PHONE))
-        }
-
     @Test
     fun `when login request has empty phone number then throw validation exception`() = runBlocking {
-            // Arrange
-            val phoneRequest = PhoneRequest(countryCode = "0020", number = "")
-            val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
+        // Arrange
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "123456789")
+        //Act
+        val expected = loginWithPhoneUC(loginRequest).drop(1).first()
+        //Assert
+        assertTrue((expected as Resource.Failure).exception is LeonException.Local.RequestValidation)
+    }
 
-            // Act & Assert
-            val exception = assertThrows<LeonException.Local.RequestValidation> {
-                  loginWithPhoneUC.execute(loginRequest)
-            }
+    @Test
+    fun `when login request has invalid phone number then throw validation exception`() = runBlocking {
+        // Arrange
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "1020")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "123456789")
+        //Act
+        val expected = loginWithPhoneUC(loginRequest).drop(1).first()
+        //Assert
+        assertTrue((expected as Resource.Failure).exception is LeonException.Local.RequestValidation)
+    }
 
-            // Verify
-            assertNotNull(exception)
-        assertTrue(exception.errors.containsKey(Validation.PHONE))
+    @Test
+    fun `when login request  has max length character greater than 15 in phone number then throw validation exception`() = runBlocking {
+        // Arrange
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "10".repeat(15))
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "")
+        //Act
+        val expected = loginWithPhoneUC(loginRequest).drop(1).first()
+        //Assert
+        assertTrue((expected as Resource.Failure).exception is LeonException.Local.RequestValidation)
     }
 
     @Test
     fun `when login request has invalid password then throw validation exception`() = runBlocking {
         // Arrange
         val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
-        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "12345")
-
-        // Act & Assert
-        val exception = assertThrows<LeonException.Local.RequestValidation> {
-             loginWithPhoneUC.execute(loginRequest)
-        }
-
-        // Verify
-        assertNotNull(exception)
-        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "12")
+        //Act
+        val expected = loginWithPhoneUC(loginRequest).drop(1).first()
+        //Assert
+        assertTrue((expected as Resource.Failure).exception is LeonException.Local.RequestValidation)
     }
 
     @Test
@@ -155,112 +144,20 @@ class LoginWithPhoneUCTestRequest {
         // Arrange
         val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
         val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "")
-
-        // Act & Assert
-        val exception = assertThrows<LeonException.Local.RequestValidation> {
-              loginWithPhoneUC.execute(loginRequest)
-        }
-
-        // Verify
-        assertNotNull(exception)
-        assertTrue(exception.errors.containsKey(Validation.PASSWORD))
+        //Act
+        val expected = loginWithPhoneUC(loginRequest).drop(1).first()
+        //Assert
+        assertTrue((expected as Resource.Failure).exception is LeonException.Local.RequestValidation)
     }
 
-
-//    @Test
-//    fun `test invalid phone number`() = runBlocking {
-//        // Arrange
-//        val phoneRequest =
-//            PhoneRequest(countryCode = "0020", number = "123") // Invalid phoneRequest number
-//        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
-//
-//        // Define behavior for loginWithPhone method
-//        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(
-//            LoginRequest::class,
-//            "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long."
-//        )
-//
-//        // Act & Assert
-//        var exceptionThrown = false
-//        try {
-//            loginWithPhoneUC.execute(loginRequest)
-//        } catch (e: LeonException.Local.RequestValidation) {
-//            exceptionThrown = true
-//            assertEquals(
-//                "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.",
-//                e.message
-//            )
-//        }
-//        assertTrue(exceptionThrown)
-//    }
-
-//    @Test
-//    fun `test invalid phone number is empty`() = runBlocking {
-//        // Arrange
-//        val phoneRequest = PhoneRequest(countryCode = "0020", number = "")
-//        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "password")
-//
-//        // Define behavior for loginWithPhone method
-//        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(
-//            LoginRequest::class,
-//            "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long."
-//        )
-//
-//        // Act & Assert
-//        var exceptionThrown = false
-//        try {
-//            loginWithPhoneUC.execute(loginRequest)
-//        } catch (e: LeonException.Local.RequestValidation) {
-//            exceptionThrown = true
-//            assertEquals(
-//                "PhoneRequest number is invalid. It must contain only digits and be between 9 and 15 characters long.",
-//                e.message
-//            )
-//        }
-//        assertTrue(exceptionThrown)
-//    }
-//
-//    @Test
-//    fun `test invalid password`() = runBlocking {
-//        // Arrange
-//        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
-//        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "12345")
-//        // Define behavior for loginWithPhone method
-//        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(
-//            LoginRequest::class,
-//            "Password is invalid. It must be between 8 and 50 characters."
-//        )
-//
-//        // Act & Assert
-//        var exceptionThrown = false
-//        try {
-//            loginWithPhoneUC.execute(loginRequest)
-//        } catch (e: LeonException.Local.RequestValidation) {
-//            exceptionThrown = true
-//            assertEquals("Password is invalid. It must be between 8 and 50 characters.", e.message)
-//        }
-//        assertTrue(exceptionThrown)
-//    }
-//
-//    @Test
-//    fun `test invalid password is empty`() = runBlocking {
-//        // Arrange
-//        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
-//        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "")
-//
-//        coEvery { repository.loginWithPhone(loginRequest) } throws LeonException.Local.RequestValidation(
-//            LoginRequest::class,
-//            "Password is invalid. It must be between 8 and 50 characters."
-//        )
-//
-//        // Act & Assert
-//        var exceptionThrown = false
-//        try {
-//            loginWithPhoneUC.execute(loginRequest)
-//        } catch (e: LeonException.Local.RequestValidation) {
-//            exceptionThrown = true
-//            assertEquals(R.string.invalid_password, e.message)
-//        }
-//        assertTrue(exceptionThrown)
-//    }
+    @Test
+    fun `when login request has max length character greater than 50 in password then throw validation exception`() = runBlocking {
+        // Arrange
+        val phoneRequest = PhoneRequest(countryCode = "0020", number = "100100100")
+        val loginRequest = LoginRequest(phoneRequest = phoneRequest, password = "12".repeat(50))
+        //Act
+        val expected = loginWithPhoneUC(loginRequest).drop(1).first()
+        //Assert
+        assertTrue((expected as Resource.Failure).exception is LeonException.Local.RequestValidation)
+    }
 }
