@@ -1,17 +1,17 @@
 package com.solutionplus.altasherat.android.helpers.logging
 
-import am.leon.solutionx.android.helpers.logging.LoggerFactory
-import am.leon.solutionx.android.helpers.logging.writers.FileWriter
-import am.leon.solutionx.android.helpers.logging.writers.LogcatWriter
-import com.intuit.sdp.BuildConfig
+import com.solutionplus.altasherat.android.helpers.logging.LoggerFactory
+import com.solutionplus.altasherat.android.helpers.logging.writers.FileWriter
+import com.solutionplus.altasherat.android.helpers.logging.writers.LogcatWriter
+import com.solutionplus.altasherat.BuildConfig
 
 
 object LoggerProvider {
-    fun provideLogger(tagKey: String = "SolutionX-Full") {
+    fun provideLogger(tagKey: String = "Altasherat") {
         LoggerFactory.setLogWriter(
             FileWriter(
                 folderName = tagKey,
-                fileName = "SolutionX-Full-logFile",
+                fileName = "Altasherat-logFile",
                 tagKey = tagKey,
                 isDebugEnabled = BuildConfig.DEBUG
             )
