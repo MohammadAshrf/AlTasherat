@@ -34,7 +34,7 @@ class SplashViewModel @Inject constructor(
             isOnboardingShownUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> if (it.model) {
                         sendEvent(SplashEvent.NavigateToHome)
                     } else {
@@ -50,7 +50,7 @@ class SplashViewModel @Inject constructor(
             hasCountriesUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> if (it.model) {
                         sendEvent(SplashEvent.FetchCountriesFromLocalAndNavigateToLanguage)
                     } else {
@@ -66,7 +66,7 @@ class SplashViewModel @Inject constructor(
             getCountriesUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> sendEvent(SplashEvent.FetchCountriesFromRemote)
                 }
             }

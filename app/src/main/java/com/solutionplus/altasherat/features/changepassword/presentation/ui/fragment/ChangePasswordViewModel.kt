@@ -50,7 +50,7 @@ class ChangePasswordViewModel @Inject constructor(
                         )
                     }
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(ChangePasswordContract.ChangePasswordEvents.ChangePasswordSuccess("Password changed successfully"))
                     }

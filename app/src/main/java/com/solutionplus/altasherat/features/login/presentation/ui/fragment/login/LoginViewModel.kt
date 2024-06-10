@@ -49,7 +49,7 @@ class LoginViewModel @Inject constructor(
             getCountriesUC.invoke().collect { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(LoginContract.LoginEvents.GetCountries(resource.model))
                     }
@@ -63,7 +63,7 @@ class LoginViewModel @Inject constructor(
             getSelectedCountryUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(LoginContract.LoginEvents.GetSelectedCountry(it.model))
                     }

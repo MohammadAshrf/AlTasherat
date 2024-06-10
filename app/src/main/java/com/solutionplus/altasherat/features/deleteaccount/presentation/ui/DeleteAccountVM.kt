@@ -40,7 +40,7 @@ class DeleteAccountVM @Inject constructor(
                     setState(oldViewState.copy(exception = resource.exception))
                 }
 
-                is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
                 is Resource.Success -> {
                     sendEvent(DeleteAccountContract.DeleteAccountEvents.DeleteAccountSuccess("Your Account is Deleted successfully"))
                 }

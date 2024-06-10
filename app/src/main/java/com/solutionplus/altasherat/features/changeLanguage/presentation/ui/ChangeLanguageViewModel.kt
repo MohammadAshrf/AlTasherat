@@ -43,7 +43,7 @@ class ChangeLanguageViewModel @Inject constructor(
             saveSelectedCountryUC.invoke(country).collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> sendEvent(ChangeLanguageEvent.SaveSelectedCountry(country))
                 }
             }
@@ -55,7 +55,7 @@ class ChangeLanguageViewModel @Inject constructor(
             getSelectedCountryUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> sendEvent(ChangeLanguageEvent.GetSelectedCountry(it.model))
                 }
             }
@@ -67,7 +67,7 @@ class ChangeLanguageViewModel @Inject constructor(
             getCountriesFromLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> sendEvent(ChangeLanguageEvent.CountriesIndex(countries = it.model))
                 }
             }

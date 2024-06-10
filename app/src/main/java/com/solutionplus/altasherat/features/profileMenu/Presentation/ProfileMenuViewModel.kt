@@ -47,7 +47,7 @@ class ProfileMenuViewModel @Inject constructor(
             checkUserStateUC.invoke(viewModelScope, null) {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn(it.model))
                     }
@@ -61,7 +61,7 @@ class ProfileMenuViewModel @Inject constructor(
             getUserUC.invoke(viewModelScope, null) {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> {}
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(ProfileMenuContract.ProfileMenuEvent.GetUser(it.model))
                     }

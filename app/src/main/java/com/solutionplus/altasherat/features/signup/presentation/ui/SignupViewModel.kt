@@ -54,7 +54,7 @@ class SignupViewModel @Inject constructor(
             getCountriesUC.invoke().collect { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
                     is Resource.Success -> {
                         sendEvent(SignUpContract.SignupEvent.GetCountries(resource.model))
                     }
@@ -113,7 +113,7 @@ class SignupViewModel @Inject constructor(
                         )
                     }
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(SignUpContract.SignupEvent.SignupSuccess(resource.model))

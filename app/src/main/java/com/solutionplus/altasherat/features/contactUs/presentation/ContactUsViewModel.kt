@@ -42,7 +42,7 @@ class ContactUsViewModel @Inject constructor(
             getCountriesUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> sendEvent(
                         ContactUsEvent.GetCountries(it.model)
                     )
@@ -62,7 +62,7 @@ class ContactUsViewModel @Inject constructor(
                         )
                     )
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(ContactUsEvent.GetUpdatedUserFromLocal(it.model))
