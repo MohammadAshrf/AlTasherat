@@ -1,13 +1,12 @@
 package com.solutionplus.altasherat.features.personalInfo.data.models.request
 
-import android.os.Build
 import android.util.Patterns
-import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
 import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 import java.io.File
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+
 
 
 data class UpdateProfileInfoRequest(
@@ -37,15 +36,15 @@ data class UpdateProfileInfoRequest(
         )
 
     fun isFirstNameValid(): Boolean {
-        return firstname.isNotBlank() && Regex(pattern = "[a-zA-Z]{3,15}$").matches(firstname)
+        return Regex(pattern = "[a-zA-Z\u0600-\u06FF]{3,15}$").matches(firstname)
     }
 
     fun isMiddleNameValid(): Boolean {
-        return middleName.isNotBlank() && Regex(pattern = "[a-zA-Z]{0,15}$").matches(middleName)
+        return Regex(pattern = "[a-zA-Z\u0600-\u06FF]{0,15}$").matches(middleName)
     }
 
     fun isLastNameValid(): Boolean {
-        return lastname.isNotBlank() && Regex(pattern = "[a-zA-Z]{3,15}$").matches(lastname)
+        return Regex(pattern = "[a-zA-Z\u0600-\u06FF]{3,15}$").matches(lastname)
     }
 
     fun isEmailValid(): Boolean {
@@ -61,7 +60,7 @@ data class UpdateProfileInfoRequest(
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun isBirthDateValid(): Boolean {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val birthDate = LocalDate.parse(birthdate, formatter)
