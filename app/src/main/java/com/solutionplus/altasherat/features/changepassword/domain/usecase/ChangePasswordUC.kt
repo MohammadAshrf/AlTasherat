@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ChangePasswordUC(
     private val repository: IchangePasswordRepository
 ) : BaseUseCase<Unit, ChangePasswordRequest>() {
-    public override suspend fun execute(params: ChangePasswordRequest?) {
+     override suspend fun execute(params: ChangePasswordRequest?) {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
             throw LeonException.Local.RequestValidation(

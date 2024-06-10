@@ -15,7 +15,7 @@ class LoginWithPhoneUC(
     private val saveUserUC: SaveUserUC,
     private val getUserUC : GetUserLocalUC
 ) : BaseUseCase<User, LoginRequest>() {
-    public override suspend fun execute(params: LoginRequest?): User {
+     override suspend fun execute(params: LoginRequest?): User {
         val errorMessages = params?.validateRequest()
         if (!errorMessages.isNullOrEmpty()) {
             throw LeonException.Local.RequestValidation(

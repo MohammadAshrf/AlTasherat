@@ -13,7 +13,7 @@ import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequ
 class DeleteAccountUC (
     private val repository: IDeleteAccountRepository
 ) :BaseUseCase<Unit, DeleteAccountRequest>(){
-    public override suspend fun execute(params: DeleteAccountRequest?) {
+     override suspend fun execute(params: DeleteAccountRequest?) {
         params?.let {
             val errorMessages = it.validateRequest()
             if (errorMessages.isNotEmpty()) {
@@ -39,4 +39,5 @@ class DeleteAccountUC (
 
         return errorKeys
     }
+
 }
