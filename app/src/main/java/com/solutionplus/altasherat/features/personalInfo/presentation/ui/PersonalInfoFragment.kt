@@ -10,6 +10,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
@@ -256,14 +257,26 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     }
 
     private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
-        errors[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getErrorMessage(it) }
+        errors[Validation.FIRST_NAME]?.let {
+            binding.firstNameEditText.error = getErrorMessage(it)
+            clearErrorAfterChanged(binding.firstNameEditText)
+        }
         errors[Validation.MIDDLE_NAME]?.let {
             binding.middleNameEditText.error = getErrorMessage(it)
+            clearErrorAfterChanged(binding.middleNameEditText)
         }
-        errors[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getErrorMessage(it) }
-        errors[Validation.EMAIL]?.let { binding.emailEditText.error = getErrorMessage(it) }
-        errors[Validation.PHONE]?.let { binding.phoneEditText.error = getErrorMessage(it) }
-        errors[Validation.COUNTRY]?.let { binding.country.error = getErrorMessage(it) }
+        errors[Validation.LAST_NAME]?.let {
+            binding.lastNameEditText.error = getErrorMessage(it)
+            clearErrorAfterChanged(binding.lastNameEditText)
+        }
+        errors[Validation.EMAIL]?.let {
+            binding.emailEditText.error = getErrorMessage(it)
+            clearErrorAfterChanged(binding.emailEditText)
+        }
+        errors[Validation.PHONE]?.let {
+            binding.phoneEditText.error = getErrorMessage(it)
+            clearErrorAfterChanged(binding.phoneEditText)
+        }
         errors[Validation.IMAGE]?.let {
             binding.viewProfileSection.outerCircle.setImageDrawable(
                 R.drawable.outer_red_circle.let {
@@ -274,23 +287,22 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         }
         errors[Validation.BIRTH_DATE]?.let {
             binding.birthdateEditText.error = getErrorMessage(it)
-            binding.birthdateEditText.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    binding.birthdateInputLayout.endIconMode = TextInputLayout.END_ICON_NONE
-                    binding.birthdateEditText.error = null
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
+            clearErrorAfterChanged(binding.birthdateEditText)
             showSnackBar(getString(R.string.invalid_birth_date), true)
         }
+    }
+
+    private fun clearErrorAfterChanged(editText: EditText) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Clear the error message when the text changes
+                editText.error = null
+                TextInputLayout.END_ICON_NONE
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 }
