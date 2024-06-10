@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
@@ -44,9 +45,17 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             getClassLogger().info(state.exception.toString())
             state.exception?.let {
                 handleHttpExceptions(it)
-                handleLocalValidation(it)
+                if (it is LeonException.Client.ResponseValidation) {
+                    handleValidationErrors(it.errors) { errorMessage ->
+                        errorMessage as String
+                    }
+                }
+                if (it is LeonException.Local.RequestValidation) {
+                    handleValidationErrors(it.errors) { errorKey ->
+                        getString(errorKey as Int)
+                    }
+                }
 
-                handleClintValidation(it)
             }
             if (state.isLoading) {
                 showLoading()
@@ -56,177 +65,6 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         }
     }
 
-    private fun handleClintValidation(it: LeonException) {
-        if (it is LeonException.Client.ResponseValidation) {
-            val errorMessages = it.errors
-            errorMessages[Validation.OLD_PASSWORD]?.let {
-                binding.etOldPassword.error = it
-                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                binding.etOldPassword.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        binding.textInputLayout2.endIconMode =
-                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                        binding.etOldPassword.error = null
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
-            }
-            errorMessages[Validation.NEW_PASSWORD]?.let {
-                binding.etNewPassword.error = it
-                binding.etReTypeNewPassword.error = it
-                binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
-                binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-                binding.etNewPassword.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        binding.textInputLayout3.endIconMode =
-                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                        binding.etNewPassword.error = null
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
-                binding.etReTypeNewPassword.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        binding.textInputLayout4.endIconMode =
-                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                        binding.etReTypeNewPassword.error = null
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
-            }
-        }
-    }
-
-    private fun handleLocalValidation(it: LeonException) {
-        if (it is LeonException.Local.RequestValidation) {
-            val errorMessages = it.errors
-            errorMessages[Validation.OLD_PASSWORD]?.let {
-                binding.etOldPassword.error = getString(it)
-                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                binding.etOldPassword.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        binding.textInputLayout2.endIconMode =
-                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                        binding.etOldPassword.error = null
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
-            }
-            errorMessages[Validation.NEW_PASSWORD]?.let {
-                binding.etNewPassword.error = getString(it)
-                binding.textInputLayout3.endIconMode = TextInputLayout.END_ICON_NONE
-                binding.etNewPassword.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        binding.textInputLayout3.endIconMode =
-                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                        binding.etNewPassword.error = null
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
-            }
-            errorMessages[Validation.NEW_PASSWORD_CONFIRMATION]?.let {
-                binding.etReTypeNewPassword.error = getString(it)
-                binding.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-                binding.etReTypeNewPassword.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        binding.textInputLayout4.endIconMode =
-                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                        binding.etReTypeNewPassword.error = null
-                    }
-
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                    }
-                })
-            }
-        }
-    }
 
     private suspend fun eventObserver() {
         viewModel.singleEvent.collect { event ->
@@ -277,5 +115,47 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             .show()
     }
 
+    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
+        errors[Validation.OLD_PASSWORD]?.let {
+            setErrorWithTextWatcher(
+                binding.etOldPassword,
+                binding.textInputLayout2,
+                getErrorMessage(it)
+            )
+        }
+        errors[Validation.NEW_PASSWORD]?.let {
+            setErrorWithTextWatcher(
+                binding.etNewPassword,
+                binding.textInputLayout3,
+                getErrorMessage(it)
+            )
+        }
+        errors[Validation.NEW_PASSWORD_CONFIRMATION]?.let {
+            setErrorWithTextWatcher(
+                binding.etReTypeNewPassword,
+                binding.textInputLayout4,
+                getErrorMessage(it)
+            )
+        }
+    }
+
+    private fun setErrorWithTextWatcher(
+        editText: EditText,
+        textInputLayout: TextInputLayout,
+        errorMessage: String
+    ) {
+        editText.error = errorMessage
+        textInputLayout.endIconMode = TextInputLayout.END_ICON_NONE
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                textInputLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                editText.error = null
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
 
 }

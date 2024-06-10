@@ -46,43 +46,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
                 handleHttpExceptions(it)
 
                 if (it is LeonException.Local.RequestValidation) {
-                    val errorMessages = it.errors
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = getString(it)
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                        binding.etPassword.addTextChangedListener(object : TextWatcher {
-                            override fun afterTextChanged(s: Editable?) {
-                                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                                binding.etPassword.error = null
-                            }
-
-                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                        })
+                    handleValidationErrors(it.errors) { errorKey ->
+                        getString(errorKey as Int)
                     }
-                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
                 }
 
                 if (it is LeonException.Client.ResponseValidation) {
-                    val errorMessages = it.errors
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = it
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                        binding.etPassword.addTextChangedListener(object : TextWatcher {
-                            override fun afterTextChanged(s: Editable?) {
-                                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                                binding.etPassword.error = null
-                            }
-
-                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                        })
-                    }
-                    errorMessages[PHONE]?.let {
-                        binding.etPhoneClient.error = it
-                        getClassLogger().debug("Phone error: $it")
+                    handleValidationErrors(it.errors) { errorMessage ->
+                        errorMessage as String
                     }
                 }
             }
@@ -166,6 +137,30 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         viewModel.onActionTrigger(
             LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
         )
+    }
+
+    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
+        errors[PASSWORD]?.let {
+            binding.etPassword.error = getErrorMessage(it)
+            binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+            binding.etPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                    binding.etPassword.error = null
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
+        }
+        errors[PHONE]?.let { binding.etPhoneClient.error = getErrorMessage(it) }
     }
 
 }
