@@ -48,7 +48,7 @@ data class UpdateProfileInfoRequest(
     }
 
     fun isEmailValid(): Boolean {
-        return email.isNotBlank() && email.length <= 50 && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return email.length <= 50 && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun isPhoneValid(): Boolean {
@@ -60,7 +60,6 @@ data class UpdateProfileInfoRequest(
     }
 
 
-
     fun isBirthDateValid(): Boolean {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val birthDate = LocalDate.parse(birthdate, formatter)
@@ -70,8 +69,8 @@ data class UpdateProfileInfoRequest(
 
     fun isImageValid(): Boolean {
         image?.let {
-            val maxSizeInKB = 512 // 10 MB
-            // Check if the file size is less than or equal to 10MB
+            val maxSizeInKB = 1024 // 1 MB
+            // Check if the file size is less than or equal to 1 MB
             val sizeInKB = it.length() / 1024
             return sizeInKB <= maxSizeInKB
         } ?: return true // If the image is null, return false

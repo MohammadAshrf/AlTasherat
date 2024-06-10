@@ -163,6 +163,5 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     //ThreeTenABP for the date
-    implementation ("com.jakewharton.threetenabp:threetenabp:1.4.7")
-
+    implementation (libs.threetenabp)
 }

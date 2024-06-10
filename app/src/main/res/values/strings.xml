@@ -161,6 +161,6 @@
     <string name="new_password_and_confirmation_do_not_match">New password and confirmation do not match</string>
     <string name="you_re_already_logged_in">You\'re already logged in!</string>
     <string name="invalid_birth_date" >Birthdate must be before 13 years from now</string>
-    <string name="invalid_image">Image must be (jpg, jpeg or png) and less than 10MB</string>
+    <string name="invalid_image">Image must be (jpg, jpeg or png) and less than 1MB</string>
     <string name="profile_name">Nadeen Mohammad Al-Sayed</string>
 </resources>

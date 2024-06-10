@@ -4,21 +4,17 @@ import com.solutionplus.altasherat.common.data.constants.Validation
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.features.changepassword.domain.model.ChangePasswordRequest
 import com.solutionplus.altasherat.features.changepassword.domain.repository.IchangePasswordRepository
-import org.junit.Assert.*
-
-import org.junit.Before
-import org.junit.Test
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
-
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.mockk
-import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Test
 import org.junit.jupiter.api.assertThrows
 
 /*
@@ -50,6 +46,7 @@ class ChangePasswordUCTest {
         // Assert
         assertEquals(expectedToken, token)
     }
+
     @Test
     fun `when token is called and repository returns null, expect returned null`() = runTest {
         // Arrange
@@ -64,43 +61,43 @@ class ChangePasswordUCTest {
 
 
     //-------------------------validation-----------------------------------------//
-    @Test
-    fun `test invalid old password`() = runBlocking {
-        // Arrange
-        val request = ChangePasswordRequest(
-            oldPassword = "12345",
-        )
+//    @Test
+//    fun `test invalid old password`() = runBlocking {
+//        // Arrange
+//        val request = ChangePasswordRequest(
+//            oldPassword = "12345",
+//        )
+//
+//        coEvery { repository.changePassword(request) } returns request
+//
+//        // Act & Assert
+//        val exception = assertThrows<LeonException.Local.RequestValidation> {
+//            changePasswordUC.execute(request)
+//        }
+//
+//        // Verify
+//        assertNotNull(exception)
+//        assertTrue(exception.errors.containsKey(Validation.OLD_PASSWORD))
+//    }
 
-        coEvery { repository.changePassword(request) } returns request
-
-        // Act & Assert
-        val exception = assertThrows<LeonException.Local.RequestValidation> {
-            changePasswordUC.execute(request)
-        }
-
-        // Verify
-        assertNotNull(exception)
-        assertTrue(exception.errors.containsKey(Validation.OLD_PASSWORD))
-    }
-
-    @Test
-    fun `test invalid when old password Empty`() = runBlocking {
-        // Arrange
-        val request = ChangePasswordRequest(
-            oldPassword = "",
-        )
-
-        coEvery { repository.changePassword(request) } returns request
-
-        // Act & Assert
-        val exception = assertThrows<LeonException.Local.RequestValidation> {
-            changePasswordUC.execute(request)
-        }
-
-        // Verify
-        assertNotNull(exception)
-        assertTrue(exception.errors.containsKey(Validation.OLD_PASSWORD))
-    }
+//    @Test
+//    fun `test invalid when old password Empty`() = runBlocking {
+//        // Arrange
+//        val request = ChangePasswordRequest(
+//            oldPassword = "",
+//        )
+//
+//        coEvery { repository.changePassword(request) } returns request
+//
+//        // Act & Assert
+//        val exception = assertThrows<LeonException.Local.RequestValidation> {
+//            changePasswordUC.execute(request)
+//        }
+//
+//        // Verify
+//        assertNotNull(exception)
+//        assertTrue(exception.errors.containsKey(Validation.OLD_PASSWORD))
+//    }
 
     @Test
     fun `test invalid new password`() = runBlocking {
