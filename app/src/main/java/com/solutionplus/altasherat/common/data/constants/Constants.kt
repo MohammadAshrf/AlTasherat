@@ -1,7 +1,5 @@
 package com.solutionplus.altasherat.common.data.constants
 
-import androidx.datastore.preferences.core.stringPreferencesKey
-
 object Constants {
     const val BASE_URL = "https://intern.api.altashirat.solutionplus.net/api/"
     const val EMAIL_KEY_BUNDLE = "emailKey"
@@ -22,4 +20,8 @@ object Validation {
     const val PASSWORD = "password"
     const val PHONE = "phone.number"
     const val EMAIL = "email"
+    const val IMAGE_MAX_SIZE = 512
+    const val IMAGE_DIV_SIZE = 1024
+    const val BIRTH_DATE_PATTERN = "yyyy-MM-dd"
+    const val BIRTH_DATE_MIN_AGE = 13
 }

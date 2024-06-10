@@ -2,6 +2,10 @@ package com.solutionplus.altasherat.features.personalInfo.data.models.request
 
 import android.util.Patterns
 import com.google.gson.annotations.SerializedName
+import com.solutionplus.altasherat.common.data.constants.Validation.BIRTH_DATE_MIN_AGE
+import com.solutionplus.altasherat.common.data.constants.Validation.BIRTH_DATE_PATTERN
+import com.solutionplus.altasherat.common.data.constants.Validation.IMAGE_DIV_SIZE
+import com.solutionplus.altasherat.common.data.constants.Validation.IMAGE_MAX_SIZE
 import com.solutionplus.altasherat.common.domain.models.request.RemoteRequest
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
@@ -60,18 +64,19 @@ data class UpdateProfileInfoRequest(
 
 
     fun isBirthDateValid(): Boolean {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatter = DateTimeFormatter.ofPattern(BIRTH_DATE_PATTERN)
         val birthDate = LocalDate.parse(birthdate, formatter)
-        val thirteenYearsAgo = LocalDate.now().minusYears(13)
+        val thirteenYearsAgo = LocalDate.now().minusYears(BIRTH_DATE_MIN_AGE.toLong())
         return !birthDate.isAfter(thirteenYearsAgo)
     }
 
     fun isImageValid(): Boolean {
         image?.let {
-            val maxSizeInKB = 512 // 512 KB
+            // Define the maximum file size in KB
+            val maxSizeInKB = IMAGE_MAX_SIZE
             // Check if the file size is less than or equal to 512 KB
-            val sizeInKB = it.length() / 1024
+            val sizeInKB = it.length() / IMAGE_DIV_SIZE
             return sizeInKB <= maxSizeInKB
-        } ?: return false
+        } ?: return true
     }
 }

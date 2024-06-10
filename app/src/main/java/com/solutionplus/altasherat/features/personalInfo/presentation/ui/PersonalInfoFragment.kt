@@ -55,7 +55,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     }
     private val personalInfoVM: PersonalInfoViewModel by viewModels()
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun viewInit() {
     }
 
@@ -127,7 +126,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
             when (it) {
                 is PersonalInfoEvent.UpdateDoneSuccessfully -> {
                     showSnackBar(
-                        "Your Profile Updated Successfully!",
+                        getString(R.string.profile_updated_successfully),
                         false
                     )
                     findNavController().popBackStack()
@@ -265,20 +264,26 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                         }
                         errorMessages[Validation.MIDDLE_NAME]?.let {
                             binding.middleNameEditText.error = it
-                            errorMessages[Validation.LAST_NAME]?.let {
-                                binding.lastNameEditText.error = it
-                            }
-                            errorMessages[Validation.EMAIL]?.let {
-                                binding.emailEditText.error = it
-                            }
-                            errorMessages[Validation.PHONE]?.let {
-                                binding.phoneEditText.error = it
-                            }
-                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
-                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
-                            errorMessages[Validation.BIRTH_DATE]?.let {
-                                binding.birthdateEditText.error = it
-                            }
+                        }
+                        errorMessages[Validation.LAST_NAME]?.let {
+                            binding.lastNameEditText.error = it
+                        }
+                        errorMessages[Validation.EMAIL]?.let {
+                            binding.emailEditText.error = it
+                        }
+                        errorMessages[Validation.PHONE]?.let {
+                            binding.phoneEditText.error = it
+                        }
+                        errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
+                        errorMessages[Validation.BIRTH_DATE]?.let {
+                            binding.birthdateEditText.error = it
+                        }
+                        errorMessages[Validation.IMAGE]?.let {
+                            binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_red_circle.let
+                            {
+                                ResourcesCompat.getDrawable(resources, it, null)
+                            })
+                            showSnackBar(it, true)
                         }
                     }
                 }
@@ -296,7 +301,6 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         return tempFile
     }
 
-    @SuppressLint("DefaultLocale")
     private fun showDatePickerDialog(calendar: Calendar) {
         context?.let { context ->
             val datePickerDialog = DatePickerDialog(context)

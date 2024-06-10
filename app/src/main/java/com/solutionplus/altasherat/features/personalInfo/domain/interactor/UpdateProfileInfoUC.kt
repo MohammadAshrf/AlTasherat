@@ -2,7 +2,14 @@ package com.solutionplus.altasherat.features.personalInfo.domain.interactor
 
 
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.common.data.constants.Validation
+import com.solutionplus.altasherat.common.data.constants.Validation.BIRTH_DATE
+import com.solutionplus.altasherat.common.data.constants.Validation.COUNTRY
+import com.solutionplus.altasherat.common.data.constants.Validation.EMAIL
+import com.solutionplus.altasherat.common.data.constants.Validation.FIRST_NAME
+import com.solutionplus.altasherat.common.data.constants.Validation.IMAGE
+import com.solutionplus.altasherat.common.data.constants.Validation.LAST_NAME
+import com.solutionplus.altasherat.common.data.constants.Validation.MIDDLE_NAME
+import com.solutionplus.altasherat.common.data.constants.Validation.PHONE
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.domain.interactor.BaseUseCase
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.UpdateProfileInfoRequest
@@ -10,7 +17,10 @@ import com.solutionplus.altasherat.features.personalInfo.domain.models.UpdatePro
 import com.solutionplus.altasherat.features.personalInfo.domain.repository.IUpdateProfileRepository
 import com.solutionplus.altasherat.features.services.user.domain.interactor.SaveUserUC
 
-class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, private val saveUserUC: SaveUserUC) :
+class UpdateProfileInfoUC(
+    private val repository: IUpdateProfileRepository,
+    private val saveUserUC: SaveUserUC
+) :
     BaseUseCase<UpdateProfileInfo, UpdateProfileInfoRequest>() {
 
     override suspend fun execute(params: UpdateProfileInfoRequest?): UpdateProfileInfo {
@@ -31,30 +41,29 @@ class UpdateProfileInfoUC(private val repository: IUpdateProfileRepository, priv
         val errorKeys = mutableMapOf<String, Int>()
 
         if (!isFirstNameValid()) {
-            errorKeys[Validation.FIRST_NAME] = R.string.invalid_first_name
+            errorKeys[FIRST_NAME] = R.string.invalid_first_name
         }
         if (!isMiddleNameValid()) {
-            errorKeys[Validation.MIDDLE_NAME] = R.string.invalid_middle_name
+            errorKeys[MIDDLE_NAME] = R.string.invalid_middle_name
         }
         if (!isLastNameValid()) {
-            errorKeys[Validation.LAST_NAME] = R.string.invalid_last_name
+            errorKeys[LAST_NAME] = R.string.invalid_last_name
         }
         if (!isEmailValid()) {
-            errorKeys[Validation.EMAIL] = R.string.invalid_email
+            errorKeys[EMAIL] = R.string.invalid_email
         }
         if (!isPhoneValid()) {
-            errorKeys[Validation.PHONE] = R.string.invalid_phone
+            errorKeys[PHONE] = R.string.invalid_phone
         }
         if (!isCountryValid()) {
-            errorKeys[Validation.COUNTRY] = R.string.invalid_country
+            errorKeys[COUNTRY] = R.string.invalid_country
         }
-        if (!isBirthDateValid()){
-            errorKeys[Validation.BIRTH_DATE] = R.string.invalid_birth_date
+        if (!isBirthDateValid()) {
+            errorKeys[BIRTH_DATE] = R.string.invalid_birth_date
         }
-        if (!isImageValid()){
-            errorKeys[Validation.IMAGE] = R.string.invalid_image
+        if (!isImageValid()) {
+            errorKeys[IMAGE] = R.string.invalid_image
         }
-
         return errorKeys
     }
 }

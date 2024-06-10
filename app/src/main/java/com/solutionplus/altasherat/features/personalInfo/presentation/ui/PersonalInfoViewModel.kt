@@ -127,7 +127,7 @@ class PersonalInfoViewModel @Inject constructor(
                 country,
             )
 
-            setState(oldViewState.copy(isLoading = true))
+            setState(oldViewState.copy(isLoading = true, exception = null))
 
             updateUserUC.invoke(updateUserRequest).collect {
                 when (it) {
