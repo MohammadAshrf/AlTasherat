@@ -69,36 +69,12 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
             state.exception?.let {
                 handleHttpExceptions(it)
                 if (it is LeonException.Local.RequestValidation) {
-                    val errorMessages = it.errors
-                    errorMessages[FIRST_NAME]?.let { binding.etFirstname.error = getString(it) }
-                    errorMessages[LAST_NAME]?.let { binding.etLastName.error = getString(it) }
-                    errorMessages[PASSWORD]?.let {
-                        binding.etPassword.error = getString(it)
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                        binding.etPassword.addTextChangedListener(object : TextWatcher {
-                            override fun afterTextChanged(s: Editable?) {
-                                binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                                binding.etPassword.error = null
-                            }
-
-                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                        })
+                    handleValidationErrors(it.errors) { errorKey ->
+                        getString(errorKey as Int)
                     }
-                    errorMessages[PHONE]?.let { binding.etPhoneClient.error = getString(it) }
-                    errorMessages[EMAIL]?.let { binding.etEmail.error = getString(it) }
                 }
-                if (it is LeonException.Client.ResponseValidation) {
-                    val errors = it.errors
-                    errors[PASSWORD]?.let {
-                        binding.etPassword.error = it
-                        binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
-                    }
-                    errors[PHONE]?.let { binding.etPhoneClient.error = it }
-                    errors[EMAIL]?.let { binding.etEmail.error = it }
-                    errors[FIRST_NAME]?.let { binding.etFirstname.error = it }
-                    errors[LAST_NAME]?.let { binding.etLastName.error = it }
+                if (it is LeonException.Client.ResponseValidation) handleValidationErrors(it.errors) { errorMessage ->
+                    errorMessage as String
                 }
             }
         }
@@ -170,6 +146,33 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                 firstName, lastName, email, phoneNumber, countryCode, countryId, password
             )
         )
+    }
+
+    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
+        errors[PASSWORD]?.let {
+            binding.etPassword.error = getErrorMessage(it)
+            binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_NONE
+            binding.etPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                    binding.etPassword.error = null
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
+        }
+        errors[PHONE]?.let { binding.etPhoneClient.error = getErrorMessage(it) }
+        errors[EMAIL]?.let { binding.etEmail.error = getErrorMessage(it) }
+        errors[FIRST_NAME]?.let { binding.etFirstname.error = getErrorMessage(it) }
+        errors[LAST_NAME]?.let { binding.etLastName.error = getErrorMessage(it) }
     }
 
     companion object {

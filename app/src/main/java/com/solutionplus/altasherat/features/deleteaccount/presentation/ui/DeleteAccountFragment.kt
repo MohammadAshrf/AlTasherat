@@ -59,39 +59,14 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
                             handleHttpExceptions(it)
 
                             if (it is LeonException.Local.RequestValidation) {
-                                val errorMessages = it.errors
-                                errorMessages[Validation.PASSWORD]?.let {
-                                    bindingBottomSheet.etReTypeNewPassword.error = getString(it)
-                                    bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-                                    bindingBottomSheet.etReTypeNewPassword.addTextChangedListener(object :
-                                        TextWatcher {
-                                        override fun afterTextChanged(s: Editable?) {
-                                            bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                                            bindingBottomSheet.etReTypeNewPassword.error = null
-                                        }
-
-                                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                                    })
+                                handleValidationErrors(it.errors) { errorKey ->
+                                    getString(errorKey as Int)
                                 }
                             }
 
                             if (it is LeonException.Client.ResponseValidation) {
-                                val errorMessages = it.errors
-                                errorMessages[Validation.PASSWORD]?.let {
-                                    bindingBottomSheet.etReTypeNewPassword.error = it
-                                    bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
-                                    bindingBottomSheet.etReTypeNewPassword.addTextChangedListener(object : TextWatcher {
-                                        override fun afterTextChanged(s: Editable?) {
-                                            bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-                                            bindingBottomSheet.etReTypeNewPassword.error = null
-                                        }
-
-                                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                                    })
+                                handleValidationErrors(it.errors) { errorMessage ->
+                                    errorMessage as String
                                 }
                             }
                         }
@@ -163,5 +138,18 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
 
     }
 
-
+    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
+        errors[Validation.PASSWORD]?.let {
+            bindingBottomSheet.etReTypeNewPassword.error = getErrorMessage(it)
+            bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_NONE
+            bindingBottomSheet.etReTypeNewPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    bindingBottomSheet.textInputLayout4.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                    bindingBottomSheet.etReTypeNewPassword.error = null
+                }
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
+        }
+    }
 }

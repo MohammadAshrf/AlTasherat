@@ -200,85 +200,14 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 }
                 it.exception?.let {
                     if (it is LeonException.Local.RequestValidation) {
-                        val errorMessages = it.errors
-                        errorMessages[Validation.FIRST_NAME]?.let {
-                            binding.firstNameEditText.error = getString(it)
-                        }
-                        errorMessages[Validation.MIDDLE_NAME]?.let {
-                            binding.middleNameEditText.error = getString(it)
-                        }
-                        errorMessages[Validation.LAST_NAME]?.let {
-                            binding.lastNameEditText.error = getString(it)
-                        }
-                        errorMessages[Validation.EMAIL]?.let {
-                            binding.emailEditText.error = getString(it)
-                        }
-                        errorMessages[Validation.PHONE]?.let {
-                            binding.phoneEditText.error = getString(it)
-                        }
-                        errorMessages[Validation.COUNTRY]?.let {
-                            binding.country.error = getString(it)
-                        }
-                        errorMessages[Validation.IMAGE]?.let {
-                            binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_red_circle.let
-                            {
-                                ResourcesCompat.getDrawable(resources, it, null)
-                            })
-                            showSnackBar(getString(R.string.invalid_image), true)
-                        }
-                        errorMessages[Validation.COUNTRY]?.let {
-                            binding.country.error = getString(it)
-                        }
-                        errorMessages[Validation.BIRTH_DATE]?.let {
-                            binding.birthdateEditText.error = getString(it)
-                            binding.birthdateEditText.addTextChangedListener(object : TextWatcher {
-                                override fun afterTextChanged(s: Editable?) {
-                                    binding.birthdateInputLayout.endIconMode =
-                                        TextInputLayout.END_ICON_NONE
-                                    binding.birthdateEditText.error = null
-                                }
-
-                                override fun beforeTextChanged(
-                                    s: CharSequence?,
-                                    start: Int,
-                                    count: Int,
-                                    after: Int
-                                ) {
-                                }
-
-                                override fun onTextChanged(
-                                    s: CharSequence?,
-                                    start: Int,
-                                    before: Int,
-                                    count: Int
-                                ) {
-                                }
-                            })
-                            showSnackBar(getString(R.string.invalid_birth_date), true)
+                        handleValidationErrors(it.errors) { errorKey ->
+                            getString(errorKey as Int)
                         }
                     }
 
                     if (it is LeonException.Client.ResponseValidation) {
-                        val errorMessages = it.errors
-                        errorMessages[Validation.FIRST_NAME]?.let {
-                            binding.firstNameEditText.error = it
-                        }
-                        errorMessages[Validation.MIDDLE_NAME]?.let {
-                            binding.middleNameEditText.error = it
-                            errorMessages[Validation.LAST_NAME]?.let {
-                                binding.lastNameEditText.error = it
-                            }
-                            errorMessages[Validation.EMAIL]?.let {
-                                binding.emailEditText.error = it
-                            }
-                            errorMessages[Validation.PHONE]?.let {
-                                binding.phoneEditText.error = it
-                            }
-                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
-                            errorMessages[Validation.COUNTRY]?.let { binding.country.error = it }
-                            errorMessages[Validation.BIRTH_DATE]?.let {
-                                binding.birthdateEditText.error = it
-                            }
+                        handleValidationErrors(it.errors) { errorMessage ->
+                            errorMessage as String
                         }
                     }
                 }
@@ -328,6 +257,36 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 binding.birthdateEditText.setText(formattedDate)
             }
             datePickerDialog.show()
+        }
+    }
+
+    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
+        errors[Validation.FIRST_NAME]?.let { binding.firstNameEditText.error = getErrorMessage(it) }
+        errors[Validation.MIDDLE_NAME]?.let { binding.middleNameEditText.error = getErrorMessage(it) }
+        errors[Validation.LAST_NAME]?.let { binding.lastNameEditText.error = getErrorMessage(it) }
+        errors[Validation.EMAIL]?.let { binding.emailEditText.error = getErrorMessage(it) }
+        errors[Validation.PHONE]?.let { binding.phoneEditText.error = getErrorMessage(it) }
+        errors[Validation.COUNTRY]?.let { binding.country.error = getErrorMessage(it) }
+        errors[Validation.IMAGE]?.let {
+            binding.viewProfileSection.outerCircle.setImageDrawable(
+                R.drawable.outer_red_circle.let {
+                    ResourcesCompat.getDrawable(resources, it, null)
+                }
+            )
+            showSnackBar(getString(R.string.invalid_image), true)
+        }
+        errors[Validation.BIRTH_DATE]?.let {
+            binding.birthdateEditText.error = getErrorMessage(it)
+            binding.birthdateEditText.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    binding.birthdateInputLayout.endIconMode = TextInputLayout.END_ICON_NONE
+                    binding.birthdateEditText.error = null
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
         }
     }
 }
