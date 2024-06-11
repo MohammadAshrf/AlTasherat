@@ -9,8 +9,6 @@
         <item name="android:colorBackground">@color/Bg</item> <!-- Dark Blue Main Background -->
         <item name="colorError">@color/error</item> <!-- Error Color -->
 
-        <item name="android:windowIsTranslucent">true</item>
-
     </style>
 
     // ------------------------------------------- Fonts -------------------------------------------
