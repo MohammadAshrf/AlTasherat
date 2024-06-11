@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.profileMenu.Presentation.adapter
+package com.solutionplus.altasherat.features.profileMenu.presentation.adapter
 
 data class RowItem(
     val icon: Int,

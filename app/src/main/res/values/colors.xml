@@ -11,7 +11,7 @@
     <color name="bgInputStroke">#E1E1E1</color>
     <color name="transparent">#00000000</color>
     <color name="textInputIcon">#b2aecc</color>
-    <color name="Error">#CE6679</color>
+    <color name="error">#CE6679</color>
     <color name="surface">#F1F4FB</color>
     <color name="background">#b2aecc</color>
     <color name="Bg">#010533</color>
@@ -26,8 +26,6 @@
     <color name="radio_button_selector">#4D4C4C</color>
     <color name="layout_background">#FFFFFF</color>
     <color name="arrow">#0E0063</color>
-    <color name="hint_color">#474646</color> <!-- Change this to the color you want -->
-    <color name="text_color">#474646</color> <!-- Change this to the color you want -->
-
+    <color name="hint_color">#b2aecc</color>
 
 </resources>

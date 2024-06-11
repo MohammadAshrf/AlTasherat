@@ -162,7 +162,7 @@
             android:id="@+id/et_password"
             style="@style/TextInputEditText"
             android:autofillHints="password"
-            android:drawableStart="@drawable/ic_lock"
+            android:drawableStart="@drawable/ic_password"
             android:hint="@string/WritePassword"
             android:inputType="textPassword" />
 

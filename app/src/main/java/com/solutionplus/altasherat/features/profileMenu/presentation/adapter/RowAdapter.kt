@@ -2,11 +2,10 @@ package com.solutionplus.altasherat.features.menu.Presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.solutionplus.altasherat.databinding.ItemMenuBinding
-import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
-import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
+import com.solutionplus.altasherat.features.profileMenu.presentation.adapter.OnRowItemClickListener
+import com.solutionplus.altasherat.features.profileMenu.presentation.adapter.RowItem
 
 class RowAdapter(
     private val items: List<RowItem>,

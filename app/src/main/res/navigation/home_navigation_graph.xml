@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/profileMenuFragment"
-        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.ProfileMenuFragment"
+        android:name="com.solutionplus.altasherat.features.profileMenu.presentation.fragment.ProfileMenuFragment"
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailVerifiedFragment"
-        android:name="com.solutionplus.altasherat.features.profileMenu.Presentation.fragment.EmailVerifiedFragment"
+        android:name="com.solutionplus.altasherat.features.profileMenu.presentation.fragment.EmailVerifiedFragment"
         android:label="fragment_email_verified"
         tools:layout="@layout/fragment_email_verified" />
 

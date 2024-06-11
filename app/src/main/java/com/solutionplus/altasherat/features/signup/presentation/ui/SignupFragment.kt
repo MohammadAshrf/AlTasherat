@@ -7,9 +7,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.textfield.TextInputLayout
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
@@ -26,9 +23,6 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnSignupActionListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionListener {
@@ -42,31 +36,13 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     override fun viewInit() {}
 
     override fun subscribeToObservables() {
-        viewStateObserver()
-        eventObserver()
+        renderState()
+        handleEvent()
     }
 
-    private fun viewStateObserver() {
-        collectFlowWithLifecycle(viewModel.viewState) {
-            renderState(it)
-        }
-
-    }
-
-    private fun eventObserver() {
-        collectFlowWithLifecycle(viewModel.singleEvent) {
-            handleEvent(it)
-        }
-    }
-
-    private fun renderState(state: SignUpContract.SignUpState) {
-        CoroutineScope(Dispatchers.Main).launch {
-            if (state.isLoading)
-                showLoading(resources.getString(R.string.please_wait))
-            else
-                hideLoading()
-
-            state.exception?.let {
+    private fun renderState() {
+        collectFlowWithLifecycle(viewModel.viewState) { it ->
+            it.exception?.let {
                 handleHttpExceptions(it)
                 if (it is LeonException.Local.RequestValidation) {
                     handleValidationErrors(it.errors) { errorKey ->
@@ -77,24 +53,29 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
                     errorMessage as String
                 }
             }
+            if (it.isLoading)
+                showLoading()
+            else
+                hideLoading()
         }
     }
 
-    private fun handleEvent(event: SignUpContract.SignupEvent) {
-        when (event) {
-            is SignUpContract.SignupEvent.SignupSuccess -> {
-                gotoHomeActivity()
-                showSnackBar()
-            }
+    private fun handleEvent() {
+        collectFlowWithLifecycle(viewModel.singleEvent) {
+            when (it) {
+                is SignUpContract.SignupEvent.SignupSuccess -> {
+                    gotoHomeActivity()
+                    showSnackBar()
+                }
 
-            is SignUpContract.SignupEvent.GetSelectedCountry -> {
-                binding.etCountryCode.setSelection(event.country.id - 1)
-            }
+                is SignUpContract.SignupEvent.GetSelectedCountry -> {
+                    binding.etCountryCode.setSelection(it.country.id - 1)
+                }
 
-            is SignUpContract.SignupEvent.GetCountries -> {
-                setupCountrySpinner(event.country)
+                is SignUpContract.SignupEvent.GetCountries -> {
+                    setupCountrySpinner(it.country)
+                }
             }
-
         }
     }
 

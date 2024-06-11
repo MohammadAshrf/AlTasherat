@@ -33,9 +33,6 @@ import com.solutionplus.altasherat.features.services.country.adapters.CountryCod
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -120,7 +117,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
 
     private fun handleEvents() {
-        collectFlowWithLifecycle(personalInfoVM.singleEvent) { it ->
+        collectFlowWithLifecycle(personalInfoVM.singleEvent) {
             when (it) {
                 is PersonalInfoEvent.UpdateDoneSuccessfully -> {
                     showSnackBar(
@@ -188,26 +185,25 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     }
 
     private fun renderState() {
-        collectFlowWithLifecycle(personalInfoVM.viewState) {
-            CoroutineScope(Dispatchers.Main).launch {
-                if (it.isLoading) {
-                    showLoading(resources.getString(R.string.please_wait))
-                } else {
-                    hideLoading()
-                }
-                it.exception?.let {
-                    if (it is LeonException.Local.RequestValidation) {
-                        handleValidationErrors(it.errors) { errorKey ->
-                            getString(errorKey as Int)
-                        }
+        collectFlowWithLifecycle(personalInfoVM.viewState) { it ->
+            it.exception?.let {
+                handleHttpExceptions(it)
+                if (it is LeonException.Local.RequestValidation) {
+                    handleValidationErrors(it.errors) { errorKey ->
+                        getString(errorKey as Int)
                     }
+                }
 
-                    if (it is LeonException.Client.ResponseValidation) {
-                        handleValidationErrors(it.errors) { errorMessage ->
-                            errorMessage as String
-                        }
+                if (it is LeonException.Client.ResponseValidation) {
+                    handleValidationErrors(it.errors) { errorMessage ->
+                        errorMessage as String
                     }
                 }
+            }
+            if (it.isLoading) {
+                showLoading()
+            } else {
+                hideLoading()
             }
         }
     }
@@ -283,12 +279,12 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     ResourcesCompat.getDrawable(resources, it, null)
                 }
             )
-            showSnackBar(getString(R.string.invalid_image), true)
+            showSnackBar(getString(R.string.invalid_image), false)
         }
         errors[Validation.BIRTH_DATE]?.let {
             binding.birthdateEditText.error = getErrorMessage(it)
             clearErrorAfterChanged(binding.birthdateEditText)
-            showSnackBar(getString(R.string.invalid_birth_date), true)
+            showSnackBar(getString(R.string.invalid_birth_date), false)
         }
     }
 

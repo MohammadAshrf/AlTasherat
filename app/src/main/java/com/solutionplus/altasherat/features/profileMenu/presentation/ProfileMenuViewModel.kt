@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.profileMenu.Presentation
+package com.solutionplus.altasherat.features.profileMenu.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger

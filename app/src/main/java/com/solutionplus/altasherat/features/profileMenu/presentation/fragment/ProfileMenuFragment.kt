@@ -1,4 +1,4 @@
-package com.solutionplus.altasherat.features.profileMenu.Presentation.fragment
+package com.solutionplus.altasherat.features.profileMenu.presentation.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,9 +14,9 @@ import com.solutionplus.altasherat.common.data.constants.Constants.EMAIL_KEY_BUN
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentProfileMenuBinding
 import com.solutionplus.altasherat.features.menu.Presentation.adapter.RowAdapter
-import com.solutionplus.altasherat.features.profileMenu.Presentation.ProfileMenuViewModel
-import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.OnRowItemClickListener
-import com.solutionplus.altasherat.features.profileMenu.Presentation.adapter.RowItem
+import com.solutionplus.altasherat.features.profileMenu.presentation.ProfileMenuViewModel
+import com.solutionplus.altasherat.features.profileMenu.presentation.adapter.OnRowItemClickListener
+import com.solutionplus.altasherat.features.profileMenu.presentation.adapter.RowItem
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 import com.solutionplus.altasherat.presentation.ui.activity.main.AuthenticationActivity
@@ -49,6 +49,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 is ProfileMenuContract.ProfileMenuEvent.GetUser -> {
                     handleUserState(it.user)
                 }
+
                 is ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn -> {
                     setupRecyclerView(it.isUserLoggedIn)
                     logger.info(it.isUserLoggedIn.toString())
@@ -72,7 +73,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
             }
         }
 
-        collectFlowWithLifecycle(viewModel.viewState) {
+        collectFlowWithLifecycle(viewModel.viewState) { it ->
             it.exception?.let {
                 handleHttpExceptions(it)
             }
@@ -90,7 +91,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
             putString(EMAIL_KEY_BUNDLE, user.email)
         }
         if (!user.emailVerified) {
-            showCustomSnackbar()
+            showCustomSnackBar()
         }
         if (user.image.path != "") {
             Glide.with(this)
@@ -100,6 +101,7 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
         }
         binding.viewProfileSection.nameTextView.text = user.firstname + " " + user.lastname
     }
+
     @SuppressLint("SetTextI18n")
     private fun getAppVersion() {
         val packageInfo =
@@ -118,10 +120,22 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
                 destinationFragmentId = if (isUserLoggedIn) R.id.action_profileMenuFragment_to_changePasswordFragment2 else null
             ),
 
-            RowItem(R.drawable.ic_info, getString(R.string.about_us), R.id.action_profileMenuFragment_to_aboutFragment),
+            RowItem(
+                R.drawable.ic_info,
+                getString(R.string.about_us),
+                R.id.action_profileMenuFragment_to_aboutFragment
+            ),
             RowItem(R.drawable.ic_support, getString(R.string.contact_us), R.id.contactUsFragment),
-            RowItem(R.drawable.ic_terms, getString(R.string.terms_and_conditions), R.id.action_profileMenuFragment_to_termsFragment),
-            RowItem(R.drawable.ic_policy, getString(R.string.privacy_policy), R.id.action_profileMenuFragment_to_privacyFragment),
+            RowItem(
+                R.drawable.ic_terms,
+                getString(R.string.terms_and_conditions),
+                R.id.action_profileMenuFragment_to_termsFragment
+            ),
+            RowItem(
+                R.drawable.ic_policy,
+                getString(R.string.privacy_policy),
+                R.id.action_profileMenuFragment_to_privacyFragment
+            ),
             RowItem(R.drawable.ic_language, getString(R.string.language), R.id.changeLanguage)
         )
 
@@ -132,18 +146,18 @@ class ProfileMenuFragment : BaseFragment<FragmentProfileMenuBinding>(), OnRowIte
     }
 
 
-    private fun showCustomSnackbar() {
-        binding.messageVerefication.VerificationMessage.visibility = View.VISIBLE
+    private fun showCustomSnackBar() {
+        binding.messageVerification.VerificationMessage.visibility = View.VISIBLE
 
-        binding.messageVerefication.snackbarAction.setOnClickListener {
+        binding.messageVerification.snackbarAction.setOnClickListener {
             findNavController().navigate(
                 R.id.action_profileMenuFragment_to_emailVerifiedFragment,
                 emailBundle
             )
-            binding.messageVerefication.VerificationMessage.visibility = View.GONE
+            binding.messageVerification.VerificationMessage.visibility = View.GONE
         }
-        binding.messageVerefication.snackbarClose.setOnClickListener {
-            binding.messageVerefication.VerificationMessage.visibility = View.GONE
+        binding.messageVerification.snackbarClose.setOnClickListener {
+            binding.messageVerification.VerificationMessage.visibility = View.GONE
         }
     }
 

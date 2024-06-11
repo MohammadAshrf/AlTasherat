@@ -31,7 +31,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnShowBottomSheet"
         style="@style/Button"
-        android:text="@string/conerm_delete"
+        android:text="@string/confirm_delete"
         app:icon="@drawable/ic_delete"
         android:layout_marginBottom="@dimen/_8sdp"
         app:iconGravity="textEnd"
@@ -49,7 +49,7 @@
         android:background="@drawable/btn_cancellation_background"
         android:drawableTint="#FFFFFF"
         android:text="@string/cancel"
-        android:textColor="@color/Error"
+        android:textColor="@color/error"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

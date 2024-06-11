@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/layout_background"
-    tools:context=".features.profileMenu.Presentation.fragment.ProfileMenuFragment">
+    tools:context=".features.profileMenu.presentation.fragment.ProfileMenuFragment">
 
 
     <include
@@ -37,25 +37,23 @@
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/Font.Bold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:text="@string/current_version"
         android:textColor="@color/text"
-        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_version"
-        style="@style/Font.Bold"
+        style="@style/TextView.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_2sdp"
         android:textColor="@color/text"
-        android:textSize="@dimen/_12sdp"
-        android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3"
@@ -65,21 +63,22 @@
         android:id="@+id/btn_log_out"
         style="@style/Button"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginBottom="23dp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:background="@drawable/custom_edit_text_bg"
         android:drawableEnd="@drawable/ic_sign_out"
         android:text="@string/sign_out"
-        android:textColor="#FF1C1F"
+        android:textColor="@color/error"
+        android:textSize="@dimen/_10ssp"
         android:visibility="gone"
         app:backgroundTint="@null"
-        app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
         tools:visibility="visible" />
 
     <include
-        android:id="@+id/message_verefication"
+        android:id="@+id/message_verification"
         layout="@layout/view_custom_snack_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

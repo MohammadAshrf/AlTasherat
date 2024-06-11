@@ -15,7 +15,7 @@
     <string name="err_msg_enter_valid_phone">رقم الهاتف يجب أن لا يقل عن 9 أرقام ولا يزيد عن 15</string>
     <string name="err_msg_enter_valid_password">كلمة المرور يجب أن لا تقل عن 9 حروف ولا يزيد عن 50</string>
 
-    <string name="please_wait">الرجاء الإنتظار…</string>
+    <string name="please_wait">برجاء الإنتظار…</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -72,7 +72,7 @@
     <string name="order_visa_now">اطلب\n الآن التاشيرة</string>
     <string name="you_can_sell_your_visa">تستطيع عرض فيزا</string>
     <string name="order_job_visa">اطلب فيزا توظيف</string>
-    <string name="visa_hedder_text">لديك وظائف وتأشيرات تريد اخبارنا بها\n بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف\n وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف\n وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل</string>
+    <string name="visa_header_text">لديك وظائف وتأشيرات تريد اخبارنا بها\n بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف\n وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل لديك وظائف\n وتأشيرات تريد اخبارنا بها بادر بملأ الاستماره واخبارنا بالتفاصيل</string>
     <string name="SignIn">تسجيل الدخول</string>
     <string name="Already_have_an_account">لديك حساب بالفعل؟</string>
     <string name="forgot_password">نسيت كلمه المرور؟</string>
@@ -84,7 +84,7 @@
     <string name="contact_us">تواصـــل معنا</string>
     <string name="contact_info">بيــــانات التواصل</string>
     <string name="_20_1011777751_966_550440787">( +20) 1011777751 - (+966) 550440787</string>
-    <string name="travel_altaherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
+    <string name="travel_altasherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
     <string name="saudi_Riad">السعودية - الرياض</string>
     <string name="cairo_location">القاهرة - جاردن سيتي</string>
     <string name="edit_text_name">اكتب الاسم للتواصل</string>
@@ -128,13 +128,13 @@
     <string name="through_visa_platform">من خلال منصة التأشيرات</string>
     <string name="Request_employment">اطلب فيزا توظيف</string>
     <string name="offer_visa">تستطيع عرض فيزا</string>
-    <string name="sign_in">تسجيل الدخول للمتابعة</string>
+    <string name="sign_in_to_start">تسجيل الدخول للمتابعة</string>
     <string name="you_have_to_sign_in">يجب عليك تسجيل الدخول للمتابعة في استكمال الطلب</string>
     <string name="new_account">حساب جديد</string>
-    <string name="sigin_in">تسجيل الدخول</string>
+    <string name="sign_in">تسجيل الدخول</string>
     <string name="account_settings">إعدادات الحساب وإلغاء تنشيط الحساب وحذفه</string>
     <string name="account_settings_goto">إدارة الحســــاب</string>
-    <string name="conerm_delete">تأكيد الحذف</string>
+    <string name="confirm_delete">تأكيد الحذف</string>
     <string name="cancel">إلغاء</string>
     <string name="Deactivate_the_account_permanently">إلغاء تنشيط الحساب نهائياً</string>
     <string name="manage_account_delete">إدارة الحســــاب</string>
@@ -148,8 +148,6 @@
     <string name="invalid_phone">رقم الهاتف غير صالح. يجب أن يحتوي على أرقام فقط وتتراوح بين 9 إلى 15 حرفًا</string>
     <string name="invalid_email">البريد الإلكتروني غير صالح. يجب أن يكون أقل من 50 حرفًا</string>
     <string name="email_text">البريد الإلكتروني</string>
-    <string name="Delete">تأكيد الحذف</string>
-    <string name="cancellation">إلغاء</string>
     <string name="delete_info">سوف يتم فقد كل المعلومات والمعاملات والحجوزات</string>
     <string name="Do_not_have_an_account">ليس لديك حساب؟</string>
     <string name="GOTOSignUp">تسجيل دخول</string>
@@ -165,4 +163,10 @@
     <string name="invalid_image">الصورة يجب أن تكون أقل من 512 كيلوبايت</string>
     <string name="profile_name">ناديــن محمد السيد</string>
     <string name="profile_updated_successfully">تم تحديث ملفك بنجاح!</string>
+    <string name="unhandled_network_error">خطأ في الشبكة</string>
+    <string name="unhandled_client_error">خطأ غير متوقع</string>
+    <string name="internal_server_error">خطأ من الخادم</string>
+    <string name="unknown_error">خطأ غير معروف</string>
+    <string name="no_internet_connection">تحقق من اتصالك بالإنترنت</string>
+    <string name="try_again">برجاء المحاولة مرة أخرى</string>
 </resources>

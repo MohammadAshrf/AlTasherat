@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +43,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         if (context is ErrorHandling)
             errorHandling = context
         else
-            throw IllegalStateException("Activity must implement ErrorHandling")
+            throw IllegalStateException(getString(R.string.activity_must_implement_error_handling))
     }
 
     override fun onCreateView(
@@ -70,24 +68,23 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
         }
     }
 
-    private var mProgressDialog: Dialog? = null
+    private var progressDialog: Dialog? = null
 
     fun showLoading(message: String? = null) {
-
-        if (mProgressDialog == null) {
-            mProgressDialog = Dialog(requireActivity()).apply {
+        if (progressDialog == null) {
+            progressDialog = Dialog(requireActivity()).apply {
                 setContentView(R.layout.view_loading)
                 setCancelable(false)
                 setCanceledOnTouchOutside(false)
             }
         }
-        mProgressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text =
-            message ?: resources.getString(R.string.please_wait)
-        mProgressDialog?.show()
+        progressDialog?.findViewById<TextView>(R.id.tv_progress_text)?.text =
+            message ?: getString(R.string.please_wait)
+        progressDialog?.show()
     }
 
     fun hideLoading() {
-        mProgressDialog?.dismiss()
+        progressDialog?.dismiss()
     }
 
     abstract fun onFragmentReady(savedInstanceState: Bundle?)
@@ -126,7 +123,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
             snackBarView.setBackgroundColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.Error
+                    R.color.error
                 )
             )
         } else {
@@ -144,7 +141,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        mProgressDialog?.dismiss()
-        mProgressDialog = null
+        progressDialog?.dismiss()
+        progressDialog = null
     }
 }

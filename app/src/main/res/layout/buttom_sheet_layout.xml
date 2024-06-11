@@ -8,18 +8,18 @@
    >
 
     <View
-        android:id="@+id/rectangle_language"
+        android:id="@+id/rectangle_deletion"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_3sdp"
         android:layout_gravity="center"
         android:background="@color/Primary" />
 
     <TextView
-        android:id="@+id/choosetxt"
+        android:id="@+id/delete_tv"
         style="@style/TextView.Heavy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in"
+        android:text="@string/sign_in_to_start"
         android:textAlignment="center" />
 
     <ImageView

@@ -66,7 +66,7 @@
     <string name="cairo_location">Cairo - Garden City</string>
     <string name="edit_text_name">Enter your contact name</string>
     <string name="subject">Topic</string>
-    <string name="phone">الجوال</string>
+    <string name="phone">Phone</string>
     <string name="subject_text">Choose a Communication Topic</string>
     <string name="msg_text">Your Message</string>
     <string name="changing_language">Language has changed!</string>
@@ -94,7 +94,7 @@
     <string name="order_visa_now">Request\n your visa now</string>
     <string name="you_can_sell_your_visa">You can view Visa</string>
     <string name="order_job_visa">Request\n an employment visa</string>
-    <string name="visa_hedder_text">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
+    <string name="visa_header_text">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
     <string name="SignIn">Sign In</string>
     <string name="Already_have_an_account">Already have an account?</string>
     <string name="forgot_password">Forgot your password?</string>
@@ -118,7 +118,7 @@
     <string name="FillOut_the_form_now">Fill the\n form now</string>
     <string name="contact_info">Communication data</string>
     <string name="_20_1011777751_966_550440787">(+20) 1011777751 - (+966) 550440787</string>
-    <string name="travel_altaherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
+    <string name="travel_altasherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
     <string name="enter_your_state">Enter Your State</string>
     <string name="binding_phone_code">(+%1$s)</string>
     <string name="header_info">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
@@ -128,20 +128,19 @@
     <string name="through_visa_platform">Through the visa platform</string>
     <string name="Request_employment">Request an visa</string>
     <string name="offer_visa">View Visa</string>
-    <string name="sign_in">Log in to start</string>
+    <string name="sign_in_to_start">Log in to start</string>
     <string name="you_have_to_sign_in">You must log in to continue completing the application</string>
     <string name="new_account">New Account</string>
-    <string name="sigin_in">Sign in</string>
+    <string name="sign_in">Sign in</string>
     <string name="ok" translatable="false">OK</string>
     <string name="account_settings">Account settings, account deactivation and deletion</string>
     <string name="account_settings_goto">Account management</string>
-    <string name="conerm_delete">Confirm deletion</string>
-    <string name="cancel">Cancellation</string>
+    <string name="confirm_delete">Confirm deletion</string>
+    <string name="cancel">Cancel</string>
     <string name="timeout_error" translatable="false">The operation timed out. Please try again later</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="Deactivate_the_account_permanently">Deactivate the account permanently</string>
     <string name="manage_account_delete">Account management</string>
-    <string name="delete_account">delete account</string>
+    <string name="delete_account">Delete account</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="invalid_first_name">First name is invalid. It must be between 3 and 15 characters</string>
     <string name="invalid_last_name">Last name is invalid. It must be between 3 and 15 characters</string>
@@ -149,8 +148,6 @@
     <string name="invalid_phone">Phone number is invalid. It must contain only digits and be between 9 and 15 characters long</string>
     <string name="invalid_email">Email is invalid. It must be less than 50 characters</string>
     <string name="email_text">Email</string>
-    <string name="Delete">Confirm deletion</string>
-    <string name="cancellation">Cancellation</string>
     <string name="Do_not_have_an_account">Don\'t have account?</string>
     <string name="GOTOSignUp">Sign Up</string>
     <string name="invalid_middle_name">Middle name is not valid</string>
@@ -164,4 +161,11 @@
     <string name="invalid_image">Image must be less than 512KB</string>
     <string name="profile_name">Nadeen Mohammad Al-Sayed</string>
     <string name="profile_updated_successfully">Your Profile Updated Successfully!</string>
+    <string name="unhandled_network_error">Unhandled Network Error</string>
+    <string name="unhandled_client_error">Unhandled Client Error</string>
+    <string name="internal_server_error">Internal Server Error</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="activity_must_implement_error_handling" translatable="false">Activity must implement ErrorHandling</string>
+    <string name="no_internet_connection">Please check your internet</string>
+    <string name="try_again">Please try again</string>
 </resources>

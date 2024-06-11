@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.extentions.bindView
 import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
@@ -42,26 +43,23 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
                 startActivity(intent)
             }
 
-            is LeonException.Local.IOOperation -> TODO()
-            is LeonException.Network.Retrial -> TODO()
+            is LeonException.Local.IOOperation -> {}
+            is LeonException.Network.Retrial -> {}
 
-            is LeonException.Client.ResponseValidation -> {
-                //showSnackbar(exception.message ?: "Unknown validation error")
-            }
+            is LeonException.Client.ResponseValidation -> {}
 
             is LeonException.Local.RequestValidation -> {
                 logger.error(exception.message)
-                //showSnackbar( exception.message ?: "Unknown validation error")
             }
 
-            is LeonException.Network.Unhandled -> showSnackbar("Unhandled Network Error")
-            is LeonException.Client.Unhandled -> showSnackbar("Unhandled Client Error")
-            is LeonException.Server.InternalServerError -> showSnackbar("Internal Server Error")
-            is LeonException.Unknown -> showSnackbar("Unknown Error")
+            is LeonException.Network.Unhandled -> showSnackBar(getString(R.string.unhandled_network_error))
+            is LeonException.Client.Unhandled -> showSnackBar(getString(R.string.unhandled_client_error))
+            is LeonException.Server.InternalServerError -> showSnackBar(getString(R.string.internal_server_error))
+            is LeonException.Unknown -> showSnackBar(getString(R.string.unknown_error))
         }
     }
 
-    private fun showSnackbar(message: String) {
+    private fun showSnackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 

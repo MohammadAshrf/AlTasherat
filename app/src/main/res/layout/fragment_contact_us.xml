@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@string/travel_altaherat_com_info_altasherat_com"
+            android:text="@string/travel_altasherat_com_info_altasherat_com"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView20"

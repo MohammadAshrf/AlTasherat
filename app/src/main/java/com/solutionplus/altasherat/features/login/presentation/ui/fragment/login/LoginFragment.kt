@@ -10,13 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.constants.Validation.PASSWORD
 import com.solutionplus.altasherat.common.data.constants.Validation.PHONE
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
-import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
@@ -35,16 +33,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     }
 
     override fun subscribeToObservables() {
-        viewStateObserver()
-        eventObserver()
+        renderState()
+        handleEvent()
     }
 
-    private fun viewStateObserver() {
-        collectFlowWithLifecycle(viewModel.viewState) {
-            getClassLogger().info(it.exception.toString())
+    private fun renderState() {
+        collectFlowWithLifecycle(viewModel.viewState) { it ->
             it.exception?.let {
                 handleHttpExceptions(it)
-
                 if (it is LeonException.Local.RequestValidation) {
                     handleValidationErrors(it.errors) { errorKey ->
                         getString(errorKey as Int)
@@ -65,33 +61,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         }
     }
 
-    private fun eventObserver() {
-        collectFlowWithLifecycle(viewModel.singleEvent) {
-            handleEvent(it)
-        }
-    }
-
     override fun viewInit() {
         binding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_resetPasswordByPhoneFragment)
         }
     }
 
-    private fun handleEvent(event: LoginContract.LoginEvents) {
-        when (event) {
-            is LoginContract.LoginEvents.LoginSuccess -> {
-                gotoHomeActivity()
-                showSnackBar()
-            }
+    private fun handleEvent() {
+        collectFlowWithLifecycle(viewModel.singleEvent) {
+            when (it) {
+                is LoginContract.LoginEvents.LoginSuccess -> {
+                    gotoHomeActivity()
+                    showSnackBar()
+                }
 
-            is LoginContract.LoginEvents.GetSelectedCountry -> {
-                binding.etCountryCode.setSelection(event.country.id - 1)
-            }
+                is LoginContract.LoginEvents.GetSelectedCountry -> {
+                    binding.etCountryCode.setSelection(it.country.id - 1)
+                }
 
-            is LoginContract.LoginEvents.GetCountries -> {
-                setupCountrySpinner(event.country)
+                is LoginContract.LoginEvents.GetCountries -> {
+                    setupCountrySpinner(it.country)
+                }
             }
-
         }
     }
 

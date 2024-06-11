@@ -8,7 +8,7 @@
     tools:context=".features.changeLanguage.presentation.ui.ChangeLanguageFragment">
 
     <View
-        android:id="@+id/rectangle_language"
+        android:id="@+id/rectangle_deletion"
         android:layout_width="@dimen/_3sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -25,9 +25,9 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:text="@string/choose_language"
         android:textSize="@dimen/_15sdp"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle_language"
-        app:layout_constraintStart_toStartOf="@id/rectangle_language"
-        app:layout_constraintTop_toTopOf="@id/rectangle_language" />
+        app:layout_constraintBottom_toBottomOf="@id/rectangle_deletion"
+        app:layout_constraintStart_toStartOf="@id/rectangle_deletion"
+        app:layout_constraintTop_toTopOf="@id/rectangle_deletion" />
 
     <RadioGroup
         android:id="@+id/radio_group"
