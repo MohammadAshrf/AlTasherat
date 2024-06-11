@@ -1,6 +1,5 @@
 package com.solutionplus.altasherat.features.services.country.data.repository
 
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.features.services.country.data.mappers.CountryMapper
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
@@ -17,9 +16,17 @@ class CountriesRepository(
     }
 
     override suspend fun getCountriesLocal(): List<Country> {
-        getClassLogger().info("start repo")
         return CountryMapper.entityToDomain(localDS.getCountriesLocal())
     }
+
+    override suspend fun saveSelectedCountry(country: Country) {
+        localDS.saveSelectedCountry(country)
+    }
+
+    override suspend fun getSelectedCountry(): Country {
+        return CountryMapper.entityToDomain(localDS.getSelectedCountry())
+    }
+
     override suspend fun saveCountries(countries: List<Country>) {
         localDS.saveCountriesToLocal(countries)
     }

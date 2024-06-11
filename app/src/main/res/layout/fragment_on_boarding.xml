@@ -42,7 +42,7 @@
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_150sdp"
+        android:layout_marginBottom="@dimen/_157sdp"
         app:dotsColor="@color/Secondary"
         app:dotsCornerRadius="8dp"
         app:dotsSize="12dp"

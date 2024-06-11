@@ -20,23 +20,17 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.android.helpers.extentions.bindView
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.delegation.ErrorHandling
-import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegate
-import com.solutionplus.altasherat.common.presentation.ui.base.delegation.InternetConnectionDelegateImpl
-import com.solutionplus.altasherat.databinding.ViewLoadingBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
-    InternetConnectionDelegate by InternetConnectionDelegateImpl(), ErrorHandling {
+abstract class BaseFragment<Binding : ViewBinding> : Fragment(), ErrorHandling {
 
     private var _binding: Binding? = null
     protected val binding: Binding
         get() = _binding!!
 
-    private lateinit var loadingView: ViewLoadingBinding
-
-    private lateinit var errorHandling: ErrorHandling
+    private var errorHandling: ErrorHandling? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,9 +57,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
     }
 
     override fun handleHttpExceptions(exception: LeonException) {
-        if (this::errorHandling.isInitialized) {
-            errorHandling.handleHttpExceptions(exception)
-        }
+        errorHandling?.handleHttpExceptions(exception)
     }
 
     private var progressDialog: Dialog? = null
@@ -92,10 +84,6 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment(),
     abstract fun subscribeToObservables()
 
     abstract fun viewInit()
-
-    protected fun isInternetAvailable(): Boolean {
-        return isInternetAvailable(requireContext())
-    }
 
     protected fun <T> collectFlowWithLifecycle(flow: Flow<T>, action: (T) -> Unit) {
         lifecycleScope.launch {

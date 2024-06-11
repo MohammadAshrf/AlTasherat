@@ -1,10 +1,8 @@
 package com.solutionplus.altasherat.features.splash.presentation.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.provider.Settings.ACTION_WIFI_SETTINGS
 import android.view.WindowManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,11 +26,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
     private var isDialogShown = false // Flag to track dialog display
     private val splashVM: SplashViewModel by viewModels()
-    override fun viewInit() {}
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
         lifecycleScope.launch {
-            delay(1200) // Simulate internet check delay
+            delay(1200) // Simulate internet check delay & Check onBoarding status
             if (!internetConnection.isInternetAvailable(requireContext()) && !isDialogShown) {
                 showInternetAlertDialog()
                 isDialogShown = true
@@ -40,6 +37,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                 splashVM.processIntent(SplashContract.SplashAction.IsOnBoardingShown)
             }
         }
+    }
+
+    override fun viewInit() {}
+
+    override fun subscribeToObservables() {
+        handleEvents()
     }
 
     private fun showInternetAlertDialog() {
@@ -55,11 +58,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         val okButton = dialogView.findViewById<MaterialButton>(R.id.dialogOkButton)
         okButton.setOnClickListener {
             dialog.dismiss()
+            startActivity(Intent(ACTION_WIFI_SETTINGS))
         }
-    }
-
-    override fun subscribeToObservables() {
-        handleEvents()
     }
 
     private fun handleEvents() {
@@ -73,16 +73,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     private fun navigateToLanguage() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
-        }, 0)
+        findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
     }
 
     private fun startHomeActivity() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(
-                Intent(requireContext(), HomeActivity::class.java)
-            ).also { requireActivity().finish() }
-        }, 1200)
+        startActivity(
+            Intent(requireContext(), HomeActivity::class.java)
+        ).also { requireActivity().finish() }
     }
 }

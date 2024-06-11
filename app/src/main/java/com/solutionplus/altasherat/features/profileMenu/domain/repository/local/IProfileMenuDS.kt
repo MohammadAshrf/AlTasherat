@@ -5,9 +5,7 @@ import com.solutionplus.altasherat.features.services.user.data.models.entity.Use
 internal interface IProfileMenuDS {
 
     suspend fun getUser(): UserEntity
-
     suspend fun isUserLoggedIn(): Boolean
-
     suspend fun deleteUser()
     suspend fun changeUserLoginState(isLoggedIn: Boolean)
     suspend fun deleteAccessToken()

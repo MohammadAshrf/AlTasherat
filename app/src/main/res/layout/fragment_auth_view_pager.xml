@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_image"
-    tools:context="com.solutionplus.altasherat.presentation.ui.fragment.viewpager.ViewPagerFragment">
+    tools:context="com.solutionplus.altasherat.presentation.ui.fragment.viewpager.AuthViewPagerFragment">
 
 
     <androidx.cardview.widget.CardView
@@ -123,7 +123,7 @@
             android:id="@+id/tv_don_t_have_an_account"
             style="@style/TextView.Heavy"
             android:padding="5dp"
-            android:text="@string/Already_have_an_account"
+            android:text="@string/already_have_an_account"
             android:textColor="@color/Bg"
             />
         <com.google.android.material.textview.MaterialTextView
@@ -131,7 +131,7 @@
             style="@style/TextView.Bold"
             android:foreground="?attr/selectableItemBackground"
             android:padding="5dp"
-            android:text="@string/SignIn"
+            android:text="@string/sign_in"
             android:textColor="@color/Secondary"
             android:textStyle="bold" />
 

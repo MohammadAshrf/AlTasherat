@@ -4,7 +4,6 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewEvent
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewState
-import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract
 import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 interface ProfileMenuContract {
@@ -26,13 +25,13 @@ interface ProfileMenuContract {
         val isLoading: Boolean,
         val exception: LeonException?,
         val action: ViewAction?,
-        ) : ViewState {
+    ) : ViewState {
         companion object {
             fun initial() = ProfileMenuState(
                 isLoading = false,
                 exception = null,
                 action = null,
-                )
+            )
         }
     }
 }

@@ -5,15 +5,15 @@ import androidx.work.WorkInfo
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.services.language.domain.interactor.GetSelectedCountryUC
-import com.solutionplus.altasherat.features.services.language.domain.interactor.SaveSelectedCountryUC
-import com.solutionplus.altasherat.features.services.language.domain.worker.LanguageWorker
-import com.solutionplus.altasherat.features.services.language.domain.worker.LanguageWorkerImpl
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageAction
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageEvent
 import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract.LanguageState
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetSelectedCountryUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.SaveSelectedCountryUC
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.services.language.domain.worker.LanguageWorker
+import com.solutionplus.altasherat.features.services.language.domain.worker.LanguageWorkerImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,7 +43,13 @@ class LanguageViewModel @Inject constructor(
             saveSelectedCountryUC.invoke(country).collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> sendEvent(LanguageEvent.SaveSelectedCountry(country))
                 }
             }
@@ -55,7 +61,13 @@ class LanguageViewModel @Inject constructor(
             getSelectedCountryUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> sendEvent(LanguageEvent.GetSelectedCountry(it.model))
                 }
             }
@@ -67,7 +79,13 @@ class LanguageViewModel @Inject constructor(
             getCountriesLocalUC.invoke().collect {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = it.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> sendEvent(LanguageEvent.CountriesIndex(countries = it.model))
                 }
             }

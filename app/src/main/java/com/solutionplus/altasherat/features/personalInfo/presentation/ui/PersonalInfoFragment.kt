@@ -23,9 +23,9 @@ import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentPersonalInfoBinding
 import com.solutionplus.altasherat.features.personalInfo.data.models.request.PhoneRequest
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetCountriesFromLocal
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetCountriesLocal
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedProfileLocal
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedProfileRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
@@ -54,7 +54,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
-        personalInfoVM.processIntent(GetCountriesFromLocal)
+        personalInfoVM.processIntent(GetCountriesLocal)
     }
 
     override fun subscribeToObservables() {
@@ -65,7 +65,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     private fun listeners() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            personalInfoVM.processIntent(GetUpdatedUserFromRemote)
+            personalInfoVM.processIntent(GetUpdatedProfileRemote)
             binding.swipeRefreshLayout.isRefreshing = false
             binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_circle.let
             {
@@ -119,7 +119,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
     private fun handleEvents() {
         collectFlowWithLifecycle(personalInfoVM.singleEvent) {
             when (it) {
-                is PersonalInfoEvent.UpdateDoneSuccessfully -> {
+                is PersonalInfoEvent.UpdateProfileSuccess -> {
                     showSnackBar(
                         getString(R.string.profile_updated_successfully),
                         false
@@ -127,16 +127,16 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     findNavController().popBackStack()
                 }
 
-                is PersonalInfoEvent.UpdateFailed -> showSnackBar(
+                is PersonalInfoEvent.UpdateProfileFailed -> showSnackBar(
                     it.message,
                     true
                 )
 
-                is PersonalInfoEvent.GetUpdatedUserFromRemote -> handleUserInfo(it.user)
+                is PersonalInfoEvent.GetUpdatedProfileRemote -> handleUserInfo(it.user)
 
-                is PersonalInfoEvent.GetCountriesFromLocal -> {
+                is PersonalInfoEvent.GetCountriesLocal -> {
                     countriesList = it.countries
-                    personalInfoVM.processIntent(GetUpdatedUserFromLocal)
+                    personalInfoVM.processIntent(GetUpdatedProfileLocal)
                     val spinnerAdapter = CountriesSpinnerAdapter(requireContext(), it.countries)
                     binding.stateSpinner.adapter = spinnerAdapter
 
@@ -147,8 +147,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                     binding.stateSpinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(
-                                parent: AdapterView<*>,
-                                view: View,
+                                parent: AdapterView<*>?,
+                                view: View?,
                                 position: Int,
                                 id: Long
                             ) {
@@ -160,7 +160,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                         }
                 }
 
-                is PersonalInfoEvent.GetUpdatedUserFromLocal -> handleUserInfo(it.user)
+                is PersonalInfoEvent.GetUpdatedProfileLocal -> handleUserInfo(it.user)
             }
         }
     }
@@ -210,7 +210,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
     private fun uriToFile(uri: Uri, context: Context): File {
         val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
-        val tempFile = File(context.cacheDir, "temp_image")
+        val tempFile = File(context.cacheDir, getString(R.string.cached_image))
         val outputStream = FileOutputStream(tempFile)
         inputStream?.copyTo(outputStream)
         inputStream?.close()

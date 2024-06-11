@@ -43,7 +43,7 @@
         style="@style/Button"
         app:iconSize="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_14sdp"
-        android:text="@string/SignIn"
+        android:text="@string/sign_in"
         app:icon="@drawable/ic_sign_up"
         app:iconGravity="textEnd" />
 

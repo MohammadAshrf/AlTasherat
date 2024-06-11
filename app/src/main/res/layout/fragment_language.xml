@@ -15,10 +15,9 @@
         android:paddingEnd="@dimen/_16sdp"
         android:src="@drawable/onboarding_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        />
 
 
     <androidx.cardview.widget.CardView
@@ -28,14 +27,14 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_60sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        app:cardBackgroundColor="#50FFFFFF"
-        app:cardCornerRadius="18dp"
+        app:cardBackgroundColor="@color/onboarding_card_bg"
+        app:cardCornerRadius="@dimen/_16sdp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49">
+       >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/choose_language"
-                android:textSize="@dimen/_14sdp"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_deletion"
                 app:layout_constraintStart_toStartOf="@id/rectangle_deletion"
                 app:layout_constraintTop_toTopOf="@id/rectangle_deletion" />
@@ -141,7 +139,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="@string/choose_state"
-                android:textSize="@dimen/_14sdp"
                 app:layout_constraintBottom_toBottomOf="@id/rectangle_state"
                 app:layout_constraintStart_toStartOf="@id/rectangle_state"
                 app:layout_constraintTop_toTopOf="@id/rectangle_state" />

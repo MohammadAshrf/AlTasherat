@@ -23,17 +23,17 @@ interface PersonalInfoContract {
             val country: Int,
         ) : PersonalInfoAction()
 
-        data object GetCountriesFromLocal : PersonalInfoAction()
-        data object GetUpdatedUserFromRemote : PersonalInfoAction()
-        data object GetUpdatedUserFromLocal : PersonalInfoAction()
+        data object GetCountriesLocal : PersonalInfoAction()
+        data object GetUpdatedProfileRemote : PersonalInfoAction()
+        data object GetUpdatedProfileLocal : PersonalInfoAction()
     }
 
     sealed class PersonalInfoEvent : ViewEvent {
-        data class GetCountriesFromLocal(val countries: List<Country>) : PersonalInfoEvent()
-        data class UpdateDoneSuccessfully(val message: String) : PersonalInfoEvent()
-        data class UpdateFailed(val message: String) : PersonalInfoEvent()
-        data class GetUpdatedUserFromRemote(val user: User) : PersonalInfoEvent()
-        data class GetUpdatedUserFromLocal(val user: User) : PersonalInfoEvent()
+        data class GetCountriesLocal(val countries: List<Country>) : PersonalInfoEvent()
+        data class UpdateProfileSuccess(val message: String) : PersonalInfoEvent()
+        data class UpdateProfileFailed(val message: String) : PersonalInfoEvent()
+        data class GetUpdatedProfileRemote(val user: User) : PersonalInfoEvent()
+        data class GetUpdatedProfileLocal(val user: User) : PersonalInfoEvent()
 
     }
 

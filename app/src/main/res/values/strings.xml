@@ -95,8 +95,7 @@
     <string name="you_can_sell_your_visa">You can view Visa</string>
     <string name="order_job_visa">Request\n an employment visa</string>
     <string name="visa_header_text">You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details. You have jobs and visas that you want to tell us about, fill out the form and tell us the details.</string>
-    <string name="SignIn">Sign In</string>
-    <string name="Already_have_an_account">Already have an account?</string>
+    <string name="already_have_an_account">Already have an account?</string>
     <string name="forgot_password">Forgot your password?</string>
     <string name="more">More</string>
     <string name="name">Name</string>
@@ -115,7 +114,7 @@
     <string name="birthdate">Birthdate</string>
     <string name="enter_birthdate">Enter Birthdate</string>
     <string name="state">State</string>
-    <string name="FillOut_the_form_now">Fill the\n form now</string>
+    <string name="fillOut_the_form_now">Fill the\n form now</string>
     <string name="contact_info">Communication data</string>
     <string name="_20_1011777751_966_550440787">(+20) 1011777751 - (+966) 550440787</string>
     <string name="travel_altasherat_com_info_altasherat_com">Travel@altaherat.com - Info@altasherat.com</string>
@@ -126,7 +125,7 @@
     <string name="easy_tourism">Tourism is easy</string>
     <string name="With_ease_with">Ease with the visa platform</string>
     <string name="through_visa_platform">Through the visa platform</string>
-    <string name="Request_employment">Request an visa</string>
+    <string name="request_employment">Request an visa</string>
     <string name="offer_visa">View Visa</string>
     <string name="sign_in_to_start">Log in to start</string>
     <string name="you_have_to_sign_in">You must log in to continue completing the application</string>
@@ -138,7 +137,7 @@
     <string name="confirm_delete">Confirm deletion</string>
     <string name="cancel">Cancel</string>
     <string name="timeout_error" translatable="false">The operation timed out. Please try again later</string>
-    <string name="Deactivate_the_account_permanently">Deactivate the account permanently</string>
+    <string name="deactivate_the_account_permanently">Deactivate the account permanently</string>
     <string name="manage_account_delete">Account management</string>
     <string name="delete_account">Delete account</string>
     <string name="confirm_password">Confirm Password</string>
@@ -148,8 +147,8 @@
     <string name="invalid_phone">Phone number is invalid. It must contain only digits and be between 9 and 15 characters long</string>
     <string name="invalid_email">Email is invalid. It must be less than 50 characters</string>
     <string name="email_text">Email</string>
-    <string name="Do_not_have_an_account">Don\'t have account?</string>
-    <string name="GOTOSignUp">Sign Up</string>
+    <string name="do_not_have_an_account">Don\'t have account?</string>
+    <string name="go_to_signup">Sign Up</string>
     <string name="invalid_middle_name">Middle name is not valid</string>
     <string name="invalid_country">Country is not valid</string>
     <string name="invalid_old_password">Old password is invalid. It must be between 8 and 50 characters</string>
@@ -157,7 +156,7 @@
     <string name="invalid_new_password_confirmation">New password confirmation is invalid. It must be between 8 and 50 characters</string>
     <string name="new_password_and_confirmation_do_not_match">New password and confirmation do not match</string>
     <string name="you_re_already_logged_in">You\'re already logged in!</string>
-    <string name="invalid_birth_date" >Birthdate must be before 13 years from now</string>
+    <string name="invalid_birth_date">Birthdate must be before 13 years from now</string>
     <string name="invalid_image">Image must be less than 512KB</string>
     <string name="profile_name">Nadeen Mohammad Al-Sayed</string>
     <string name="profile_updated_successfully">Your Profile Updated Successfully!</string>
@@ -168,4 +167,6 @@
     <string name="activity_must_implement_error_handling" translatable="false">Activity must implement ErrorHandling</string>
     <string name="no_internet_connection">Please check your internet</string>
     <string name="try_again">Please try again</string>
+    <string name="cached_image" translatable="false">cached_image</string>
+    <string name="wifi_settings">Wi-Fi Settings</string>
 </resources>

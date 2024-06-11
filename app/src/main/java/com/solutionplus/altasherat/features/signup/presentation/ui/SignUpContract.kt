@@ -9,7 +9,7 @@ import com.solutionplus.altasherat.features.services.user.domain.models.User
 
 interface SignUpContract {
 
-    sealed class SignupActions : ViewAction {
+    sealed class SignupAction : ViewAction {
         data class Signup(
             val firstName: String,
             val lastName: String,
@@ -18,9 +18,10 @@ interface SignUpContract {
             val countryCode: String,
             val countryId:Int,
             val password: String
-        ) : SignupActions()
-        data object GetSelectedCountry :SignupActions()
-        data class SaveSelectedCountry(val country: Country) : SignupActions()
+        ) : SignupAction()
+        data object GetSelectedCountry :SignupAction()
+        data object GetCountries : SignupAction()
+
     }
 
     sealed class SignupEvent : ViewEvent {

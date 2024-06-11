@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
-import com.solutionplus.altasherat.databinding.FragmentViewPagerBinding
+import com.solutionplus.altasherat.databinding.FragmentAuthViewPagerBinding
 import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginFragment
 import com.solutionplus.altasherat.features.signup.presentation.ui.SignupFragment
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
@@ -20,7 +20,7 @@ import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.Vi
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
+class AuthViewPagerFragment : BaseFragment<FragmentAuthViewPagerBinding>() {
 
     private lateinit var adapter: ViewPagerAdapter
 
@@ -120,13 +120,14 @@ class ViewPagerFragment : BaseFragment<FragmentViewPagerBinding>() {
         when (position) {
             0 -> {
                 binding.btnLoginAndSignup.text = getString(R.string.sign_in)
-                binding.tvDonTHaveAnAccount.text = getString(R.string.Do_not_have_an_account)
-                binding.tvRegister.text = getString(R.string.GOTOSignUp)
+                binding.tvDonTHaveAnAccount.text = getString(R.string.do_not_have_an_account)
+                binding.tvRegister.text = getString(R.string.go_to_signup)
             }
+
             1 -> {
                 binding.btnLoginAndSignup.text = getString(R.string.new_account)
-                binding.tvDonTHaveAnAccount.text = getString(R.string.Already_have_an_account)
-                binding.tvRegister.text = getString(R.string.SignIn)
+                binding.tvDonTHaveAnAccount.text = getString(R.string.already_have_an_account)
+                binding.tvRegister.text = getString(R.string.sign_in)
             }
         }
     }

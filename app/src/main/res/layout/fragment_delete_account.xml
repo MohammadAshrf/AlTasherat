@@ -59,7 +59,7 @@
         style="@style/TextView.Bold"
         android:layout_marginTop="@dimen/_32sdp"
         android:layout_marginStart="@dimen/_8sdp"
-        android:text="@string/Deactivate_the_account_permanently"
+        android:text="@string/deactivate_the_account_permanently"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textView18" />
 

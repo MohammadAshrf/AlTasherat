@@ -9,7 +9,6 @@ import android.widget.AdapterView
 import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputLayout
 import com.solutionplus.altasherat.R
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.constants.Validation.EMAIL
 import com.solutionplus.altasherat.common.data.constants.Validation.FIRST_NAME
 import com.solutionplus.altasherat.common.data.constants.Validation.LAST_NAME
@@ -20,6 +19,7 @@ import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragm
 import com.solutionplus.altasherat.databinding.FragmentSignupBinding
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract.SignupAction.GetCountries
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
 import com.solutionplus.altasherat.presentation.ui.fragment.viewpager.adapter.OnSignupActionListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +30,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     private val viewModel: SignupViewModel by viewModels()
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
+        viewModel.processIntent(GetCountries)
+        viewModel.processIntent(SignUpContract.SignupAction.GetSelectedCountry)
         subscribeToObservables()
     }
 
@@ -92,23 +94,26 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountryCode.adapter = adapter
-        binding.etCountryCode.setSelection(
-            countries.indexOf(adapter.getItem(0))
-        )
+        // Find the default country (assuming it's the first one) and set its position
+        val defaultCountry = countries.firstOrNull() // Use firstOrNull for safety
+        val defaultPosition = countries.indexOf(defaultCountry)
+        if (defaultPosition != -1) {
+            binding.etCountryCode.setSelection(defaultPosition)
+        }
+
         binding.etCountryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
+                parent: AdapterView<*>?,
+                view: View?,
                 position: Int,
                 id: Long
             ) {
                 binding.etCountryCode.adapter.getItem(position) as Country
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
-
 
     override fun onSignupAction() {
         val firstName = binding.etFirstname.text.toString()
@@ -122,8 +127,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
         binding.etPassword.error = null
         binding.textInputLayout2.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
 
-        viewModel.onActionTrigger(
-            SignUpContract.SignupActions.Signup(
+        viewModel.processIntent(
+            SignUpContract.SignupAction.Signup(
                 firstName, lastName, email, phoneNumber, countryCode, countryId, password
             )
         )
@@ -154,9 +159,5 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(), OnSignupActionList
         errors[EMAIL]?.let { binding.etEmail.error = getErrorMessage(it) }
         errors[FIRST_NAME]?.let { binding.etFirstname.error = getErrorMessage(it) }
         errors[LAST_NAME]?.let { binding.etLastName.error = getErrorMessage(it) }
-    }
-
-    companion object {
-        val logger = getClassLogger()
     }
 }

@@ -7,15 +7,35 @@
     android:background="@color/layout_background"
     tools:context=".features.changeLanguage.presentation.ui.ChangeLanguageFragment">
 
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/language"
+        style="@style/TextView.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/language"
+        app:layout_constraintBottom_toBottomOf="@id/back_arrow"
+        app:layout_constraintStart_toEndOf="@id/back_arrow"
+        app:layout_constraintTop_toTopOf="@id/back_arrow" />
+
     <View
         android:id="@+id/rectangle_deletion"
         android:layout_width="@dimen/_3sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:background="@color/Primary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/back_arrow" />
 
     <TextView
         android:id="@+id/choose_language"
@@ -24,7 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
         android:text="@string/choose_language"
-        android:textSize="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="@id/rectangle_deletion"
         app:layout_constraintStart_toStartOf="@id/rectangle_deletion"
         app:layout_constraintTop_toTopOf="@id/rectangle_deletion" />
@@ -82,17 +101,15 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
         style="@style/Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:background="@drawable/button_background"
-        app:icon="@drawable/ic_save"
-        app:iconGravity="textEnd"
         android:drawableTint="#FFFFFF"
         android:text="@string/save"
+        android:textSize="@dimen/_14ssp"
+        app:iconSize="@dimen/_16sdp"
         app:backgroundTint="@null"
+        app:icon="@drawable/ic_save"
+        app:iconGravity="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

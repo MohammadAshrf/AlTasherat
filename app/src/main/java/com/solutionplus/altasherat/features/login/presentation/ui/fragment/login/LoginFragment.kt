@@ -15,6 +15,7 @@ import com.solutionplus.altasherat.common.data.constants.Validation.PHONE
 import com.solutionplus.altasherat.common.data.model.exception.LeonException
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLoginBinding
+import com.solutionplus.altasherat.features.login.presentation.ui.fragment.login.LoginContract.LoginAction.GetCountries
 import com.solutionplus.altasherat.features.services.country.adapters.CountryCodeSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
 import com.solutionplus.altasherat.presentation.ui.activity.main.HomeActivity
@@ -27,9 +28,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
+        viewModel.processIntent(GetCountries)
+        viewModel.processIntent(LoginContract.LoginAction.GetSelectedCountry)
         subscribeToObservables()
-        viewModel.onActionTrigger(LoginContract.LoginActions.GetCountries)
-
     }
 
     override fun subscribeToObservables() {
@@ -96,24 +97,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         requireActivity().finish()
     }
 
-
     private fun setupCountrySpinner(countries: List<Country>) {
         val adapter = CountryCodeSpinnerAdapter(requireContext(), countries)
         binding.etCountryCode.adapter = adapter
-        binding.etCountryCode.setSelection(
-            countries.indexOf(adapter.getItem(0))
-        )
+        // Find the default country (assuming it's the first one) and set its position
+        val defaultCountry = countries.firstOrNull() // Use firstOrNull for safety
+        val defaultPosition = countries.indexOf(defaultCountry)
+        if (defaultPosition != -1) {
+            binding.etCountryCode.setSelection(defaultPosition)
+        }
+
         binding.etCountryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
+                parent: AdapterView<*>?,
+                view: View?,
                 position: Int,
                 id: Long
             ) {
                 binding.etCountryCode.adapter.getItem(position) as Country
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 
@@ -125,8 +129,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), OnLoginActionListene
         val phoneNumber = binding.etPhoneClient.text.toString()
         val password = binding.etPassword.text.toString()
         val countryCode = (binding.etCountryCode.selectedItem as Country).phoneCode
-        viewModel.onActionTrigger(
-            LoginContract.LoginActions.LoginWithPhone(phoneNumber, countryCode, password)
+        viewModel.processIntent(
+            LoginContract.LoginAction.LoginWithPhone(phoneNumber, countryCode, password)
         )
     }
 

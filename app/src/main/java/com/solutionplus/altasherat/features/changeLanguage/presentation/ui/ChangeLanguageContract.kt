@@ -10,19 +10,11 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 interface ChangeLanguageContract {
 
     sealed class  ChangeLanguageAction : ViewAction {
-        data object GetCountriesFromLocal : ChangeLanguageAction()
-        data class SaveSelectedCountry(val country: Country) : ChangeLanguageAction()
-        data object GetSelectedCountry : ChangeLanguageAction()
         data class StartLanguageWorker(val language: String) : ChangeLanguageAction()
-        data object ContinueToOnBoarding : ChangeLanguageAction()
     }
 
     sealed class ChangeLanguageEvent : ViewEvent {
-        data class CountriesIndex(val countries: List<Country>) : ChangeLanguageEvent()
-        data class SaveSelectedCountry(val country: Country) : ChangeLanguageEvent()
-        data class GetSelectedCountry(val country: Country): ChangeLanguageEvent()
         data class LanguageWorkerStarted(val language: String) : ChangeLanguageEvent()
-        data object NavigateToOnBoarding : ChangeLanguageEvent()
     }
 
     data class ChangeLanguageState(

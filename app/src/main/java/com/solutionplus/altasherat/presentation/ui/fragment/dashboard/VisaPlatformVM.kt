@@ -30,7 +30,7 @@ class VisaPlatformVM @Inject constructor(
             checkUserStateUC.invoke(viewModelScope, null) {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading))
+                    is Resource.Loading -> setState(oldViewState.copy(isLoading = false, exception = null))
                     is Resource.Success -> {
                         sendEvent(VisaPlatformContract.VisaPlatformEvent.IsUserLoggedIn(it.model))
                     }

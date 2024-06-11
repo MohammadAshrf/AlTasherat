@@ -10,8 +10,8 @@ import com.solutionplus.altasherat.features.personalInfo.data.models.request.Upd
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.GetProfileInfoRemoteUC
 import com.solutionplus.altasherat.features.personalInfo.domain.interactor.UpdateProfileInfoUC
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromLocal
-import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedUserFromRemote
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedProfileLocal
+import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.GetUpdatedProfileRemote
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoAction.UpdateUser
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoEvent
 import com.solutionplus.altasherat.features.personalInfo.presentation.ui.PersonalInfoContract.PersonalInfoState
@@ -34,9 +34,9 @@ class PersonalInfoViewModel @Inject constructor(
     override fun onActionTrigger(action: ViewAction?) {
         setState(oldViewState.copy(action = action))
         when (action) {
-            is PersonalInfoAction.GetCountriesFromLocal -> getCountriesFromLocal()
-            is GetUpdatedUserFromRemote -> getUpdatedUserFromRemote()
-            is GetUpdatedUserFromLocal -> getUpdatedUserFromLocal()
+            is PersonalInfoAction.GetCountriesLocal -> getCountriesFromLocal()
+            is GetUpdatedProfileRemote -> getUpdatedUserFromRemote()
+            is GetUpdatedProfileLocal -> getUpdatedUserFromLocal()
 
             is UpdateUser -> updateUser(
                 action.firstname,
@@ -70,7 +70,7 @@ class PersonalInfoViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
-                        sendEvent(PersonalInfoEvent.GetUpdatedUserFromLocal(it.model))
+                        sendEvent(PersonalInfoEvent.GetUpdatedProfileLocal(it.model))
                     }
                 }
             }
@@ -96,7 +96,7 @@ class PersonalInfoViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
-                        sendEvent(PersonalInfoEvent.GetUpdatedUserFromRemote(it.model))
+                        sendEvent(PersonalInfoEvent.GetUpdatedProfileRemote(it.model))
                     }
                 }
             }
@@ -149,7 +149,7 @@ class PersonalInfoViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
-                        sendEvent(PersonalInfoEvent.UpdateDoneSuccessfully("Data updated successfully"))
+                        sendEvent(PersonalInfoEvent.UpdateProfileSuccess("Data updated successfully"))
                     }
                 }
             }
@@ -170,7 +170,7 @@ class PersonalInfoViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         sendEvent(
-                            PersonalInfoEvent.GetCountriesFromLocal(
+                            PersonalInfoEvent.GetCountriesLocal(
                                 countries = it.model
 
                             )

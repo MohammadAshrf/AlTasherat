@@ -7,7 +7,9 @@ import com.solutionplus.altasherat.features.services.country.data.repository.loc
 import com.solutionplus.altasherat.features.services.country.data.repository.remote.CountriesRemoteDS
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesRemoteUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.HasCountriesUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.SaveSelectedCountryUC
 import com.solutionplus.altasherat.features.services.country.domain.repository.ICountriesRepository
 import com.solutionplus.altasherat.features.services.country.domain.repository.local.ICountriesLocalDS
 import com.solutionplus.altasherat.features.services.country.domain.repository.remote.ICountriesRemoteDS
@@ -29,6 +31,16 @@ internal object CountriesDI {
     @Provides
     fun provideGetCountriesFromLocalUC(repository: ICountriesRepository): GetCountriesLocalUC =
         GetCountriesLocalUC(repository)
+
+    @Singleton
+    @Provides
+    fun provideSaveSelectedCountryUC(repository: ICountriesRepository): SaveSelectedCountryUC =
+        SaveSelectedCountryUC(repository)
+
+    @Singleton
+    @Provides
+    fun provideGetSelectedCountryUC(repository: ICountriesRepository): GetSelectedCountryUC =
+        GetSelectedCountryUC(repository)
 
     @Singleton
     @Provides

@@ -16,7 +16,7 @@ internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStora
         val countries =
             localStorageProvider.getEntry(StorageKeyEnum.COUNTRIES, "", String::class.java)
         val itemType = object : TypeToken<List<CountryEntity>>() {}.type
-        val result =Gson().fromJson<List<CountryEntity>>(countries, itemType)?: emptyList()
+        val result = Gson().fromJson<List<CountryEntity>>(countries, itemType) ?: emptyList()
         logger.info("done $result")
         return result
     }
@@ -24,6 +24,17 @@ internal class CountriesLocalDS(private val localStorageProvider: IKeyValueStora
     override suspend fun saveCountriesToLocal(countries: List<Country>) {
         localStorageProvider
             .saveEntry(StorageKeyEnum.COUNTRIES, Gson().toJson(countries), String::class.java)
+    }
+
+    override suspend fun saveSelectedCountry(country: Country) {
+        localStorageProvider
+            .saveEntry(StorageKeyEnum.SELECTED_COUNTRY, Gson().toJson(country), String::class.java)
+    }
+
+    override suspend fun getSelectedCountry(): CountryEntity {
+        val selectedCountry =
+            localStorageProvider.getEntry(StorageKeyEnum.SELECTED_COUNTRY, "", String::class.java)
+        return Gson().fromJson(selectedCountry, CountryEntity::class.java)
     }
 
     override suspend fun hasCountriesInLocal(): Boolean {

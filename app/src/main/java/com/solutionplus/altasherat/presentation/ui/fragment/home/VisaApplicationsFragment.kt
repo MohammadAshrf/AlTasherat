@@ -1,16 +1,20 @@
 package com.solutionplus.altasherat.presentation.ui.fragment.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.solutionplus.altasherat.R
+import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
+import com.solutionplus.altasherat.databinding.FragmentVisaApplicationsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class VisaApplicationsFragment : Fragment() {
+class VisaApplicationsFragment : BaseFragment<FragmentVisaApplicationsBinding>() {
+    override fun onFragmentReady(savedInstanceState: Bundle?) {
+    }
 
+    override fun subscribeToObservables() {
+    }
 
+    override fun viewInit() {
+        binding.visaText.text = getString(R.string.visa_applications)
+    }
 }

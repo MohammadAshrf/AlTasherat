@@ -4,11 +4,13 @@ import androidx.lifecycle.viewModelScope
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
-import com.solutionplus.altasherat.features.services.language.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.services.country.domain.interactor.GetCountriesLocalUC
+import com.solutionplus.altasherat.features.services.country.domain.interactor.GetSelectedCountryUC
 import com.solutionplus.altasherat.features.signup.data.model.request.PhoneRequest
 import com.solutionplus.altasherat.features.signup.data.model.request.SignupRequest
 import com.solutionplus.altasherat.features.signup.domain.usecase.SignupUC
+import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract.SignupAction.GetCountries
+import com.solutionplus.altasherat.features.signup.presentation.ui.SignUpContract.SignupAction.GetSelectedCountry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,20 +18,15 @@ import javax.inject.Inject
 @HiltViewModel
 class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC,
-    private val getCountriesUC: GetCountriesLocalUC,
+    private val getCountriesLocalUC: GetCountriesLocalUC,
     private val getSelectedCountryUC: GetSelectedCountryUC,
-) : AlTasheratViewModel<SignUpContract.SignupActions, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
+) : AlTasheratViewModel<SignUpContract.SignupAction, SignUpContract.SignupEvent, SignUpContract.SignUpState>(
     initialState = SignUpContract.SignUpState.initial()
 ) {
-
-    init {
-        fetchCountries()
-        fetchSelectedCountry()
-    }
-
     override fun onActionTrigger(action: ViewAction?) {
+        setState(oldViewState.copy(action = action))
         when (action) {
-            is SignUpContract.SignupActions.Signup -> signUp(
+            is SignUpContract.SignupAction.Signup -> signUp(
                 action.firstName,
                 action.lastName,
                 action.email,
@@ -39,17 +36,24 @@ class SignupViewModel @Inject constructor(
                 action.password
             )
 
-            is SignUpContract.SignupActions.GetSelectedCountry -> fetchSelectedCountry()
+            is GetSelectedCountry -> fetchSelectedCountry()
+            is GetCountries -> fetchCountries()
         }
     }
 
 
     private fun fetchCountries() {
         viewModelScope.launch {
-            getCountriesUC.invoke().collect { resource ->
+            getCountriesLocalUC.invoke().collect { resource ->
                 when (resource) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = resource.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = resource.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         sendEvent(SignUpContract.SignupEvent.GetCountries(resource.model))
                     }
@@ -108,7 +112,13 @@ class SignupViewModel @Inject constructor(
                         )
                     }
 
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = resource.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = resource.loading,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         setState(oldViewState.copy(isLoading = false, exception = null))
                         sendEvent(SignUpContract.SignupEvent.SignupSuccess(resource.model))

@@ -6,5 +6,7 @@ import com.solutionplus.altasherat.features.services.country.domain.models.Count
 interface ICountriesLocalDS {
     suspend fun getCountriesLocal(): List<CountryEntity>
     suspend fun saveCountriesToLocal(countries: List<Country>)
+    suspend fun saveSelectedCountry(country: Country)
+    suspend fun getSelectedCountry(): CountryEntity
     suspend fun hasCountriesInLocal(): Boolean
 }

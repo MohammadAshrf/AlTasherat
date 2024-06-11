@@ -1,12 +1,10 @@
 package com.solutionplus.altasherat.features.profileMenu.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.solutionplus.altasherat.android.helpers.logging.getClassLogger
 import com.solutionplus.altasherat.common.data.model.Resource
 import com.solutionplus.altasherat.common.presentation.viewmodel.AlTasheratViewModel
 import com.solutionplus.altasherat.common.presentation.viewmodel.ViewAction
 import com.solutionplus.altasherat.features.profileMenu.ProfileMenuContract
-
 import com.solutionplus.altasherat.features.profileMenu.domain.usecase.CheckUserStateUC
 import com.solutionplus.altasherat.features.profileMenu.domain.usecase.GetUserUC
 import com.solutionplus.altasherat.features.profileMenu.domain.usecase.LogoutUC
@@ -20,12 +18,12 @@ class ProfileMenuViewModel @Inject constructor(
     private val checkUserStateUC: CheckUserStateUC,
     private val logoutUC: LogoutUC
 ) : AlTasheratViewModel<ProfileMenuContract.ProfileMenuAction, ProfileMenuContract.ProfileMenuEvent, ProfileMenuContract.ProfileMenuState>(
-    ProfileMenuContract.ProfileMenuState.initial()) {
+    ProfileMenuContract.ProfileMenuState.initial()
+) {
 
     override fun clearState() {
         setState(ProfileMenuContract.ProfileMenuState.initial())
     }
-
 
 
     override fun onActionTrigger(action: ViewAction?) {
@@ -37,8 +35,8 @@ class ProfileMenuViewModel @Inject constructor(
     }
 
     private fun handleLogout() {
-        logoutUC.invoke(viewModelScope,null) {
-            sendEvent(ProfileMenuContract.ProfileMenuEvent.LogoutSuccess("Logout successful"))
+        logoutUC.invoke(viewModelScope, null) {
+            sendEvent(ProfileMenuContract.ProfileMenuEvent.LogoutSuccess("Logout Successfully!"))
         }
     }
 
@@ -47,7 +45,13 @@ class ProfileMenuViewModel @Inject constructor(
             checkUserStateUC.invoke(viewModelScope, null) {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = false,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         sendEvent(ProfileMenuContract.ProfileMenuEvent.IsUserLoggedIn(it.model))
                     }
@@ -61,16 +65,18 @@ class ProfileMenuViewModel @Inject constructor(
             getUserUC.invoke(viewModelScope, null) {
                 when (it) {
                     is Resource.Failure -> setState(oldViewState.copy(exception = it.exception))
-                    is Resource.Loading -> setState(oldViewState.copy(isLoading = it.loading, exception = null))
+                    is Resource.Loading -> setState(
+                        oldViewState.copy(
+                            isLoading = false,
+                            exception = null
+                        )
+                    )
+
                     is Resource.Success -> {
                         sendEvent(ProfileMenuContract.ProfileMenuEvent.GetUser(it.model))
                     }
                 }
             }
         }
-    }
-
-    companion object{
-        val logger = getClassLogger()
     }
 }

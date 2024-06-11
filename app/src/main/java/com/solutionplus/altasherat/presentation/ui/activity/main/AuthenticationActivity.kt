@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AuthenticationActivity : BaseActivity<ActivityAuthenticationBinding>() {
     override fun viewInit() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(binding.AuthunticationContainerView.id) as NavHostFragment
+            supportFragmentManager.findFragmentById(binding.AuthenticationContainerView.id) as NavHostFragment
         navHostFragment.findNavController()
     }
 
