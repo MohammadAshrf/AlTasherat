@@ -27,8 +27,8 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
         _binding = bindView()
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets.consumeSystemWindowInsets()
         }
         viewInit()
         onActivityReady(savedInstanceState)
@@ -67,4 +67,3 @@ abstract class BaseActivity<Binding : ViewBinding> : AppCompatActivity(), ErrorH
         val logger = getClassLogger()
     }
 }
-
