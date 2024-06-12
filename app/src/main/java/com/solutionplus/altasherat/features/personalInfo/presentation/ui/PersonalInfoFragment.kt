@@ -227,7 +227,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
             datePickerDialog.setOnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 val selectedDate =
-                    String.format("%02d-%02d-%d", year, monthOfYear + 1, dayOfMonth)
+                    String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
                 binding.birthdateEditText.setText(selectedDate)
                 calendar.set(year, monthOfYear, dayOfMonth)
                 // To ignore time

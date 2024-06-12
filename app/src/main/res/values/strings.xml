@@ -169,4 +169,5 @@
     <string name="try_again">Please try again</string>
     <string name="cached_image" translatable="false">cached_image</string>
     <string name="wifi_settings">Wi-Fi Settings</string>
+    <string name="date_format" translatable="false">%02d-%02d-%d</string>
 </resources>

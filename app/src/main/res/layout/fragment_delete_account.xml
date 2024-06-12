@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/contact_us_tv"
         style="@style/TextView.Bold"
         android:layout_marginTop="@dimen/_32sdp"
         android:layout_marginStart="@dimen/_8sdp"
