@@ -1,7 +1,9 @@
 package com.solutionplus.altasherat.features.services.language.domain.worker
 
 import android.content.Context
+import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -16,8 +18,11 @@ class LanguageWorkerImpl @Inject constructor(private val context: Context) {
 
     suspend fun updateLanguage(language: String): Flow<WorkInfo> = flow {
         val inputData = workDataOf(LanguageWorker.LANGUAGE to language)
+        val constraints =
+            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
 
         val languageWorkRequest = OneTimeWorkRequestBuilder<LanguageWorker>()
+            .setConstraints(constraints)
             .setInputData(inputData)
             .build()
 

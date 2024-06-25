@@ -10,26 +10,49 @@ import androidx.navigation.fragment.findNavController
 import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentLanguageBinding
+import com.solutionplus.altasherat.features.language.presentation.Language
 import com.solutionplus.altasherat.features.services.country.adapters.CountriesSpinnerAdapter
 import com.solutionplus.altasherat.features.services.country.domain.models.Country
+import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelection
+import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelectionAdapter
+import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelectionCallback
+import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelectionViewType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
+class LanguageFragment : BaseFragment<FragmentLanguageBinding>(), SingleSelectionCallback {
     private val languageVM: LanguageViewModel by viewModels()
-    override fun viewInit() {
-        if (AppCompatDelegate.getApplicationLocales().get(0)?.language.equals("ar")) {
-            binding.arabicRadioBtn.isChecked = true
-            binding.englishRadioBtn.isChecked = false
-            binding.englishRadioBtn.isEnabled = true
-            binding.arabicRadioBtn.isEnabled = false
-        } else {
-            binding.englishRadioBtn.isChecked = true
-            binding.arabicRadioBtn.isChecked = false
-            binding.englishRadioBtn.isEnabled = false
-            binding.arabicRadioBtn.isEnabled = true
+
+    private val adapter: SingleSelectionAdapter by lazy {
+        SingleSelectionAdapter(SingleSelectionViewType.SELECTION_RADIO, this)
+    }
+
+    private val items: List<SingleSelection> by lazy {
+        listOf(
+            Language(1, getString(R.string.arabic), "ar", selected = false, R.drawable.arabic),
+            Language(2, getString(R.string.english), "en", selected = false, R.drawable.english)
+        )
+    }
+
+    override fun onSingleItemSelected(selectedItem: SingleSelection) {
+        val selectedLanguage = selectedItem as Language
+        languageVM
+            .processIntent(
+                LanguageContract.LanguageAction.StartLanguageWorker(selectedLanguage.currentLocale)
+            )
+    }
+
+    override fun viewInit() = with(binding) {
+        AppCompatDelegate.getApplicationLocales()[0]?.toLanguageTag()
+            ?.let { language ->
+                items.first { (it as Language).currentLocale == language }.selected = true
+            }
+        recyclerSingleSelection.adapter = adapter
+        adapter.setItems(items)
+        adapter.setSelectedItem(items.first { it.selected })
+        binding.continueButton.setOnClickListener {
+            languageVM.processIntent(LanguageContract.LanguageAction.ContinueToOnBoarding)
         }
-        handleViews()
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {
@@ -39,18 +62,6 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>() {
 
     override fun subscribeToObservables() {
         handleEvents()
-    }
-
-    private fun handleViews() {
-        binding.arabicRadioBtn.setOnClickListener {
-            languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("ar"))
-        }
-        binding.englishRadioBtn.setOnClickListener {
-            languageVM.processIntent(LanguageContract.LanguageAction.StartLanguageWorker("en"))
-        }
-        binding.continueButton.setOnClickListener {
-            languageVM.processIntent(LanguageContract.LanguageAction.ContinueToOnBoarding)
-        }
     }
 
     private fun handleEvents() {
