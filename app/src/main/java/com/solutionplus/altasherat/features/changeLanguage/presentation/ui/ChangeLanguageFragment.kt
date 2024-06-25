@@ -9,7 +9,6 @@ import com.solutionplus.altasherat.R
 import com.solutionplus.altasherat.common.presentation.ui.base.frgment.BaseFragment
 import com.solutionplus.altasherat.databinding.FragmentChangeLanguageBinding
 import com.solutionplus.altasherat.features.language.presentation.Language
-import com.solutionplus.altasherat.features.language.presentation.ui.LanguageContract
 import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelection
 import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelectionAdapter
 import com.solutionplus.altasherat.presentation.adapters.singleSelection.SingleSelectionCallback
@@ -34,13 +33,12 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(),
     }
 
     override fun onSingleItemSelected(selectedItem: SingleSelection) {
-            val selectedLanguage = selectedItem as Language
-            languageVM
-                .processIntent(
-                    ChangeLanguageContract.ChangeLanguageAction.StartLanguageWorker(selectedLanguage.currentLocale)
-                )
-            findNavController().popBackStack()
-        }
+        val selectedLanguage = selectedItem as Language
+        languageVM
+            .processIntent(
+                ChangeLanguageContract.ChangeLanguageAction.StartLanguageWorker(selectedLanguage.currentLocale)
+            )
+    }
 
 
     override fun viewInit() = with(binding) {
@@ -52,7 +50,7 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(),
         adapter.setItems(items)
         adapter.setSelectedItem(items.first { it.selected })
 
-        binding.backArrow.setOnClickListener {
+        backArrow.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -60,13 +58,18 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(),
     private fun handleEvents() {
         collectFlowWithLifecycle(languageVM.singleEvent) {
             when (it) {
-                is ChangeLanguageContract.ChangeLanguageEvent.LanguageWorkerStarted -> changeAppLocale(it.language)
+                is ChangeLanguageContract.ChangeLanguageEvent.LanguageWorkerStarted -> changeAppLocale(
+                    it.language
+                )
             }
         }
     }
 
     private fun changeAppLocale(language: String) {
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
+        binding.btnSave.setOnClickListener {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
+            findNavController().popBackStack()
+        }
     }
 
     override fun onFragmentReady(savedInstanceState: Bundle?) {}
