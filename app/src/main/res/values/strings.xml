@@ -170,4 +170,10 @@
     <string name="cached_image" translatable="false">cached_image</string>
     <string name="wifi_settings">Wi-Fi Settings</string>
     <string name="date_format" translatable="false">%02d-%02d-%d</string>
+    <string name="personal_information">Personal Info</string>
+    <string name="personal_info">Personal Info of Selling Visa</string>
+    <string name="complete_info">Complete the info to continue</string>
+    <string name="applicant_name">Applicant Name</string>
+    <string name="enter_name">Enter the Name</string>
+
 </resources>

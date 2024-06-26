@@ -274,21 +274,13 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSave"
                     style="@style/Button"
                     android:layout_marginTop="@dimen/_30sdp"
-                    android:background="@drawable/button_background"
-                    android:drawableEnd="@drawable/ic_save"
-                    android:drawableTint="#FFFFFF"
-                    android:elevation="12dp"
-                    android:paddingStart="@dimen/_95sdp"
-                    android:paddingEnd="@dimen/_95sdp"
                     android:text="@string/save"
-                    android:textAppearance="@style/Font.Bold"
-                    android:textSize="@dimen/_18ssp"
-                    app:backgroundTint="@null"
-                    app:iconTint="#FFFFFF"
+                    app:icon="@drawable/ic_save"
+                    app:iconGravity="textEnd"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/state_input_layout"
                     app:layout_constraintStart_toStartOf="@+id/state_input_layout"

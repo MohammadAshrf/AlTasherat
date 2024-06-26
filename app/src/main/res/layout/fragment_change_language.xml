@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/language"
-        style="@style/TextView.Bold"
+        style="@style/TextView.Heavy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
@@ -65,11 +65,8 @@
         android:id="@+id/btn_save"
         style="@style/Button"
         android:layout_marginBottom="@dimen/_16sdp"
-        android:background="@drawable/button_background"
-        android:drawableTint="#FFFFFF"
         android:text="@string/save"
         android:textSize="@dimen/_14ssp"
-        app:backgroundTint="@null"
         app:icon="@drawable/ic_save"
         app:iconGravity="textEnd"
         app:iconSize="@dimen/_16sdp"

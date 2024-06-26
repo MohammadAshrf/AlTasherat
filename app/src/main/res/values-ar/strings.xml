@@ -169,4 +169,9 @@
     <string name="no_internet_connection">تحقق من اتصالك بالإنترنت</string>
     <string name="try_again">برجاء المحاولة مرة أخرى</string>
     <string name="wifi_settings">إعدادات الواي فاي</string>
+    <string name="personal_information">المعلومات الشخصية</string>
+    <string name="personal_info">البيانات الخاصة بعرض الفيزا</string>
+    <string name="complete_info">استكمل البيانات للمتابعة</string>
+    <string name="applicant_name">اسم مقدم التأشيرة</string>
+    <string name="enter_name">أدخل الإسم</string>
 </resources>
