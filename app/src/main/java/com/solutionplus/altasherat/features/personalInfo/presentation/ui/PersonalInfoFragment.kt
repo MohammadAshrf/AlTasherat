@@ -63,34 +63,34 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         handleEvents()
     }
 
-    private fun listeners() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
+    private fun listeners() = with(binding) {
+        swipeRefreshLayout.setOnRefreshListener {
             personalInfoVM.processIntent(GetUpdatedProfileRemote)
-            binding.swipeRefreshLayout.isRefreshing = false
-            binding.viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_circle.let
+            swipeRefreshLayout.isRefreshing = false
+            viewProfileSection.outerCircle.setImageDrawable(R.drawable.outer_circle.let
             {
                 ResourcesCompat.getDrawable(resources, it, null)
             })
         }
-        binding.moreButton.setOnClickListener {
+        moreButton.setOnClickListener {
             findNavController().navigate(R.id.action_personalInfoFragment_to_gotoDeleteAccountFragment)
         }
-        binding.btnSave.setOnClickListener {
-            val firstname = binding.firstNameEditText.text.toString().trim()
-            val middleName = binding.middleNameEditText.text.toString().trim()
-            val lastname = binding.lastNameEditText.text.toString().trim()
+        btnSave.setOnClickListener {
+            val firstname = firstNameEditText.text.toString().trim()
+            val middleName = middleNameEditText.text.toString().trim()
+            val lastname = lastNameEditText.text.toString().trim()
             val phone = PhoneRequest(
-                countryCode = countriesList[binding.spinnerCountryCode.selectedItemPosition].phoneCode,
-                number = binding.phoneEditText.text.toString()
+                countryCode = countriesList[spinnerCountryCode.selectedItemPosition].phoneCode,
+                number = phoneEditText.text.toString()
             )
-            val email = binding.emailEditText.text.toString().trim()
+            val email = emailEditText.text.toString().trim()
 
             val image = imageUri?.let {
                 uriToFile(it, requireContext())  // Convert Uri to File only if imageUri is not null
             }
 
-            val birthdate = binding.birthdateEditText.text.toString()
-            val country = countriesList[binding.stateSpinner.selectedItemPosition].id
+            val birthdate = birthdateEditText.text.toString()
+            val country = countriesList[stateSpinner.selectedItemPosition].id
             personalInfoVM.processIntent(
                 UpdateUser(
                     firstname,
@@ -104,13 +104,13 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 )
             )
         }
-        binding.backButton.setOnClickListener {
+        backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.birthdateEditText.setOnClickListener {
+        birthdateEditText.setOnClickListener {
             showDatePickerDialog(Calendar.getInstance())
         }
-        binding.viewProfileSection.penEditor.setOnClickListener {
+        viewProfileSection.penEditor.setOnClickListener {
             contract.launch("image/*")
         }
     }
@@ -134,17 +134,17 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
                 is PersonalInfoEvent.GetUpdatedProfileRemote -> handleUserInfo(it.user)
 
-                is PersonalInfoEvent.GetCountriesLocal -> {
+                is PersonalInfoEvent.GetCountriesLocal -> with(binding) {
                     countriesList = it.countries
                     personalInfoVM.processIntent(GetUpdatedProfileLocal)
                     val spinnerAdapter = CountriesSpinnerAdapter(requireContext(), it.countries)
-                    binding.stateSpinner.adapter = spinnerAdapter
+                    stateSpinner.adapter = spinnerAdapter
 
-                    binding.spinnerCountryCode.adapter = CountryCodeSpinnerAdapter(
+                    spinnerCountryCode.adapter = CountryCodeSpinnerAdapter(
                         requireContext(),
                         it.countries
                     )
-                    binding.stateSpinner.onItemSelectedListener =
+                    stateSpinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(
                                 parent: AdapterView<*>?,
@@ -152,8 +152,8 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                                 position: Int,
                                 id: Long
                             ) {
-                                binding.stateSpinner.adapter.getItem(position) as Country
-                                binding.spinnerCountryCode.adapter.getItem(position) as Country
+                                stateSpinner.adapter.getItem(position) as Country
+                                spinnerCountryCode.adapter.getItem(position) as Country
                             }
 
                             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -165,23 +165,23 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         }
     }
 
-    private fun handleUserInfo(it: User) {
-        binding.firstNameEditText.setText(it.firstname)
-        binding.middleNameEditText.setText(it.middleName)
-        binding.lastNameEditText.setText(it.lastname)
-        binding.phoneEditText.setText(it.phone.number)
-        binding.spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
-        binding.emailEditText.setText(it.email)
+    private fun handleUserInfo(it: User) = with(binding) {
+        firstNameEditText.setText(it.firstname)
+        middleNameEditText.setText(it.middleName)
+        lastNameEditText.setText(it.lastname)
+        phoneEditText.setText(it.phone.number)
+        spinnerCountryCode.setSelection(countriesList.indexOf(countriesList.find { country -> country.phoneCode == it.phone.countryCode }))
+        emailEditText.setText(it.email)
         it.image.let { image ->
-            Glide.with(this)
+            Glide.with(requireContext())
                 .load(image.path)
                 .centerCrop()
                 .placeholder(R.drawable.ic_profile_holder)
                 .error(R.drawable.ic_profile_holder)
-                .into(binding.viewProfileSection.profilePicture)
+                .into(viewProfileSection.profilePicture)
         }
-        binding.birthdateEditText.setText(it.birthdate)
-        binding.stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
+        birthdateEditText.setText(it.birthdate)
+        stateSpinner.setSelection(countriesList.indexOf(countriesList.find { country -> country.id == it.country.id }))
     }
 
     private fun renderState() {
@@ -218,7 +218,7 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
         return tempFile
     }
 
-    private fun showDatePickerDialog(calendar: Calendar) {
+    private fun showDatePickerDialog(calendar: Calendar) = with(binding) {
         context?.let { context ->
             val datePickerDialog = DatePickerDialog(context)
             val currentYear = calendar.get(Calendar.YEAR)
@@ -227,8 +227,13 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
 
             datePickerDialog.setOnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 val selectedDate =
-                    String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
-                binding.birthdateEditText.setText(selectedDate)
+                    String.format(
+                        getString(R.string.date_format),
+                        year,
+                        monthOfYear + 1,
+                        dayOfMonth
+                    )
+                birthdateEditText.setText(selectedDate)
                 calendar.set(year, monthOfYear, dayOfMonth)
                 // To ignore time
                 calendar.set(Calendar.HOUR_OF_DAY, 0)
@@ -246,47 +251,48 @@ class PersonalInfoFragment : BaseFragment<FragmentPersonalInfoBinding>() {
                 val formattedDate = displayDateFormatter.format(calendar.apply {
                     set(year, monthOfYear, dayOfMonth)
                 })
-                binding.birthdateEditText.setText(formattedDate)
+                birthdateEditText.setText(formattedDate)
             }
             datePickerDialog.show()
         }
     }
 
-    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) {
-        errors[Validation.FIRST_NAME]?.let {
-            binding.firstNameEditText.error = getErrorMessage(it)
-            clearErrorAfterChanged(binding.firstNameEditText)
+    private fun handleValidationErrors(errors: Map<String, Any>, getErrorMessage: (Any) -> String) =
+        with(binding) {
+            errors[Validation.FIRST_NAME]?.let {
+                firstNameEditText.error = getErrorMessage(it)
+                clearErrorAfterChanged(firstNameEditText)
+            }
+            errors[Validation.MIDDLE_NAME]?.let {
+                middleNameEditText.error = getErrorMessage(it)
+                clearErrorAfterChanged(middleNameEditText)
+            }
+            errors[Validation.LAST_NAME]?.let {
+                lastNameEditText.error = getErrorMessage(it)
+                clearErrorAfterChanged(lastNameEditText)
+            }
+            errors[Validation.EMAIL]?.let {
+                emailEditText.error = getErrorMessage(it)
+                clearErrorAfterChanged(emailEditText)
+            }
+            errors[Validation.PHONE]?.let {
+                phoneEditText.error = getErrorMessage(it)
+                clearErrorAfterChanged(phoneEditText)
+            }
+            errors[Validation.IMAGE]?.let {
+                viewProfileSection.outerCircle.setImageDrawable(
+                    R.drawable.outer_red_circle.let {
+                        ResourcesCompat.getDrawable(resources, it, null)
+                    }
+                )
+                showSnackBar(getString(R.string.invalid_image), false)
+            }
+            errors[Validation.BIRTH_DATE]?.let {
+                birthdateEditText.error = getErrorMessage(it)
+                clearErrorAfterChanged(birthdateEditText)
+                showSnackBar(getString(R.string.invalid_birth_date), false)
+            }
         }
-        errors[Validation.MIDDLE_NAME]?.let {
-            binding.middleNameEditText.error = getErrorMessage(it)
-            clearErrorAfterChanged(binding.middleNameEditText)
-        }
-        errors[Validation.LAST_NAME]?.let {
-            binding.lastNameEditText.error = getErrorMessage(it)
-            clearErrorAfterChanged(binding.lastNameEditText)
-        }
-        errors[Validation.EMAIL]?.let {
-            binding.emailEditText.error = getErrorMessage(it)
-            clearErrorAfterChanged(binding.emailEditText)
-        }
-        errors[Validation.PHONE]?.let {
-            binding.phoneEditText.error = getErrorMessage(it)
-            clearErrorAfterChanged(binding.phoneEditText)
-        }
-        errors[Validation.IMAGE]?.let {
-            binding.viewProfileSection.outerCircle.setImageDrawable(
-                R.drawable.outer_red_circle.let {
-                    ResourcesCompat.getDrawable(resources, it, null)
-                }
-            )
-            showSnackBar(getString(R.string.invalid_image), false)
-        }
-        errors[Validation.BIRTH_DATE]?.let {
-            binding.birthdateEditText.error = getErrorMessage(it)
-            clearErrorAfterChanged(binding.birthdateEditText)
-            showSnackBar(getString(R.string.invalid_birth_date), false)
-        }
-    }
 
     private fun clearErrorAfterChanged(editText: EditText) {
         editText.addTextChangedListener(object : TextWatcher {
