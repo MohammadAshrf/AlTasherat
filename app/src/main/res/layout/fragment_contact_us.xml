@@ -303,7 +303,8 @@
                             android:id="@+id/msg_edit_text"
                             style="@style/TextInputEditText"
                             android:layout_height="@dimen/_70sdp"
-                            android:drawableStart="@drawable/ic_email"
+                            android:lastBaselineToBottomHeight="@dimen/_50sdp"
+                            android:drawableStart="@drawable/ic_clarification"
                             android:hint="@string/msg_text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
